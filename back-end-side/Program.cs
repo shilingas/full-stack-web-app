@@ -1,3 +1,10 @@
+using back_end_side.Controllers;
+using CsvHelper;
+using System.Globalization;
+using System.Linq;
+//System.Diagnostics.Debug.WriteLine("my string");
+//ReadingController rc = new ReadingController();
+//rc.ReadFromFile();
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

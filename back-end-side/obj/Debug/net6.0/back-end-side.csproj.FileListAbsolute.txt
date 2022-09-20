@@ -25,3 +25,4 @@ C:\Users\Marius\Documents\FullStackWebApp\back-end-side\obj\Debug\net6.0\refint\
 C:\Users\Marius\Documents\FullStackWebApp\back-end-side\obj\Debug\net6.0\back-end-side.pdb
 C:\Users\Marius\Documents\FullStackWebApp\back-end-side\obj\Debug\net6.0\back-end-side.genruntimeconfig.cache
 C:\Users\Marius\Documents\FullStackWebApp\back-end-side\obj\Debug\net6.0\ref\back-end-side.dll
+C:\Users\Marius\Documents\FullStackWebApp\back-end-side\bin\Debug\net6.0\CsvHelper.dll

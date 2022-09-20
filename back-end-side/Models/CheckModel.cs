@@ -2,6 +2,7 @@
 {
     public class CheckModel
     {
-       
+        public int id { get; set; }
+        public string marketName { get; set; }
     }
 }
