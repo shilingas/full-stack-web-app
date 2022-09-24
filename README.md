@@ -9,7 +9,7 @@ We will be creating .NET app using C# and React+TypeScript for UI </br>
 <li>Rankinis išlaidų suvedimas</li>
 <li>Banko išrašo failų įkėlimas</li>
 <li>Rekomendacijų pagal pajamas funkcija</li>
-<li>Registracija/Prisijungimas, vartotojai (outhzero)</li>
+<li>Registracija/Prisijungimas, vartotojai (out0)</li>
 <li>Asmeninių tikslų prisiskyrimo funkcija</li>
 <li>Taškų sistema</li>
 <li>Sąsajos tarp vartotojų</li>
