@@ -1,5 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
 import axios from "axios";
+import Navbar from "../src/Components/Navbar";
 const App = () => {
     const [data, setData] = useState([]);
     const [status, setStatus] = useState(false);
@@ -18,6 +19,7 @@ const App = () => {
     }
     return (
         <div className='container'>
+            <Navbar />
             <button onClick={showData}>Show data</button>
             <button onClick={() => setData([])}>Clear data</button>
             <div className='data'>

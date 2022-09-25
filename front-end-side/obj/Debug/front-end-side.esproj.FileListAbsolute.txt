@@ -4,3 +4,5 @@ C:\Users\Admin\Desktop\PSI project\full-stack-web-app\front-end-side\obj\Debug\f
 C:\Users\Admin\Desktop\PSI project\full-stack-web-app\front-end-side\obj\Debug\front-end-side.esproj.CoreCompileInputs.cache
 C:\Users\Marius\Pictures\full-stack-web-app\front-end-side\obj\Debug\front-end-side.esproj.SuggestedBindingRedirects.cache
 C:\Users\Marius\Pictures\full-stack-web-app\front-end-side\obj\Debug\front-end-side.esproj.CoreCompileInputs.cache
+C:\Users\Marius\full-stack-web-app\front-end-side\obj\Debug\front-end-side.esproj.SuggestedBindingRedirects.cache
+C:\Users\Marius\full-stack-web-app\front-end-side\obj\Debug\front-end-side.esproj.CoreCompileInputs.cache
