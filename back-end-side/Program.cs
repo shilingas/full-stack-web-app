@@ -23,6 +23,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+ReportReader.ReadFromCsvFile();  // Read files from csv
+
 app.UseHttpsRedirection();
 app.UseCors();
 
