@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Desktop\\PSI project\\full-stack-web-app\\back-end-side\\back-end-side.csproj": {}
+    "C:\\Users\\Marius\\Pictures\\full-stack-web-app\\back-end-side\\back-end-side.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Desktop\\PSI project\\full-stack-web-app\\back-end-side\\back-end-side.csproj": {
+    "C:\\Users\\Marius\\Pictures\\full-stack-web-app\\back-end-side\\back-end-side.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\PSI project\\full-stack-web-app\\back-end-side\\back-end-side.csproj",
+        "projectUniqueName": "C:\\Users\\Marius\\Pictures\\full-stack-web-app\\back-end-side\\back-end-side.csproj",
         "projectName": "back-end-side",
-        "projectPath": "C:\\Users\\Admin\\Desktop\\PSI project\\full-stack-web-app\\back-end-side\\back-end-side.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Desktop\\PSI project\\full-stack-web-app\\back-end-side\\obj\\",
+        "projectPath": "C:\\Users\\Marius\\Pictures\\full-stack-web-app\\back-end-side\\back-end-side.csproj",
+        "packagesPath": "C:\\Users\\Marius\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Marius\\Pictures\\full-stack-web-app\\back-end-side\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Marius\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
