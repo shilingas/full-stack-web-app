@@ -15,14 +15,14 @@ namespace back_end_side.Controllers
                 {
                     var records = csvReader.GetRecords<Record>().ToList();
 
-                    foreach (var record in records) // printing everything for testing
+                    /*foreach (var record in records) // printing everything for testing
                     {
                         Console.WriteLine(record.Date);
                         Console.WriteLine(record.Seller);
                         Console.WriteLine(record.Purpose);
                         Console.WriteLine(record.Amount + " Eur");
                         Console.WriteLine();
-                    }
+                    }*/
 
                     return records;
                 }
