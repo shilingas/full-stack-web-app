@@ -1,0 +1,17 @@
+table.data_table {
+    width: calc(100% - 20px);
+    margin-top: 20px;
+}
+
+    table.data_table td, table.data_table th {
+        padding: 10px;
+        border: 0.26vw solid #fff;
+    }
+
+    table.data_table th {
+        background: #e6e6e6;
+    }
+
+    table.data_table td {
+        background: #f6f6f6;
+    }
