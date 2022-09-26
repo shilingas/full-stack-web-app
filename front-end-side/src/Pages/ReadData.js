@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "../Pages/ReadData.css";
 import Navbar from "../../src/Components/Navbar";
-const EnterData = () => {
+const EnterData = () => { 
+    const [info, setInfo] = useState([]);
+    const [status, setStatus] = useState(false);
+    useEffect(() => {
+        axios.get("https://localhost:7174/api/File").then(resp => {
+            setInfo(resp);
+            setStatus(true);
+            console.log(resp);
+        })
+    }, []);
     return (
         <div>
             <Navbar />
@@ -16,26 +26,23 @@ const EnterData = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>2022-09-10</td>
-                            <td>Maxima</td>
-                            <td>PIRKINYS 516793******5265</td>
-                            <td>20.02 EUR</td>
-                        </tr>
-
-                        <tr>
-                            <td>2022-09-10</td>
-                            <td>CRCLE K ORO UOSTAS</td>
-                            <td>PIRKINYS 5166578******5265</td>
-                            <td>32.54 EUR</td>
-                        </tr>
-
-                        <tr>
-                            <td>2022-09-10</td>
-                            <td>Maxima</td>
-                            <td>PIRKINYS 516793******5265</td>
-                            <td>20.02 EUR</td>
-                        </tr>
+                        {
+                            status ? (
+                                info.data.map((item) => {
+                                    const { date, seller, purpose, amount } = item;
+                                    return (
+                                        <tr>
+                                            <td>{date}</td>
+                                            <td>{seller}</td>
+                                            <td>{purpose}</td>
+                                            <td>{amount}</td>
+                                        </tr>
+                                    );
+                                })
+                            ) : (
+                                null
+                            )
+                        }
                     </tbody>
                 </table>
             </div>
