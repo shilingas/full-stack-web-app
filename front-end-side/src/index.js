@@ -13,6 +13,7 @@ import reportWebVitals from './reportWebVitals';
 import Friends from "./Pages/Friends";
 import ShowData from "./Pages/ShowData";
 import EnterData from "./Pages/EnterData";
+import ReadData from "./Pages/ReadData";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
@@ -22,6 +23,7 @@ root.render(
                 <Route path="/friends" element={<Friends />} />
                 <Route path="/show-data" element={<ShowData />} />
                 <Route path="/enter-data" element={<EnterData />} />
+                <Route path="/read-from-file-data" element={<ReadData />} />
             </Routes>
         </Router>
   </React.StrictMode>

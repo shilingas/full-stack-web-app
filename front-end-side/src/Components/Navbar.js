@@ -3,11 +3,19 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
 
     return (
-        <div className='navbar'>
-            <Link to="/">Home</Link>
-            <Link to="/friends">Friends</Link>
-            <Link to="/enter-data">Enter data</Link>
-            <Link to="/show-data">Show data</Link>
+        <div class="navigation-block">
+            <div className='container'>
+                <div className='navbar'>
+                    <div id="logotype">Expese tracker</div>
+                    <div id="links">
+                        <Link to="/">Home</Link>
+                        <Link to="/friends">Friends</Link>
+                        <Link to="/enter-data">Enter data</Link>
+                        <Link to="/read-from-file-data">Data from file</Link>
+                        <Link to="/show-data" class="right-link">Show data</Link>
+                    </div>
+                </div>
+            </div>
         </div>
         );
 

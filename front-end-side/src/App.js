@@ -18,7 +18,7 @@ const App = () => {
         })
     }
     return (
-        <div className='container'>
+        <div>
             <Navbar />
             <button onClick={showData}>Show data</button>
             <button onClick={() => setData([])}>Clear data</button>
