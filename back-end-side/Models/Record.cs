@@ -12,5 +12,7 @@ namespace back_end_side.Models
         public string? Purpose { get; set; }
         [Name("amount")]
         public double Amount { get; set; }
+
+        public string? Category;
     }
 }

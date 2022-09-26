@@ -23,7 +23,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-ReportReader.ReadFromCsvFile();  // Read files from csv
+//ReportReader.ReadFromCsvFile();  // Read files from csv
+Sorting sorting = new Sorting();
+sorting.SortToCategories();
+Console.WriteLine("\nFood sum: " + sorting.foodSum +
+    "\nClothes Sum: " + sorting.clothesSum +
+    "\nCar maintenance sum: " + sorting.carSum +
+    "\nHouse maintenance sum: " + sorting.houseSum +
+    "\nEntertainment sum: " + sorting.entertainmentSum +
+    "\nOther expenses sum: " + sorting.otherSum);
 
 app.UseHttpsRedirection();
 app.UseCors();
