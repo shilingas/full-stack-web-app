@@ -138,3 +138,31 @@ C:\Users\ASUS\Desktop\PSI\full-stack-web-app\back-end-side\obj\Debug\net6.0\refi
 C:\Users\ASUS\Desktop\PSI\full-stack-web-app\back-end-side\obj\Debug\net6.0\back-end-side.pdb
 C:\Users\ASUS\Desktop\PSI\full-stack-web-app\back-end-side\obj\Debug\net6.0\back-end-side.genruntimeconfig.cache
 C:\Users\ASUS\Desktop\PSI\full-stack-web-app\back-end-side\obj\Debug\net6.0\ref\back-end-side.dll
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\bin\Debug\net6.0\appsettings.json
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\bin\Debug\net6.0\back-end-side.exe
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\bin\Debug\net6.0\back-end-side.deps.json
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\bin\Debug\net6.0\back-end-side.runtimeconfig.json
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\bin\Debug\net6.0\back-end-side.dll
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\bin\Debug\net6.0\back-end-side.pdb
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\bin\Debug\net6.0\CsvHelper.dll
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\obj\Debug\net6.0\back-end-side.csproj.AssemblyReference.cache
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\obj\Debug\net6.0\back-end-side.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\obj\Debug\net6.0\back-end-side.AssemblyInfoInputs.cache
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\obj\Debug\net6.0\back-end-side.AssemblyInfo.cs
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\obj\Debug\net6.0\back-end-side.csproj.CoreCompileInputs.cache
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\obj\Debug\net6.0\back-end-side.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\obj\Debug\net6.0\back-end-side.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\obj\Debug\net6.0\scopedcss\bundle\back-end-side.styles.css
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\obj\Debug\net6.0\back-end-side.csproj.CopyComplete
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\obj\Debug\net6.0\back-end-side.dll
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\obj\Debug\net6.0\refint\back-end-side.dll
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\obj\Debug\net6.0\back-end-side.pdb
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\obj\Debug\net6.0\back-end-side.genruntimeconfig.cache
+C:\Users\geral\Desktop\PSI project\full-stack-web-app\back-end-side\obj\Debug\net6.0\ref\back-end-side.dll
