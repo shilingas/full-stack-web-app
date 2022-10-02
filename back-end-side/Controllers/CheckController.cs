@@ -7,7 +7,7 @@ namespace back_end.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [DisableCors]
+    [EnableCors("corsapp")]
     public class CheckController : ControllerBase
     {
         CheckModel[] products = new CheckModel[]

@@ -7,6 +7,7 @@ namespace back_end_side.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("corsapp")]
     public class ShowDataController : ControllerBase
     {
         List<InputModel> models = new List<InputModel>();
