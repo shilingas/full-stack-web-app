@@ -43,17 +43,10 @@ code {
     padding: 0 20px;
 }
 
-/*#statistics {
-    height: 40px;
-    width: calc(100% - 20px);
-    display: flex;
-    margin: 30px 10px;
+h2.title {
+    color: #000;
+    font-size: 29px;
+    text-transform: lowercase;
+    text-align: center;
+    letter-spacing: 7px;
 }
-
-#statistics .stat {
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-}*/
