@@ -7,12 +7,12 @@ const EnterData = () => {
     const [info, setInfo] = useState([]);
     const [status, setStatus] = useState(false);
     const [delay, setDelay] = useState(false);
-
+    const [inputData, setInputData] = useState(false);
+    const [delayForInput, setDelayForInput] = useState(false);
     useEffect(() => {
         axios.get("https://localhost:7174/api/Sorting").then(item => {
             setData(item);
             setDelay(true);
-            console.log(item);
         })
     }, []);
 
@@ -20,7 +20,12 @@ const EnterData = () => {
         axios.get("https://localhost:7174/api/File").then(resp => {
             setInfo(resp);
             setStatus(true);
-            console.log(resp);
+        })
+    }, []);
+    useEffect(() => {
+        axios.get('https://localhost:7174/api/ShowData').then(resp => {
+            setInputData(resp);
+            setDelayForInput(true);
         })
     }, []);
     return (
@@ -40,6 +45,23 @@ const EnterData = () => {
                         {
                             status ? (
                                 info.data.map((item) => {
+                                    const { date, seller, purpose, amount } = item;
+                                    return (
+                                        <tr>
+                                            <td>{date}</td>
+                                            <td>{seller}</td>
+                                            <td>{purpose}</td>
+                                            <td>{amount}</td>
+                                        </tr>
+                                    );
+                                })
+                            ) : (
+                                null
+                            )
+                        }
+                        {
+                            delayForInput ? (
+                                inputData.data.map((item) => {
                                     const { date, seller, purpose, amount } = item;
                                     return (
                                         <tr>

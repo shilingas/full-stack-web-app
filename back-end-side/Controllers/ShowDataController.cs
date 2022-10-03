@@ -10,14 +10,20 @@ namespace back_end_side.Controllers
     [EnableCors("corsapp")]
     public class ShowDataController : ControllerBase
     {
-        List<InputModel> models = new List<InputModel>();
+       static List<InputModel> models = new List<InputModel>();
         [HttpPost]
-        [DisableCors]
         [Produces("application/json")]
         public IActionResult Post([FromBody]InputModel model)
         {
             models.Add(model);
+            Console.WriteLine(models.Count);
             return Ok(model);
+        }
+        [HttpGet]
+        [EnableCors("corsapp")]
+        public List<InputModel> GetAll()
+        {
+            return models;
         }
     }
 }
