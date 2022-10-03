@@ -1,4 +1,5 @@
 ﻿using back_end_side.Models;
+using System;
 
 namespace back_end_side.Controllers
 {
@@ -10,7 +11,7 @@ namespace back_end_side.Controllers
         static private String[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI" };
         static private String[] EntertainmentShops = { "GG ARENA" };
 
-        public double foodSum, clothesSum, carSum, houseSum, entertainmentSum, otherSum;
+        //public double foodSum, clothesSum, carSum, houseSum, entertainmentSum, otherSum;
 
         public static SortingModel Model = new SortingModel();
 
@@ -68,7 +69,13 @@ namespace back_end_side.Controllers
 
         }
 
-        private static Boolean checkType(Record record, String[] shopNames)
+        public static List<Record> SortedList()
+        {
+            SortToCategories();
+            return recordsFromFile;
+        }
+
+        public static Boolean checkType(Record record, String[] shopNames)
         {
             foreach (String shopName in shopNames)
             {
@@ -78,7 +85,6 @@ namespace back_end_side.Controllers
                 }
 
             }
-
             return false;
         }
 

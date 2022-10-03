@@ -14,6 +14,12 @@ import Friends from "./Pages/Friends";
 import ShowData from "./Pages/ShowData";
 import EnterData from "./Pages/EnterData";
 import ReadData from "./Pages/ReadData";
+import FoodExpenses from "./Pages/FoodExpenses";
+import ClothesExpenses from "./Pages/ClothesExpenses";
+import CarExpenses from "./Pages/CarExpenses";
+import HouseExpenses from "./Pages/HouseExpenses";
+import EntertainmentExpenses from "./Pages/EntertainmentExpenses";
+import OtherExpenses from "./Pages/OtherExpenses";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
@@ -24,6 +30,12 @@ root.render(
                 <Route path="/show-data" element={<ShowData />} />
                 <Route path="/enter-data" element={<EnterData />} />
                 <Route path="/read-from-file-data" element={<ReadData />} />
+                <Route path="/food-expenses" element={<FoodExpenses />} />
+                <Route path="/clothes-expenses" element={<ClothesExpenses />} />
+                <Route path="/car-expenses" element={<CarExpenses />} />
+                <Route path="/house-expenses" element={<HouseExpenses />} />
+                <Route path="/entertainment-expenses" element={<EntertainmentExpenses />} />
+                <Route path="/other-expenses" element={<OtherExpenses />} />
             </Routes>
         </Router>
   </React.StrictMode>
