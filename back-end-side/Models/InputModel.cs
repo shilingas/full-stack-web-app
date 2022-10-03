@@ -2,8 +2,9 @@
 {
     public class InputModel
     {
-        public string price { get; set; }
-        public string companyName { get; set; }
-        public string productType { get; set; }
+        public string date { get; set; }
+        public string seller { get; set; }
+        public string purpose { get; set; }
+        public string amount { get; set; }
     }
 }
