@@ -9,13 +9,18 @@ const EnterData = () => {
     const [delay, setDelay] = useState(false);
     const [inputData, setInputData] = useState(false);
     const [delayForInput, setDelayForInput] = useState(false);
+    const [expenses, setExpenses] = useState(0);
     useEffect(() => {
         axios.get("https://localhost:7174/api/Sorting").then(item => {
             setData(item);
             setDelay(true);
         })
     }, []);
-
+    useEffect(() => {
+        axios.get("https://localhost:7174/api/Sorting").then(item => {
+            setExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
+    })
+    }, []);
     useEffect(() => {
         axios.get("https://localhost:7174/api/File").then(resp => {
             setInfo(resp);
@@ -88,12 +93,12 @@ const EnterData = () => {
                     delay ? (
                         <div id="statistics">
                             <div id="stat-bar">
-                                <a class="stat food" href="/food-expenses" style={{ width: (Math.round(data.data.foodSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100)+'%' }}><span class="text">{Math.round(data.data.foodSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100}%</span></a>
-                                <a class="stat clothes" href="/clothes-expenses" style={{ width: (Math.round(data.data.clothesSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100) + '%' }}><span class="text">{Math.round(data.data.clothesSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100}%</span></a>
-                                <a class="stat car" href="/car-expenses" style={{ width: Math.round(data.data.carSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100 +'%' }}><span class="text">{Math.round(data.data.carSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100}%</span></a>
-                                <a class="stat house" href="/house-expenses" style={{ width: (Math.round(data.data.houseSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100)+'%' }}><span class="text">{Math.round(data.data.houseSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100}%</span></a>
-                                <a class="stat entertaintment" href="/entertainment-expenses" style={{ width: (Math.round(data.data.entertaintmentSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100)+'%' }}><span class="text">{Math.round(data.data.entertaintmentSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100}%</span></a>
-                                <a class="stat other last" href="/other-expenses" style={{ width: (Math.round(data.data.otherSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100)+'%' }}><span class="text">{Math.round(data.data.otherSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100}%</span></a>
+                                <a class="stat food" href="/food-expenses" style={{ width: (Math.round(data.data.foodSum / (expenses) * 100 * 100) / 100)+'%' }}><span class="text">{Math.round(data.data.foodSum / (expenses) * 100 * 100) / 100}%</span></a>
+                                <a class="stat clothes" href="/clothes-expenses" style={{ width: (Math.round(data.data.clothesSum / (expenses) * 100 * 100) / 100) + '%' }}><span class="text">{Math.round(data.data.clothesSum / (expenses) * 100 * 100) / 100}%</span></a>
+                                <a class="stat car" href="/car-expenses" style={{ width: Math.round(data.data.carSum / (expenses) * 100 * 100) / 100 +'%' }}><span class="text">{Math.round(data.data.carSum / (expenses) * 100 * 100) / 100}%</span></a>
+                                <a class="stat house" href="/house-expenses" style={{ width: (Math.round(data.data.houseSum / (expenses) * 100 * 100) / 100)+'%' }}><span class="text">{Math.round(data.data.houseSum / (expenses) * 100 * 100) / 100}%</span></a>
+                                <a class="stat entertaintment" href="/entertainment-expenses" style={{ width: (Math.round(data.data.entertaintmentSum / (expenses) * 100 * 100) / 100)+'%' }}><span class="text">{Math.round(data.data.entertaintmentSum / (expenses) * 100 * 100) / 100}%</span></a>
+                                <a class="stat other last" href="/other-expenses" style={{ width: (Math.round(data.data.otherSum / (expenses) * 100 * 100) / 100)+'%' }}><span class="text">{Math.round(data.data.otherSum / (expenses) * 100 * 100) / 100}%</span></a>
                             </div>
 
                             <ul id="legend">
@@ -101,7 +106,7 @@ const EnterData = () => {
                                     <li class="item">
                                         <div class="dot food"></div>
                                         <span class="name">Food</span>
-                                        <span class="percentage">{Math.round(data.data.foodSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100}%</span>
+                                        <span class="percentage">{Math.round(data.data.foodSum / (expenses) * 100 * 100) / 100}%</span>
                                     </li>
                                 </a>
 
@@ -109,7 +114,7 @@ const EnterData = () => {
                                     <li class="item">
                                         <div class="dot clothes"></div>
                                         <span class="name">Clothes</span>
-                                        <span class="percentage">{Math.round(data.data.clothesSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100}%</span>
+                                        <span class="percentage">{Math.round(data.data.clothesSum / (expenses) * 100 * 100) / 100}%</span>
                                     </li>
                                 </a>
 
@@ -117,7 +122,7 @@ const EnterData = () => {
                                     <li class="item">
                                         <div class="dot car"></div>
                                         <span class="name">Car</span>
-                                        <span class="percentage">{Math.round(data.data.carSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100}%</span>
+                                        <span class="percentage">{Math.round(data.data.carSum / (expenses) * 100 * 100) / 100}%</span>
                                     </li>
                                 </a>
 
@@ -125,7 +130,7 @@ const EnterData = () => {
                                     <li class="item">
                                         <div class="dot house"></div>
                                         <span class="name">House</span>
-                                        <span class="percentage">{Math.round(data.data.houseSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100}%</span>
+                                        <span class="percentage">{Math.round(data.data.houseSum / (expenses) * 100 * 100) / 100}%</span>
                                     </li>
                                 </a>
 
@@ -133,7 +138,7 @@ const EnterData = () => {
                                     <li class="item">
                                         <div class="dot entertaintment"></div>
                                         <span class="name">Entertainment</span>
-                                        <span class="percentage">{Math.round(data.data.entertaintmentSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100}%</span>
+                                        <span class="percentage">{Math.round(data.data.entertaintmentSum / (expenses) * 100 * 100) / 100}%</span>
                                     </li>
                                 </a>
 
@@ -141,11 +146,41 @@ const EnterData = () => {
                                     <li class="item">
                                         <div class="dot other"></div>
                                         <span class="name">Other</span>
-                                        <span class="percentage">{Math.round(data.data.otherSum / (data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum) * 100 * 100) / 100}%</span>
+                                        <span class="percentage">{Math.round(data.data.otherSum / (expenses) * 100 * 100) / 100}%</span>
                                     </li>
                                 </a>
 
                             </ul>
+                            <div class="expenses">
+                                <p>
+                                    <span class="p_title">Total: </span>
+                                    {expenses} EUR
+                                </p>
+                                <p>
+                                    <span class="p_title">Spent on food: </span>
+                                    {data.data.foodSum} EUR
+                                </p>
+                                <p>
+                                    <span class="p_title">Spent on clothing: </span>
+                                    {data.data.clothesSum} EUR
+                                </p>
+                                <p>
+                                    <span class="p_title">Spent on transportation: </span>
+                                    {data.data.carSum} EUR
+                                </p>
+                                <p>
+                                    <span class="p_title">Spent on housing: </span>
+                                    {data.data.houseSum} EUR
+                                </p>
+                                <p>
+                                    <span class="p_title">Spent on entertainment: </span>
+                                    {data.data.entertaintmentSum} EUR
+                                </p>
+                                <p>
+                                    <span class="p_title">Other expenses: </span>
+                                    {data.data.otherSum} EUR
+                                </p>
+                            </div>
                         </div>
                     ) : (
                         null
