@@ -84,15 +84,21 @@ table.data_table td {
     margin-right: 8px;
 }
 
-#statistics ul#legend a li.item span.name {
+#statistics ul#legend a li.item span.name, #statistics .expenses p span.p_title {
     color: #24292f;
     font-weight: bold;
     font-size: 15px;
     margin-right: 10px;
 }
 
-#statistics ul#legend a li.item span.percentage {
+#statistics ul#legend a li.item span.percentage, #statistics .expenses p {
     color: #57606a;
     font-size: 14px;
+    margin: 5px 0px;
+}
 
+#statistics .expenses {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-top: 40px;
 }

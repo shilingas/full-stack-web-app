@@ -146,6 +146,36 @@ const EnterData = () => {
                                 </a>
 
                             </ul>
+                            <div class="expenses">
+                                <p>
+                                    <span class="p_title">Total: </span>
+                                    {data.data.foodSum + data.data.clothesSum + data.data.carSum + data.data.houseSum + data.data.entertaintmentSum + data.data.otherSum} EUR
+                                </p>
+                                <p>
+                                    <span class="p_title">Spent on food: </span>
+                                    {data.data.foodSum} EUR
+                                </p>
+                                <p>
+                                    <span class="p_title">Spent on clothing: </span>
+                                    {data.data.clothesSum} EUR
+                                </p>
+                                <p>
+                                    <span class="p_title">Spent on transportation: </span>
+                                    {data.data.carSum} EUR
+                                </p>
+                                <p>
+                                    <span class="p_title">Spent on housing: </span>
+                                    {data.data.houseSum} EUR
+                                </p>
+                                <p>
+                                    <span class="p_title">Spent on entertainment: </span>
+                                    {data.data.entertaintmentSum} EUR
+                                </p>
+                                <p>
+                                    <span class="p_title">Other expenses: </span>
+                                    {data.data.otherSum} EUR
+                                </p>
+                            </div>
                         </div>
                     ) : (
                         null
