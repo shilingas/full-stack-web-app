@@ -13,7 +13,9 @@ namespace back_end_side.Controllers
         [HttpGet]
         public List<Record> GetFile()
         {
-            List<Record> FileData = ReportReader.ReadFromCsvFile();
+            //List<Record> FileData = ReportReader.ReadFromCsvFile();
+            //Sorting.SortToCategories();
+            List<Record> FileData = Sorting.SortedList();
             return FileData;
         }
     }
