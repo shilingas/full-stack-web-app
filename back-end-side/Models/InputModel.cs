@@ -2,9 +2,9 @@
 {
     public class InputModel
     {
-        public string date { get; set; }
-        public string seller { get; set; }
-        public string purpose { get; set; }
-        public string amount { get; set; }
+        public string? Date { get; set; }
+        public string? Seller { get; set; }
+        public string? Purpose { get; set; }
+        public string? Amount { get; set; }
     }
 }
