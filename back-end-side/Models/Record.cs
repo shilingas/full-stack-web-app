@@ -4,13 +4,13 @@ namespace back_end_side.Models
 {
     public class Record
     {
-        [Name("date")]
+        [Name("Data")]
         public DateTime Date { get; set; }
-        [Name("seller")]
+        [Name("Gavėjas")]
         public string? Seller { get; set; }
-        [Name("purpose")]
+        [Name("Paaiškinimai")]
         public string? Purpose { get; set; }
-        [Name("amount")]
+        [Name("Suma")]
         public double Amount { get; set; }
         [Ignore]
         public string? Category { get; set; }

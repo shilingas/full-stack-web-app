@@ -5,11 +5,11 @@ namespace back_end_side.Controllers
 {
     public class Sorting
     {
-        private static readonly string[] Supermarkets = { "MAXIMA", "NORFA", "lIDL", "IKI", "RIMI", "AIBE" };
+        private static readonly string[] Supermarkets = { "MAXIMA", "NORFA", "lIDL", "IKI", "RIMI", "AIBE", "KFC", "SUBWAY", "MEATBUSTERS", "Hesburger", "JAMMI", "CAN CAN" };
         private static readonly string[] ClothesShops = { "ZARA", "STRADIVARIUS", "H&M" };
-        private static readonly string[] CarMaintenanceShops = { "CIRCLE K", "VIADA" };
-        private static readonly string[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI" };
-        private static readonly string[] EntertainmentShops = { "GG ARENA" };
+        private static readonly string[] CarMaintenanceShops = { "CIRCLE K", "VIADA", "BOLT", "Stova", "RIDE SHARE" };
+        private static readonly string[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI", "CONSILIUM OPTIMUM", "tele2", "telia", "TOPO CENTRAS", "BITĖ", "GO3", "IKEA" };
+        private static readonly string[] EntertainmentShops = { "CYBERX", "SPOTIFY", "BasketNews" };
 
         static List<Record> RecordsFromFile = ReportReader.ReadFromCsvFile();
         public static SortingModel SortToCategories()
@@ -72,7 +72,7 @@ namespace back_end_side.Controllers
         {
             foreach (String shopName in shopNames)
             {
-                if (record.Seller != null && record.Seller.ToUpper().Contains(shopName))
+                if (record.Seller != null && record.Seller.ToUpper().Contains(shopName.ToUpper()))
                 {
                     return true;
                 }

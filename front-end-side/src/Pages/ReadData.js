@@ -54,8 +54,8 @@ const EnterData = () => {
                                     return (
                                         <tr>
                                             <td>{date}</td>
-                                            <td>{seller}</td>
-                                            <td>{purpose}</td>
+                                            <td>{seller.slice(0, 37)}</td>
+                                            <td>{purpose.slice(0, 37)}</td>
                                             <td>{amount}</td>
                                         </tr>
                                     );
@@ -71,8 +71,8 @@ const EnterData = () => {
                                     return (
                                         <tr>
                                             <td>{date}</td>
-                                            <td>{seller}</td>
-                                            <td>{purpose}</td>
+                                            <td>{seller.slice(0, 40)}</td>
+                                            <td>{purpose.slice(0, 40)}</td>
                                             <td>{amount}</td>
                                         </tr>
                                     );
