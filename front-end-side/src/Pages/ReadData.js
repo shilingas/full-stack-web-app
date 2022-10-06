@@ -110,7 +110,7 @@ const EnterData = () => {
                                     </li>
                                 </a>
 
-                                <a href="#">
+                                <a href="/clothes-expenses">
                                     <li class="item">
                                         <div class="dot clothes"></div>
                                         <span class="name">Clothes</span>
@@ -118,7 +118,7 @@ const EnterData = () => {
                                     </li>
                                 </a>
 
-                                <a href="#">
+                                <a href="/car-expenses">
                                     <li class="item">
                                         <div class="dot car"></div>
                                         <span class="name">Car</span>
@@ -126,7 +126,7 @@ const EnterData = () => {
                                     </li>
                                 </a>
 
-                                <a href="#">
+                                <a href="/house-expenses">
                                     <li class="item">
                                         <div class="dot house"></div>
                                         <span class="name">House</span>
@@ -134,7 +134,7 @@ const EnterData = () => {
                                     </li>
                                 </a>
 
-                                <a href="#">
+                                <a href="/entertainment-expenses">
                                     <li class="item">
                                         <div class="dot entertaintment"></div>
                                         <span class="name">Entertainment</span>
@@ -142,7 +142,7 @@ const EnterData = () => {
                                     </li>
                                 </a>
 
-                                <a href="#">
+                                <a href="/other-expenses">
                                     <li class="item">
                                         <div class="dot other"></div>
                                         <span class="name">Other</span>

@@ -5,63 +5,58 @@ namespace back_end_side.Controllers
 {
     public class Sorting
     {
-        static private String[] Supermarkets = { "MAXIMA", "NORFA", "lIDL", "IKI", "RIMI", "AIBE" };
-        static private String[] ClothesShops = { "ZARA", "STRADIVARIUS", "H&M" };
-        static private String[] CarMaintenanceShops = { "CIRCLE K", "VIADA" };
-        static private String[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI" };
-        static private String[] EntertainmentShops = { "GG ARENA" };
 
-        //public double foodSum, clothesSum, carSum, houseSum, entertainmentSum, otherSum;
+        public static List<Record> RecordsFromFile = ReportReader.ReadFromCsvFile();
 
-        public static SortingModel Model = new SortingModel();
-
-        static List<Record> recordsFromFile = ReportReader.ReadFromCsvFile();
         public static SortingModel SortToCategories()
         {
-            Model.CarSum = 0;
-            Model.EntertaintmentSum = 0;
-            Model.OtherSum = 0;
-            Model.HouseSum = 0;
-            Model.ClothesSum = 0;
-            Model.FoodSum = 0;
+            string[] Supermarkets = { "MAXIMA", "NORFA", "lIDL", "IKI", "RIMI", "AIBE" };
+            string[] ClothesShops = { "ZARA", "STRADIVARIUS", "H&M" };
+            string[] CarMaintenanceShops = { "CIRCLE K", "VIADA" };
+            string[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI" };
+            string[] EntertainmentShops = { "GG ARENA" };
 
-            foreach (var record in recordsFromFile)
+            SortingModel Model = new()
             {
-                if (checkType(record, Supermarkets))
+                CarSum = 0,
+                EntertaintmentSum = 0,
+                OtherSum = 0,
+                HouseSum = 0,
+                ClothesSum = 0,
+                FoodSum = 0
+            };
+
+            foreach (var record in RecordsFromFile)
+            {
+                if (CheckType(record, Supermarkets))
                 {
                     record.Category = "food";
                     Model.FoodSum += record.Amount;
-                    //foodSum += record.Amount;
                 }
-                else if (checkType(record, ClothesShops))
+                else if (CheckType(record, ClothesShops))
                 {
                     record.Category = "clothes";
                     Model.ClothesSum += record.Amount;
-                    //clothesSum += record.Amount;
                 }
-                else if (checkType(record, CarMaintenanceShops))
+                else if (CheckType(record, CarMaintenanceShops))
                 {
                     record.Category = "car";
                     Model.CarSum += record.Amount;
-                    //carSum += record.Amount;
                 }
-                else if (checkType(record, HouseMaintenanceShops))
+                else if (CheckType(record, HouseMaintenanceShops))
                 {
                     record.Category = "house";
                     Model.HouseSum += record.Amount;
-                    //houseSum += record.Amount;
                 }
-                else if (checkType(record, EntertainmentShops))
+                else if (CheckType(record, EntertainmentShops))
                 {
                     record.Category = "entertainment";
                     Model.EntertaintmentSum += record.Amount;
-                    //entertainmentSum += record.Amount;
                 }
                 else
                 {
                     record.Category = "other";
                     Model.OtherSum += record.Amount;
-                    //otherSum += record.Amount;
                 }
             }
 
@@ -72,10 +67,10 @@ namespace back_end_side.Controllers
         public static List<Record> SortedList()
         {
             SortToCategories();
-            return recordsFromFile;
+            return RecordsFromFile;
         }
 
-        public static Boolean checkType(Record record, String[] shopNames)
+        public static Boolean CheckType(Record record, String[] shopNames)
         {
             foreach (String shopName in shopNames)
             {
