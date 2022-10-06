@@ -5,15 +5,17 @@ namespace back_end_side.Controllers
 {
     public class Sorting
     {
-        private static readonly string[] Supermarkets = { "MAXIMA", "NORFA", "lIDL", "IKI", "RIMI", "AIBE" };
-        private static readonly string[] ClothesShops = { "ZARA", "STRADIVARIUS", "H&M" };
-        private static readonly string[] CarMaintenanceShops = { "CIRCLE K", "VIADA" };
-        private static readonly string[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI" };
-        private static readonly string[] EntertainmentShops = { "GG ARENA" };
 
-        static List<Record> RecordsFromFile = ReportReader.ReadFromCsvFile();
+        public static List<Record> RecordsFromFile = ReportReader.ReadFromCsvFile();
+
         public static SortingModel SortToCategories()
         {
+            string[] Supermarkets = { "MAXIMA", "NORFA", "lIDL", "IKI", "RIMI", "AIBE" };
+            string[] ClothesShops = { "ZARA", "STRADIVARIUS", "H&M" };
+            string[] CarMaintenanceShops = { "CIRCLE K", "VIADA" };
+            string[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI" };
+            string[] EntertainmentShops = { "GG ARENA" };
+
             SortingModel Model = new()
             {
                 CarSum = 0,
