@@ -56,7 +56,7 @@ const EnterData = () => {
                                             <td>{date}</td>
                                             <td>{seller.slice(0, 37)}</td>
                                             <td>{purpose.slice(0, 37)}</td>
-                                            <td>{amount}</td>
+                                            <td>{amount.toFixed(2)}</td>
                                         </tr>
                                     );
                                 })
@@ -73,7 +73,7 @@ const EnterData = () => {
                                             <td>{date}</td>
                                             <td>{seller.slice(0, 40)}</td>
                                             <td>{purpose.slice(0, 40)}</td>
-                                            <td>{amount}</td>
+                                            <td>{amount.toFixed(2)}</td>
                                         </tr>
                                     );
                                 })
@@ -154,31 +154,31 @@ const EnterData = () => {
                             <div class="expenses">
                                 <p>
                                     <span class="p_title">Total: </span>
-                                    {expenses} EUR
+                                    {Math.round(expenses * 100)/100} EUR
                                 </p>
                                 <p>
                                     <span class="p_title">Spent on food: </span>
-                                    {data.data.foodSum} EUR
+                                    {Math.round(data.data.foodSum * 100) / 100} EUR
                                 </p>
                                 <p>
                                     <span class="p_title">Spent on clothing: </span>
-                                    {data.data.clothesSum} EUR
+                                    {Math.round(data.data.clothesSum * 100) / 100} EUR
                                 </p>
                                 <p>
                                     <span class="p_title">Spent on transportation: </span>
-                                    {data.data.carSum} EUR
+                                    {Math.round(data.data.carSum * 100) / 100} EUR
                                 </p>
                                 <p>
                                     <span class="p_title">Spent on housing: </span>
-                                    {data.data.houseSum} EUR
+                                    {Math.round(data.data.houseSum * 100) / 100} EUR
                                 </p>
                                 <p>
                                     <span class="p_title">Spent on entertainment: </span>
-                                    {data.data.entertaintmentSum} EUR
+                                    {Math.round(data.data.entertaintmentSum * 100) / 100} EUR
                                 </p>
                                 <p>
                                     <span class="p_title">Other expenses: </span>
-                                    {data.data.otherSum} EUR
+                                    {Math.round(data.data.otherSum * 100) / 100} EUR
                                 </p>
                             </div>
                         </div>
