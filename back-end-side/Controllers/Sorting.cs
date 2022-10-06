@@ -5,7 +5,8 @@ namespace back_end_side.Controllers
 {
     public class Sorting
     {
-        static List<Record> RecordsFromFile = ReportReader.ReadFromCsvFile();
+
+        public static List<Record> RecordsFromFile = ReportReader.ReadFromCsvFile();
         public static SortingModel SortToCategories()
         {
             string[] Supermarkets = { "MAXIMA", "NORFA", "lIDL", "IKI", "RIMI", "AIBE", "KFC", "SUBWAY", "MEATBUSTERS", "Hesburger", "JAMMI", "CAN CAN", "NO FORKS", "ILUNCH", "TAU", "CHAIKA", "Kavinė", "CAFFEINE" };
