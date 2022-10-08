@@ -8,7 +8,7 @@ namespace back_end_side.Controllers
 {
     public class ReportReader
     {
-        public static List<Record> ReadFromCsvFile()
+        public static List<Record>? ReadFromCsvFile()
         {
             // swedbank = 0, paysera = 1, seb = 2
             int bank = 2;
@@ -39,19 +39,24 @@ namespace back_end_side.Controllers
                 return records;
             } else
             {
-                using var streamReader = new StreamReader("../swedbank.csv");
-                streamReader.ReadLine();
-                using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
-
-                var records = csvReader.GetRecords<Record>().ToList();
-
                 if (bank == 0)
                 {
+                    using var streamReader = new StreamReader("../swedbank.csv");
+                    using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
+
+                    var records = csvReader.GetRecords<Record>().ToList();
+
                     int numberOfElements = records.Count;
                     records.RemoveAt(numberOfElements - 1);
+
+                    return records;
                 }
                 else if (bank == 1)
                 {
+                    using var streamReader = new StreamReader("../paysera.csv");
+                    using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
+
+                    var records = csvReader.GetRecords<Record>().ToList();
 
                     for (int i = records.Count - 1; i >= 0; --i)
                     {
@@ -65,10 +70,12 @@ namespace back_end_side.Controllers
                         }
                     }
 
-                }
+                    return records;
 
-                return records;
+                }
             }
+
+            return null;
         }
     }
 }
