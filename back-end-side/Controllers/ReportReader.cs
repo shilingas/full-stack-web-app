@@ -11,24 +11,24 @@ namespace back_end_side.Controllers
         public static List<Record>? ReadFromCsvFile()
         {
             // swedbank = 0, paysera = 1, seb = 2
-            int bank = 2;
+            int bank = 0;
+
+            var DelimiterToSemicolon = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                Delimiter = ";",
+            };
 
             if (bank == 2)
             {
-                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-                {
-                    Delimiter = ";",
-                };
-
                 using var streamReader = new StreamReader("../seb.csv");
                 streamReader.ReadLine();
-                using var csvReader = new CsvReader(streamReader, config);
+                using var csvReader = new CsvReader(streamReader, DelimiterToSemicolon);
 
                 var records = csvReader.GetRecords<Record>().ToList();
 
                 for (int i = records.Count - 1; i >= 0; --i)
                 {
-                    if (records.ElementAt(i).PaymentType != null && records.ElementAt(i).PaymentType.Contains("įskaitymas"))
+                    if (records.ElementAt(i).PaymentType.Equals("K"))
                     {
                         records.RemoveAt(i);
                     }
@@ -49,18 +49,29 @@ namespace back_end_side.Controllers
                     int numberOfElements = records.Count;
                     records.RemoveAt(numberOfElements - 1);
 
+                    for (int i = records.Count - 1; i >= 0; --i)
+                    {
+                        if ((records.ElementAt(i).Seller.Equals("") && records.ElementAt(i).Purpose.Equals("Likutis pradžiai")) ||
+                            (records.ElementAt(i).Seller.Equals("") && records.ElementAt(i).Purpose.Equals("Apyvarta")) ||
+                            records.ElementAt(i).PaymentType.Equals("K"))
+                        {
+                            records.RemoveAt(i);
+                        }
+                    }
+
                     return records;
                 }
                 else if (bank == 1)
                 {
                     using var streamReader = new StreamReader("../paysera.csv");
+
                     using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
 
                     var records = csvReader.GetRecords<Record>().ToList();
 
                     for (int i = records.Count - 1; i >= 0; --i)
                     {
-                        if (records.ElementAt(i).Amount > 0)
+                        if (records.ElementAt(i).PaymentType.Equals("K"))
                         {
                             records.RemoveAt(i);
                         }
@@ -72,10 +83,14 @@ namespace back_end_side.Controllers
 
                     return records;
 
+                } else
+                {
+                    Console.WriteLine("Invalid bank ID");
                 }
             }
 
             return null;
         }
+
     }
 }
