@@ -20,6 +20,7 @@ import CarExpenses from "./Pages/CarExpenses";
 import HouseExpenses from "./Pages/HouseExpenses";
 import EntertainmentExpenses from "./Pages/EntertainmentExpenses";
 import OtherExpenses from "./Pages/OtherExpenses";
+import FileUpload from "./Pages/FileUpload";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
@@ -36,6 +37,7 @@ root.render(
                 <Route path="/house-expenses" element={<HouseExpenses />} />
                 <Route path="/entertainment-expenses" element={<EntertainmentExpenses />} />
                 <Route path="/other-expenses" element={<OtherExpenses />} />
+                <Route path="/file-upload" element={<FileUpload />} />
             </Routes>
         </Router>
   </React.StrictMode>
