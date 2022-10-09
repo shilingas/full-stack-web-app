@@ -15,7 +15,7 @@ const ExpensesPages = ({ categoryType }) => {
     return (
         <div>
             <Navbar />
-            <h2 class="title">{categoryType}Expenses</h2>
+            <h2 class="title">{categoryType} Expenses</h2>
             <div class="container">
                 <table class="data_table">
                     <thead>
