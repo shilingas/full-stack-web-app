@@ -37,6 +37,9 @@ const EnterData = () => {
         <div>
             <Navbar />
             <div class="container">
+
+                <h2 class="title">Your expenses</h2>
+
                 <table class="data_table">
                     <thead>
                         <tr>
@@ -82,6 +85,13 @@ const EnterData = () => {
                             )
                         }
                     </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">Spent in total</td>
+                            <td>{ expenses }</td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
 
