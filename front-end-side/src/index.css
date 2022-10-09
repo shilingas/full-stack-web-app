@@ -1,10 +1,45 @@
+:root {
+    --main-color: #ff2f39;
+    --main-color-shade: #ff27b3;
+    --main-text-color: #798395;
+    --secondary-text-color: #343b48;
+    --active-text-color: #d7259e;
+    --bg-color: #1b2028;
+    --bg-color-shade: #263246;
+    --white: #fff;
+    --gradient: linear-gradient(90deg, var(--main-color) 0%, var(--main-color-shade) 100%) no-repeat;
+    /*Statistics bars colors*/
+    --food-color: #ff2f39;
+    --food-color-shade: #ff27b3;
+    --clothing-color: #8f03ff;
+    --clothing-color-shade: #ba15ff;
+    --entertainment-color: #df7211;
+    --entertainment-color-shade: #ffc614;
+    --transportation-color: #0067ad;
+    --transportation-color-shade: #3498db;
+    --house-color: #18b158;
+    --house-color-shade: #2ecc71;
+    --other-color: #96a5af;
+    --other-color-shade: #bdc3c7;
+    --input-bg: #282f3b;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--bg-color);
+    background: linear-gradient(180deg, var(--bg-color) 0%, var(--bg-color-shade) 100%) no-repeat;
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    color: var(--main-text-color);
+}
+
+a {
+    color: var(--active-text-color);
 }
 
 code {
@@ -12,26 +47,37 @@ code {
     monospace;
 }
 
-.navigation-block {
-    background: #191919;
-}
-
 .navigation-block .navbar {
     padding: 20px 0;
-    background: #191919;
-    color: #fff;
+    color: var(--white);
     display: grid;
     grid-template-columns: 1fr auto;
 }
 
+.navigation-block hr.nav-seperator {
+    border: 0;
+    height: 7px;
+    background: var(--main-color);
+    background: linear-gradient(90deg, var(--main-color) 0%, var(--main-color-shade) 100%) no-repeat;
+    width: 50%;
+    margin: 0;
+
+}
+
 .navigation-block .navbar a {
-    color: #777;
+    color: var(--main-text-color);
     text-decoration: none;
     padding: 0 10px;
     font-size: 14px;
     display: inline-block;
     padding-bottom: 5px;
-    }
+    transition: .3s ease-in-out;
+}
+
+.navigation-block .navbar a:hover {
+    color: var(--active-text-color);
+    transition: .3s ease-in-out;
+}
 
 .navigation-block .navbar .navbar a.right-link {
     padding-right: 0;
@@ -44,9 +90,29 @@ code {
 }
 
 h2.title {
-    color: #000;
+    color: var(--main-text-color);
     font-size: 29px;
     text-transform: lowercase;
     text-align: center;
     letter-spacing: 7px;
+}
+
+input {
+    background: var(--input-bg);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    color: var(--main-text-color);
+}
+
+button {
+    background: linear-gradient(90deg, var(--main-color) 0%, var(--main-color-shade) 100%) no-repeat;
+    border: 0;
+    outline: none;
+    font-size: 14px;
+    padding: 12px 30px;
+    margin: 5px;
+    border-radius: 10px;
+    color: var(--white);
+    text-transform: uppercase;
 }
