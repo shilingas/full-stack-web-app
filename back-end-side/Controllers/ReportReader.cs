@@ -85,7 +85,6 @@ namespace back_end_side.Controllers
                 Console.WriteLine("Invalid bank ID");
                 return null;
             }
-
         }
 
     }

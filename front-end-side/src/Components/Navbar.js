@@ -13,6 +13,7 @@ const Navbar = () => {
                         <Link to="/enter-data">Enter data</Link>
                         <Link to="/read-from-file-data">Data from file</Link>
                         <Link to="/show-data" class="right-link">Show data</Link>
+                        <Link to="/file-upload">File upload</Link>
                     </div>
                 </div>
             </div>
