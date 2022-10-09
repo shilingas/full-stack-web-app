@@ -9,17 +9,12 @@ import {
     Routes,
     Link
 } from "react-router-dom";
+import ExpensesPages from "./Pages/ExpensesPages";
 import reportWebVitals from './reportWebVitals';
 import Friends from "./Pages/Friends";
 import ShowData from "./Pages/ShowData";
 import EnterData from "./Pages/EnterData";
 import ReadData from "./Pages/ReadData";
-import FoodExpenses from "./Pages/FoodExpenses";
-import ClothesExpenses from "./Pages/ClothesExpenses";
-import CarExpenses from "./Pages/CarExpenses";
-import HouseExpenses from "./Pages/HouseExpenses";
-import EntertainmentExpenses from "./Pages/EntertainmentExpenses";
-import OtherExpenses from "./Pages/OtherExpenses";
 import FileUpload from "./Pages/FileUpload";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -31,13 +26,13 @@ root.render(
                 <Route path="/show-data" element={<ShowData />} />
                 <Route path="/enter-data" element={<EnterData />} />
                 <Route path="/read-from-file-data" element={<ReadData />} />
-                <Route path="/food-expenses" element={<FoodExpenses />} />
-                <Route path="/clothes-expenses" element={<ClothesExpenses />} />
-                <Route path="/car-expenses" element={<CarExpenses />} />
-                <Route path="/house-expenses" element={<HouseExpenses />} />
-                <Route path="/entertainment-expenses" element={<EntertainmentExpenses />} />
-                <Route path="/other-expenses" element={<OtherExpenses />} />
                 <Route path="/file-upload" element={<FileUpload />} />
+                <Route path="/food-expenses" element={<ExpensesPages categoryType="food" />} />
+                <Route path="/clothes-expenses" element={<ExpensesPages categoryType="clothes" />} />
+                <Route path="/car-expenses" element={<ExpensesPages categoryType="car"/>} />
+                <Route path="/house-expenses" element={<ExpensesPages categoryType="house" />} />
+                <Route path="/entertainment-expenses" element={<ExpensesPages categoryType="entertainment" />} />
+                <Route path="/other-expenses" element={<ExpensesPages categoryType="other" />} />
             </Routes>
         </Router>
   </React.StrictMode>

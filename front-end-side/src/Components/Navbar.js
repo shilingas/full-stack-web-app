@@ -17,6 +17,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
+            <hr class="nav-seperator"/>
         </div>
         );
 
