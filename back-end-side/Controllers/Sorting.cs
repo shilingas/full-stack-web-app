@@ -6,15 +6,14 @@ namespace back_end_side.Controllers
     public class Sorting
     {
 
-        public static List<Record> RecordsFromFile = ReportReader.ReadFromCsvFile();
-
+        private static readonly List<Record> RecordsFromFile = ReportReader.ReadFromCsvFile();
         public static SortingModel SortToCategories()
         {
-            string[] Supermarkets = { "MAXIMA", "NORFA", "lIDL", "IKI", "RIMI", "AIBE" };
+            string[] Supermarkets = { "MAXIMA", "NORFA", "lIDL", "IKI", "RIMI", "AIBE", "KFC", "SUBWAY", "MEATBUSTERS", "Hesburger", "JAMMI", "CAN CAN", "NO FORKS", "ILUNCH", "TAU", "CHAIKA", "Kavinė", "CAFFEINE" };
             string[] ClothesShops = { "ZARA", "STRADIVARIUS", "H&M" };
-            string[] CarMaintenanceShops = { "CIRCLE K", "VIADA" };
-            string[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI" };
-            string[] EntertainmentShops = { "GG ARENA" };
+            string[] CarMaintenanceShops = { "CIRCLE K", "VIADA", "BOLT", "Stova", "RIDE SHARE", "SUSISIEKIMO PASLAUGOS" };
+            string[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI", "CONSILIUM OPTIMUM", "tele2", "telia", "TOPO CENTRAS", "BITĖ", "GO3", "IKEA" };
+            string[] EntertainmentShops = { "CYBERX", "SPOTIFY", "BasketNews", "Oculus Digital", "steam", "ŽALGIRIO KREPŠINIO CENTRAS" };
 
             SortingModel Model = new()
             {
@@ -74,7 +73,7 @@ namespace back_end_side.Controllers
         {
             foreach (String shopName in shopNames)
             {
-                if (record.Seller != null && record.Seller.ToUpper().Contains(shopName))
+                if (record.Seller != null && record.Seller.ToUpper().Contains(shopName.ToUpper()))
                 {
                     return true;
                 }
