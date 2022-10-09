@@ -37,6 +37,9 @@ const EnterData = () => {
         <div>
             <Navbar />
             <div class="container">
+
+                <h2 class="title">Your expenses</h2>
+
                 <table class="data_table">
                     <thead>
                         <tr>
@@ -82,6 +85,13 @@ const EnterData = () => {
                             )
                         }
                     </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">Spent in total</td>
+                            <td>{ expenses }</td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
 
@@ -92,94 +102,110 @@ const EnterData = () => {
                 {  
                     delay ? (
                         <div id="statistics">
-                            <div id="stat-bar">
-                                <a class="stat food" href="/food-expenses" style={{ width: (Math.round(data.data.foodSum / (expenses) * 100 * 100) / 100)+'%' }}><span class="text">{Math.round(data.data.foodSum / (expenses) * 100 * 100) / 100}%</span></a>
-                                <a class="stat clothes" href="/clothes-expenses" style={{ width: (Math.round(data.data.clothesSum / (expenses) * 100 * 100) / 100) + '%' }}><span class="text">{Math.round(data.data.clothesSum / (expenses) * 100 * 100) / 100}%</span></a>
-                                <a class="stat car" href="/car-expenses" style={{ width: Math.round(data.data.carSum / (expenses) * 100 * 100) / 100 +'%' }}><span class="text">{Math.round(data.data.carSum / (expenses) * 100 * 100) / 100}%</span></a>
-                                <a class="stat house" href="/house-expenses" style={{ width: (Math.round(data.data.houseSum / (expenses) * 100 * 100) / 100)+'%' }}><span class="text">{Math.round(data.data.houseSum / (expenses) * 100 * 100) / 100}%</span></a>
-                                <a class="stat entertaintment" href="/entertainment-expenses" style={{ width: (Math.round(data.data.entertaintmentSum / (expenses) * 100 * 100) / 100)+'%' }}><span class="text">{Math.round(data.data.entertaintmentSum / (expenses) * 100 * 100) / 100}%</span></a>
-                                <a class="stat other last" href="/other-expenses" style={{ width: (Math.round(data.data.otherSum / (expenses) * 100 * 100) / 100)+'%' }}><span class="text">{Math.round(data.data.otherSum / (expenses) * 100 * 100) / 100}%</span></a>
-                            </div>
+                            <div id="cards">
+                                <div class="card food">
+                                    <div class="padding">
+                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--food-color) 0deg, var(--food-color-shade) ' + (Math.round(data.data.foodSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round(data.data.foodSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)'}}>
+                                            <div class="inside-box">{Math.round(data.data.foodSum / (expenses) * 10 * 100) / 10}%</div>
+                                        </div>
+                                        <div class="texts">
+                                            <p class="title">Food expenses</p>
+                                            <p class="amount">{ Math.round(data.data.foodSum * 100) / 100 } EUR</p>
+                                        </div>
+                                        <div class="button">
+                                            <a href="/food-expenses">Details</a>
+                                        </div>
+                                    </div>
 
-                            <ul id="legend">
-                                <a href="/food-expenses">
-                                    <li class="item">
-                                        <div class="dot food"></div>
-                                        <span class="name">Food</span>
-                                        <span class="percentage">{Math.round(data.data.foodSum / (expenses) * 100 * 100) / 100}%</span>
-                                    </li>
-                                </a>
-
-                                <a href="/clothes-expenses">
-                                    <li class="item">
-                                        <div class="dot clothes"></div>
-                                        <span class="name">Clothes</span>
-                                        <span class="percentage">{Math.round(data.data.clothesSum / (expenses) * 100 * 100) / 100}%</span>
-                                    </li>
-                                </a>
-
-                                <a href="/car-expenses">
-                                    <li class="item">
-                                        <div class="dot car"></div>
-                                        <span class="name">Car</span>
-                                        <span class="percentage">{Math.round(data.data.carSum / (expenses) * 100 * 100) / 100}%</span>
-                                    </li>
-                                </a>
-
-                                <a href="/house-expenses">
-                                    <li class="item">
-                                        <div class="dot house"></div>
-                                        <span class="name">House</span>
-                                        <span class="percentage">{Math.round(data.data.houseSum / (expenses) * 100 * 100) / 100}%</span>
-                                    </li>
-                                </a>
-
-                                <a href="/entertainment-expenses">
-                                    <li class="item">
-                                        <div class="dot entertaintment"></div>
-                                        <span class="name">Entertainment</span>
-                                        <span class="percentage">{Math.round(data.data.entertaintmentSum / (expenses) * 100 * 100) / 100}%</span>
-                                    </li>
-                                </a>
-
-                                <a href="/other-expenses">
-                                    <li class="item">
-                                        <div class="dot other"></div>
-                                        <span class="name">Other</span>
-                                        <span class="percentage">{Math.round(data.data.otherSum / (expenses) * 100 * 100) / 100}%</span>
-                                    </li>
-                                </a>
-
-                            </ul>
-                            <div class="expenses">
-                                <p>
-                                    <span class="p_title">Total: </span>
-                                    {Math.round(expenses * 100)/100} EUR
-                                </p>
-                                <p>
-                                    <span class="p_title">Spent on food: </span>
-                                    {Math.round(data.data.foodSum * 100) / 100} EUR
-                                </p>
-                                <p>
-                                    <span class="p_title">Spent on clothing: </span>
-                                    {Math.round(data.data.clothesSum * 100) / 100} EUR
-                                </p>
-                                <p>
-                                    <span class="p_title">Spent on transportation: </span>
-                                    {Math.round(data.data.carSum * 100) / 100} EUR
-                                </p>
-                                <p>
-                                    <span class="p_title">Spent on housing: </span>
-                                    {Math.round(data.data.houseSum * 100) / 100} EUR
-                                </p>
-                                <p>
-                                    <span class="p_title">Spent on entertainment: </span>
-                                    {Math.round(data.data.entertaintmentSum * 100) / 100} EUR
-                                </p>
-                                <p>
-                                    <span class="p_title">Other expenses: </span>
-                                    {Math.round(data.data.otherSum * 100) / 100} EUR
-                                </p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                                        <path fill-opacity="1" d="M0,224L60,202.7C120,181,240,139,360,106.7C480,75,600,53,720,85.3C840,117,960,203,1080,224C1200,245,1320,203,1380,181.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+                                    </svg>
+                                </div>
+                                <div class="card car">
+                                    <div class="padding">
+                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--transportation-color) 0deg, var(--transportation-color-shade) ' + (Math.round(data.data.carSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round(data.data.carSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
+                                            <div class="inside-box">{Math.round(data.data.carSum / (expenses) * 10 * 100) / 10}%</div>
+                                        </div>
+                                        <div class="texts">
+                                            <p class="title">Transportation expenses</p>
+                                            <p class="amount">{Math.round(data.data.carSum * 100) / 100} EUR</p>
+                                        </div>
+                                        <div class="button">
+                                            <a href="/car-expenses">Details</a>
+                                        </div>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                                        <path fill-opacity="1" d="M0,224L60,202.7C120,181,240,139,360,106.7C480,75,600,53,720,85.3C840,117,960,203,1080,224C1200,245,1320,203,1380,181.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+                                    </svg>
+                                </div>
+                                <div class="card entertainment">
+                                    <div class="padding">
+                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--entertainment-color) 0deg, var(--entertainment-color-shade) ' + (Math.round(data.data.entertaintmentSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round(data.data.entertaintmentSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
+                                            <div class="inside-box">{Math.round(data.data.entertaintmentSum / (expenses) * 10 * 100) / 10}%</div>
+                                        </div>
+                                        <div class="texts">
+                                            <p class="title">Entertainment expenses</p>
+                                            <p class="amount">{Math.round(data.data.entertaintmentSum * 100) / 100} EUR</p>
+                                        </div>
+                                        <div class="button">
+                                            <a href="/entertainment-expenses">Details</a>
+                                        </div>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                                        <path fill-opacity="1" d="M0,224L60,202.7C120,181,240,139,360,106.7C480,75,600,53,720,85.3C840,117,960,203,1080,224C1200,245,1320,203,1380,181.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+                                    </svg>
+                                </div>
+                                <div class="card house">
+                                    <div class="padding">
+                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--house-color) 0deg, var(--house-color-shade) ' + (Math.round(data.data.houseSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round(data.data.houseSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
+                                            <div class="inside-box">{Math.round(data.data.houseSum / (expenses) * 10 * 100) / 10}%</div>
+                                        </div>
+                                        <div class="texts">
+                                            <p class="title">Housing expenses</p>
+                                            <p class="amount">{Math.round(data.data.houseSum * 100) / 100} EUR</p>
+                                        </div>
+                                        <div class="button">
+                                            <a href="/house-expenses">Details</a>
+                                        </div>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                                        <path fill-opacity="1" d="M0,224L60,202.7C120,181,240,139,360,106.7C480,75,600,53,720,85.3C840,117,960,203,1080,224C1200,245,1320,203,1380,181.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+                                    </svg>
+                                </div>
+                                <div class="card clothes">
+                                    <div class="padding">
+                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--clothing-color) 0deg, var(--clothing-color-shade) ' + (Math.round(data.data.clothesSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round(data.data.clothesSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
+                                            <div class="inside-box">{Math.round(data.data.clothesSum / (expenses) * 10 * 100) / 10}%</div>
+                                        </div>
+                                        <div class="texts">
+                                            <p class="title">Clothes expenses</p>
+                                            <p class="amount">{Math.round(data.data.clothesSum * 100) / 100} EUR</p>
+                                        </div>
+                                        <div class="button">
+                                            <a href="/clothes-expenses">Details</a>
+                                        </div>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                                        <path fill-opacity="1" d="M0,224L60,202.7C120,181,240,139,360,106.7C480,75,600,53,720,85.3C840,117,960,203,1080,224C1200,245,1320,203,1380,181.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+                                    </svg>
+                                </div>
+                                <div class="card other">
+                                    <div class="padding">
+                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--other-color) 0deg, var(--other-color-shade) ' + (Math.round(data.data.otherSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round(data.data.otherSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
+                                            <div class="inside-box">{Math.round(data.data.otherSum / (expenses) * 10 * 100) / 10}%</div>
+                                        </div>
+                                        <div class="texts">
+                                            <p class="title">Other expenses</p>
+                                            <p class="amount">{Math.round(data.data.otherSum * 100) / 100} EUR</p>
+                                        </div>
+                                        <div class="button">
+                                            <a href="/other-expenses">Details</a>
+                                        </div>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                                        <path fill-opacity="1" d="M0,224L60,202.7C120,181,240,139,360,106.7C480,75,600,53,720,85.3C840,117,960,203,1080,224C1200,245,1320,203,1380,181.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+                                    </svg>
+                                </div>
                             </div>
                         </div>
                     ) : (
