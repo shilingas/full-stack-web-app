@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../../src/Components/Navbar";
-const FoodExpenses = () => {
+const ExpensesPages = ({ categoryType }) => {
     const [info, setInfo] = useState([]);
     const [status, setStatus] = useState(false);
     useEffect(() => {
@@ -15,7 +15,7 @@ const FoodExpenses = () => {
     return (
         <div>
             <Navbar />
-            <h2 class="title">Other Expenses</h2>
+            <h2 class="title">{categoryType}Expenses</h2>
             <div class="container">
                 <table class="data_table">
                     <thead>
@@ -32,9 +32,8 @@ const FoodExpenses = () => {
                                 info.data.map((item) => {
                                     const { date, seller, purpose, amount, category } = item;
                                     //item.filter(item => item.category == "food")
-                                    if (category == "other")
+                                    if (category == categoryType)
                                         return (
-
                                             <tr>
                                                 <td>{date}</td>
                                                 <td>{seller}</td>
@@ -53,4 +52,4 @@ const FoodExpenses = () => {
         </div>
     );
 }
-export default FoodExpenses;
+export default ExpensesPages;
