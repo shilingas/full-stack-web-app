@@ -2,32 +2,32 @@ import React, { useState } from "react";
 import Navbar from "../../src/Components/Navbar";
 import axios from "axios";
 const FileUpload = () => {
-    const [file, setFile] = useState();
-    const [fileName, setFileName] = useState();
+    const [file, setFile] = useState(null);
+    const [fileName, setFileName] = useState(null);
 
     const handleFile = (e) => {
-        //let inputFile = e.target.files[0]
-        //setFile({ file: inputFile })
-
-        console.log(e.target.files, "$$$$");
-        console.log(e.target.files[0], "$$$$");
+        //console.log(e.target.files, "$$$$");
+        //console.log(e.target.files[0].name, "NAME");
         setFile(e.target.files[0]);
         setFileName(e.target.files[0].name);
     };
 
-    const handleUpload = async(e) => {
-        console.log(file);
-        const formData = new FormData();
-        formData.append("formFile", file);
-        formData.append("fileName", fileName);
+    const handleUpload = async (e) => {
+        //console.log(file);
+        //const formData = new FormData();
+        //formData.append("formFile", file);
+        //formData.append("fileName", fileName);
         try {
-            const res = await axios.post("https://localhost:7174/api/Upload", formData, {
+            const axios = require('axios')
+            const res = await axios.post("https://localhost:7174/api/Upload", { "fileName" : fileName, "formFile" : file }, {
                 headers: {
-
+                    "Content-Type": "multipart/form-data"
                 },
-            });
-            console.log(res);
+            }).then(res => {
+                console.log(res);
+            }); 
         } catch (ex) {
+            console.log("HAHAHAHHAHAH");
             console.log(ex);
         }
 
@@ -40,7 +40,7 @@ const FileUpload = () => {
             <form>
                 <div className="">
                     <label>Select File </label>
-                    <input type="file" name="file" onChange={(e) => handleFile(e)}/>
+                    <input type="file" onChange={(e) => handleFile(e)}/>
                 </div>
 
                 <br />
