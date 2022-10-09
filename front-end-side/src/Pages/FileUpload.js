@@ -6,17 +6,11 @@ const FileUpload = () => {
     const [fileName, setFileName] = useState(null);
 
     const handleFile = (e) => {
-        //console.log(e.target.files, "$$$$");
-        //console.log(e.target.files[0].name, "NAME");
         setFile(e.target.files[0]);
         setFileName(e.target.files[0].name);
     };
 
     const handleUpload = async (e) => {
-        //console.log(file);
-        //const formData = new FormData();
-        //formData.append("formFile", file);
-        //formData.append("fileName", fileName);
         try {
             const axios = require('axios')
             const res = await axios.post("https://localhost:7174/api/Upload", { "fileName" : fileName, "formFile" : file }, {
@@ -27,7 +21,6 @@ const FileUpload = () => {
                 console.log(res);
             }); 
         } catch (ex) {
-            console.log("HAHAHAHHAHAH");
             console.log(ex);
         }
 
