@@ -14,9 +14,7 @@
 
 .form-container form.form input {
     font-size: 13px;
-    border: 1px solid #e6e6e6;
     padding: 10px 12px;
-    color: rgba(56,56,79,0.64);
 }
 
 .form-container form.form input:focus {
