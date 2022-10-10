@@ -46,7 +46,7 @@ const ExpensesPages = ({ categoryType }) => {
                                                 <td>{date.slice(0, 10)}</td>
                                                 <td>{seller.slice(0, 37)}</td>
                                                 <td>{details.slice(0, 37)}</td>
-                                                <td>{parseFloat(amount)}</td>
+                                                <td>{parseFloat(amount).toFixed(2)}</td>
                                             </tr>
                                         );
                                 })
@@ -57,15 +57,15 @@ const ExpensesPages = ({ categoryType }) => {
                         {
                             delayForInput ? (
                                 inputData.data.map((item) => {
-                                    const { date, seller, purpose, amount, category } = item;
+                                    const { date, seller, details, amount, category } = item;
                                     if (category == categoryType)
                                         return (
 
                                             <tr>
                                                 <td>{date.slice(0, 10)}</td>
                                                 <td>{seller.slice(0, 37)}</td>
-                                                <td>{purpose.slice(0, 37)}</td>
-                                                <td>{parseFloat(amount)}</td>
+                                                <td>{details.slice(0, 37)}</td>
+                                                <td>{parseFloat(amount).toFixed(2)}</td>
                                             </tr>
                                         );
                                 })
