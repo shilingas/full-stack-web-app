@@ -112,8 +112,8 @@ const EnterData = () => {
                                     return (
                                         <tr>
                                             <td>{date.slice(0, 10)}</td>
-                                            <td>{seller.slice(0, 40)}</td>
-                                            <td>{details}</td>
+                                            <td>{seller.slice(0, 37)}</td>
+                                            <td>{details.slice(0, 37)}</td>
                                             <td>{parseFloat(amount).toFixed(2)}</td>
                                         </tr>
                                     );
