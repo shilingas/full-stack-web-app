@@ -10,6 +10,39 @@ const EnterData = () => {
     const [inputData, setInputData] = useState(false);
     const [delayForInput, setDelayForInput] = useState(false);
     const [expenses, setExpenses] = useState(0);
+    const [inputValues, setInputValues] = useState([]);
+    const [foodSum, setFoodSum] = useState(0);
+    const [clothesSum, setClothesSum] = useState(0);
+    const [carSum, setCarSum] = useState(0);
+    const [houseSum, setHouseSum] = useState(0);
+    const [entertainmentSum, setEntertainmentSum] = useState(0);
+    const [otherSum, setOtherSum] = useState(0);
+    useEffect(() => {
+        inputValues.map((item) => {
+            switch (item.category) {
+                case "food":
+                    setFoodSum(prev => prev + parseFloat(item.amount));
+                    break;
+                case "clothes":
+                    setClothesSum(prev => prev + parseFloat(item.amount));
+                    break;
+                case "car":
+                    setCarSum(prev => prev + parseFloat(item.amount));
+                    break;
+                case "house":
+                    setHouseSum(prev => prev + parseFloat(item.amount));
+                    break;
+                case "entertainment":
+                    setEntertainmentSum(prev => prev + parseFloat(item.amount));
+                    break;
+                case "other":
+                    setOtherSum(prev => prev + parseFloat(item.amount));
+                    break;
+                default:
+                    break;
+            }
+        });
+    }, [inputValues]);
     useEffect(() => {
         axios.get("https://localhost:7174/api/Sorting").then(item => {
             setData(item);
@@ -32,6 +65,11 @@ const EnterData = () => {
             setInputData(resp);
             setDelayForInput(true);
         })
+        fetch('https://localhost:7174/api/ShowData')
+            .then((response) => response.json())
+            .then((data) => {
+                setInputValues(data);
+            });
     }, []);
     return (
         <div>
@@ -70,13 +108,13 @@ const EnterData = () => {
                         {
                             delayForInput ? (
                                 inputData.data.map((item) => {
-                                    const { date, seller, purpose, amount } = item;
+                                    const { date, seller, amount, details } = item;
                                     return (
                                         <tr>
                                             <td>{date.slice(0, 10)}</td>
                                             <td>{seller.slice(0, 40)}</td>
-                                            <td>{purpose.slice(0, 40)}</td>
-                                            <td>{amount.toFixed(2)}</td>
+                                            <td>{details}</td>
+                                            <td>{parseFloat(amount).toFixed(2)}</td>
                                         </tr>
                                     );
                                 })
@@ -89,7 +127,7 @@ const EnterData = () => {
                     <tfoot>
                         <tr>
                             <td colspan="3">Spent in total</td>
-                            <td>{ expenses }</td>
+                            <td>{ expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum}</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -100,17 +138,17 @@ const EnterData = () => {
                 <h2 class="title">Statistics</h2>
 
                 {  
-                    delay ? (
+                    (delay && delayForInput) ? (
                         <div id="statistics">
                             <div id="cards">
                                 <div class="card food">
                                     <div class="padding">
-                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--food-color) 0deg, var(--food-color-shade) ' + (Math.round(data.data.foodSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round(data.data.foodSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)'}}>
-                                            <div class="inside-box">{Math.round(data.data.foodSum / (expenses) * 10 * 100) / 10}%</div>
+                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--food-color) 0deg, var(--food-color-shade) ' + (Math.round((data.data.foodSum + foodSum) / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round( (data.data.foodSum + foodSum) / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 100 * 100) / 100 * 3.6) + 'deg 360deg)'}}>
+                                            <div class="inside-box">{Math.round( (data.data.foodSum + foodSum) / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 10 * 100) / 10}%</div>
                                         </div>
                                         <div class="texts">
                                             <p class="title">Food expenses</p>
-                                            <p class="amount">{ Math.round(data.data.foodSum * 100) / 100 } EUR</p>
+                                            <p class="amount">{ Math.round((data.data.foodSum + foodSum) * 100) / 100 } EUR</p>
                                         </div>
                                         <div class="button">
                                             <a href="/food-expenses">Details</a>
@@ -123,12 +161,12 @@ const EnterData = () => {
                                 </div>
                                 <div class="card car">
                                     <div class="padding">
-                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--transportation-color) 0deg, var(--transportation-color-shade) ' + (Math.round(data.data.carSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round(data.data.carSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
-                                            <div class="inside-box">{Math.round(data.data.carSum / (expenses) * 10 * 100) / 10}%</div>
+                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--transportation-color) 0deg, var(--transportation-color-shade) ' + (Math.round((data.data.carSum + carSum) / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round((data.data.carSum  + carSum) / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
+                                            <div class="inside-box">{Math.round((data.data.carSum + carSum) / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 10 * 100) / 10}%</div>
                                         </div>
                                         <div class="texts">
                                             <p class="title">Transportation expenses</p>
-                                            <p class="amount">{Math.round(data.data.carSum * 100) / 100} EUR</p>
+                                            <p class="amount">{Math.round((data.data.carSum + carSum) * 100) / 100} EUR</p>
                                         </div>
                                         <div class="button">
                                             <a href="/car-expenses">Details</a>
@@ -140,12 +178,12 @@ const EnterData = () => {
                                 </div>
                                 <div class="card entertainment">
                                     <div class="padding">
-                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--entertainment-color) 0deg, var(--entertainment-color-shade) ' + (Math.round(data.data.entertaintmentSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round(data.data.entertaintmentSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
-                                            <div class="inside-box">{Math.round(data.data.entertaintmentSum / (expenses) * 10 * 100) / 10}%</div>
+                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--entertainment-color) 0deg, var(--entertainment-color-shade) ' + (Math.round((data.data.entertaintmentSum + entertainmentSum) / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round((data.data.entertaintmentSum + entertainmentSum) / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
+                                            <div class="inside-box">{Math.round((data.data.entertaintmentSum + entertainmentSum) / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 10 * 100) / 10}%</div>
                                         </div>
                                         <div class="texts">
                                             <p class="title">Entertainment expenses</p>
-                                            <p class="amount">{Math.round(data.data.entertaintmentSum * 100) / 100} EUR</p>
+                                            <p class="amount">{Math.round((data.data.entertaintmentSum + entertainmentSum) * 100) / 100} EUR</p>
                                         </div>
                                         <div class="button">
                                             <a href="/entertainment-expenses">Details</a>
@@ -157,12 +195,12 @@ const EnterData = () => {
                                 </div>
                                 <div class="card house">
                                     <div class="padding">
-                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--house-color) 0deg, var(--house-color-shade) ' + (Math.round(data.data.houseSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round(data.data.houseSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
-                                            <div class="inside-box">{Math.round(data.data.houseSum / (expenses) * 10 * 100) / 10}%</div>
+                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--house-color) 0deg, var(--house-color-shade) ' + (Math.round(data.data.houseSum / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round((data.data.houseSum + houseSum / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 100 * 100) / 100 * 3.6) + 'deg 360deg)') }}>
+                                            <div class="inside-box">{Math.round((data.data.houseSum + houseSum) / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 10 * 100) / 10}%</div>
                                         </div>
                                         <div class="texts">
                                             <p class="title">Housing expenses</p>
-                                            <p class="amount">{Math.round(data.data.houseSum * 100) / 100} EUR</p>
+                                            <p class="amount">{Math.round((data.data.houseSum + houseSum) * 100) / 100} EUR</p>
                                         </div>
                                         <div class="button">
                                             <a href="/house-expenses">Details</a>
@@ -174,12 +212,12 @@ const EnterData = () => {
                                 </div>
                                 <div class="card clothes">
                                     <div class="padding">
-                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--clothing-color) 0deg, var(--clothing-color-shade) ' + (Math.round(data.data.clothesSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round(data.data.clothesSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
-                                            <div class="inside-box">{Math.round(data.data.clothesSum / (expenses) * 10 * 100) / 10}%</div>
+                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--clothing-color) 0deg, var(--clothing-color-shade) ' + (Math.round((data.data.clothesSum + clothesSum) / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round((data.data.clothesSum + clothesSum) / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
+                                            <div class="inside-box">{Math.round((data.data.clothesSum + clothesSum) / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 10 * 100) / 10}%</div>
                                         </div>
                                         <div class="texts">
                                             <p class="title">Clothes expenses</p>
-                                            <p class="amount">{Math.round(data.data.clothesSum * 100) / 100} EUR</p>
+                                            <p class="amount">{Math.round((data.data.clothesSum + clothesSum) * 100) / 100} EUR</p>
                                         </div>
                                         <div class="button">
                                             <a href="/clothes-expenses">Details</a>
@@ -191,12 +229,12 @@ const EnterData = () => {
                                 </div>
                                 <div class="card other">
                                     <div class="padding">
-                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--other-color) 0deg, var(--other-color-shade) ' + (Math.round(data.data.otherSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round(data.data.otherSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
-                                            <div class="inside-box">{Math.round(data.data.otherSum / (expenses) * 10 * 100) / 10}%</div>
+                                        <div class="percentage-bar" style={{ background: 'conic-gradient( var(--other-color) 0deg, var(--other-color-shade) ' + (Math.round((data.data.otherSum + otherSum) / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round((data.data.otherSum + otherSum) / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
+                                            <div class="inside-box">{Math.round((data.data.otherSum + otherSum) / (expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum) * 10 * 100) / 10}%</div>
                                         </div>
                                         <div class="texts">
                                             <p class="title">Other expenses</p>
-                                            <p class="amount">{Math.round(data.data.otherSum * 100) / 100} EUR</p>
+                                            <p class="amount">{Math.round((data.data.otherSum + otherSum) * 100) / 100} EUR</p>
                                         </div>
                                         <div class="button">
                                             <a href="/other-expenses">Details</a>

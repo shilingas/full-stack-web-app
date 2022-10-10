@@ -81,6 +81,25 @@ namespace back_end_side.Controllers
             }
             return false;
         }
+        public static String CheckInput(InputModel model)
+        {
+            string[] Supermarkets = { "MAXIMA", "NORFA", "lIDL", "IKI", "RIMI", "AIBE", "KFC", "SUBWAY", "MEATBUSTERS", "Hesburger", "JAMMI", "CAN CAN", "NO FORKS", "ILUNCH", "TAU", "CHAIKA", "Kavinė", "CAFFEINE" };
+            string[] ClothesShops = { "ZARA", "STRADIVARIUS", "H&M" };
+            string[] CarMaintenanceShops = { "CIRCLE K", "VIADA", "BOLT", "Stova", "RIDE SHARE", "SUSISIEKIMO PASLAUGOS" };
+            string[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI", "CONSILIUM OPTIMUM", "tele2", "telia", "TOPO CENTRAS", "BITĖ", "GO3", "IKEA" };
+            string[] EntertainmentShops = { "CYBERX", "SPOTIFY", "BasketNews", "Oculus Digital", "steam", "ŽALGIRIO KREPŠINIO CENTRAS" };  
+            if (model.Seller != null && Supermarkets.Any(model.Seller.ToUpper().Contains))
+                return "food";
+            if (model.Seller != null && ClothesShops.Any(model.Seller.ToUpper().Contains))
+                return "clothes";
+            if (model.Seller != null && CarMaintenanceShops.Any(model.Seller.ToUpper().Contains))
+                return "car";
+            if (model.Seller != null && HouseMaintenanceShops.Any(model.Seller.ToUpper().Contains))
+                return "house";
+            if (model.Seller != null && EntertainmentShops.Any(model.Seller.ToUpper().Contains))
+                return "entertainment";
+            else return "noCategory";
+        }
 
 
     }

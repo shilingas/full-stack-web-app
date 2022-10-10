@@ -4,12 +4,21 @@ import Navbar from "../../src/Components/Navbar";
 const ExpensesPages = ({ categoryType }) => {
     const [info, setInfo] = useState([]);
     const [status, setStatus] = useState(false);
+    const [inputData, setInputData] = useState([]);
+    const [delayForInput, setDelayForInput] = useState(false);
     useEffect(() => {
         axios.get("https://localhost:7174/api/File").then(resp => {
             setInfo(resp);
             setStatus(true);
             console.log(resp);
         })
+    }, []);
+    useEffect(() => {
+        axios.get('https://localhost:7174/api/ShowData').then(resp => {
+            setInputData(resp);
+            setDelayForInput(true);
+            console.log(resp);
+        });
     }, []);
 
     return (
@@ -30,10 +39,28 @@ const ExpensesPages = ({ categoryType }) => {
                         {
                             status ? (
                                 info.data.map((item) => {
-                                    const { date, seller, purpose, amount, category } = item;
-                                    //item.filter(item => item.category == "food")
+                                    const { date, seller, details, amount, category } = item;
                                     if (category == categoryType)
                                         return (
+                                            <tr>
+                                                <td>{date}</td>
+                                                <td>{seller}</td>
+                                                <td>{details}</td>
+                                                <td>{amount}</td>
+                                            </tr>
+                                        );
+                                })
+                            ) : (
+                                null
+                            )
+                        }
+                        {
+                            delayForInput ? (
+                                inputData.data.map((item) => {
+                                    const { date, seller, purpose, amount, category } = item;
+                                    if (category == categoryType)
+                                        return (
+
                                             <tr>
                                                 <td>{date}</td>
                                                 <td>{seller}</td>
