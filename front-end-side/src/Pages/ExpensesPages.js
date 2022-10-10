@@ -46,7 +46,7 @@ const ExpensesPages = ({ categoryType }) => {
                                                 <td>{date.slice(0, 10)}</td>
                                                 <td>{seller.slice(0, 37)}</td>
                                                 <td>{details.slice(0, 37)}</td>
-                                                <td>{amount}</td>
+                                                <td>{parseFloat(amount)}</td>
                                             </tr>
                                         );
                                 })
@@ -64,8 +64,8 @@ const ExpensesPages = ({ categoryType }) => {
                                             <tr>
                                                 <td>{date.slice(0, 10)}</td>
                                                 <td>{seller.slice(0, 37)}</td>
-                                                <td>{purpose}</td>
-                                                <td>{amount}</td>
+                                                <td>{purpose.slice(0, 37)}</td>
+                                                <td>{parseFloat(amount)}</td>
                                             </tr>
                                         );
                                 })
