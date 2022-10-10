@@ -7,7 +7,7 @@ const Friends = () => {
             <Navbar/>
             <h1>Friends:</h1>
             <h2>Regex</h2>
-            <img src="/dog.gif" alt=""/>
+            <img src="/dog.gif" alt="Regex is not home :("/>
         </div>
     );
 }
