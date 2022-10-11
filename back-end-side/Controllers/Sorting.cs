@@ -98,7 +98,7 @@ namespace back_end_side.Controllers
                 return "house";
             if (model.Seller != null && EntertainmentShops.Any(model.Seller.ToUpper().Contains))
                 return "entertainment";
-            else return "noCategory";
+            else return "other";
         }
 
 
