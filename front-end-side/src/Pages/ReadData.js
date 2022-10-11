@@ -127,7 +127,7 @@ const EnterData = () => {
                     <tfoot>
                         <tr>
                             <td colspan="3">Spent in total</td>
-                            <td>{ expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum}</td>
+                            <td>{parseFloat(expenses + foodSum + clothesSum + carSum + houseSum + entertainmentSum + otherSum).toFixed(2)}</td>
                         </tr>
                     </tfoot>
                 </table>

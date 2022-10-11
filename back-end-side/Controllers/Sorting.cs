@@ -6,12 +6,11 @@ namespace back_end_side.Controllers
     public class Sorting
     {
 
-        private static readonly List<Record> RecordsFromFile = ReportReader.ReadFromCsvFile();
         public static SortingModel SortToCategories()
         {
             string[] Supermarkets = { "MAXIMA", "NORFA", "lIDL", "IKI", "RIMI", "AIBE", "KFC", "SUBWAY", "MEATBUSTERS", "Hesburger", "JAMMI", "CAN CAN", "NO FORKS", "ILUNCH", "TAU", "CHAIKA", "Kavinė", "CAFFEINE" };
             string[] ClothesShops = { "ZARA", "STRADIVARIUS", "H&M" };
-            string[] CarMaintenanceShops = { "CIRCLE K", "VIADA", "BOLT", "Stova", "RIDE SHARE", "SUSISIEKIMO PASLAUGOS" };
+            string[] CarMaintenanceShops = { "CIRCLE K", "VIADA", "BOLT", "Stova", "RIDE SHARE", "SUSISIEKIMO PASLAUGOS", "CITYBEE" };
             string[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI", "CONSILIUM OPTIMUM", "tele2", "telia", "TOPO CENTRAS", "BITĖ", "GO3", "IKEA" };
             string[] EntertainmentShops = { "CYBERX", "SPOTIFY", "BasketNews", "Oculus Digital", "steam", "ŽALGIRIO KREPŠINIO CENTRAS" };
 
@@ -24,41 +23,43 @@ namespace back_end_side.Controllers
                 ClothesSum = 0,
                 FoodSum = 0
             };
-
-            foreach (var record in RecordsFromFile)
+            if (UploadController.RecordsFromFile != null)
             {
-                if (CheckType(record, Supermarkets))
+                foreach (var record in UploadController.RecordsFromFile)
                 {
-                    record.Category = "food";
-                    Model.FoodSum += record.Amount;
-                }
-                else if (CheckType(record, ClothesShops))
-                {
-                    record.Category = "clothes";
-                    Model.ClothesSum += record.Amount;
-                }
-                else if (CheckType(record, CarMaintenanceShops))
-                {
-                    record.Category = "car";
-                    Model.CarSum += record.Amount;
-                }
-                else if (CheckType(record, HouseMaintenanceShops))
-                {
-                    record.Category = "house";
-                    Model.HouseSum += record.Amount;
-                }
-                else if (CheckType(record, EntertainmentShops))
-                {
-                    record.Category = "entertainment";
-                    Model.EntertaintmentSum += record.Amount;
-                }
-                else
-                {
-                    record.Category = "other";
-                    Model.OtherSum += record.Amount;
+                    if (CheckType(record, Supermarkets))
+                    {
+                        record.Category = "food";
+                        Model.FoodSum += record.Amount;
+                    }
+                    else if (CheckType(record, ClothesShops))
+                    {
+                        record.Category = "clothes";
+                        Model.ClothesSum += record.Amount;
+                    }
+                    else if (CheckType(record, CarMaintenanceShops))
+                    {
+                        record.Category = "car";
+                        Model.CarSum += record.Amount;
+                    }
+                    else if (CheckType(record, HouseMaintenanceShops))
+                    {
+                        record.Category = "house";
+                        Model.HouseSum += record.Amount;
+                    }
+                    else if (CheckType(record, EntertainmentShops))
+                    {
+                        record.Category = "entertainment";
+                        Model.EntertaintmentSum += record.Amount;
+                    }
+                    else
+                    {
+                        record.Category = "other";
+                        Model.OtherSum += record.Amount;
+                    }
                 }
             }
-
+            
             return Model;
 
         }
@@ -66,7 +67,7 @@ namespace back_end_side.Controllers
         public static List<Record> SortedList()
         {
             SortToCategories();
-            return RecordsFromFile;
+            return UploadController.RecordsFromFile;
         }
 
         public static Boolean CheckType(Record record, String[] shopNames)
