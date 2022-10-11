@@ -15,8 +15,8 @@ namespace back_end_side.Controllers
         [Produces("application/json")]
         public IActionResult Post([FromBody]InputModel model)
         {
+            model.Category = Sorting.CheckInput(model);
             models.Add(model);
-            Console.WriteLine(models.Count);
             return Ok(model);
         }
         [HttpGet]
