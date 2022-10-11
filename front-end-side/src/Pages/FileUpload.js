@@ -9,8 +9,8 @@ const FileUpload = () => {
     const handleFile = (e) => {
         setFile(e.target.files[0]);
         setFileName(e.target.files[0].name);
-        var e = document.getElementById("banks");
-        setBank(e.value);
+        var selectedBank = document.getElementById("banks");
+        setBank(selectedBank.value);
     };
 
     const handleUpload = async (e) => {

@@ -8,8 +8,13 @@ namespace back_end_side.Controllers
 {
     public class ReportReader
     {
-        public static int? bank = null;
-        public static List<Record>? ReadFromCsvFile()
+        
+        public int? bank = null;
+        public ReportReader(int bank)
+        {
+            this.bank = bank;
+        }
+        public List<Record>? ReadFromCsvFile()
         {
             // swedbank = 0, paysera = 1, seb = 2
             
@@ -82,8 +87,7 @@ namespace back_end_side.Controllers
                     return records;
                 } else
                 {
-                    Console.WriteLine("Invalid bank ID"); 
-                    bank = null;
+                    Console.WriteLine("Invalid bank ID");
                     return null;
                 }
                

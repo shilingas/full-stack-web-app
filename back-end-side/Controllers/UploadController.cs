@@ -19,9 +19,7 @@ namespace back_end_side.Controllers
         [HttpPost]
         public ActionResult Post([FromForm] FileModel file)
         {
-            
-            Console.WriteLine("BANK: " + file.Bank);
-            ReportReader.bank = file.Bank;
+            ReportReader reportReader = new ReportReader(file.Bank);
             try
             {
                 if (file.FormFile != null && file.FileName != null)
@@ -30,11 +28,10 @@ namespace back_end_side.Controllers
                     string newPath = Path.Combine(Directory.GetCurrentDirectory(), "uploadedFiles", "report.csv");
                    
                     using (Stream stream = new FileStream(path, FileMode.Create))
-                    {
-                        file.FormFile.CopyTo(stream);
-                        System.IO.File.Copy(path, newPath);
-                    } 
-                    RecordsFromFile.AddRange(ReportReader.ReadFromCsvFile());
+                    file.FormFile.CopyTo(stream);
+                    System.IO.File.Copy(path, newPath);
+                     
+                    RecordsFromFile.AddRange(reportReader.ReadFromCsvFile());
                     if (System.IO.File.Exists(path) && System.IO.File.Exists(path))
                     {
                         System.IO.File.Delete(Path.Combine(path));
