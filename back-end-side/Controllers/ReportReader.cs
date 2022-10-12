@@ -2,7 +2,6 @@
 using CsvHelper;
 using CsvHelper.Configuration;
 using System.Globalization;
-using System.Reflection.PortableExecutable;
 
 namespace back_end_side.Controllers
 {
@@ -16,7 +15,6 @@ namespace back_end_side.Controllers
         }
         public List<Record>? ReadFromCsvFile()
         {
-            // swedbank = 0, paysera = 1, seb = 2
             
             if (File.Exists("../back-end-side/uploadedFiles/report.csv"))
             {
@@ -24,9 +22,10 @@ namespace back_end_side.Controllers
                 {
                     Delimiter = ";",
                 };
+
                 using var streamReader = new StreamReader("../back-end-side/uploadedFiles/report.csv");
 
-                if (bank == 0)
+                if (bank == (int)Banks.Swedbank)
                 {
                     using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
 
@@ -47,7 +46,7 @@ namespace back_end_side.Controllers
 
                     return records;
                 }
-                else if (bank == 1)
+                else if (bank == (int)Banks.Paysera)
                 {
                     using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
 
@@ -67,7 +66,7 @@ namespace back_end_side.Controllers
 
                     return records;
                 }
-                else if (bank == 2)
+                else if (bank == (int)Banks.Seb)
                 {
                     streamReader.ReadLine();
                     using var csvReader = new CsvReader(streamReader, DelimiterToSemicolon);
@@ -87,7 +86,6 @@ namespace back_end_side.Controllers
                     return records;
                 } else
                 {
-                    Console.WriteLine("Invalid bank ID");
                     return null;
                 }
                
@@ -96,5 +94,11 @@ namespace back_end_side.Controllers
             
         }
 
+    }
+    enum Banks
+    {
+        Swedbank,
+        Paysera,
+        Seb
     }
 }
