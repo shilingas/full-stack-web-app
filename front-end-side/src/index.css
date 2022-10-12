@@ -104,6 +104,7 @@ input {
     outline: none;
     border-radius: 10px;
     color: var(--main-text-color);
+    padding: 15px 25px;
 }
 
 button {
@@ -112,8 +113,18 @@ button {
     outline: none;
     font-size: 14px;
     padding: 12px 30px;
-    margin: 5px;
     border-radius: 10px;
     color: var(--white);
     text-transform: uppercase;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+button:hover {
+    transition: .3s ease-in-out;
+    transform: scale(1.05);
+}
+
+::placeholder {
+    color: var(--main-text-color);
 }
