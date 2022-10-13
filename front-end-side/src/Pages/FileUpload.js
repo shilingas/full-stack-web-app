@@ -35,23 +35,25 @@ const FileUpload = () => {
     };
 
     return (
-            <div class="container">
+            <div>
                 <Navbar />
-                <h2 class="title">File Upload</h2>
-                <form>
-                    <div className="">
-                        <label for="banks">Choose a bank:</label>
-                        <select id="banks">
-                            <option value="0">Swedbank</option>
-                            <option value="1">Paysera</option>
-                            <option value="2">SEB</option>
-                        </select>
-                        <label>Select File </label>
-                        <input type="file" accept=".csv" onChange={(e) => handleFile(e)}/>
-                    </div>
-                    <br />
-                    <button type="button" value="upload" onClick={(e) => handleUpload(e)}>Upload</button>
-                 </form>
+                <div class="container">
+                    <h2 class="title">File Upload</h2>
+                    <form>
+                        <div className="">
+                            <label for="banks">Choose a bank:</label>
+                            <select id="banks">
+                                <option value="0">Swedbank</option>
+                                <option value="1">Paysera</option>
+                                <option value="2">SEB</option>
+                            </select>
+                            <label>Select File </label>
+                            <input type="file" accept=".csv" onChange={(e) => handleFile(e)}/>
+                        </div>
+                        <br />
+                        <button type="button" value="upload" onClick={(e) => handleUpload(e)}>Upload</button>
+                    </form>
+                </div>
             </div>
         );
     

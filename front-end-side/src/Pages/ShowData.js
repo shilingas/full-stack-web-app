@@ -29,38 +29,16 @@ const ShowData = () => {
     return (
         <div>
             <Navbar />
-            <div className='form-container'>
-                <form className='form' onSubmit={postData}>
-                    <label className='form-labels' htmlFor="date">Date: </label>
-                    <input onChange={(e) => setDate(e.target.value) } className='form-inputs' type="text" id="date" name="date" value={date}/>
-                    <label className='form-labels' htmlFor="seller">Seller: </label>
-                    <input onChange={(e) => setSeller(e.target.value)} className='form-inputs' type="text" id="seller" name="seller" value={seller} />
-                    <label className='form-labels' htmlFor="price">Amount: </label>
-                    <input onChange={(e) => setAmount(e.target.value)} className='form-inputs' type="text" id="price" name="price" value={amount} />
-                    <label className='form-labels' htmlFor="details">Details: </label>
-                    <input onChange={(e) => setDetails(e.target.value)} className='form-inputs' type="text" id="price" name="price" value={details} />
+            <div className='container'>
+                <form id='form' onSubmit={postData}>
+                    <input onChange={(e) => setDate(e.target.value)} className='form-inputs' type="text" id="date" name="date" value={date} placeholder="Date" />
+                    <input onChange={(e) => setSeller(e.target.value)} className='form-inputs' type="text" id="seller" name="seller" value={seller} placeholder="Seller" />
+                    <input onChange={(e) => setAmount(e.target.value)} className='form-inputs' type="text" id="price" name="price" value={amount} placeholder="Amount" />
+                    <input onChange={(e) => setDetails(e.target.value)} className='form-inputs' type="text" id="details" name="details" value={details} placeholder="Details" />
                     <button>Submit</button>
-                    <button onClick={() => show()}>Show all data</button>
                 </form>
             </div>
-            <div className='data'>
-                {
-                    status ? (
-                    info.data.map((item) => {
-                        const { date, seller, category, amount } = item;
-                        return (
-                            <div className='data-item'>
-                                <h1>Date: {date}</h1>
-                                <h1>Seller: {seller}</h1>
-                                <h1>Amount: {amount}</h1>
-                                <h1>Category: {category}</h1>
-                             </div>
-                            );
-                    })) : (
-                            null
-                          )
-                }
-            </div>
+            
         </div>
     );
 }

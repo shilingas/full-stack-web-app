@@ -1,12 +1,6 @@
 ﻿using back_end_side.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
-using System.Diagnostics;
-using System.Reflection;
-using System.Text;
 
 namespace back_end_side.Controllers
 {   

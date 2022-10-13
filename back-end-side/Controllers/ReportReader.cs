@@ -2,7 +2,6 @@
 using CsvHelper;
 using CsvHelper.Configuration;
 using System.Globalization;
-using System.Reflection.PortableExecutable;
 
 namespace back_end_side.Controllers
 {
@@ -18,7 +17,6 @@ namespace back_end_side.Controllers
         }
         public List<Record>? ReadFromCsvFile()
         {
-            // swedbank = 0, paysera = 1, seb = 2
             
             var DelimiterToSemicolon = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
@@ -27,7 +25,7 @@ namespace back_end_side.Controllers
                 
             using var streamReader = new StreamReader(fileData.OpenReadStream());
 
-            if (bank == 0)
+            if (bank == (int)Banks.Swedbank)
             {
                 using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
 
@@ -45,13 +43,11 @@ namespace back_end_side.Controllers
                         records.RemoveAt(i);
                     }
                 }
-
                 return records;
-            }
-            else if (bank == 1)
-            {
+             }
+             else if (bank == (int)Banks.Paysera)
+             {
                 using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
-
                 var records = csvReader.GetRecords<Record>().ToList();
 
                 for (int i = records.Count - 1; i >= 0; --i)
@@ -65,33 +61,37 @@ namespace back_end_side.Controllers
                         records.ElementAt(i).Amount *= -1;
                     }
                 }
-
                 return records;
-            }
-            else if (bank == 2)
-            {
-                streamReader.ReadLine();
-                using var csvReader = new CsvReader(streamReader, DelimiterToSemicolon);
+              }
+              else if (bank == (int)Banks.Seb)
+              {
+                  streamReader.ReadLine();
+                  using var csvReader = new CsvReader(streamReader, DelimiterToSemicolon);
 
-                var records = csvReader.GetRecords<Record>().ToList();
+                  var records = csvReader.GetRecords<Record>().ToList();
 
-                for (int i = records.Count - 1; i >= 0; --i)
+                  for (int i = records.Count - 1; i >= 0; --i)
+                  {
+                      if (records.ElementAt(i).PaymentType.Equals("K"))
+                      {
+                          records.RemoveAt(i);
+                      }
+
+                      records.ElementAt(i).Amount /= 100;
+                  }
+                  return records;
+                  
+                } else
                 {
-                    if (records.ElementAt(i).PaymentType.Equals("K"))
-                    {
-                        records.RemoveAt(i);
-                    }
-
-                    records.ElementAt(i).Amount /= 100;
+                    return null;
                 }
-
-                return records;
-            } else
-            {
-                Console.WriteLine("Invalid bank ID");
-                return null;
-            }
+            } 
         }
             
     }
-}
+    enum Banks
+    {
+        Swedbank,
+        Paysera,
+        Seb
+    }
