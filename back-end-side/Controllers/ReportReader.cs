@@ -9,91 +9,85 @@ namespace back_end_side.Controllers
     {
         
         public int? bank = null;
-        public ReportReader(int bank)
+        public IFormFile fileData;
+        public ReportReader(int bank, IFormFile fileData)
         {
             this.bank = bank;
+            this.fileData = fileData;
         }
         public List<Record>? ReadFromCsvFile()
         {
             
-            if (File.Exists("../back-end-side/uploadedFiles/report.csv"))
+            var DelimiterToSemicolon = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
-                var DelimiterToSemicolon = new CsvConfiguration(CultureInfo.InvariantCulture)
+                Delimiter = ";",
+            };
+                
+            using var streamReader = new StreamReader(fileData.OpenReadStream());
+
+            if (bank == (int)Banks.Swedbank)
+            {
+                using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
+
+                var records = csvReader.GetRecords<Record>().ToList();
+
+                int numberOfElements = records.Count;
+                records.RemoveAt(numberOfElements - 1);
+
+                for (int i = records.Count - 1; i >= 0; --i)
                 {
-                    Delimiter = ";",
-                };
-
-                using var streamReader = new StreamReader("../back-end-side/uploadedFiles/report.csv");
-
-                if (bank == (int)Banks.Swedbank)
-                {
-                    using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
-
-                    var records = csvReader.GetRecords<Record>().ToList();
-
-                    int numberOfElements = records.Count;
-                    records.RemoveAt(numberOfElements - 1);
-
-                    for (int i = records.Count - 1; i >= 0; --i)
+                    if ((records.ElementAt(i).Seller.Equals("") && records.ElementAt(i).Purpose.Equals("Likutis pradžiai")) ||
+                        (records.ElementAt(i).Seller.Equals("") && records.ElementAt(i).Purpose.Equals("Apyvarta")) ||
+                        records.ElementAt(i).PaymentType.Equals("K"))
                     {
-                        if ((records.ElementAt(i).Seller.Equals("") && records.ElementAt(i).Purpose.Equals("Likutis pradžiai")) ||
-                            (records.ElementAt(i).Seller.Equals("") && records.ElementAt(i).Purpose.Equals("Apyvarta")) ||
-                            records.ElementAt(i).PaymentType.Equals("K"))
-                        {
-                            records.RemoveAt(i);
-                        }
+                        records.RemoveAt(i);
                     }
-
-                    return records;
                 }
-                else if (bank == (int)Banks.Paysera)
+                return records;
+             }
+             else if (bank == (int)Banks.Paysera)
+             {
+                using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
+                var records = csvReader.GetRecords<Record>().ToList();
+
+                for (int i = records.Count - 1; i >= 0; --i)
                 {
-                    using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
-
-                    var records = csvReader.GetRecords<Record>().ToList();
-
-                    for (int i = records.Count - 1; i >= 0; --i)
+                    if (records.ElementAt(i).PaymentType.Equals("K"))
                     {
-                        if (records.ElementAt(i).PaymentType.Equals("K"))
-                        {
-                            records.RemoveAt(i);
-                        }
-                        else
-                        {
-                            records.ElementAt(i).Amount *= -1;
-                        }
+                        records.RemoveAt(i);
                     }
-
-                    return records;
+                    else
+                    {
+                        records.ElementAt(i).Amount *= -1;
+                    }
                 }
-                else if (bank == (int)Banks.Seb)
-                {
-                    streamReader.ReadLine();
-                    using var csvReader = new CsvReader(streamReader, DelimiterToSemicolon);
+                return records;
+              }
+              else if (bank == (int)Banks.Seb)
+              {
+                  streamReader.ReadLine();
+                  using var csvReader = new CsvReader(streamReader, DelimiterToSemicolon);
 
-                    var records = csvReader.GetRecords<Record>().ToList();
+                  var records = csvReader.GetRecords<Record>().ToList();
 
-                    for (int i = records.Count - 1; i >= 0; --i)
-                    {
-                        if (records.ElementAt(i).PaymentType.Equals("K"))
-                        {
-                            records.RemoveAt(i);
-                        }
+                  for (int i = records.Count - 1; i >= 0; --i)
+                  {
+                      if (records.ElementAt(i).PaymentType.Equals("K"))
+                      {
+                          records.RemoveAt(i);
+                      }
 
-                        records.ElementAt(i).Amount /= 100;
-                    }
-
-                    return records;
+                      records.ElementAt(i).Amount /= 100;
+                  }
+                  return records;
+                  
                 } else
                 {
                     return null;
                 }
-               
-            }
-            return new List<Record>();
-            
+            } 
         }
-
+            
     }
     enum Banks
     {
@@ -101,4 +95,3 @@ namespace back_end_side.Controllers
         Paysera,
         Seb
     }
-}

@@ -15,32 +15,19 @@ namespace back_end_side.Controllers
         [HttpPost]
         public ActionResult Post([FromForm] FileModel file)
         {
-            ReportReader reportReader = new ReportReader(file.Bank);
             try
             {
                 if (file.FormFile != null && file.FileName != null)
                 {
-                    string path = Path.Combine(Directory.GetCurrentDirectory(), "uploadedFiles", file.FileName); 
-                    string newPath = Path.Combine(Directory.GetCurrentDirectory(), "uploadedFiles", "report.csv");
-                   
-                    using (Stream stream = new FileStream(path, FileMode.Create))
-                    file.FormFile.CopyTo(stream);
-                    System.IO.File.Copy(path, newPath);
-                     
+                    ReportReader reportReader = new ReportReader(file.Bank, file.FormFile);
                     RecordsFromFile.AddRange(reportReader.ReadFromCsvFile());
-                    if (System.IO.File.Exists(path) && System.IO.File.Exists(path))
-                    {
-                        System.IO.File.Delete(Path.Combine(path));
-                        System.IO.File.Delete(Path.Combine(newPath));
-
-                    }
                 }
 
-                return StatusCode(StatusCodes.Status201Created);
+                return Ok(RecordsFromFile);
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                return BadRequest(RecordsFromFile);
             }
         }
     }
