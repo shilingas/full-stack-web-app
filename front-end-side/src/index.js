@@ -12,9 +12,8 @@ import {
 import ExpensesPages from "./Pages/ExpensesPages";
 import reportWebVitals from './reportWebVitals';
 import Friends from "./Pages/Friends";
-import ShowData from "./Pages/ShowData";
+import Data from "./Pages/Data";
 import EnterData from "./Pages/EnterData";
-import ReadData from "./Pages/ReadData";
 import FileUpload from "./Pages/FileUpload";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,10 +22,10 @@ root.render(
             <Routes>
                 <Route path="/" element={<App />} />
                 <Route path="/friends" element={<Friends />} />
-                <Route path="/show-data" element={<ShowData />} />
+                <Route path="/data" element={<Data />} />
                 <Route path="/enter-data" element={<EnterData />} />
-                <Route path="/read-from-file-data" element={<ReadData />} />
                 <Route path="/file-upload" element={<FileUpload />} />
+
                 <Route path="/food-expenses" element={<ExpensesPages categoryType="food" />} />
                 <Route path="/clothes-expenses" element={<ExpensesPages categoryType="clothes" />} />
                 <Route path="/car-expenses" element={<ExpensesPages categoryType="car"/>} />

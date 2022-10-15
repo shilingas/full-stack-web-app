@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "../Pages/ReadData.css";
-import Navbar from "../../src/Components/Navbar";
+import "../Pages/Data.css";
+import Navbar from "../Components/Navbar";
 const EnterData = () => {
     const [data, setData] = useState({});
     const [info, setInfo] = useState([]);

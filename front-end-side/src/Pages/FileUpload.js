@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import Navbar from "../../src/Components/Navbar";
 import axios from "axios";
 const FileUpload = () => {
+    const navigate = useNavigate();
     const [file, setFile] = useState(null);
     const [fileName, setFileName] = useState(null);
     const [bank, setBank] = useState(null);
@@ -32,6 +34,7 @@ const FileUpload = () => {
         } catch (ex) {
             console.log(ex);
         }
+        navigate('/data');
     };
 
     return (

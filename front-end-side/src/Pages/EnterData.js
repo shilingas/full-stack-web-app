@@ -1,11 +1,45 @@
-import React from "react";
-import Navbar from "../../src/Components/Navbar";
-const EnterData = () => {
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import "../Pages/EnterData.css";
+import axios from "axios";
+import Navbar from "../Components/Navbar";
+const ShowData = () => {
+    const navigate = useNavigate();
+    const [date, setDate] = useState('');
+    const [seller, setSeller] = useState('');
+    const [amount, setAmount] = useState('');
+    const [info, setInfo] = useState([]);
+    const [details, setDetails] = useState('');
+    const [status, setStatus] = useState(false);
+    const postData = async (e) => {
+        e.preventDefault();
+        const res = await axios.post('https://localhost:7174/api/ShowData', { "date": date, "seller": seller, "amount": amount, "details": details });
+        navigate('/data');
+    }
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        await axios.get('https://localhost:7174/api/ShowData').then(resp => {
+            setInfo(resp);
+            setStatus(true);
+        })
+    }
+    const show = () => {
+        setStatus(true);
+    }
     return (
         <div>
             <Navbar />
-            <h1>enter data</h1>
+            <div className='container'>
+                <form id='form' onSubmit={postData}>
+                    <input onChange={(e) => setDate(e.target.value)} className='form-inputs' type="text" id="date" name="date" value={date} placeholder="Date" />
+                    <input onChange={(e) => setSeller(e.target.value)} className='form-inputs' type="text" id="seller" name="seller" value={seller} placeholder="Seller" />
+                    <input onChange={(e) => setAmount(e.target.value)} className='form-inputs' type="text" id="price" name="price" value={amount} placeholder="Amount" />
+                    <input onChange={(e) => setDetails(e.target.value)} className='form-inputs' type="text" id="details" name="details" value={details} placeholder="Details" />
+                    <button>Submit</button>
+                </form>
+            </div>
+            
         </div>
-        );
+    );
 }
-export default EnterData;
+export default ShowData;
