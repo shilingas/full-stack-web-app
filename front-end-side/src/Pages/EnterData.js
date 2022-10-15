@@ -8,23 +8,11 @@ const ShowData = () => {
     const [date, setDate] = useState('');
     const [seller, setSeller] = useState('');
     const [amount, setAmount] = useState('');
-    const [info, setInfo] = useState([]);
     const [details, setDetails] = useState('');
-    const [status, setStatus] = useState(false);
     const postData = async (e) => {
         e.preventDefault();
         const res = await axios.post('https://localhost:7174/api/ShowData', { "date": date, "seller": seller, "amount": amount, "details": details });
         navigate('/data');
-    }
-    const handleSubmit = async(e) => {
-        e.preventDefault();
-        await axios.get('https://localhost:7174/api/ShowData').then(resp => {
-            setInfo(resp);
-            setStatus(true);
-        })
-    }
-    const show = () => {
-        setStatus(true);
     }
     return (
         <div>
