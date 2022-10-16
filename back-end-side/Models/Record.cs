@@ -16,6 +16,6 @@ namespace back_end_side.Models
         public string? PaymentType { get; set; }
 
         [Ignore]
-        public string? Category { get; set; }
+        public string? Category { get; set; } = "other";
     }
 }
