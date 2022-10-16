@@ -33,43 +33,36 @@ namespace back_end_side.Controllers
             };
             if (UploadController.RecordsFromFile != null)
             {
+
+                Model.FoodSum = queryMethod("food", Supermarkets);
+                Model.ClothesSum = queryMethod("clothes", ClothesShops);
+                Model.CarSum = queryMethod("car", CarMaintenanceShops);
+                Model.EntertaintmentSum = queryMethod("entertainment", EntertainmentShops);
+                Model.HouseSum = queryMethod("house", HouseMaintenanceShops);
                 foreach (var record in UploadController.RecordsFromFile)
                 {
-                    if (record.Seller != null && Supermarkets.Any(record.Seller.ToUpper().Contains))
+                    if (record.Category.Equals("other"))
                     {
-                        record.Category = "food";
-                        Model.FoodSum += record.Amount;
-                    }
-                    else if (record.Seller != null && ClothesShops.Any(record.Seller.ToUpper().Contains))
-                    {
-                        record.Category = "clothes";
-                        Model.ClothesSum += record.Amount;
-                    }
-                    else if (record.Seller != null && CarMaintenanceShops.Any(record.Seller.ToUpper().Contains))
-                    {
-                        record.Category = "car";
-                        Model.CarSum += record.Amount;
-                    }
-                    else if (record.Seller != null && HouseMaintenanceShops.Any(record.Seller.ToUpper().Contains))
-                    {
-                        record.Category = "house";
-                        Model.HouseSum += record.Amount;
-                    }
-                    else if (record.Seller != null && EntertainmentShops.Any(record.Seller.ToUpper().Contains))
-                    {
-                        record.Category = "entertainment";
-                        Model.EntertaintmentSum += record.Amount;
-                    }
-                    else
-                    {
-                        record.Category = "other";
                         Model.OtherSum += record.Amount;
                     }
                 }
             }
-            
+
             return Model;
 
+        }
+
+        public static double queryMethod(string category, string[] shops)
+        {
+            double Sum = 0;
+            (from record in UploadController.RecordsFromFile
+             where record.Seller != null && shops.Any(record.Seller.ToUpper().Contains)
+             select record).ToList().ForEach(record => {
+                 record.Category = category;
+                 Sum += record.Amount;
+             });
+
+            return Sum;
         }
 
         public static List<Record> SortedList()
