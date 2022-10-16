@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "../Pages/ReadData.css";
-import Navbar from "../../src/Components/Navbar";
+import "../Pages/Data.css";
+import Navbar from "../Components/Navbar";
 const EnterData = () => {
     const [data, setData] = useState({});
     const [info, setInfo] = useState([]);
@@ -17,32 +17,6 @@ const EnterData = () => {
     const [houseSum, setHouseSum] = useState(0);
     const [entertainmentSum, setEntertainmentSum] = useState(0);
     const [otherSum, setOtherSum] = useState(0);
-    useEffect(() => {
-        inputValues.map((item) => {
-            switch (item.category) {
-                case "food":
-                    setFoodSum(prev => prev + parseFloat(item.amount));
-                    break;
-                case "clothes":
-                    setClothesSum(prev => prev + parseFloat(item.amount));
-                    break;
-                case "car":
-                    setCarSum(prev => prev + parseFloat(item.amount));
-                    break;
-                case "house":
-                    setHouseSum(prev => prev + parseFloat(item.amount));
-                    break;
-                case "entertainment":
-                    setEntertainmentSum(prev => prev + parseFloat(item.amount));
-                    break;
-                case "other":
-                    setOtherSum(prev => prev + parseFloat(item.amount));
-                    break;
-                default:
-                    break;
-            }
-        });
-    }, [inputValues]);
     useEffect(() => {
         axios.get("https://localhost:7174/api/Sorting").then(item => {
             setData(item);
@@ -71,6 +45,44 @@ const EnterData = () => {
                 setInputValues(data);
             });
     }, []);
+    useEffect(() => {
+        let totalFood = 0;
+        let totalClothes = 0;
+        let totalHouse = 0;
+        let totalCar = 0;
+        let totalEnt = 0;
+        let totalOther = 0;
+        inputValues.map((item) => {
+            switch (item.category) {
+                case "food":
+                    totalFood += parseFloat(item.amount);
+                    setFoodSum(totalFood);
+                    break;
+                case "clothes":
+                    totalClothes += parseFloat(item.amount);
+                    setClothesSum(totalClothes);
+                    break;
+                case "car":
+                    totalCar += parseFloat(item.amount);
+                    setCarSum(totalCar);
+                    break;
+                case "house":
+                    totalHouse += parseFloat(item.amount);
+                    setHouseSum(totalHouse);
+                    break;
+                case "entertainment":
+                    totalEnt += parseFloat(item.amount);
+                    setEntertainmentSum(totalEnt);
+                    break;
+                case "other":
+                    totalOther += parseFloat(item.amount);
+                    setOtherSum(totalOther);
+                    break;
+                default:
+                    break;
+            }
+        });
+    }, [inputValues]);
     return (
         <div>
             <Navbar />

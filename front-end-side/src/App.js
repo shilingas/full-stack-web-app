@@ -34,7 +34,7 @@ const App = () => {
                                 </div>
                             );
                         })) : (
-                        <h1>empty data...</h1>
+                        <h1>Welcome</h1>
                     )
                 }
             </div>
