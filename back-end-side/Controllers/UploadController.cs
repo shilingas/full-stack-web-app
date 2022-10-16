@@ -19,7 +19,7 @@ namespace back_end_side.Controllers
             {
                 if (file.FormFile != null && file.FileName != null)
                 {
-                    ReportReader reportReader = new ReportReader(file.Bank, file.FormFile);
+                    ReportReader reportReader = new ReportReader(fileData: file.FormFile, bank: file.Bank);
                     RecordsFromFile.AddRange(reportReader.ReadFromCsvFile());
                 }
 

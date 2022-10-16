@@ -1,19 +1,27 @@
 ﻿using back_end_side.Models;
 using System;
+using System.Reflection;
 
 namespace back_end_side.Controllers
 {
+    public struct SortingModel
+    {
+        public double FoodSum { get; set; }
+        public double ClothesSum { get; set; }
+        public double CarSum { get; set; }
+        public double HouseSum { get; set; }
+        public double EntertaintmentSum { get; set; }
+        public double OtherSum { get; set; }
+    }
     public class Sorting
     {
-
+        public static readonly string[] Supermarkets = { "MAXIMA", "NORFA", "LIDL", "IKI", "RIMI", "AIBE", "KFC", "SUBWAY", "MEATBUSTERS", "HESBURGER", "JAMMI", "CAN CAN", "NO FORKS", "ILUNCH", "TAU", "CHAIKA", "Kavinė", "CAFFEINE" };
+        public static readonly string[] ClothesShops = { "ZARA", "STRADIVARIUS", "H&M" };
+        public static readonly string[] CarMaintenanceShops = { "CIRCLE K", "VIADA", "BOLT", "STOVA", "RIDE SHARE", "SUSISIEKIMO PASLAUGOS", "CITYBEE" };
+        public static readonly string[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI", "CONSILIUM OPTIMUM", "TELE2", "telia", "TOPO CENTRAS", "BITĖ", "GO3", "IKEA" };
+        public static readonly string[] EntertainmentShops = { "CYBERX", "SPOTIFY", "BASKETNEWS", "OCULUS DIGITAL", "STEAM", "ŽALGIRIO KREPŠINIO CENTRAS" };
         public static SortingModel SortToCategories()
         {
-            string[] Supermarkets = { "MAXIMA", "NORFA", "lIDL", "IKI", "RIMI", "AIBE", "KFC", "SUBWAY", "MEATBUSTERS", "Hesburger", "JAMMI", "CAN CAN", "NO FORKS", "ILUNCH", "TAU", "CHAIKA", "Kavinė", "CAFFEINE" };
-            string[] ClothesShops = { "ZARA", "STRADIVARIUS", "H&M" };
-            string[] CarMaintenanceShops = { "CIRCLE K", "VIADA", "BOLT", "Stova", "RIDE SHARE", "SUSISIEKIMO PASLAUGOS", "CITYBEE" };
-            string[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI", "CONSILIUM OPTIMUM", "tele2", "telia", "TOPO CENTRAS", "BITĖ", "GO3", "IKEA" };
-            string[] EntertainmentShops = { "CYBERX", "SPOTIFY", "BasketNews", "Oculus Digital", "steam", "ŽALGIRIO KREPŠINIO CENTRAS" };
-
             SortingModel Model = new()
             {
                 CarSum = 0,
@@ -27,27 +35,27 @@ namespace back_end_side.Controllers
             {
                 foreach (var record in UploadController.RecordsFromFile)
                 {
-                    if (CheckType(record, Supermarkets))
+                    if (record.Seller != null && Supermarkets.Any(record.Seller.ToUpper().Contains))
                     {
                         record.Category = "food";
                         Model.FoodSum += record.Amount;
                     }
-                    else if (CheckType(record, ClothesShops))
+                    else if (record.Seller != null && ClothesShops.Any(record.Seller.ToUpper().Contains))
                     {
                         record.Category = "clothes";
                         Model.ClothesSum += record.Amount;
                     }
-                    else if (CheckType(record, CarMaintenanceShops))
+                    else if (record.Seller != null && CarMaintenanceShops.Any(record.Seller.ToUpper().Contains))
                     {
                         record.Category = "car";
                         Model.CarSum += record.Amount;
                     }
-                    else if (CheckType(record, HouseMaintenanceShops))
+                    else if (record.Seller != null && HouseMaintenanceShops.Any(record.Seller.ToUpper().Contains))
                     {
                         record.Category = "house";
                         Model.HouseSum += record.Amount;
                     }
-                    else if (CheckType(record, EntertainmentShops))
+                    else if (record.Seller != null && EntertainmentShops.Any(record.Seller.ToUpper().Contains))
                     {
                         record.Category = "entertainment";
                         Model.EntertaintmentSum += record.Amount;
@@ -70,25 +78,8 @@ namespace back_end_side.Controllers
             return UploadController.RecordsFromFile;
         }
 
-        public static Boolean CheckType(Record record, String[] shopNames)
-        {
-            foreach (String shopName in shopNames)
-            {
-                if (record.Seller != null && record.Seller.ToUpper().Contains(shopName.ToUpper()))
-                {
-                    return true;
-                }
-
-            }
-            return false;
-        }
         public static String CheckInput(InputModel model)
         {
-            string[] Supermarkets = { "MAXIMA", "NORFA", "lIDL", "IKI", "RIMI", "AIBE", "KFC", "SUBWAY", "MEATBUSTERS", "Hesburger", "JAMMI", "CAN CAN", "NO FORKS", "ILUNCH", "TAU", "CHAIKA", "Kavinė", "CAFFEINE" };
-            string[] ClothesShops = { "ZARA", "STRADIVARIUS", "H&M" };
-            string[] CarMaintenanceShops = { "CIRCLE K", "VIADA", "BOLT", "Stova", "RIDE SHARE", "SUSISIEKIMO PASLAUGOS" };
-            string[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI", "CONSILIUM OPTIMUM", "tele2", "telia", "TOPO CENTRAS", "BITĖ", "GO3", "IKEA" };
-            string[] EntertainmentShops = { "CYBERX", "SPOTIFY", "BasketNews", "Oculus Digital", "steam", "ŽALGIRIO KREPŠINIO CENTRAS" };  
             if (model.Seller != null && Supermarkets.Any(model.Seller.ToUpper().Contains))
                 return "food";
             if (model.Seller != null && ClothesShops.Any(model.Seller.ToUpper().Contains))
