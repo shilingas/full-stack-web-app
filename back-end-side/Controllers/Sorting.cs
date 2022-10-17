@@ -71,7 +71,7 @@ namespace back_end_side.Controllers
             return UploadController.RecordsFromFile;
         }
 
-        public static String CheckInput(InputModel model)
+        public static String CheckInput(Record model)
         {
             if (model.Seller != null && Supermarkets.Any(model.Seller.ToUpper().Contains))
                 return "food";

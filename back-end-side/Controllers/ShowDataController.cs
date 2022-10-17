@@ -10,20 +10,19 @@ namespace back_end_side.Controllers
     [EnableCors("corsapp")]
     public class ShowDataController : ControllerBase
     {
-       static List<InputModel> models = new List<InputModel>();
         [HttpPost]
         [Produces("application/json")]
-        public IActionResult Post([FromBody]InputModel model)
+        public IActionResult Post([FromBody]Record model)
         {
             model.Category = Sorting.CheckInput(model);
-            models.Add(model);
+            UploadController.RecordsFromFile.Add(model);
             return Ok(model);
         }
         [HttpGet]
         [EnableCors("corsapp")]
-        public List<InputModel> GetAll()
+        public List<Record> GetAll()
         {
-            return models;
+            return UploadController.RecordsFromFile;
         }
     }
 }
