@@ -2,7 +2,7 @@
 
 namespace back_end_side.Models
 {
-    public class Record
+    public class Record : IComparable
     {
         [Name("Data", "Data ir laikas", "DATA")]
         public DateTime Date { get; set; }
@@ -17,5 +17,16 @@ namespace back_end_side.Models
 
         [Ignore]
         public string? Category { get; set; } = "other";
+
+        public int CompareTo(object? obj)
+        {
+            if (obj == null) return 1;
+
+            Record nextRecord = obj as Record;
+            if (nextRecord != null)
+                return this.Date.CompareTo(nextRecord.Date);
+            else
+                throw new ArgumentException("There are problems with the list");
+        }
     }
 }
