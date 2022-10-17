@@ -11,7 +11,7 @@ const ShowData = () => {
     const [purpose, setPurpose] = useState('');
     const postData = async (e) => {
         e.preventDefault();
-        const dateRegEx = /^([0-9]{4}[-/ ]?((0?[13-9]|1[012])[-/ ]?(0?[1-9]|[12][0-9]|30)|(0?[13578]|1[02])[-/ ]?31|0?2[-/ ]?(0?[1-9]|1[0-9]|2[0-8]))|([0-9]{2}(([2468][048]|[02468][48])|[13579][26])|([13579][26]|[02468][048]|0[0-9]|1[0-6])00)[-/ ]?0?2[-/ ]?29)$/
+        const dateRegEx = /^([0-9]{4}-((0[13-9]|1[012])-(0[1-9]|[12][0-9]|30)|(0[13578]|1[02])-31|02-(0[1-9]|1[0-9]|2[0-8]))|([0-9]{2}(([2468][048]|[02468][48])|[13579][26])|([13579][26]|[02468][048]|0[0-9]|1[0-6])00)-02-29)$/
         const amountRegEx = /^\d+\.?\d{0,2}$/
         const isNotEmptyRegEx = /([^\s])/
 
@@ -73,8 +73,8 @@ const ShowData = () => {
                 <form id='form' onSubmit={postData}>
                     <input onChange={(e) => setDate(e.target.value)} className='form-inputs' type="text" id="date" name="date" value={date} placeholder="Date" />
                     <input onChange={(e) => setSeller(e.target.value)} className='form-inputs' type="text" id="seller" name="seller" value={seller} placeholder="Seller" />
-                    <input onChange={(e) => setAmount(e.target.value)} className='form-inputs' type="text" id="price" name="price" value={amount} placeholder="Amount" />
                     <input onChange={(e) => setPurpose(e.target.value)} className='form-inputs' type="text" id="details" name="details" value={purpose} placeholder="Details" />
+                    <input onChange={(e) => setAmount(e.target.value)} className='form-inputs' type="text" id="price" name="price" value={amount} placeholder="Amount" />
                     <p id="error-msg"></p>
                     <button>Submit</button>
                 </form>
