@@ -26,7 +26,7 @@ namespace back_end_side.Models
             if (nextRecord != null)
                 return this.Date.CompareTo(nextRecord.Date);
             else
-                throw new ArgumentException("exeption");
+                throw new ArgumentException("There are problems with the list");
         }
     }
 }
