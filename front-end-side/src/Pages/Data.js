@@ -7,16 +7,8 @@ const EnterData = () => {
     const [info, setInfo] = useState([]);
     const [status, setStatus] = useState(false);
     const [delay, setDelay] = useState(false);
-    const [inputData, setInputData] = useState(false);
     const [delayForInput, setDelayForInput] = useState(false);
     const [expenses, setExpenses] = useState(0);
-    const [inputValues, setInputValues] = useState([]);
-    const [foodSum, setFoodSum] = useState(0);
-    const [clothesSum, setClothesSum] = useState(0);
-    const [carSum, setCarSum] = useState(0);
-    const [houseSum, setHouseSum] = useState(0);
-    const [entertainmentSum, setEntertainmentSum] = useState(0);
-    const [otherSum, setOtherSum] = useState(0);
     useEffect(() => {
         axios.get("https://localhost:7174/api/Sorting").then(item => {
             setData(item);
