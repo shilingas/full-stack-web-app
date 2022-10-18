@@ -6,12 +6,18 @@ using System.Globalization;
 
 namespace back_end_side.Controllers
 {
+    enum Banks
+    {
+        Swedbank,
+        Paysera,
+        Seb
+    }
+
     public class ReportReader
     {
-        
         public int? bank = null;
         public IFormFile fileData;
-        public static List<Record> IncomeList = new List<Record>();
+        private static List<Record> IncomeList = new List<Record>();
         public ReportReader(int bank, IFormFile fileData)
         {
             this.bank = bank;
@@ -31,11 +37,6 @@ namespace back_end_side.Controllers
                 using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
 
                 var records = csvReader.GetRecords<Record>().ToList();
-                int countLastElements = 1;
-
-                foreach(var vass in records) {
-                    Console.WriteLine(vass.PaymentType);
-                        }
 
                 for (int i = records.Count - 1; i >= 0; --i)
                 {
@@ -51,9 +52,9 @@ namespace back_end_side.Controllers
                 }
 
                 return records;
-             }
-             else if (bank == (int)Banks.Paysera)
-             {
+            }
+            else if (bank == (int)Banks.Paysera)
+            {
                 using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
                 var records = csvReader.GetRecords<Record>().ToList();
 
@@ -69,36 +70,30 @@ namespace back_end_side.Controllers
                     }
                 }
                 return records;
-              }
-              else if (bank == (int)Banks.Seb)
-              {
-                  streamReader.ReadLine();
-                  using var csvReader = new CsvReader(streamReader, DelimiterToSemicolon);
+            }
+            else if (bank == (int)Banks.Seb)
+            {
+                streamReader.ReadLine();
+                using var csvReader = new CsvReader(streamReader, DelimiterToSemicolon);
 
-                  var records = csvReader.GetRecords<Record>().ToList();
+                var records = csvReader.GetRecords<Record>().ToList();
 
-                  for (int i = records.Count - 1; i >= 0; --i)
-                  {
-                      records.ElementAt(i).Amount /= 100;
-
-                      if (records.ElementAt(i).PaymentType.Equals("K"))
-                      {
-                          records.MoveToOtherList(ref IncomeList, i);
-                      }
-                  }
-                  return records;
-                  
-                } else
+                for (int i = records.Count - 1; i >= 0; --i)
                 {
-                    return null;
+                    records.ElementAt(i).Amount /= 100;
+
+                    if (records.ElementAt(i).PaymentType.Equals("K"))
+                    {
+                        records.MoveToOtherList(ref IncomeList, i);
+                    }
                 }
-            } 
-        }
+                return records;
+                  
+            } else
+            {
+                return null;
+            }
+        } 
+    }
             
-    }
-    enum Banks
-    {
-        Swedbank,
-        Paysera,
-        Seb
-    }
+   }

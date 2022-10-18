@@ -39,13 +39,17 @@ namespace back_end_side.Controllers
                 Model.CarSum = queryMethod("car", CarMaintenanceShops);
                 Model.EntertaintmentSum = queryMethod("entertainment", EntertainmentShops);
                 Model.HouseSum = queryMethod("house", HouseMaintenanceShops);
+
+                double sumOfOther = 0;
                 foreach (var record in UploadController.RecordsFromFile)
                 {
                     if (record.Category.Equals("other"))
                     {
-                        Model.OtherSum += record.Amount;
+                        sumOfOther += record.Amount;
                     }
                 }
+
+                Model.OtherSum = sumOfOther;
             }
 
             return Model;

@@ -22,7 +22,7 @@ namespace back_end_side.Models
         {
             if (obj == null) return 1;
 
-            Record nextRecord = obj as Record;
+            Record nextRecord = (Record)obj;
             if (nextRecord != null)
                 return this.Date.CompareTo(nextRecord.Date);
             else
