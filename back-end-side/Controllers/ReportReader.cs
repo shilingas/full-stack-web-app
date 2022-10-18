@@ -1,15 +1,23 @@
 ﻿using back_end_side.Models;
 using CsvHelper;
 using CsvHelper.Configuration;
+using Microsoft.AspNetCore.Components;
 using System.Globalization;
 
 namespace back_end_side.Controllers
 {
+    enum Banks
+    {
+        Swedbank,
+        Paysera,
+        Seb
+    }
+
     public class ReportReader
     {
-        
         public int? bank = null;
         public IFormFile fileData;
+        private static List<Record> IncomeList = new List<Record>();
         public ReportReader(int bank, IFormFile fileData)
         {
             this.bank = bank;
@@ -17,7 +25,6 @@ namespace back_end_side.Controllers
         }
         public List<Record>? ReadFromCsvFile()
         {
-            
             var DelimiterToSemicolon = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 Delimiter = ";",
@@ -31,22 +38,23 @@ namespace back_end_side.Controllers
 
                 var records = csvReader.GetRecords<Record>().ToList();
 
-                int numberOfElements = records.Count;
-                records.RemoveAt(numberOfElements - 1);
-
                 for (int i = records.Count - 1; i >= 0; --i)
                 {
                     if ((records.ElementAt(i).Seller.Equals("") && records.ElementAt(i).Purpose.Equals("Likutis pradžiai")) ||
-                        (records.ElementAt(i).Seller.Equals("") && records.ElementAt(i).Purpose.Equals("Apyvarta")) ||
-                        records.ElementAt(i).PaymentType.Equals("K"))
+                        (records.ElementAt(i).Seller.Equals("") && records.ElementAt(i).Purpose.Equals("Apyvarta")) )
                     {
                         records.RemoveAt(i);
+                    } 
+                    else if (records.ElementAt(i).PaymentType.Equals("K"))
+                    {
+                        records.MoveToOtherList(ref IncomeList, i);
                     }
                 }
+
                 return records;
-             }
-             else if (bank == (int)Banks.Paysera)
-             {
+            }
+            else if (bank == (int)Banks.Paysera)
+            {
                 using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
                 var records = csvReader.GetRecords<Record>().ToList();
 
@@ -54,7 +62,7 @@ namespace back_end_side.Controllers
                 {
                     if (records.ElementAt(i).PaymentType.Equals("K"))
                     {
-                        records.RemoveAt(i);
+                        records.MoveToOtherList(ref IncomeList, i);
                     }
                     else
                     {
@@ -62,36 +70,30 @@ namespace back_end_side.Controllers
                     }
                 }
                 return records;
-              }
-              else if (bank == (int)Banks.Seb)
-              {
-                  streamReader.ReadLine();
-                  using var csvReader = new CsvReader(streamReader, DelimiterToSemicolon);
+            }
+            else if (bank == (int)Banks.Seb)
+            {
+                streamReader.ReadLine();
+                using var csvReader = new CsvReader(streamReader, DelimiterToSemicolon);
 
-                  var records = csvReader.GetRecords<Record>().ToList();
+                var records = csvReader.GetRecords<Record>().ToList();
 
-                  for (int i = records.Count - 1; i >= 0; --i)
-                  {
-                      if (records.ElementAt(i).PaymentType.Equals("K"))
-                      {
-                          records.RemoveAt(i);
-                      }
-
-                      records.ElementAt(i).Amount /= 100;
-                  }
-                  return records;
-                  
-                } else
+                for (int i = records.Count - 1; i >= 0; --i)
                 {
-                    return null;
+                    records.ElementAt(i).Amount /= 100;
+
+                    if (records.ElementAt(i).PaymentType.Equals("K"))
+                    {
+                        records.MoveToOtherList(ref IncomeList, i);
+                    }
                 }
-            } 
-        }
+                return records;
+                  
+            } else
+            {
+                return null;
+            }
+        } 
+    }
             
-    }
-    enum Banks
-    {
-        Swedbank,
-        Paysera,
-        Seb
-    }
+   }

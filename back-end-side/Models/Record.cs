@@ -2,7 +2,7 @@
 
 namespace back_end_side.Models
 {
-    public class Record
+    public class Record : IComparable
     {
         [Name("Data", "Data ir laikas", "DATA")]
         public DateTime Date { get; set; }
@@ -16,6 +16,12 @@ namespace back_end_side.Models
         public string? PaymentType { get; set; }
 
         [Ignore]
-        public string? Category { get; set; }
+        public string? Category { get; set; } = "other";
+
+        public int CompareTo(object? obj)
+        {
+            Record nextRecord = (Record)obj;
+            return this.Date.CompareTo(nextRecord.Date);
+        }
     }
 }

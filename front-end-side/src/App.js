@@ -1,43 +1,10 @@
-import React, { Component, useState, useEffect } from 'react';
-import axios from "axios";
+import React from 'react';
 import Navbar from "./Components/Navbar";
 const App = () => {
-    const [data, setData] = useState([]);
-    const [status, setStatus] = useState(false);
-    //  useEffect(() => {
-    //     axios.get("https://localhost:7174/api/Check").then(resp => {
-    //        setData(resp);
-    //       setStatus(true);
-    //    })
-    //  });
-
-    const showData = () => {
-        axios.get("https://localhost:7174/api/Check").then(resp => {
-            setData(resp);
-            setStatus(true);
-        })
-    }
     return (
         <div>
             <Navbar />
-            <button onClick={showData}>Show data</button>
-            <button onClick={() => setData([])}>Clear data</button>
-            <div className='data'>
-                {
-                    status ? (
-                        data.data.map((item) => {
-                            const { id, marketName } = item;
-                            return (
-                                <div>
-                                    <h1>{id} </h1>
-                                    <h1>{marketName}</h1>
-                                </div>
-                            );
-                        })) : (
-                        <h1>Welcome</h1>
-                    )
-                }
-            </div>
+            <h2 className="title">Welcome</h2>
         </div>
     );
 }

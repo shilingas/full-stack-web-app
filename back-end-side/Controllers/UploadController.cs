@@ -21,6 +21,7 @@ namespace back_end_side.Controllers
                 {
                     ReportReader reportReader = new ReportReader(fileData: file.FormFile, bank: file.Bank);
                     RecordsFromFile.AddRange(reportReader.ReadFromCsvFile());
+                    RecordsFromFile.Sort();
                 }
 
                 return Ok(RecordsFromFile);
