@@ -1,6 +1,7 @@
 ﻿using back_end_side.Models;
 using CsvHelper;
 using CsvHelper.Configuration;
+using Microsoft.AspNetCore.Components;
 using System.Globalization;
 
 namespace back_end_side.Controllers
@@ -10,6 +11,7 @@ namespace back_end_side.Controllers
         
         public int? bank = null;
         public IFormFile fileData;
+        public static List<Record> IncomeList = new List<Record>();
         public ReportReader(int bank, IFormFile fileData)
         {
             this.bank = bank;
@@ -17,7 +19,6 @@ namespace back_end_side.Controllers
         }
         public List<Record>? ReadFromCsvFile()
         {
-            
             var DelimiterToSemicolon = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 Delimiter = ";",
@@ -30,19 +31,25 @@ namespace back_end_side.Controllers
                 using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
 
                 var records = csvReader.GetRecords<Record>().ToList();
+                int countLastElements = 1;
 
-                int numberOfElements = records.Count;
-                records.RemoveAt(numberOfElements - 1);
+                foreach(var vass in records) {
+                    Console.WriteLine(vass.PaymentType);
+                        }
 
                 for (int i = records.Count - 1; i >= 0; --i)
                 {
                     if ((records.ElementAt(i).Seller.Equals("") && records.ElementAt(i).Purpose.Equals("Likutis pradžiai")) ||
-                        (records.ElementAt(i).Seller.Equals("") && records.ElementAt(i).Purpose.Equals("Apyvarta")) ||
-                        records.ElementAt(i).PaymentType.Equals("K"))
+                        (records.ElementAt(i).Seller.Equals("") && records.ElementAt(i).Purpose.Equals("Apyvarta")) )
                     {
                         records.RemoveAt(i);
+                    } 
+                    else if (records.ElementAt(i).PaymentType.Equals("K"))
+                    {
+                        records.MoveToOtherList(ref IncomeList, i);
                     }
                 }
+
                 return records;
              }
              else if (bank == (int)Banks.Paysera)
@@ -54,7 +61,7 @@ namespace back_end_side.Controllers
                 {
                     if (records.ElementAt(i).PaymentType.Equals("K"))
                     {
-                        records.RemoveAt(i);
+                        records.MoveToOtherList(ref IncomeList, i);
                     }
                     else
                     {
@@ -72,12 +79,12 @@ namespace back_end_side.Controllers
 
                   for (int i = records.Count - 1; i >= 0; --i)
                   {
+                      records.ElementAt(i).Amount /= 100;
+
                       if (records.ElementAt(i).PaymentType.Equals("K"))
                       {
-                          records.RemoveAt(i);
+                          records.MoveToOtherList(ref IncomeList, i);
                       }
-
-                      records.ElementAt(i).Amount /= 100;
                   }
                   return records;
                   

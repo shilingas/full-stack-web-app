@@ -28,14 +28,8 @@ const EnterData = () => {
     }, []);
     useEffect(() => {
         axios.get('https://localhost:7174/api/ShowData').then(resp => {
-            setInputData(resp);
             setDelayForInput(true);
         })
-        fetch('https://localhost:7174/api/ShowData')
-            .then((response) => response.json())
-            .then((data) => {
-                setInputValues(data);
-            });
     }, []);
     return (
         <div>
