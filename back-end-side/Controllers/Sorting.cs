@@ -13,7 +13,7 @@ namespace back_end_side.Controllers
         public double EntertaintmentSum { get; set; }
         public double OtherSum { get; set; }
     }
-    public static class Sorting
+    public class Sorting
     {
         public static readonly string[] Supermarkets = { "MAXIMA", "NORFA", "LIDL", "IKI", "RIMI", "AIBE", "KFC", "SUBWAY", "MEATBUSTERS", "HESBURGER", "JAMMI", "CAN CAN", "NO FORKS", "ILUNCH", "TAU", "CHAIKA", "Kavinė", "CAFFEINE" };
         public static readonly string[] ClothesShops = { "ZARA", "STRADIVARIUS", "H&M" };
@@ -75,7 +75,7 @@ namespace back_end_side.Controllers
             return UploadController.RecordsFromFile;
         }
 
-        public static String CheckInput(this Record model)
+        public static String CheckInput(Record model)
         {
             if (model.Seller != null && Supermarkets.Any(model.Seller.ToUpper().Contains))
                 return "food";
@@ -89,7 +89,5 @@ namespace back_end_side.Controllers
                 return "entertainment";
             else return "other";
         }
-
-
     }
 }

@@ -14,7 +14,7 @@ namespace back_end_side.Controllers
         [Produces("application/json")]
         public IActionResult Post([FromBody]Record model)
         {
-            model.Category = model.CheckInput();
+            model.Category = Sorting.CheckInput(model);
             UploadController.RecordsFromFile.Add(model);
             UploadController.RecordsFromFile.Sort();
             return Ok(model);

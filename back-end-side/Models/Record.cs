@@ -20,13 +20,8 @@ namespace back_end_side.Models
 
         public int CompareTo(object? obj)
         {
-            if (obj == null) return 1;
-
             Record nextRecord = (Record)obj;
-            if (nextRecord != null)
-                return this.Date.CompareTo(nextRecord.Date);
-            else
-                throw new ArgumentException("There are problems with the list");
+            return this.Date.CompareTo(nextRecord.Date);
         }
     }
 }
