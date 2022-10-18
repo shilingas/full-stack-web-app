@@ -50,7 +50,7 @@ const ShowData = () => {
         }
 
         function addErrorBorder(string) {
-            document.getElementById(string).style.border = "1px solid #c0392b";
+            document.getElementById(string).style.border = "1px solid var(--error-color)";
         }
 
         function printErrorMsg(string) {
