@@ -17,7 +17,11 @@ const EnterData = () => {
     }, []);
     useEffect(() => {
         axios.get("https://localhost:7174/api/Sorting").then(item => {
-            setExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
+            if (item.data.carSum == 0) {
+                setExpenses(1);
+            } else {
+                setExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum + 1);
+            }
 
             setTimeout(function () {
                 if (item.data.foodSum == 0) {
@@ -101,7 +105,7 @@ const EnterData = () => {
                     <tfoot>
                         <tr>
                             <td colSpan="3">Spent in total</td>
-                            <td>{parseFloat(expenses).toFixed(2)}</td>
+                            <td>{parseFloat(expenses - 1).toFixed(2)}</td>
                         </tr>
                     </tfoot>
                 </table>
