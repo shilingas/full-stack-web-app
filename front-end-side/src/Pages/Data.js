@@ -17,7 +17,7 @@ const EnterData = () => {
     }, []);
     useEffect(() => {
         axios.get("https://localhost:7174/api/Sorting").then(item => {
-            
+
             setExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
 
             setTimeout(function () {
@@ -41,7 +41,7 @@ const EnterData = () => {
                 }
             }, delay);
 
-            
+
         })
     }, []);
     useEffect(() => {
@@ -120,18 +120,18 @@ const EnterData = () => {
 
                 <h2 className="title">Statistics</h2>
 
-                {  
+                {
                     (delay && delayForInput) ? (
                         <div id="statistics">
                             <div id="cards">
                                 <div className="card food">
                                     <div className="padding">
-                                        <div className="percentage-bar" style={{ background: 'conic-gradient( var(--food-color) 0deg, var(--food-color-shade) ' + checkIfNotNaN(Math.round((data.data.foodSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + checkIfNotNaN(Math.round( (data.data.foodSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)'}}>
-                                            <div className="inside-box">{checkIfNotNaN(Math.round( (data.data.foodSum) / (expenses) * 10 * 100) / 10)}%</div>
+                                        <div className="percentage-bar" style={{ background: 'conic-gradient( var(--food-color) 0deg, var(--food-color-shade) ' + checkIfNotNaN(Math.round((data.data.foodSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + checkIfNotNaN(Math.round((data.data.foodSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
+                                            <div className="inside-box">{checkIfNotNaN(Math.round((data.data.foodSum) / (expenses) * 10 * 100) / 10)}%</div>
                                         </div>
                                         <div className="texts">
                                             <p className="title">Food expenses</p>
-                                            <p className="amount">{ Math.round((data.data.foodSum) * 100) / 100 } EUR</p>
+                                            <p className="amount">{Math.round((data.data.foodSum) * 100) / 100} EUR</p>
                                         </div>
                                         <div className="button">
                                             <div className="cursor-field">
