@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../Pages/Data.css";
 import Navbar from "../Components/Navbar";
+import Modal from "../Pages/EnterData";
 const EnterData = () => {
     const [data, setData] = useState({});
     const [info, setInfo] = useState([]);
@@ -9,6 +10,7 @@ const EnterData = () => {
     const [delay, setDelay] = useState(false);
     const [delayForInput, setDelayForInput] = useState(false);
     const [expenses, setExpenses] = useState(0);
+    const [show, setShow] = useState(false);
     useEffect(() => {
         axios.get("https://localhost:7174/api/Sorting").then(item => {
             setData(item);
@@ -71,9 +73,20 @@ const EnterData = () => {
         }
     }
 
+    function blurEverything() {
+        document.getElementsByTagName("BODY")[0].setAttribute("class","modal-open");
+    }
+
     return (
         <div>
             <Navbar />
+
+            <div className="container" style={{marginTop: "30px"} }>
+                <button onClick={() => setShow(true)}>Add data</button>
+            </div>
+
+            <Modal onClose={() => setShow(false)} show={show} />
+
             <div className="container">
 
                 <h2 className="title">Your expenses</h2>
