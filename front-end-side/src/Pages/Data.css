@@ -43,7 +43,7 @@ table.data_table td:nth-of-type(1) {
     color: var(--main-text-color);
     overflow: hidden;
     position: relative;
-}
+} 
 
 #statistics #cards .card svg {
     position: absolute;
@@ -65,7 +65,11 @@ table.data_table td:nth-of-type(1) {
     display: grid;
 }
 
-#statistics #cards .card .padding .button a {
+#statistics #cards .card.disabled .padding .button .cursor-field {
+    transition: none;
+}
+
+#statistics #cards .card .padding .button .cursor-field a {
     color: var(--white);
     text-decoration: none;
     background: linear-gradient(90deg, var(--main-color) 0%, var(--main-color-shade) 100%) no-repeat;
@@ -74,10 +78,23 @@ table.data_table td:nth-of-type(1) {
     text-transform: lowercase;
     font-size: 13px;
     user-select: none;
-    transition: .2s ease-in-out;
 }
 
-#statistics #cards .card .padding .button a:hover {
+#statistics #cards .card.disabled .padding .button .cursor-field {
+    cursor: not-allowed;
+    transition: none;
+}
+#statistics #cards .card.disabled .padding .button .cursor-field:hover {
+    transform: none;
+    transition: none;
+}
+
+#statistics #cards .card.disabled .padding .button .cursor-field a {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+#statistics #cards .card .padding .button .cursor-field:hover {
     transform: scale(1.1);
     transition: .2s ease-in-out;
 }

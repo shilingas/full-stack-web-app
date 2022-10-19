@@ -18,7 +18,30 @@ const EnterData = () => {
     useEffect(() => {
         axios.get("https://localhost:7174/api/Sorting").then(item => {
             setExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
-    })
+
+            setTimeout(function () {
+                if (item.data.foodSum == 0) {
+                    disableField("food");
+                }
+                if (item.data.carSum == 0) {
+                    disableField("car");
+                }
+                if (item.data.entertaintmentSum == 0) {
+                    disableField("entertainment");
+                }
+                if (item.data.clothesSum == 0) {
+                    disableField("clothes");
+                }
+                if (item.data.houseSum == 0) {
+                    disableField("house");
+                }
+                if (item.data.otherSum == 0) {
+                    disableField("other");
+                }
+            }, delay);
+
+            
+        })
     }, []);
     useEffect(() => {
         axios.get("https://localhost:7174/api/File").then(resp => {
@@ -31,6 +54,14 @@ const EnterData = () => {
             setDelayForInput(true);
         })
     }, []);
+
+    function disableField(string) {
+        var elems = document.getElementsByClassName(string);
+        for (var i = 0; i < elems.length; i += 1) {
+            elems[i].className += ' disabled';
+        }
+    }
+
     return (
         <div>
             <Navbar />
@@ -94,7 +125,9 @@ const EnterData = () => {
                                             <p class="amount">{ Math.round((data.data.foodSum) * 100) / 100 } EUR</p>
                                         </div>
                                         <div class="button">
-                                            <a href="/food-expenses">Details</a>
+                                            <div class="cursor-field">
+                                                <a href="/food-expenses">Details</a>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -112,7 +145,9 @@ const EnterData = () => {
                                             <p class="amount">{Math.round((data.data.carSum) * 100) / 100} EUR</p>
                                         </div>
                                         <div class="button">
-                                            <a href="/car-expenses">Details</a>
+                                            <div class="cursor-field">
+                                                <a href="/car-expenses">Details</a>
+                                            </div>
                                         </div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -129,7 +164,9 @@ const EnterData = () => {
                                             <p class="amount">{Math.round((data.data.entertaintmentSum) * 100) / 100} EUR</p>
                                         </div>
                                         <div class="button">
-                                            <a href="/entertainment-expenses">Details</a>
+                                            <div class="cursor-field">
+                                                <a href="/entertainment-expenses">Details</a>
+                                            </div>
                                         </div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -146,7 +183,9 @@ const EnterData = () => {
                                             <p class="amount">{Math.round((data.data.houseSum) * 100) / 100} EUR</p>
                                         </div>
                                         <div class="button">
-                                            <a href="/house-expenses">Details</a>
+                                            <div class="cursor-field">
+                                                <a href="/house-expenses">Details</a>
+                                            </div>
                                         </div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -163,7 +202,9 @@ const EnterData = () => {
                                             <p class="amount">{Math.round((data.data.clothesSum) * 100) / 100} EUR</p>
                                         </div>
                                         <div class="button">
-                                            <a href="/clothes-expenses">Details</a>
+                                            <div class="cursor-field">
+                                                <a href="/clothes-expenses">Details</a>
+                                            </div>
                                         </div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -180,7 +221,9 @@ const EnterData = () => {
                                             <p class="amount">{Math.round((data.data.otherSum) * 100) / 100} EUR</p>
                                         </div>
                                         <div class="button">
-                                            <a href="/other-expenses">Details</a>
+                                            <div class="cursor-field">
+                                                <a href="/other-expenses">Details</a>
+                                            </div>
                                         </div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
