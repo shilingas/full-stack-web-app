@@ -17,6 +17,7 @@ const EnterData = () => {
     }, []);
     useEffect(() => {
         axios.get("https://localhost:7174/api/Sorting").then(item => {
+            
             setExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
 
             setTimeout(function () {
@@ -59,6 +60,14 @@ const EnterData = () => {
         var elems = document.getElementsByClassName(string);
         for (var i = 0; i < elems.length; i += 1) {
             elems[i].className += ' disabled';
+        }
+    }
+
+    function checkIfNotNaN(number) {
+        if (isNaN(number)) {
+            return 0;
+        } else {
+            return number;
         }
     }
 
@@ -117,8 +126,8 @@ const EnterData = () => {
                             <div id="cards">
                                 <div className="card food">
                                     <div className="padding">
-                                        <div className="percentage-bar" style={{ background: 'conic-gradient( var(--food-color) 0deg, var(--food-color-shade) ' + (Math.round((data.data.foodSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round( (data.data.foodSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)'}}>
-                                            <div className="inside-box">{Math.round( (data.data.foodSum) / (expenses) * 10 * 100) / 10}%</div>
+                                        <div className="percentage-bar" style={{ background: 'conic-gradient( var(--food-color) 0deg, var(--food-color-shade) ' + checkIfNotNaN(Math.round((data.data.foodSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + checkIfNotNaN(Math.round( (data.data.foodSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)'}}>
+                                            <div className="inside-box">{checkIfNotNaN(Math.round( (data.data.foodSum) / (expenses) * 10 * 100) / 10)}%</div>
                                         </div>
                                         <div className="texts">
                                             <p className="title">Food expenses</p>
@@ -137,8 +146,8 @@ const EnterData = () => {
                                 </div>
                                 <div className="card car">
                                     <div className="padding">
-                                        <div className="percentage-bar" style={{ background: 'conic-gradient( var(--transportation-color) 0deg, var(--transportation-color-shade) ' + (Math.round((data.data.carSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round((data.data.carSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
-                                            <div className="inside-box">{Math.round((data.data.carSum) / (expenses) * 10 * 100) / 10}%</div>
+                                        <div className="percentage-bar" style={{ background: 'conic-gradient( var(--transportation-color) 0deg, var(--transportation-color-shade) ' + checkIfNotNaN(Math.round((data.data.carSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + checkIfNotNaN(Math.round((data.data.carSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
+                                            <div className="inside-box">{checkIfNotNaN(Math.round((data.data.carSum) / (expenses) * 10 * 100) / 10)}%</div>
                                         </div>
                                         <div className="texts">
                                             <p className="title">Transportation expenses</p>
@@ -156,8 +165,8 @@ const EnterData = () => {
                                 </div>
                                 <div className="card entertainment">
                                     <div className="padding">
-                                        <div className="percentage-bar" style={{ background: 'conic-gradient( var(--entertainment-color) 0deg, var(--entertainment-color-shade) ' + (Math.round((data.data.entertaintmentSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round((data.data.entertaintmentSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
-                                            <div className="inside-box">{Math.round((data.data.entertaintmentSum) / (expenses) * 10 * 100) / 10}%</div>
+                                        <div className="percentage-bar" style={{ background: 'conic-gradient( var(--entertainment-color) 0deg, var(--entertainment-color-shade) ' + checkIfNotNaN(Math.round((data.data.entertaintmentSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + checkIfNotNaN(Math.round((data.data.entertaintmentSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
+                                            <div className="inside-box">{checkIfNotNaN(Math.round((data.data.entertaintmentSum) / (expenses) * 10 * 100) / 10)}%</div>
                                         </div>
                                         <div className="texts">
                                             <p className="title">Entertainment expenses</p>
@@ -175,8 +184,8 @@ const EnterData = () => {
                                 </div>
                                 <div className="card house">
                                     <div className="padding">
-                                        <div className="percentage-bar" style={{ background: 'conic-gradient( var(--house-color) 0deg, var(--house-color-shade) ' + (Math.round(data.data.houseSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round((data.data.houseSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)') }}>
-                                            <div className="inside-box">{Math.round((data.data.houseSum) / (expenses) * 10 * 100) / 10}%</div>
+                                        <div className="percentage-bar" style={{ background: 'conic-gradient( var(--house-color) 0deg, var(--house-color-shade) ' + checkIfNotNaN(Math.round(data.data.houseSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + checkIfNotNaN(Math.round((data.data.houseSum / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)') }}>
+                                            <div className="inside-box">{checkIfNotNaN(Math.round((data.data.houseSum) / (expenses) * 10 * 100) / 10)}%</div>
                                         </div>
                                         <div className="texts">
                                             <p className="title">Housing expenses</p>
@@ -194,8 +203,8 @@ const EnterData = () => {
                                 </div>
                                 <div className="card clothes">
                                     <div className="padding">
-                                        <div className="percentage-bar" style={{ background: 'conic-gradient( var(--clothing-color) 0deg, var(--clothing-color-shade) ' + (Math.round((data.data.clothesSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round((data.data.clothesSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
-                                            <div className="inside-box">{Math.round((data.data.clothesSum) / (expenses) * 10 * 100) / 10}%</div>
+                                        <div className="percentage-bar" style={{ background: 'conic-gradient( var(--clothing-color) 0deg, var(--clothing-color-shade) ' + checkIfNotNaN(Math.round((data.data.clothesSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + checkIfNotNaN(Math.round((data.data.clothesSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
+                                            <div className="inside-box">{checkIfNotNaN(Math.round((data.data.clothesSum) / (expenses) * 10 * 100) / 10)}%</div>
                                         </div>
                                         <div className="texts">
                                             <p className="title">Clothes expenses</p>
@@ -213,8 +222,8 @@ const EnterData = () => {
                                 </div>
                                 <div className="card other">
                                     <div className="padding">
-                                        <div className="percentage-bar" style={{ background: 'conic-gradient( var(--other-color) 0deg, var(--other-color-shade) ' + (Math.round((data.data.otherSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + (Math.round((data.data.otherSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
-                                            <div className="inside-box">{Math.round((data.data.otherSum) / (expenses) * 10 * 100) / 10}%</div>
+                                        <div className="percentage-bar" style={{ background: 'conic-gradient( var(--other-color) 0deg, var(--other-color-shade) ' + checkIfNotNaN(Math.round((data.data.otherSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg, var(--main-text-color) ' + checkIfNotNaN(Math.round((data.data.otherSum) / (expenses) * 100 * 100) / 100 * 3.6) + 'deg 360deg)' }}>
+                                            <div className="inside-box">{checkIfNotNaN(Math.round((data.data.otherSum) / (expenses) * 10 * 100) / 10)}%</div>
                                         </div>
                                         <div className="texts">
                                             <p className="title">Other expenses</p>
