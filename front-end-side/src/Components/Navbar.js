@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
 
     return (
-        <div class="navigation-block">
+        <div className="navigation-block">
             <div className='container'>
                 <div className='navbar'>
                     <div id="logotype">Expenses tracker</div>
@@ -16,7 +16,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-            <hr class="nav-seperator"/>
+            <hr className="nav-seperator"/>
         </div>
         );
 
