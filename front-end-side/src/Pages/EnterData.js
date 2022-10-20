@@ -45,7 +45,7 @@ const ShowData = props => {
                 printErrorMsg("Date is invalid or field is empty. Date format should be <b>xxxx-xx-xx</b>");
             } else if (inputDate > currentDate && isNotEmptyRegEx.test(date)) {
                 addErrorBorder("date");
-                printErrorMsg("Date is later then current date");
+                printErrorMsg("Date is later than current date");
             }
 
         }
