@@ -11,7 +11,6 @@ const Navbar = () => {
                         <Link to="/">Home</Link>
                         <Link to="/friends">Friends</Link>
                         <Link to="/data">Data</Link>
-                        <Link to="/file-upload" class="right-link">File upload</Link>
                     </div>
                 </div>
             </div>

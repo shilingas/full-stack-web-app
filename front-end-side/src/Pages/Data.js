@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../Pages/Data.css";
 import Navbar from "../Components/Navbar";
-import Modal from "../Pages/EnterData";
+import ModalEnterData from "../Pages/EnterData";
+import ModalUploadFile from "../Pages/FileUpload";
 const EnterData = () => {
     const [data, setData] = useState({});
     const [info, setInfo] = useState([]);
@@ -10,7 +11,8 @@ const EnterData = () => {
     const [delay, setDelay] = useState(false);
     const [delayForInput, setDelayForInput] = useState(false);
     const [expenses, setExpenses] = useState(0);
-    const [show, setShow] = useState(false);
+    const [showUploadData, setShowUploadData] = useState(false);
+    const [showEnterData, setShowEnterData] = useState(false);
     useEffect(() => {
         axios.get("https://localhost:7174/api/Sorting").then(item => {
             setData(item);
@@ -73,8 +75,9 @@ const EnterData = () => {
         }
     }
 
-    function blurEverything() {
-        document.getElementsByTagName("BODY")[0].setAttribute("class","modal-open");
+    function addClass() {
+        var element = document.getElementsByTagName("BODY")[0];
+        element.classList.remove("modal-open");
     }
 
     return (
@@ -82,10 +85,12 @@ const EnterData = () => {
             <Navbar />
 
             <div className="container" style={{marginTop: "30px"} }>
-                <button onClick={() => setShow(true)}>Add data</button>
+                <a onClick={addClass(), () => setShowEnterData(true)} style={{marginRight: "10px"} }>Add data</a>
+                <a onClick={() => setShowUploadData(true)}>Upload Data</a>
             </div>
 
-            <Modal onClose={() => setShow(false)} show={show} />
+            <ModalEnterData onClose={() => setShowEnterData(false)} show={showEnterData} />
+            <ModalUploadFile onClose={() => setShowUploadData(false)} show={showUploadData} />
 
             <div className="container">
 

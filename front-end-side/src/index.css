@@ -43,7 +43,15 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 a {
+    color: var(--main-text-color);
+    text-decoration: none;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+a:hover {
     color: var(--active-text-color);
+    transition: .3s ease-in-out;
 }
 
 code {

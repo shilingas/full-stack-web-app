@@ -1,0 +1,70 @@
+label.upload-file {
+    background: var(--input-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+    display: block;
+    padding: 30px;
+}
+
+label.upload-file .zindex {
+    position: relative;
+    z-index: 2;
+}
+
+.upload-icon svg {
+    fill: var(--main-text-color);
+    height: 40px;
+    z-index: 2;
+    position: relative;
+}
+
+label {
+    display: block;
+
+}
+
+.button-block {
+    display: flex;
+    justify-content: end;
+    margin-top: 15px;
+}
+
+input[type="file"] {
+    position: absolute;
+    width: calc(100% - 50px);
+    height: calc(100% - 50px);
+    top: 0;
+    left: 0;
+    text-align: center;
+    opacity: 0;
+    z-index: 6;
+    cursor: pointer;
+}
+
+input[type=file]::file-selector-button {
+    display: none;
+}
+
+#fileName {
+    position: relative;
+    z-index: 10;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+p.title {
+    font-size: 23px;
+    margin-bottom: 0;
+}
+
+p.files-upported {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.modal.upload-data .modal-content {
+    max-width: 600px;
+    width: 600px;
+}

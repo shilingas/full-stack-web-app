@@ -143,6 +143,10 @@ table.data_table td:nth-of-type(4) {
     fill: var(--other-color);
 }
 
+#statistics #cards .card.food .padding .button a {
+    background: linear-gradient(90deg, var(--food-color) 0%, var(--food-color-shade) 100%) no-repeat;
+}
+
 #statistics #cards .card.car .padding .button a {
     background: linear-gradient(90deg, var(--transportation-color) 0%, var(--transportation-color-shade) 100%) no-repeat;
 }
