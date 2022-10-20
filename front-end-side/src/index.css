@@ -36,7 +36,10 @@ body {
     color: var(--main-text-color);
 }
 
-body.modal-open { overflow: hidden; }
+body.modal-open {
+    overflow: hidden;
+    margin-right: 7px;
+}
 
 h1, h2, h3, h4, h5, h6, p {
     color: var(--main-text-color);
@@ -64,6 +67,11 @@ code {
     color: var(--white);
     display: grid;
     grid-template-columns: 1fr auto;
+}
+
+.navigation-block .navbar #logotype a {
+    color: var(--white);
+    font-size: 16px;
 }
 
 .navigation-block hr.nav-seperator, .modal .modal-content #modal-decoration {
@@ -188,4 +196,17 @@ button:hover {
 body.modal-open > #root > div > *:not(.modal) {
     filter: blur(5px);
     overflow: hidden;
+}
+
+body::-webkit-scrollbar {
+    width: 7px;
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--bg-color);
+    background: linear-gradient(180deg, var(--bg-color) 0%, var(--bg-color-shade) 100%) no-repeat;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #373f4d;
 }

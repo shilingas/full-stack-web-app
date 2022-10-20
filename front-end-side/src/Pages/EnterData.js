@@ -50,6 +50,7 @@ const ShowData = props => {
 
         }
         else {
+            printErrorMsg("Well Done! Your record will appear on the page in a moment!")
             const res = await axios.post('https://localhost:7174/api/ShowData', { "date": date, "seller": seller, "amount": amount, "purpose": purpose });
             window.location.reload(true);
         }

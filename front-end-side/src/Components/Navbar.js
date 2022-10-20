@@ -6,7 +6,9 @@ const Navbar = () => {
         <div className="navigation-block">
             <div className='container'>
                 <div className='navbar'>
-                    <div id="logotype">Expenses tracker</div>
+                    <div id="logotype">
+                        <Link to="/">Expenses tracker</Link>
+                    </div>
                     <div id="links">
                         <Link to="/">Home</Link>
                         <Link to="/friends">Friends</Link>
