@@ -33,10 +33,7 @@ const FileUpload = props => {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 },
-            }).then(res => {
-                console.log(res);
-            });
-            console.log(res);
+            })
 
         } catch (ex) {
             console.log(ex);
