@@ -13,8 +13,6 @@ import ExpensesPages from "./Pages/ExpensesPages";
 import reportWebVitals from './reportWebVitals';
 import Friends from "./Pages/Friends";
 import Data from "./Pages/Data";
-import EnterData from "./Pages/EnterData";
-import FileUpload from "./Pages/FileUpload";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
@@ -23,8 +21,6 @@ root.render(
                 <Route path="/" element={<App />} />
                 <Route path="/friends" element={<Friends />} />
                 <Route path="/data" element={<Data />} />
-                <Route path="/enter-data" element={<EnterData />} />
-                <Route path="/file-upload" element={<FileUpload />} />
 
                 <Route path="/food-expenses" element={<ExpensesPages categoryType="food" />} />
                 <Route path="/clothes-expenses" element={<ExpensesPages categoryType="clothes" />} />
