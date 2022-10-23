@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import "../Pages/FileUpload.css";
 import axios from "axios";
 const FileUpload = props => {
-    //const navigate = useNavigate();
     const [file, setFile] = useState(null);
     const [fileName, setFileName] = useState(null);
     const [bank, setBank] = useState(null);
@@ -26,7 +25,6 @@ const FileUpload = props => {
         const formData = new FormData();
         formData.append("fileName", fileName);
         formData.append("formFile", file);
-        //formData.append("bank", bank)
         const newData = Object.fromEntries(formData.entries());
         try {
             const res = await axios.post("https://localhost:7174/api/Upload", newData, {
