@@ -25,5 +25,20 @@ namespace back_end_side.Controllers
         {
             return UploadController.RecordsFromFile;
         }
+        [HttpPut("{id:int}")]
+        [EnableCors("corsapp")]
+        public IActionResult Put([FromBody] Record model, int id)
+        {
+            // pirma - nustatom kategorija, tada pakeiciam tam tikru indexo value ir tada sortinam
+            model.Category = Sorting.CheckInput(model);
+            int index = UploadController.RecordsFromFile.FindIndex(ind => ind.Equals(id));
+            if (index == -1)
+            {
+                Console.WriteLine(id);
+                UploadController.RecordsFromFile[id] = model;
+            }
+            UploadController.RecordsFromFile.Sort();
+            return Ok(model);
+        }
     }
 }

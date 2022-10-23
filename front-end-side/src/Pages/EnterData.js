@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import "../Pages/EnterData.css";
 import axios from "axios";
+import ModalUpdateData from "../Pages/EnterData";
 const ShowData = props => {
     const [date, setDate] = useState('');
     const [seller, setSeller] = useState('');
@@ -80,6 +81,14 @@ const ShowData = props => {
     if (!props.show) {
         return null;
     }
+    const updateData = (e) => {
+
+        // props.index - id, kuri keisti
+        // purpose, amount, seller, date - jau update inpute ivesti duomenys
+        console.log(props.index);
+        console.log(purpose, amount, seller, date);
+        axios.put("https://localhost:7174/api/ShowData/" + props.index, { "date": date, "seller": seller, "amount": amount, "purpose": purpose, "id": props.index });
+    }
     return (
         <div className="modal enter-data" onClick={removeClass(), props.onClose}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
@@ -91,7 +100,7 @@ const ShowData = props => {
                     </svg>
                 </div>
                 <div class="modal-padding">
-                    <form id='form' onSubmit={postData}>
+                    <form id='form' onSubmit={props.buttonType == "post" ? postData : updateData}>
                         <input onChange={(e) => setDate(e.target.value)} className='form-inputs' type="text" id="date" name="date" value={date} placeholder="Date" />
                         <input onChange={(e) => setSeller(e.target.value)} className='form-inputs' type="text" id="seller" name="seller" value={seller} placeholder="Seller" />
                         <input onChange={(e) => setPurpose(e.target.value)} className='form-inputs' type="text" id="details" name="details" value={purpose} placeholder="Details" />

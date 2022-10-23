@@ -4,6 +4,7 @@ import "../Pages/Data.css";
 import Navbar from "../Components/Navbar";
 import ModalEnterData from "../Pages/EnterData";
 import ModalUploadFile from "../Pages/FileUpload";
+import ModalUpdateData from "../Pages/EnterData";
 const EnterData = () => {
     const [data, setData] = useState({});
     const [info, setInfo] = useState([]);
@@ -13,6 +14,8 @@ const EnterData = () => {
     const [expenses, setExpenses] = useState(0);
     const [showUploadData, setShowUploadData] = useState(false);
     const [showEnterData, setShowEnterData] = useState(false);
+    const [showUpdateData, setShowUpdateData] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
     useEffect(() => {
         axios.get("https://localhost:7174/api/Sorting").then(item => {
             setData(item);
@@ -79,6 +82,11 @@ const EnterData = () => {
         var element = document.getElementsByTagName("BODY")[0];
         element.classList.remove("modal-open");
     }
+    const updateData = (index) => {
+        setCurrentIndex(index);
+        addClass();
+        setShowUpdateData(true);
+    }
 
     return (
         <div>
@@ -89,8 +97,9 @@ const EnterData = () => {
                 <a onClick={() => setShowUploadData(true)}>Upload Data</a>
             </div>
 
-            <ModalEnterData onClose={() => setShowEnterData(false)} show={showEnterData} />
+            <ModalEnterData onClose={() => setShowEnterData(false)} show={showEnterData} buttonType={"post"} />
             <ModalUploadFile onClose={() => setShowUploadData(false)} show={showUploadData} />
+            <ModalUpdateData onClose={() => setShowUpdateData(false)} show={showUpdateData} buttonType={"update"} index={currentIndex} />
 
             <div className="container">
 
@@ -108,7 +117,7 @@ const EnterData = () => {
                     <tbody>
                         {
                             status ? (
-                                info.data.map((item) => {
+                                info.data.map((item, index) => {
                                     const { date, seller, purpose, amount } = item;
                                     return (
                                         <tr>
@@ -116,6 +125,7 @@ const EnterData = () => {
                                             <td>{seller}</td>
                                             <td>{purpose}</td>
                                             <td>{amount.toFixed(2)}</td>
+                                            <a onClick={() => updateData(parseInt(index))}>Edit</a>
                                         </tr>
                                     );
                                 })
