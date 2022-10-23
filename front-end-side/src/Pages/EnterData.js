@@ -85,8 +85,6 @@ const ShowData = props => {
 
         // props.index - id, kuri keisti
         // purpose, amount, seller, date - jau update inpute ivesti duomenys
-        console.log(props.index);
-        console.log(purpose, amount, seller, date);
         axios.put("https://localhost:7174/api/ShowData/" + props.index, { "date": date, "seller": seller, "amount": amount, "purpose": purpose, "id": props.index });
     }
     return (
