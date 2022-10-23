@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
 import "../Pages/EnterData.css";
 import axios from "axios";
-import ModalUpdateData from "../Pages/EnterData";
 const ShowData = props => {
     const [date, setDate] = useState('');
     const [seller, setSeller] = useState('');
@@ -86,6 +84,7 @@ const ShowData = props => {
         // props.index - id, kuri keisti
         // purpose, amount, seller, date - jau update inpute ivesti duomenys
         axios.put("https://localhost:7174/api/ShowData/" + props.index, { "date": date, "seller": seller, "amount": amount, "purpose": purpose, "id": props.index });
+        document.getElementById("date").placeholder = date;
     }
     return (
         <div className="modal enter-data" onClick={removeClass(), props.onClose}>
@@ -99,10 +98,10 @@ const ShowData = props => {
                 </div>
                 <div class="modal-padding">
                     <form id='form' onSubmit={props.buttonType == "post" ? postData : updateData}>
-                        <input onChange={(e) => setDate(e.target.value)} className='form-inputs' type="text" id="date" name="date" value={date} placeholder="Date" />
-                        <input onChange={(e) => setSeller(e.target.value)} className='form-inputs' type="text" id="seller" name="seller" value={seller} placeholder="Seller" />
-                        <input onChange={(e) => setPurpose(e.target.value)} className='form-inputs' type="text" id="details" name="details" value={purpose} placeholder="Details" />
-                        <input onChange={(e) => setAmount(e.target.value)} className='form-inputs' type="text" id="price" name="price" value={amount} placeholder="Amount" />
+                        <input onChange={(e) => setDate(e.target.value)} className='form-inputs' type="text" id="date" name="date" value={date} placeholder={props.date.slice(0, 10)} />
+                        <input onChange={(e) => setSeller(e.target.value)} className='form-inputs' type="text" id="seller" name="seller" value={seller} placeholder={props.seller} />
+                        <input onChange={(e) => setPurpose(e.target.value)} className='form-inputs' type="text" id="details" name="details" value={purpose} placeholder={props.purpose} />
+                        <input onChange={(e) => setAmount(e.target.value)} className='form-inputs' type="text" id="price" name="price" value={amount} placeholder={props.amount}/>
                         <button>Submit</button>
                         <p id="error-msg"></p>
                     </form>

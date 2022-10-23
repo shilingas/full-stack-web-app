@@ -16,6 +16,10 @@ const EnterData = () => {
     const [showEnterData, setShowEnterData] = useState(false);
     const [showUpdateData, setShowUpdateData] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentDate, setCurrentDate] = useState("");
+    const [currentSeller, setCurrentSeller] = useState("");
+    const [currentPurpose, setCurrentPurpose] = useState("");
+    const [currentAmount, setCurrentAmount] = useState("");
     useEffect(() => {
         axios.get("https://localhost:7174/api/Sorting").then(item => {
             setData(item);
@@ -82,8 +86,12 @@ const EnterData = () => {
         var element = document.getElementsByTagName("BODY")[0];
         element.classList.remove("modal-open");
     }
-    const updateData = (index) => {
+    const updateData = (index, date, seller, purpose, amount) => {
         setCurrentIndex(index);
+        setCurrentDate(date);
+        setCurrentSeller(seller);
+        setCurrentPurpose(purpose);
+        setCurrentAmount(amount);
         addClass();
         setShowUpdateData(true);
     }
@@ -97,9 +105,9 @@ const EnterData = () => {
                 <a onClick={() => setShowUploadData(true)}>Upload Data</a>
             </div>
 
-            <ModalEnterData onClose={() => setShowEnterData(false)} show={showEnterData} buttonType={"post"} />
+            <ModalEnterData onClose={() => setShowEnterData(false)} show={showEnterData} buttonType={"post"} date={"Date"} seller={"Seller"} purpose={"Purpose"} amount={"Amount"} />
             <ModalUploadFile onClose={() => setShowUploadData(false)} show={showUploadData} />
-            <ModalUpdateData onClose={() => setShowUpdateData(false)} show={showUpdateData} buttonType={"update"} index={currentIndex} />
+            <ModalUpdateData onClose={() => setShowUpdateData(false)} show={showUpdateData} buttonType={"update"} index={currentIndex} date={currentDate} seller={currentSeller} purpose={currentPurpose} amount={currentAmount} />
 
             <div className="container">
 
@@ -125,7 +133,7 @@ const EnterData = () => {
                                             <td>{seller}</td>
                                             <td>{purpose}</td>
                                             <td>{amount.toFixed(2)}</td>
-                                            <a onClick={() => updateData(parseInt(index))}>Edit</a>
+                                            <a onClick={() => updateData(parseInt(index), date, seller, purpose, amount)}>Edit</a>
                                         </tr>
                                     );
                                 })
