@@ -4,7 +4,7 @@ namespace back_end_side.Controllers
 {
     public static class ExtensionMethods
     {
-        public static List<T> MoveToOtherList<T>(this List<T> list, ref List<T> list2, int elementId, bool removeFromFirstList = true)
+        public static List<T> MoveToOtherList<T>(this List<T> list, List<T> list2, int elementId, bool removeFromFirstList = true)
         {
             list2.Add(list[elementId]);
             if (removeFromFirstList)

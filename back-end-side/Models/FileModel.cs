@@ -4,6 +4,5 @@
     {
         public string? FileName { get; set; }
         public IFormFile? FormFile { get; set; }
-        public int Bank { get; set; }
     }
 }

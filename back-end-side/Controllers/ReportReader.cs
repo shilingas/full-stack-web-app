@@ -3,6 +3,7 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using Microsoft.AspNetCore.Components;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace back_end_side.Controllers
 {
@@ -15,13 +16,28 @@ namespace back_end_side.Controllers
 
     public class ReportReader
     {
-        public int? bank = null;
         public IFormFile fileData;
         private static List<Record> IncomeList = new List<Record>();
-        public ReportReader(int bank, IFormFile fileData)
+        public ReportReader(IFormFile fileData)
         {
-            this.bank = bank;
             this.fileData = fileData;
+        }
+        private int CheckBank(StreamReader streamReader)
+        {
+            string? firstLine = streamReader.ReadLine();
+            string sebPattern = @"^(""SĄSKAITOS  \(LT\d{2}70440\d{11}\) IŠRAŠAS \(UŽ LAIKOTARPĮ:)+";
+            Regex expr = new Regex(sebPattern);
+           
+            if (expr.Matches(firstLine).Count > 0)
+                return 2;
+
+            if (firstLine.Equals("\"Sąskaitos Nr.\",\"\",\"Data\",\"Gavėjas\",\"Paaiškinimai\",\"Suma\",\"Valiuta\",\"D/K\",\"Įrašo Nr.\",\"Kodas\",\"Įmokos kodas\",\"Dok. Nr.\",\"Kliento kodas mokėtojo IS\",\"Kliento kodas\",\"Pradinis mokėtojas\",\"Galutinis gavėjas\","))
+                return 0;
+
+            if (firstLine.Equals("Tipas,\"Išrašo nr.\",\"Pervedimo nr.\",\"Data ir laikas\",\"Gavėjas / Mokėtojas\",Kodas,\"Suma ir valiuta\",Valiutos,Paskirtis,\"Įmokos kodas\",\"Kreditas / Debetas\",Likutis"))
+                return 1;
+
+            else return -1;
         }
         public List<Record>? ReadFromCsvFile()
         {
@@ -29,8 +45,14 @@ namespace back_end_side.Controllers
             {
                 Delimiter = ";",
             };
-                
-            using var streamReader = new StreamReader(fileData.OpenReadStream());
+
+            Stream stream = fileData.OpenReadStream();
+            using var streamReader = new StreamReader(stream);
+
+            int bank = CheckBank(streamReader);
+
+            stream.Position = 0;
+            streamReader.DiscardBufferedData();
 
             if (bank == (int)Banks.Swedbank)
             {
@@ -47,7 +69,7 @@ namespace back_end_side.Controllers
                     } 
                     else if (records.ElementAt(i).PaymentType.Equals("K"))
                     {
-                        records.MoveToOtherList(ref IncomeList, i);
+                        records.MoveToOtherList(IncomeList, i);
                     }
                 }
 
@@ -62,7 +84,7 @@ namespace back_end_side.Controllers
                 {
                     if (records.ElementAt(i).PaymentType.Equals("K"))
                     {
-                        records.MoveToOtherList(ref IncomeList, i);
+                        records.MoveToOtherList(IncomeList, i);
                     }
                     else
                     {
@@ -82,9 +104,9 @@ namespace back_end_side.Controllers
                 {
                     records.ElementAt(i).Amount /= 100;
 
-                    if (records.ElementAt(i).PaymentType.Equals("K"))
+                    if (records.ElementAt(i).PaymentType.Equals("C"))
                     {
-                        records.MoveToOtherList(ref IncomeList, i);
+                        records.MoveToOtherList(IncomeList, i);
                     }
                 }
                 return records;
