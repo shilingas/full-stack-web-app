@@ -34,7 +34,6 @@ namespace back_end_side.Controllers
             int index = UploadController.RecordsFromFile.FindIndex(ind => ind.Equals(id));
             if (index == -1)
             {
-                Console.WriteLine(id);
                 UploadController.RecordsFromFile[id] = model;
             }
             UploadController.RecordsFromFile.Sort();
