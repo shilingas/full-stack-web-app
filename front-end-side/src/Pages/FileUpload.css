@@ -34,7 +34,7 @@ label {
 input[type="file"] {
     position: absolute;
     width: calc(100% - 50px);
-    height: calc(100% - 50px);
+    height: calc(100% - 32px);
     top: 0;
     left: 0;
     text-align: center;
