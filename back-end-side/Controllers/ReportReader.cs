@@ -69,7 +69,7 @@ namespace back_end_side.Controllers
                     } 
                     else if (records.ElementAt(i).PaymentType.Equals("K"))
                     {
-                        records.MoveToOtherList(ref IncomeList, i);
+                        records.MoveToOtherList(IncomeList, i);
                     }
                 }
 
@@ -84,7 +84,7 @@ namespace back_end_side.Controllers
                 {
                     if (records.ElementAt(i).PaymentType.Equals("K"))
                     {
-                        records.MoveToOtherList(ref IncomeList, i);
+                        records.MoveToOtherList(IncomeList, i);
                     }
                     else
                     {
@@ -106,7 +106,7 @@ namespace back_end_side.Controllers
 
                     if (records.ElementAt(i).PaymentType.Equals("C"))
                     {
-                        records.MoveToOtherList(ref IncomeList, i);
+                        records.MoveToOtherList(IncomeList, i);
                     }
                 }
                 return records;
