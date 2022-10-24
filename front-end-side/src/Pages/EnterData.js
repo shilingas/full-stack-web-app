@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Pages/EnterData.css";
 import axios from "axios";
 const ShowData = props => {
-    const [date, setDate] = useState('');
-    const [seller, setSeller] = useState('');
-    const [amount, setAmount] = useState('');
-    const [purpose, setPurpose] = useState('');
+    const [date, setDate] = useState(props.date.slice(0, 10));
+    const [seller, setSeller] = useState(props.seller);
+    const [amount, setAmount] = useState(props.amount);
+    const [purpose, setPurpose] = useState(props.purpose);
+
+    useEffect(() => {
+        setDate(props.date.slice(0, 10));
+        setSeller(props.seller);
+        setAmount(props.amount);
+        setPurpose(props.purpose);
+    }, [props]);
+
     const postData = async (e) => {
         e.preventDefault();
         const dateRegEx = /^([0-9]{4}-((0[13-9]|1[012])-(0[1-9]|[12][0-9]|30)|(0[13578]|1[02])-31|02-(0[1-9]|1[0-9]|2[0-8]))|([0-9]{2}(([2468][048]|[02468][48])|[13579][26])|([13579][26]|[02468][048]|0[0-9]|1[0-6])00)-02-29)$/
@@ -98,10 +106,10 @@ const ShowData = props => {
                 </div>
                 <div class="modal-padding">
                     <form id='form' onSubmit={props.buttonType == "post" ? postData : updateData}>
-                        <input onChange={(e) => setDate(e.target.value)} className='form-inputs' type="text" id="date" name="date" value={date} placeholder={props.date.slice(0, 10)} />
-                        <input onChange={(e) => setSeller(e.target.value)} className='form-inputs' type="text" id="seller" name="seller" value={seller} placeholder={props.seller} />
-                        <input onChange={(e) => setPurpose(e.target.value)} className='form-inputs' type="text" id="details" name="details" value={purpose} placeholder={props.purpose} />
-                        <input onChange={(e) => setAmount(e.target.value)} className='form-inputs' type="text" id="price" name="price" value={amount} placeholder={props.amount}/>
+                        <input onChange={(e) => setDate(e.target.value)} className='form-inputs' type="text" id="date" name="date" value={date} placeholder="Date" />
+                        <input onChange={(e) => setSeller(e.target.value)} className='form-inputs' type="text" id="seller" name="seller" value={seller} placeholder="Seller" />
+                        <input onChange={(e) => setPurpose(e.target.value)} className='form-inputs' type="text" id="details" name="details" value={purpose} placeholder="Details" />
+                        <input onChange={(e) => setAmount(e.target.value)} className='form-inputs' type="text" id="price" name="price" value={amount} placeholder="Amount"/>
                         <button>Submit</button>
                         <p id="error-msg"></p>
                     </form>
