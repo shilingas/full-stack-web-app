@@ -201,3 +201,23 @@ table.data_table td:nth-of-type(4) {
     font-weight: bold;
     font-size: 18px;
 }
+
+table.data_table td.edit {
+    background: linear-gradient(90deg, var(--house-color) 0%, var(--house-color-shade) 100%) no-repeat;
+    cursor: pointer;
+    opacity: 0.8;
+    width: 0px;
+    height: 0px;
+    transition: .3s ease-in-out;
+}
+
+table.data_table td.edit:hover {
+    transition:.3s ease-in-out;
+    transform: scale(1.1);
+}
+
+table.data_table td.edit svg {
+    fill: var(--white);
+    width: auto;
+    height: 20px;
+}
