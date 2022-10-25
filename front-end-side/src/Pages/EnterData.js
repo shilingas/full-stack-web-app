@@ -92,7 +92,6 @@ const ShowData = props => {
         // props.index - id, kuri keisti
         // purpose, amount, seller, date - jau update inpute ivesti duomenys
         axios.put("https://localhost:7174/api/ShowData/" + props.index, { "date": date, "seller": seller, "amount": amount, "purpose": purpose, "id": props.index });
-        document.getElementById("date").placeholder = date;
     }
     return (
         <div className="modal enter-data" onClick={removeClass(), props.onClose}>
