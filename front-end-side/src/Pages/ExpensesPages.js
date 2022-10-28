@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Navbar from "../../src/Components/Navbar";
 const ExpensesPages = ({ categoryType }) => {
@@ -12,6 +12,7 @@ const ExpensesPages = ({ categoryType }) => {
     const [seller, setSeller] = useState('');
     const [amount, setAmount] = useState('');
     const [purpose, setPurpose] = useState('');
+    const initialRender = useRef(true);
     useEffect(() => {
         axios.get("https://localhost:7174/api/File").then(resp => {
             setInfo(resp);
@@ -36,11 +37,28 @@ const ExpensesPages = ({ categoryType }) => {
         setSeller(newSeller);
         setPurpose(newPurpose);
         setAmount(newAmount);
-        window.location.reload(false);
     }
 
     useEffect(() => {
-        axios.put("https://localhost:7174/api/Sorting/" + currentIndex, { "date": date, "seller": seller, "amount": amount, "purpose": purpose, "category": selectedCategory, "isCategorized": true, "index": currentIndex });
+
+        if (initialRender.current) {
+            initialRender.current = false;
+        }
+        else {
+            axios.put("https://localhost:7174/api/Sorting/" + currentIndex, { "date": date, "seller": seller, "amount": amount, "purpose": purpose, "category": selectedCategory, "isCategorized": true, "index": currentIndex }).then(() => {
+                axios.get('https://localhost:7174/api/ShowData').then(resp => {
+                    setInputData(resp);
+                    setDelayForInput(true);
+                    console.log(resp);
+                });
+                axios.get("https://localhost:7174/api/File").then(resp => {
+                    setInfo(resp);
+                    setStatus(true);
+                    console.log(resp);
+                });
+            });
+        }
+ 
     }, [selectedCategory, currentIndex, date, seller, purpose, amount]);
 
     return (
@@ -70,11 +88,11 @@ const ExpensesPages = ({ categoryType }) => {
                                                 <td>{purpose}</td>
                                                 <td>{parseFloat(amount).toFixed(2)}</td>
                                                 <td>
-                                                    <a style={{display: "block"}} onClick={() => handleSelect("food", index, date, seller, purpose, amount)}>Food</a>
-                                                    <a style={{display: "block"}} onClick={() => handleSelect("car", index, date, seller, purpose, amount)}>Transportation</a>
-                                                    <a style={{display: "block"}} onClick={() => handleSelect("entertainment", index, date, seller, purpose, amount)}>Entertainment</a>
-                                                    <a style={{display: "block"}} onClick={() => handleSelect("house", index, date, seller, purpose, amount)}>Housing</a>
-                                                    <a style={{display: "block"}} onClick={() => handleSelect("clothes", index, date, seller, purpose, amount)}>Clothing</a>
+                                                    <a style={{ display: "block" }} onClick={() => handleSelect("food", index, date, seller, purpose, amount)}>Food</a>
+                                                    <a style={{ display: "block" }} onClick={() => handleSelect("car", index, date, seller, purpose, amount)}>Transportation</a>
+                                                    <a style={{ display: "block" }} onClick={() => handleSelect("entertainment", index, date, seller, purpose, amount)}>Entertainment</a>
+                                                    <a style={{ display: "block" }} onClick={() => handleSelect("house", index, date, seller, purpose, amount)}>Housing</a>
+                                                    <a style={{ display: "block" }} onClick={() => handleSelect("clothes", index, date, seller, purpose, amount)}>Clothing</a>
                                                 </td>
                                             </tr>
                                         );
