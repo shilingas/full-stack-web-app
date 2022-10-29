@@ -123,7 +123,7 @@ table.data_table td:nth-of-type(4) {
     fill: var(--main-color);
 }
 
-#statistics #cards .card.car svg path {
+#statistics #cards .card.transportation svg path {
     fill: var(--transportation-color);
 }
 
@@ -147,7 +147,7 @@ table.data_table td:nth-of-type(4) {
     background: linear-gradient(90deg, var(--food-color) 0%, var(--food-color-shade) 100%) no-repeat;
 }
 
-#statistics #cards .card.car .padding .button a {
+#statistics #cards .card.transportation .padding .button a {
     background: linear-gradient(90deg, var(--transportation-color) 0%, var(--transportation-color-shade) 100%) no-repeat;
 }
 
@@ -160,7 +160,7 @@ table.data_table td:nth-of-type(4) {
 }
 
 #statistics #cards .card.clothes .padding .button a {
-    background: linear-gradient(90deg, var(--clothing-color) 0%, var(--clothing-color-shade) 100%) no-repeat;
+    background: linear-gradient(90deg, var(--clothes-color) 0%, var(--clothes-color-shade) 100%) no-repeat;
 }
 
 #statistics #cards .card.other .padding .button a {
@@ -189,6 +189,8 @@ table.data_table td:nth-of-type(4) {
     font-weight: bold;
     font-size: 17px;
 }
+
+#statistics #cards .card .padding .texts p.title span { text-transform: capitalize; }
 
 #statistics #cards .card .padding .percentage-bar .inside-box {
     background: #373f4d;
