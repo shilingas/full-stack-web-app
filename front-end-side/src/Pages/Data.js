@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../Pages/Data.css";
 import Navbar from "../Components/Navbar";
-import ModalEnterData from "../Pages/EnterData";
-import ModalUploadFile from "../Pages/FileUpload";
+import Modal from "../Components/Modal";
+import DataEnter from "../Pages/EnterData";
+import UploadFile from "../Pages/FileUpload";
 import ModalUpdateData from "../Pages/EnterData";
 const EnterData = () => {
     const [data, setData] = useState({});
@@ -105,9 +106,17 @@ const EnterData = () => {
                 <a onClick={() => setShowUploadData(true)}>Upload Data</a>
             </div>
 
-            <ModalEnterData onClose={() => setShowEnterData(false)} show={showEnterData} buttonType={"post"} date={"Date"} seller={"Seller"} purpose={"Purpose"} amount={"Amount"} />
-            <ModalUploadFile onClose={() => setShowUploadData(false)} show={showUploadData} />
-            <ModalUpdateData onClose={() => setShowUpdateData(false)} show={showUpdateData} buttonType={"update"} index={currentIndex} date={currentDate} seller={currentSeller} purpose={currentPurpose} amount={currentAmount} />
+            <Modal onClose={() => setShowEnterData(false)} show={showEnterData}>
+                <DataEnter show={showEnterData} buttonType={"post"} date={""} seller={""} purpose={""} amount={""} />
+            </Modal>
+
+            <Modal onClose={() => setShowUploadData(false)} show={showUploadData}>
+                <UploadFile show={showUploadData} />
+            </Modal>
+
+            <Modal onClose={() => setShowUpdateData(false)} show={showUpdateData}>
+                <ModalUpdateData show={showUpdateData} buttonType={"update"} index={currentIndex} date={currentDate} seller={currentSeller} purpose={currentPurpose} amount={currentAmount} />
+            </Modal>
 
             <div className="container">
 

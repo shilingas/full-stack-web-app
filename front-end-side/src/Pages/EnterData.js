@@ -80,10 +80,6 @@ const ShowData = props => {
         }
     }
 
-    function removeClass() {
-        document.getElementsByTagName("BODY")[0].setAttribute("class", "modal-open");
-    }
-
     if (!props.show) {
         return null;
     }
@@ -94,28 +90,14 @@ const ShowData = props => {
         axios.put("https://localhost:7174/api/ShowData/" + props.index, { "date": date, "seller": seller, "amount": amount, "purpose": purpose, "id": props.index });
     }
     return (
-        <div className="modal enter-data" onClick={removeClass(), props.onClose}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
-                <div id="modal-decoration"></div>
-
-                <div class="close">
-                    <svg viewBox="0 0 30 30" onClick={removeClass(), props.onClose}>
-                        <path d="M 7 4 C 6.744125 4 6.4879687 4.0974687 6.2929688 4.2929688 L 4.2929688 6.2929688 C 3.9019687 6.6839688 3.9019687 7.3170313 4.2929688 7.7070312 L 11.585938 15 L 4.2929688 22.292969 C 3.9019687 22.683969 3.9019687 23.317031 4.2929688 23.707031 L 6.2929688 25.707031 C 6.6839688 26.098031 7.3170313 26.098031 7.7070312 25.707031 L 15 18.414062 L 22.292969 25.707031 C 22.682969 26.098031 23.317031 26.098031 23.707031 25.707031 L 25.707031 23.707031 C 26.098031 23.316031 26.098031 22.682969 25.707031 22.292969 L 18.414062 15 L 25.707031 7.7070312 C 26.098031 7.3170312 26.098031 6.6829688 25.707031 6.2929688 L 23.707031 4.2929688 C 23.316031 3.9019687 22.682969 3.9019687 22.292969 4.2929688 L 15 11.585938 L 7.7070312 4.2929688 C 7.5115312 4.0974687 7.255875 4 7 4 z" />
-                    </svg>
-                </div>
-                <div class="modal-padding">
-                    <form id='form' onSubmit={props.buttonType == "post" ? postData : updateData}>
-                        <input onChange={(e) => setDate(e.target.value)} className='form-inputs' type="text" id="date" name="date" value={date} placeholder="Date" />
-                        <input onChange={(e) => setSeller(e.target.value)} className='form-inputs' type="text" id="seller" name="seller" value={seller} placeholder="Seller" />
-                        <input onChange={(e) => setPurpose(e.target.value)} className='form-inputs' type="text" id="details" name="details" value={purpose} placeholder="Details" />
-                        <input onChange={(e) => setAmount(e.target.value)} className='form-inputs' type="text" id="price" name="price" value={amount} placeholder="Amount"/>
-                        <button>Submit</button>
-                        <p id="error-msg"></p>
-                    </form>
-                </div>
-            </div>
-
-        </div>
+        <form id='form' onSubmit={props.buttonType == "post" ? postData : updateData}>
+            <input onChange={(e) => setDate(e.target.value)} className='form-inputs' type="text" id="date" name="date" value={date} placeholder="Date" />
+            <input onChange={(e) => setSeller(e.target.value)} className='form-inputs' type="text" id="seller" name="seller" value={seller} placeholder="Seller" />
+            <input onChange={(e) => setPurpose(e.target.value)} className='form-inputs' type="text" id="details" name="details" value={purpose} placeholder="Details" />
+            <input onChange={(e) => setAmount(e.target.value)} className='form-inputs' type="text" id="price" name="price" value={amount} placeholder="Amount"/>
+            <button>Submit</button>
+            <p id="error-msg"></p>
+        </form>
     );
 }
 export default ShowData;
