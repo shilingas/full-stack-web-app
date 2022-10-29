@@ -74,7 +74,7 @@ const ExpensesPages = ({ categoryType }) => {
                             status ? (
                                 info.data.map((item, index) => {
                                     const { date, seller, purpose, amount, category } = item;
-                                    if (category == categoryType)
+                                    if (category == categoryType) {
                                         return (
                                             <tr>
                                                 <td>{date.slice(0, 10)}</td>
@@ -82,14 +82,30 @@ const ExpensesPages = ({ categoryType }) => {
                                                 <td>{purpose}</td>
                                                 <td>{parseFloat(amount).toFixed(2)}</td>
                                                 <td>
-                                                    <a style={{ display: "block" }} onClick={() => handleSelect("food", index, date, seller, purpose, amount)}>Food</a>
-                                                    <a style={{ display: "block" }} onClick={() => handleSelect("car", index, date, seller, purpose, amount)}>Transportation</a>
-                                                    <a style={{ display: "block" }} onClick={() => handleSelect("entertainment", index, date, seller, purpose, amount)}>Entertainment</a>
-                                                    <a style={{ display: "block" }} onClick={() => handleSelect("house", index, date, seller, purpose, amount)}>Housing</a>
-                                                    <a style={{ display: "block" }} onClick={() => handleSelect("clothes", index, date, seller, purpose, amount)}>Clothing</a>
+                                                    {categoryType == "food" ?
+                                                        null 
+                                                        : <a style={{ display: "block" }} onClick={() => handleSelect("food", index, date, seller, purpose, amount)}>Food</a>
+                                                    }
+                                                    {categoryType == "car" ?
+                                                        null
+                                                        : <a style={{ display: "block" }} onClick={() => handleSelect("car", index, date, seller, purpose, amount)}>Transportation</a>
+                                                    }
+                                                    {categoryType == "entertainment" ?
+                                                        null
+                                                        : <a style={{ display: "block" }} onClick={() => handleSelect("entertainment", index, date, seller, purpose, amount)}>Entertainment</a>
+                                                    }
+                                                    {categoryType == "house" ?
+                                                        null
+                                                        : <a style={{ display: "block" }} onClick={() => handleSelect("house", index, date, seller, purpose, amount)}>Housing</a>
+                                                    }
+                                                    {categoryType == "clothes" ?
+                                                        null
+                                                        : <a style={{ display: "block" }} onClick={() => handleSelect("clothes", index, date, seller, purpose, amount)}>Clothing</a>
+                                                    }
                                                 </td>
                                             </tr>
                                         );
+                                    }
                                 })
                             ) : (
                                 null
