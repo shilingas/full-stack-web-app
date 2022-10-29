@@ -1,6 +1,21 @@
 import React from "react";
+import { useEffect } from "react";
 import "../Pages/FileUpload.css";
 const Modal = props => {
+
+    const closeWithESC = (e) => {
+        if ((e.char || e.keyCode) === 27) {
+            props.onClose();
+        }
+    }
+
+    useEffect(() => {
+        document.body.addEventListener('keydown', closeWithESC)
+        return function cleanUp() {
+            document.body.removeEventListener('keydown', closeWithESC)
+        }
+    }, [])
+
     function removeClass() {
         document.getElementsByTagName("BODY")[0].setAttribute("class", "modal-open");
     }
