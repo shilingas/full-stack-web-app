@@ -18,6 +18,9 @@ namespace back_end_side.Models
         [Ignore]
         public string? Category { get; set; } = "other";
 
+        [Ignore]
+        public bool IsCategorized { get; set; } = false;
+        
         public int CompareTo(object? obj)
         {
             Record nextRecord = (Record)obj;

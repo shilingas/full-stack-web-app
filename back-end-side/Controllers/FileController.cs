@@ -12,6 +12,7 @@ namespace back_end_side.Controllers
     public class FileController : ControllerBase
     {
         [HttpGet]
+        [EnableCors("corsapp")]
         public List<Record> GetFile()
         {
             List<Record> FileData = Sorting.SortedList();
