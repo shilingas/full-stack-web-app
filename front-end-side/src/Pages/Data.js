@@ -22,6 +22,8 @@ const EnterData = () => {
     const [currentSeller, setCurrentSeller] = useState("");
     const [currentPurpose, setCurrentPurpose] = useState("");
     const [currentAmount, setCurrentAmount] = useState("");
+    const [size, setSize] = useState(5);
+    const [allShown, setAllShown] = useState(false);
     useEffect(() => {
         axios.get("https://localhost:7174/api/Sorting").then(item => {
             setData(item);
@@ -51,6 +53,15 @@ const EnterData = () => {
         element.classList.remove("modal-open");
     }
 
+    function showAll() {
+        setSize(info.data.lenght);
+        setAllShown(true);
+    }
+    function showLess() {
+        setSize(5);
+        setAllShown(false);
+    }
+
     const updateData = (index, date, seller, purpose, amount) => {
         setCurrentIndex(index);
         setCurrentDate(date);
@@ -71,18 +82,18 @@ const EnterData = () => {
             </div>
 
             <Modal onClose={() => setShowEnterData(false)} show={showEnterData}>
-                <DataEnter show={showEnterData} buttonType={"post"} date={""} seller={""} purpose={""} amount={""} />
+                <DataEnter buttonType={"post"} date={""} seller={""} purpose={""} amount={""} />
             </Modal>
 
             <Modal onClose={() => setShowUploadData(false)} show={showUploadData}>
-                <UploadFile show={showUploadData} />
+                <UploadFile/>
             </Modal>
 
             <Modal onClose={() => setShowUpdateData(false)} show={showUpdateData}>
                 <ModalUpdateData show={showUpdateData} buttonType={"update"} index={currentIndex} date={currentDate} seller={currentSeller} purpose={currentPurpose} amount={currentAmount} />
             </Modal>
 
-            <div className="container">
+            <div className="container statistics-table">
 
                 <h2 className="title">Your expenses</h2>
 
@@ -99,7 +110,8 @@ const EnterData = () => {
                     <tbody>
                         {
                             status ? (
-                                info.data.map((item, index) => {
+                                
+                                info.data.slice(0, size).map((item, index) => {
                                     const { date, seller, purpose, amount } = item;
                                     return (
                                         <tr>
@@ -126,6 +138,11 @@ const EnterData = () => {
                         </tr>
                     </tfoot>
                 </table>
+
+                {allShown ?
+                    <button type="button" onClick={showLess}>Show less</button>
+                    : <button type="button" onClick={showAll}>Show more</button>
+                }
             </div>
 
             <div className="container">

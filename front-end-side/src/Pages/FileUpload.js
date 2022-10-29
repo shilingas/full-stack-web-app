@@ -44,10 +44,6 @@ const FileUpload = props => {
         }, delay);
     }
 
-    if (!props.show) {
-        return null;
-    }
-
     return (
 
         <form>

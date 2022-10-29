@@ -1,3 +1,8 @@
+.statistics-table button {
+    display: block;
+    margin: 20px auto 50px;
+}
+
 table.data_table {
     width: calc(100% + 10px);
     border-collapse: separate;

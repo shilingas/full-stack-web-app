@@ -80,9 +80,6 @@ const ShowData = props => {
         }
     }
 
-    if (!props.show) {
-        return null;
-    }
     const updateData = (e) => {
 
         // props.index - id, kuri keisti
