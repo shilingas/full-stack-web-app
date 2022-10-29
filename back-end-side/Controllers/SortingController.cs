@@ -24,8 +24,6 @@ namespace back_end_side.Controllers
         public IActionResult Put([FromBody] Record model, int index)
         {
             UploadController.RecordsFromFile[index] = model;
-            Console.WriteLine(UploadController.RecordsFromFile[index].IsCategorized);
-
             return Ok(model);
         }
     }

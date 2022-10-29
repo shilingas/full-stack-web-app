@@ -17,20 +17,17 @@ const ExpensesPages = ({ categoryType }) => {
         axios.get("https://localhost:7174/api/File").then(resp => {
             setInfo(resp);
             setStatus(true);
-            console.log(resp);
         })
     }, []);
     useEffect(() => {
         axios.get('https://localhost:7174/api/ShowData').then(resp => {
             setInputData(resp);
             setDelayForInput(true);
-            console.log(resp);
         });
     }, []);
 
 
     const handleSelect = (category, index, newDate, newSeller, newPurpose, newAmount) => {
-        
         setSelectedCategory(category);
         setCurrentIndex(index);
         setDate(newDate);
@@ -49,16 +46,13 @@ const ExpensesPages = ({ categoryType }) => {
                 axios.get('https://localhost:7174/api/ShowData').then(resp => {
                     setInputData(resp);
                     setDelayForInput(true);
-                    console.log(resp);
                 });
                 axios.get("https://localhost:7174/api/File").then(resp => {
                     setInfo(resp);
                     setStatus(true);
-                    console.log(resp);
                 });
             });
         }
- 
     }, [selectedCategory, currentIndex, date, seller, purpose, amount]);
 
     return (
