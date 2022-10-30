@@ -13,7 +13,7 @@ namespace back_end_side.Controllers
         [HttpPost]
         [Produces("application/json")]
         [EnableCors("corsapp")]
-        public IActionResult Post([FromBody]Record model)
+        public IActionResult Post([FromBody] Record model)
         {
             model.Category = Sorting.CheckInput(model);
             UploadController.RecordsFromFile.Add(model);
@@ -38,7 +38,7 @@ namespace back_end_side.Controllers
         }
         [HttpDelete("{id:int}")]
         [EnableCors("corsapp")]
-        public IActionResult Remove(int id)
+        public IActionResult Delete(int id)
         {
             UploadController.RecordsFromFile.RemoveAt(id);
             return Ok();
