@@ -12,6 +12,7 @@ namespace back_end_side.Controllers
     {
         [HttpPost]
         [Produces("application/json")]
+        [EnableCors("corsapp")]
         public IActionResult Post([FromBody]Record model)
         {
             model.Category = Sorting.CheckInput(model);

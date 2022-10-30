@@ -60,11 +60,16 @@ namespace back_end_side.Controllers
         {
             double Sum = 0;
             (from record in UploadController.RecordsFromFile
-             where record.Seller != null && shops.Any(record.Seller.ToUpper().Contains)
+             where record.Seller != null && shops.Any(record.Seller.ToUpper().Contains) && !record.IsCategorized
              select record).ToList().ForEach(record => {
                  record.Category = category;
-                 Sum += record.Amount;
              });
+
+            Sum = UploadController.RecordsFromFile
+                .Where(r => r.Category != null && r.Category
+                .Equals(category))
+                .Select(r => r.Amount)
+                .Sum();
 
             return Sum;
         }

@@ -24,7 +24,7 @@ root.render(
 
                 <Route path="/food-expenses" element={<ExpensesPages categoryType="food" />} />
                 <Route path="/clothes-expenses" element={<ExpensesPages categoryType="clothes" />} />
-                <Route path="/car-expenses" element={<ExpensesPages categoryType="car"/>} />
+                <Route path="/transportation-expenses" element={<ExpensesPages categoryType="car"/>} />
                 <Route path="/house-expenses" element={<ExpensesPages categoryType="house" />} />
                 <Route path="/entertainment-expenses" element={<ExpensesPages categoryType="entertainment" />} />
                 <Route path="/other-expenses" element={<ExpensesPages categoryType="other" />} />
