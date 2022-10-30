@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Navbar from "../../src/Components/Navbar";
+import Modal from "../Components/Modal";
+import Icon from "../Components/Icons.js";
 const ExpensesPages = ({ categoryType }) => {
     const [info, setInfo] = useState([]);
     const [status, setStatus] = useState(false);
@@ -12,6 +14,7 @@ const ExpensesPages = ({ categoryType }) => {
     const [seller, setSeller] = useState('');
     const [amount, setAmount] = useState('');
     const [purpose, setPurpose] = useState('');
+    const [showCategories, setShowCategories] = useState(false);
     const initialRender = useRef(true);
     useEffect(() => {
         axios.get("https://localhost:7174/api/File").then(resp => {
@@ -27,13 +30,18 @@ const ExpensesPages = ({ categoryType }) => {
     }, []);
 
 
-    const handleSelect = (category, index, newDate, newSeller, newPurpose, newAmount) => {
-        setSelectedCategory(category);
+    const handleSelect = (index, newDate, newSeller, newPurpose, newAmount) => {
+        setShowCategories(true);
         setCurrentIndex(index);
         setDate(newDate);
         setSeller(newSeller);
         setPurpose(newPurpose);
         setAmount(newAmount);
+    }
+
+    function addClass() {
+        var element = document.getElementsByTagName("BODY")[0];
+        element.classList.remove("modal-open");
     }
 
     useEffect(() => {
@@ -52,14 +60,38 @@ const ExpensesPages = ({ categoryType }) => {
                     setStatus(true);
                 });
             });
+            setShowCategories(false);
         }
-    }, [selectedCategory, currentIndex, date, seller, purpose, amount]);
+    }, [selectedCategory]);
 
     return (
         <div>
             <Navbar />
             <h2 className="title">{categoryType} Expenses</h2>
+            <Modal className="categorize" onClose={() => setShowCategories(false)} show={showCategories}>
+                {categoryType == "food" ?
+                    null
+                    : <button style={{ display: "block", marginTop: "10px", width: "100%" }} onClick={() => setSelectedCategory("food")}>Food</button>
+                }
+                {categoryType == "car" ?
+                    null
+                    : <button style={{ display: "block", marginTop: "10px", width: "100%" }} onClick={() => setSelectedCategory("car")}>Transportation</button>
+                }
+                {categoryType == "entertainment" ?
+                    null
+                    : <button style={{ display: "block", marginTop: "10px", width: "100%" }} onClick={() => setSelectedCategory("entertainment")}>Entertainment</button>
+                }
+                {categoryType == "house" ?
+                    null
+                    : <button style={{ display: "block", marginTop: "10px", width: "100%" }} onClick={() => setSelectedCategory("house")}>Housing</button>
+                }
+                {categoryType == "clothes" ?
+                    null
+                    : <button style={{ display: "block", marginTop: "10px", width: "100%" }} onClick={() => setSelectedCategory("clothes")}>Clothing</button>
+                }
+            </Modal>
             <div className="container">
+                
                 <table className="data_table">
                     <thead>
                         <tr>
@@ -81,28 +113,10 @@ const ExpensesPages = ({ categoryType }) => {
                                                 <td>{seller}</td>
                                                 <td>{purpose}</td>
                                                 <td>{parseFloat(amount).toFixed(2)}</td>
-                                                <td>
-                                                    {categoryType == "food" ?
-                                                        null 
-                                                        : <a style={{ display: "block" }} onClick={() => handleSelect("food", index, date, seller, purpose, amount)}>Food</a>
-                                                    }
-                                                    {categoryType == "car" ?
-                                                        null
-                                                        : <a style={{ display: "block" }} onClick={() => handleSelect("car", index, date, seller, purpose, amount)}>Transportation</a>
-                                                    }
-                                                    {categoryType == "entertainment" ?
-                                                        null
-                                                        : <a style={{ display: "block" }} onClick={() => handleSelect("entertainment", index, date, seller, purpose, amount)}>Entertainment</a>
-                                                    }
-                                                    {categoryType == "house" ?
-                                                        null
-                                                        : <a style={{ display: "block" }} onClick={() => handleSelect("house", index, date, seller, purpose, amount)}>Housing</a>
-                                                    }
-                                                    {categoryType == "clothes" ?
-                                                        null
-                                                        : <a style={{ display: "block" }} onClick={() => handleSelect("clothes", index, date, seller, purpose, amount)}>Clothing</a>
-                                                    }
+                                                <td className="edit" onClick={addClass(), () => handleSelect(index, date, seller, purpose, amount)}>
+                                                    <Icon type="edit-button"></Icon>
                                                 </td>
+                                                
                                             </tr>
                                         );
                                     }
