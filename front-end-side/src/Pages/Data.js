@@ -23,9 +23,10 @@ const EnterData = () => {
     const [currentSeller, setCurrentSeller] = useState("");
     const [currentPurpose, setCurrentPurpose] = useState("");
     const [currentAmount, setCurrentAmount] = useState("");
-    const [isDeleted, setIsDeleted] = useState(false);
     const [size, setSize] = useState(5);
+    const [showConfirmation, setShowConfirmation] = useState(false);
     const [allShown, setAllShown] = useState(false);
+    const [deleteIndex, setDeleteIndex] = useState(0);
     useEffect(() => {
         axios.get("https://localhost:7174/api/Sorting").then(item => {
             setData(item);
@@ -73,9 +74,11 @@ const EnterData = () => {
         addClass();
         setShowUpdateData(true);
     }
-    // if you want refresh without window.location.reload();
-    // you need to update states after requests to get newest info so it automatically re-renders component
-    const removeData = (index) => {
+    const showModal = (index) => {
+        setShowConfirmation(true);
+        setDeleteIndex(index);
+    }
+    const deleteData = (index) => {
         axios.delete(`https://localhost:7174/api/ShowData/${index}`).then(() => {
             axios.get("https://localhost:7174/api/File").then(resp => {
                 setInfo(resp);
@@ -89,13 +92,15 @@ const EnterData = () => {
                 setExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
             })
         }
-)}
+        )
+        setShowConfirmation(false);
+    }
     return (
         <div>
             <Navbar />
 
-            <div className="container" style={{marginTop: "30px"} }>
-                <a onClick={addClass(), () => setShowEnterData(true)} style={{marginRight: "10px"} }>Add data</a>
+            <div className="container" style={{ marginTop: "30px" }}>
+                <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
                 <a onClick={() => setShowUploadData(true)}>Upload Data</a>
             </div>
 
@@ -104,11 +109,16 @@ const EnterData = () => {
             </Modal>
 
             <Modal className="upload-data" onClose={() => setShowUploadData(false)} show={showUploadData}>
-                <UploadFile/>
+                <UploadFile />
             </Modal>
 
             <Modal className="enter-data" onClose={() => setShowUpdateData(false)} show={showUpdateData}>
                 <ModalUpdateData show={showUpdateData} buttonType={"update"} index={currentIndex} date={currentDate} seller={currentSeller} purpose={currentPurpose} amount={currentAmount} />
+            </Modal>
+            <Modal show={showConfirmation} onClose={() => setShowConfirmation(false)}>
+                <p>delete?</p>
+                <button onClick={() => deleteData(deleteIndex)}>Yes</button>
+                <button onClick={() => setShowConfirmation(false)}>No</button>
             </Modal>
 
             <div className="container statistics-table">
@@ -128,7 +138,7 @@ const EnterData = () => {
                     <tbody>
                         {
                             status ? (
-                                
+
                                 info.data.slice(0, size).map((item, index) => {
                                     const { date, seller, purpose, amount } = item;
                                     return (
@@ -140,7 +150,7 @@ const EnterData = () => {
                                             <td className="edit" onClick={() => updateData(parseInt(index), date, seller, purpose, amount)}>
                                                 <Icon type="edit-button"></Icon>
                                             </td>
-                                            <button type="submit" onClick={() => removeData(index)}>Remove</button>
+                                            <td onClick={() => showModal(index)}>Remove item</td>
                                         </tr>
                                     );
                                 })
