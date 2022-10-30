@@ -36,5 +36,12 @@ namespace back_end_side.Controllers
             UploadController.RecordsFromFile.Sort();
             return Ok(model);
         }
+        [HttpDelete("{id:int}")]
+        [EnableCors("corsapp")]
+        public IActionResult Remove(int id)
+        {
+            UploadController.RecordsFromFile.RemoveAt(id);
+            return Ok();
+        }
     }
 }

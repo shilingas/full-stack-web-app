@@ -23,6 +23,7 @@ const EnterData = () => {
     const [currentSeller, setCurrentSeller] = useState("");
     const [currentPurpose, setCurrentPurpose] = useState("");
     const [currentAmount, setCurrentAmount] = useState("");
+    const [isDeleted, setIsDeleted] = useState(false);
     const [size, setSize] = useState(5);
     const [allShown, setAllShown] = useState(false);
     useEffect(() => {
@@ -72,7 +73,23 @@ const EnterData = () => {
         addClass();
         setShowUpdateData(true);
     }
-
+    // if you want refresh without window.location.reload();
+    // you need to update states after requests to get newest info so it automatically re-renders component
+    const removeData = (index) => {
+        axios.delete(`https://localhost:7174/api/ShowData/${index}`).then(() => {
+            axios.get("https://localhost:7174/api/File").then(resp => {
+                setInfo(resp);
+                setStatus(true);
+            })
+            axios.get("https://localhost:7174/api/Sorting").then(item => {
+                setData(item);
+                setDelay(true);
+            });
+            axios.get("https://localhost:7174/api/Sorting").then((item) => {
+                setExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
+            })
+        }
+)}
     return (
         <div>
             <Navbar />
@@ -123,6 +140,7 @@ const EnterData = () => {
                                             <td className="edit" onClick={() => updateData(parseInt(index), date, seller, purpose, amount)}>
                                                 <Icon type="edit-button"></Icon>
                                             </td>
+                                            <button type="submit" onClick={() => removeData(index)}>Remove</button>
                                         </tr>
                                     );
                                 })
