@@ -187,6 +187,8 @@ button:hover {
     padding: 0 40px;
 }
 
+.modal .modal-content .close .clickable-place { display: inline-grid; }
+
 .modal .modal-content .close svg {
     fill: var(--main-text-color);
     height: 25px;

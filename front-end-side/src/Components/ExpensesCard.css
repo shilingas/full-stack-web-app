@@ -82,7 +82,7 @@
 }
 
 .card.clothes svg path {
-    fill: var(--clothing-color);
+    fill: var(--clothes-color);
 }
 
 .card.other svg path {
