@@ -1,0 +1,151 @@
+.card {
+    background: #373f4d;
+    border-radius: 10px;
+    width: 100%;
+    color: var(--main-text-color);
+    overflow: hidden;
+    position: relative;
+} 
+
+.card svg {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    z-index: 0;
+}
+
+.card .padding {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    z-index: 2;
+    position: relative;
+}
+
+.card .padding .button {
+    align-content: center;
+    display: grid;
+}
+
+.card.disabled .padding .button .cursor-field {
+    transition: none;
+}
+
+.card .padding .button .cursor-field a {
+    color: var(--white);
+    text-decoration: none;
+    background: linear-gradient(90deg, var(--main-color) 0%, var(--main-color-shade) 100%) no-repeat;
+    padding: 5px 25px 7px;
+    border-radius: 50px;
+    text-transform: lowercase;
+    font-size: 13px;
+    user-select: none;
+}
+
+.card.disabled .padding .button .cursor-field {
+    cursor: not-allowed;
+    transition: none;
+}
+.card.disabled .padding .button .cursor-field:hover {
+    transform: none;
+    transition: none;
+}
+
+.card.disabled .padding .button .cursor-field a {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.card .padding .button .cursor-field:hover {
+    transform: scale(1.1);
+    transition: .2s ease-in-out;
+}
+
+.card svg path {
+    opacity: 0.12;
+}
+
+.card.food svg path {
+    fill: var(--main-color);
+}
+
+.card.transportation svg path {
+    fill: var(--transportation-color);
+}
+
+.card.entertainment svg path {
+    fill: var(--entertainment-color);
+}
+
+.card.house svg path {
+    fill: var(--house-color);
+}
+
+.card.clothes svg path {
+    fill: var(--clothes-color);
+}
+
+.card.other svg path {
+    fill: var(--other-color);
+}
+
+.card.food .padding .button a {
+    background: linear-gradient(90deg, var(--food-color) 0%, var(--food-color-shade) 100%) no-repeat;
+}
+
+.card.transportation .padding .button a {
+    background: linear-gradient(90deg, var(--transportation-color) 0%, var(--transportation-color-shade) 100%) no-repeat;
+}
+
+.card.entertainment .padding .button a {
+    background: linear-gradient(90deg, var(--entertainment-color) 0%, var(--entertainment-color-shade) 100%) no-repeat;
+}
+
+.card.house .padding .button a {
+    background: linear-gradient(90deg, var(--house-color) 0%, var(--house-color-shade) 100%) no-repeat;
+}
+
+.card.clothes .padding .button a {
+    background: linear-gradient(90deg, var(--clothes-color) 0%, var(--clothes-color-shade) 100%) no-repeat;
+}
+
+.card.other .padding .button a {
+    background: linear-gradient(90deg, var(--other-color) 0%, var(--other-color-shade) 100%) no-repeat;
+}
+
+.card .padding .percentage-bar {
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    padding: 8px;
+    user-select: none;
+}
+
+.card .padding .texts {
+    padding: 0 15px;
+    display: grid;
+    align-content: center;
+}
+
+.card .padding .texts p {
+    margin: 0;
+}
+
+.card .padding .texts p.title {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.card .padding .texts p.title span { text-transform: capitalize; }
+
+.card .padding .percentage-bar .inside-box {
+    background: #373f4d;
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+}
