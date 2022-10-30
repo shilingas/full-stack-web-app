@@ -14,7 +14,8 @@ namespace back_end_side.Models
         public double Amount { get; set; }
         [Name("Kreditas / Debetas", "D/K", "DEBETAS/KREDITAS")]
         public string? PaymentType { get; set; }
-
+        [Name("Įrašo Nr.", "TRANSAKCIJOS KODAS", "Išrašo nr.")]
+        public string? ExpenseCode { get; set; }
         [Ignore]
         public string? Category { get; set; } = "other";
 
