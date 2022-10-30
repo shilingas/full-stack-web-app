@@ -14,12 +14,13 @@ namespace back_end_side.Controllers
             return list;
         }
 
-        public static List<Record> RemoveDuplicates(this List<Record> list)
+        public static void RemoveDuplicates(this List<Record> list)
         {
             var uniqueList = list.Where(i => i.ExpenseCode != null).DistinctBy(i => i.ExpenseCode).ToList();
             var nullList = list.Where(i => i.ExpenseCode == null).ToList();
             uniqueList.AddRange(nullList);
-            return uniqueList;
+            list.Clear();
+            list.AddRange(uniqueList);
         }
     }
 }

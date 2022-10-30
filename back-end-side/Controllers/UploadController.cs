@@ -21,7 +21,7 @@ namespace back_end_side.Controllers
                 {
                     ReportReader reportReader = new ReportReader(fileData: file.FormFile);
                     RecordsFromFile.AddRange(reportReader.ReadFromCsvFile());
-                    RecordsFromFile = RecordsFromFile.RemoveDuplicates();
+                    RecordsFromFile.RemoveDuplicates();
 
                     RecordsFromFile.Sort();
                 }
