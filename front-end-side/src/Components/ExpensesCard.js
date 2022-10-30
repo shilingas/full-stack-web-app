@@ -1,4 +1,5 @@
 import React from "react";
+import "../Components/ExpensesCard.css";
 const ExpensesCard = props => {
 
     function checkIfNotNaN(number) {
