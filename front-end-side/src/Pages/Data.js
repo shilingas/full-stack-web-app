@@ -54,7 +54,7 @@ const EnterData = () => {
     }
 
     function showAll() {
-        setSize(info.data.lenght);
+        setSize(info.data.length);
         setAllShown(true);
     }
     function showLess() {
