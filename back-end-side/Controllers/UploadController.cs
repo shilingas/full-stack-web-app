@@ -10,7 +10,7 @@ namespace back_end_side.Controllers
     
     public class UploadController : ControllerBase
     {
-        public static readonly List<Record> RecordsFromFile = new List<Record>();
+        public static List<Record> RecordsFromFile = new List<Record>();
 
         [HttpPost]
         public ActionResult Post([FromForm] FileModel file)
@@ -21,6 +21,8 @@ namespace back_end_side.Controllers
                 {
                     ReportReader reportReader = new ReportReader(fileData: file.FormFile);
                     RecordsFromFile.AddRange(reportReader.ReadFromCsvFile());
+                    RecordsFromFile.RemoveDuplicates();
+
                     RecordsFromFile.Sort();
                 }
 
