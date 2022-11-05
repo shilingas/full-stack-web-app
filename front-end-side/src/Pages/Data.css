@@ -44,14 +44,14 @@ table.data_table td:nth-of-type(4) {
     width: 60px;
 }
 
-table.data_table td.edit {
+table.data_table td.edit, table.data_table td.move {
     cursor: pointer;
     width: 0px;
     height: 0px;
     transition: .3s ease-in-out;
 }
 
-table.data_table td.edit:hover {
+table.data_table td.edit:hover, table.data_table td.move:hover {
     transition:.3s ease-in-out;
     transform: scale(1.1);
 }
@@ -60,6 +60,12 @@ table.data_table td.edit svg {
     fill: var(--main-text-color);
     width: auto;
     height: 20px;
+}
+
+table.data_table td.move svg {
+    fill: var(--main-text-color);
+    width: 26px;
+    height: auto;
 }
 
 #statistics {

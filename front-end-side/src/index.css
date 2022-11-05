@@ -74,7 +74,7 @@ code {
     font-size: 16px;
 }
 
-.navigation-block hr.nav-seperator, .modal .modal-content #modal-decoration {
+.navigation-block hr.nav-seperator, .modal .modal-content #modal-decoration, #success-msg #decoration {
     border: 0;
     height: 7px;
     background: var(--main-color);
@@ -83,7 +83,7 @@ code {
     margin: 0;
 }
 
-.modal .modal-content #modal-decoration {
+.modal .modal-content #modal-decoration, #success-msg #decoration {
     width: 100%;
     position: absolute;
     left: 0;
@@ -211,4 +211,70 @@ body::-webkit-scrollbar-track {
 
 body::-webkit-scrollbar-thumb {
     background: #373f4d;
+}
+
+.modal.categorize .modal-content {
+    max-width: 300px;
+    width: 300px;
+}
+
+#success-msg {
+    background: #2e3542;
+    position: fixed;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 14px 18px 7px;
+    border-radius: 0 0 8px 8px;
+    user-select: none;
+    overflow: hidden;
+    box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.75);
+}
+
+#success-msg #decoration {
+    animation-name: loadingAnimation;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+}
+
+#success-msg #decoration {
+    background: linear-gradient(90deg, var(--house-color) 0%, var(--house-color-shade) 100%) no-repeat;
+}
+
+#success-msg #alignment {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    grid-column-gap: 20px;
+}
+
+#success-msg #alignment svg {
+    height: 70px;
+    user-select: none;
+    width: auto;
+    padding: 15px;
+}
+
+#success-msg #alignment .text p {
+    margin: 0;
+}
+
+#success-msg #alignment .text p.title {
+    font-size: 20px;
+}
+
+#success-msg #alignment .text p.message {
+    font-size: 15px;
+}
+
+@keyframes loadingAnimation {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
 }
