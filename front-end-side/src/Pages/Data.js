@@ -8,13 +8,8 @@ import ExpensesCard from "../Components/ExpensesCard";
 import DataEnter from "../Pages/EnterData";
 import UploadFile from "../Pages/FileUpload";
 import ModalUpdateData from "../Pages/EnterData";
+import useGetData from "../useGetData";
 const EnterData = () => {
-    const [data, setData] = useState({});
-    const [info, setInfo] = useState([]);
-    const [status, setStatus] = useState(false);
-    const [delay, setDelay] = useState(false);
-    const [delayForInput, setDelayForInput] = useState(false);
-    const [expenses, setExpenses] = useState(0);
     const [showUploadData, setShowUploadData] = useState(false);
     const [showEnterData, setShowEnterData] = useState(false);
     const [showUpdateData, setShowUpdateData] = useState(false);
@@ -27,44 +22,21 @@ const EnterData = () => {
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [allShown, setAllShown] = useState(false);
     const [deleteIndex, setDeleteIndex] = useState(0);
-    useEffect(() => {
-        axios.get("https://localhost:7174/api/Sorting").then(item => {
-            setData(item);
-            setDelay(true);
-        })
-    }, []);
-    useEffect(() => {
-        axios.get("https://localhost:7174/api/Sorting").then(item => {
-
-            setExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
-        })
-    }, []);
-    useEffect(() => {
-        axios.get("https://localhost:7174/api/File").then(resp => {
-            setInfo(resp);
-            setStatus(true);
-        })
-    }, []);
-    useEffect(() => {
-        axios.get('https://localhost:7174/api/ShowData').then(resp => {
-            setDelayForInput(true);
-        })
-    }, []);
-
+    const [fileData, statusForFileData, setFileData, setStatusForFileData] = useGetData("GET_FILE_DATA");
+    const [newExpenses, statusForExpenses, setNewExpenses, setStatusForExpenses] = useGetData("GET_EXPENSES");
+    const [categoryData, categoryStatus, setCategoryData, setCategoryStatus] = useGetData("GET_CATEGORY_DATA");
     function addClass() {
         var element = document.getElementsByTagName("BODY")[0];
         element.classList.remove("modal-open");
     }
-
     function showAll() {
-        setSize(info.data.length);
+        setSize(fileData.data.length);
         setAllShown(true);
     }
     function showLess() {
         setSize(5);
         setAllShown(false);
     }
-
     const updateData = (index, date, seller, purpose, amount) => {
         setCurrentIndex(index);
         setCurrentDate(date);
@@ -81,15 +53,16 @@ const EnterData = () => {
     const deleteData = (index) => {
         axios.delete(`https://localhost:7174/api/ShowData/${index}`).then(() => {
             axios.get("https://localhost:7174/api/File").then(resp => {
-                setInfo(resp);
-                setStatus(true);
+                setFileData(resp);
+                setStatusForFileData(true);
             })
             axios.get("https://localhost:7174/api/Sorting").then(item => {
-                setData(item);
-                setDelay(true);
+                setCategoryData(item);
+                setCategoryStatus(true);
+                setStatusForExpenses(true);
             });
             axios.get("https://localhost:7174/api/Sorting").then((item) => {
-                setExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
+                setNewExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
             })
         }
         )
@@ -137,9 +110,9 @@ const EnterData = () => {
                     </thead>
                     <tbody>
                         {
-                            status ? (
+                            statusForFileData ? (
 
-                                info.data.slice(0, size).map((item, index) => {
+                                fileData.data.slice(0, size).map((item, index) => {
                                     const { date, seller, purpose, amount } = item;
                                     return (
                                         <tr>
@@ -163,7 +136,7 @@ const EnterData = () => {
                     <tfoot>
                         <tr>
                             <td colSpan="3">Spent in total</td>
-                            <td colSpan="3">{parseFloat(expenses).toFixed(2)}</td>
+                            <td colSpan="3">{parseFloat(newExpenses).toFixed(2)}</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -177,17 +150,16 @@ const EnterData = () => {
             <div className="container">
 
                 <h2 className="title">Statistics</h2>
-
                 {
-                    (delay && delayForInput) ? (
+                    (statusForExpenses && categoryStatus) ? (
                         <div id="statistics">
                             <div id="cards">
-                                <ExpensesCard name="food" categorySum={data.data.foodSum} expenses={expenses} />
-                                <ExpensesCard name="transportation" categorySum={data.data.carSum} expenses={expenses} />
-                                <ExpensesCard name="entertainment" categorySum={data.data.entertaintmentSum} expenses={expenses} />
-                                <ExpensesCard name="house" categorySum={data.data.houseSum} expenses={expenses} />
-                                <ExpensesCard name="clothes" categorySum={data.data.clothesSum} expenses={expenses} />
-                                <ExpensesCard name="other" categorySum={data.data.otherSum} expenses={expenses} />
+                                <ExpensesCard name="food" categorySum={categoryData.data.foodSum} expenses={newExpenses} />
+                                <ExpensesCard name="transportation" categorySum={categoryData.data.carSum} expenses={newExpenses} />
+                                <ExpensesCard name="entertainment" categorySum={categoryData.data.entertaintmentSum} expenses={newExpenses} />
+                                <ExpensesCard name="house" categorySum={categoryData.data.houseSum} expenses={newExpenses} />
+                                <ExpensesCard name="clothes" categorySum={categoryData.data.clothesSum} expenses={newExpenses} />
+                                <ExpensesCard name="other" categorySum={categoryData.data.otherSum} expenses={newExpenses} />
                             </div>
                         </div>
                     ) : (
