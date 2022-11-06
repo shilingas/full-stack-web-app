@@ -16,6 +16,7 @@ const ExpensesPages = ({ categoryType }) => {
     const [purpose, setPurpose] = useState('');
     const [showCategories, setShowCategories] = useState(false);
     const initialRender = useRef(true);
+    const [id, setId] = useState("");
     useEffect(() => {
         axios.get("https://localhost:7174/api/File").then(resp => {
             setInfo(resp);
@@ -30,13 +31,14 @@ const ExpensesPages = ({ categoryType }) => {
     }, []);
 
 
-    const handleSelect = (index, newDate, newSeller, newPurpose, newAmount) => {
+    const handleSelect = (index, newDate, newSeller, newPurpose, newAmount, newId) => {
         setShowCategories(true);
         setCurrentIndex(index);
         setDate(newDate);
         setSeller(newSeller);
         setPurpose(newPurpose);
         setAmount(newAmount);
+        setId(newId);
     }
 
     function addClass() {
@@ -50,7 +52,8 @@ const ExpensesPages = ({ categoryType }) => {
             initialRender.current = false;
         }
         else {
-            axios.put("https://localhost:7174/api/Sorting/" + currentIndex, { "date": date, "seller": seller, "amount": amount, "purpose": purpose, "category": selectedCategory, "isCategorized": true, "index": currentIndex }).then(() => {
+            console.log(id);
+            axios.put(`https://localhost:7174/api/Sorting/${id}` ,  { "date": date, "seller": seller, "amount": amount, "purpose": purpose, "category": selectedCategory, "isCategorized": true, "id": id, "index": id}).then(resp => {
                 axios.get('https://localhost:7174/api/ShowData').then(resp => {
                     setInputData(resp);
                     setDelayForInput(true);
@@ -59,8 +62,10 @@ const ExpensesPages = ({ categoryType }) => {
                     setInfo(resp);
                     setStatus(true);
                 });
+                console.log(resp)
             });
             setShowCategories(false);
+            
         }
     }, [selectedCategory]);
 
@@ -105,7 +110,7 @@ const ExpensesPages = ({ categoryType }) => {
                         {
                             status ? (
                                 info.data.map((item, index) => {
-                                    const { date, seller, purpose, amount, category } = item;
+                                    const { date, seller, purpose, amount, category, id } = item;
                                     if (category == categoryType) {
                                         return (
                                             <tr>
@@ -113,7 +118,7 @@ const ExpensesPages = ({ categoryType }) => {
                                                 <td>{seller}</td>
                                                 <td>{purpose}</td>
                                                 <td>{parseFloat(amount).toFixed(2)}</td>
-                                                <td className="edit" onClick={addClass(), () => handleSelect(index, date, seller, purpose, amount)}>
+                                                <td className="edit" onClick={addClass(), () => handleSelect(index, date, seller, purpose, amount, id)}>
                                                     <Icon type="edit-button"></Icon>
                                                 </td>
                                                 

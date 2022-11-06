@@ -1,7 +1,9 @@
-﻿using back_end_side.Models;
+﻿using back_end_side.DbFiles;
+using back_end_side.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace back_end_side.Controllers
 {
@@ -10,37 +12,91 @@ namespace back_end_side.Controllers
     [EnableCors("corsapp")]
     public class ShowDataController : ControllerBase
     {
+        private readonly ExpensesContext _context;
+
+        public ShowDataController(ExpensesContext context)
+        {
+            _context = context;
+        }
+
         [HttpPost]
         [Produces("application/json")]
         [EnableCors("corsapp")]
         public IActionResult Post([FromBody] Record model)
         {
-            model.Category = Sorting.CheckInput(model);
-            UploadController.RecordsFromFile.Add(model);
-            UploadController.RecordsFromFile.Sort();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var sorting = new Sorting(_context);
+                    model.Category = sorting.CheckInput(model);
+                    _context.Add(model);
+                    _context.SaveChanges();
+
+                }
+            }
+            catch (DbUpdateException /* ex */)
+            {
+                //Log the error (uncomment ex variable name and write a log.
+                /*ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists " +
+                    "see your system administrator.");*/
+            }
+
             return Ok(model);
         }
         [HttpGet]
         [EnableCors("corsapp")]
-        public List<Record> GetAll()
+        public DbSet<Record> GetAll()
         {
-            return UploadController.RecordsFromFile;
+            return _context.Expenses;
         }
+
         [HttpPut("{id:int}")]
         [EnableCors("corsapp")]
         public IActionResult Put([FromBody] Record model, int id)
         {
-            // pirma - nustatom kategorija, tada pakeiciam tam tikru indexo value ir tada sortinam
-            model.Category = Sorting.CheckInput(model);
-            UploadController.RecordsFromFile[id] = model;
-            UploadController.RecordsFromFile.Sort();
+            var sorting = new Sorting(_context);
+            var recordToUpdate = _context.Expenses.FirstOrDefault(r => r.ID.Equals(id));
+           
+            try
+            {
+                if (recordToUpdate != null)
+                {
+                    recordToUpdate.Date = model.Date;
+                    recordToUpdate.Seller = model.Seller;
+                    recordToUpdate.Purpose = model.Purpose;
+                    recordToUpdate.Amount = model.Amount;
+                    recordToUpdate.Category = sorting.CheckInput(model);
+                    _context.SaveChanges();
+                }
+
+                //UploadController.RecordsFromFile.Sort();
+            }
+            catch (DbUpdateException /* ex */)
+            {
+                //Log the error (uncomment ex variable name and write a log.)
+                /*ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists, " +
+                    "see your system administrator.");*/
+            }
             return Ok(model);
         }
         [HttpDelete("{id:int}")]
         [EnableCors("corsapp")]
         public IActionResult Delete(int id)
         {
-            UploadController.RecordsFromFile.RemoveAt(id);
+            var record = _context.Expenses.AsNoTracking().FirstOrDefault(r => r.ID.Equals(id));
+            if (record == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                _context.Expenses.Attach(record);
+                _context.Expenses.Remove(record);
+                _context.SaveChanges();
+            }
             return Ok();
         }
     }

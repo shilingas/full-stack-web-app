@@ -1,4 +1,5 @@
 ﻿using CsvHelper.Configuration.Attributes;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace back_end_side.Models
 {
@@ -16,6 +17,8 @@ namespace back_end_side.Models
         public string? PaymentType { get; set; }
         [Name("Įrašo Nr.", "TRANSAKCIJOS KODAS", "Išrašo nr.")]
         public string? ExpenseCode { get; set; }
+        [Ignore]
+        public int ID { get; set; }
         [Ignore]
         public string? Category { get; set; } = "other";
 

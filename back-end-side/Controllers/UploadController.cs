@@ -1,16 +1,26 @@
-﻿using back_end_side.Models;
+﻿using back_end_side.DbFiles;
+using back_end_side.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace back_end_side.Controllers
 {   
+
     [EnableCors("corsapp")]
     [Route("api/[controller]")]
     [ApiController]
     
     public class UploadController : ControllerBase
     {
-        public static List<Record> RecordsFromFile = new List<Record>();
+
+        private readonly ExpensesContext _context;
+
+        public UploadController(ExpensesContext context)
+        {
+            _context = context;
+            new FileController(context);
+        }
+
 
         [HttpPost]
         public ActionResult Post([FromForm] FileModel file)
@@ -19,18 +29,20 @@ namespace back_end_side.Controllers
             {
                 if (file.FormFile != null && file.FileName != null)
                 {
+                    
                     ReportReader reportReader = new ReportReader(fileData: file.FormFile);
-                    RecordsFromFile.AddRange(reportReader.ReadFromCsvFile());
-                    RecordsFromFile.RemoveDuplicates();
+                    
+                    //RecordsFromFile.Sort();
+                    _context.RemoveDuplicates();
+                    _context.Expenses.AddRange(reportReader.ReadFromCsvFile());
+                    _context.SaveChanges();
+                } 
 
-                    RecordsFromFile.Sort();
-                }
-
-                return Ok(RecordsFromFile);
+                return Ok();
             }
             catch (Exception)
             {
-                return BadRequest(RecordsFromFile);
+                return BadRequest();
             }
         }
     }

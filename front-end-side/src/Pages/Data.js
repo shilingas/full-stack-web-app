@@ -18,7 +18,7 @@ const EnterData = () => {
     const [showUploadData, setShowUploadData] = useState(false);
     const [showEnterData, setShowEnterData] = useState(false);
     const [showUpdateData, setShowUpdateData] = useState(false);
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState("");
     const [currentDate, setCurrentDate] = useState("");
     const [currentSeller, setCurrentSeller] = useState("");
     const [currentPurpose, setCurrentPurpose] = useState("");
@@ -79,6 +79,7 @@ const EnterData = () => {
         setDeleteIndex(index);
     }
     const deleteData = (index) => {
+        console.log(index);
         axios.delete(`https://localhost:7174/api/ShowData/${index}`).then(() => {
             axios.get("https://localhost:7174/api/File").then(resp => {
                 setInfo(resp);
@@ -140,17 +141,17 @@ const EnterData = () => {
                             status ? (
 
                                 info.data.slice(0, size).map((item, index) => {
-                                    const { date, seller, purpose, amount } = item;
+                                    const { date, seller, purpose, amount, id } = item;
                                     return (
                                         <tr>
                                             <td>{date.slice(0, 10)}</td>
                                             <td>{seller}</td>
                                             <td>{purpose}</td>
                                             <td>{amount.toFixed(2)}</td>
-                                            <td className="edit" onClick={() => updateData(parseInt(index), date, seller, purpose, amount)}>
+                                            <td className="edit" onClick={() => updateData(id, date, seller, purpose, amount)}>
                                                 <Icon type="edit-button"></Icon>
                                             </td>
-                                            <td onClick={() => showModal(index)}>Remove item</td>
+                                            <td onClick={() => showModal(id)}>Remove item</td>
                                         </tr>
                                     );
                                 })
