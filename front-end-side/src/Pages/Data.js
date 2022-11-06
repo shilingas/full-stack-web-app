@@ -140,7 +140,7 @@ const EnterData = () => {
                         {
                             status ? (
 
-                                info.data.slice(0, size).map((item, index) => {
+                                info.data.sort((a, b) => a.date > b.date ? 1 : -1).slice(0, size).map((item, index) => {
                                     const { date, seller, purpose, amount, id } = item;
                                     return (
                                         <tr>

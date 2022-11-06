@@ -18,7 +18,7 @@ namespace back_end_side.Controllers
 
         public static void RemoveDuplicates(this ExpensesContext context)
         {
-            var duplicates = context.Expenses.AsEnumerable().GroupBy(r =>  r.ExpenseCode).SelectMany(grp => grp.Skip(1));
+            var duplicates = context.Expenses.AsEnumerable().GroupBy(r => r.ExpenseCode).SelectMany(grp => grp.Skip(1));
             context.Expenses.RemoveRange(duplicates);
             context.SaveChanges();
 

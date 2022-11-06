@@ -33,8 +33,8 @@ namespace back_end_side.Controllers
                     ReportReader reportReader = new ReportReader(fileData: file.FormFile);
                     
                     //RecordsFromFile.Sort();
-                    _context.RemoveDuplicates();
                     _context.Expenses.AddRange(reportReader.ReadFromCsvFile());
+                    _context.RemoveDuplicates();
                     _context.SaveChanges();
                 } 
 
