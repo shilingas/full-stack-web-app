@@ -8,13 +8,8 @@ import ExpensesCard from "../Components/ExpensesCard";
 import DataEnter from "../Pages/EnterData";
 import UploadFile from "../Pages/FileUpload";
 import ModalUpdateData from "../Pages/EnterData";
+import useGetData from "../useGetData";
 const EnterData = () => {
-    const [data, setData] = useState({});
-    const [info, setInfo] = useState([]);
-    const [status, setStatus] = useState(false);
-    const [delay, setDelay] = useState(false);
-    const [delayForInput, setDelayForInput] = useState(false);
-    const [expenses, setExpenses] = useState(0);
     const [showUploadData, setShowUploadData] = useState(false);
     const [showEnterData, setShowEnterData] = useState(false);
     const [showUpdateData, setShowUpdateData] = useState(false);
@@ -27,44 +22,21 @@ const EnterData = () => {
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [allShown, setAllShown] = useState(false);
     const [deleteIndex, setDeleteIndex] = useState(0);
-    useEffect(() => {
-        axios.get("https://localhost:7174/api/Sorting").then(item => {
-            setData(item);
-            setDelay(true);
-        })
-    }, []);
-    useEffect(() => {
-        axios.get("https://localhost:7174/api/Sorting").then(item => {
-
-            setExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
-        })
-    }, []);
-    useEffect(() => {
-        axios.get("https://localhost:7174/api/File").then(resp => {
-            setInfo(resp);
-            setStatus(true);
-        })
-    }, []);
-    useEffect(() => {
-        axios.get('https://localhost:7174/api/ShowData').then(resp => {
-            setDelayForInput(true);
-        })
-    }, []);
-
+    const [fileData, statusForFileData, setFileData, setStatusForFileData] = useGetData("GET_FILE_DATA");
+    const [newExpenses, statusForExpenses, setNewExpenses, setStatusForExpenses] = useGetData("GET_EXPENSES");
+    const [categoryData, categoryStatus, setCategoryData, setCategoryStatus] = useGetData("GET_CATEGORY_DATA");
     function addClass() {
         var element = document.getElementsByTagName("BODY")[0];
         element.classList.remove("modal-open");
     }
-
     function showAll() {
-        setSize(info.data.length);
+        setSize(fileData.data.length);
         setAllShown(true);
     }
     function showLess() {
         setSize(5);
         setAllShown(false);
     }
-
     const updateData = (index, date, seller, purpose, amount) => {
         setCurrentIndex(index);
         setCurrentDate(date);
@@ -78,24 +50,38 @@ const EnterData = () => {
         setShowConfirmation(true);
         setDeleteIndex(index);
     }
+    function CustomAlert(type, msg, duration) {
+        var element = document.createElement("div");
+        element.setAttribute("id", "custom-alert");
+        var decoration = '<div id="alignment"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 89.357 7.284 c -1.02 -1.297 -2.9 -1.552 -4.216 -0.557 C 73.3 15.685 62.228 25.68 52.018 36.561 c -5.44 5.811 -10.63 11.885 -15.478 18.289 c -2.576 3.427 -5.054 6.948 -7.396 10.6 h -0.148 L 15.315 38.08 c -0.132 -0.262 -0.282 -0.527 -0.445 -0.779 c -2.522 -3.903 -7.817 -4.933 -11.632 -2.175 c -3.577 2.586 -4.206 7.702 -1.811 11.41 l 22.147 34.278 l 0.271 0.421 c 0.783 1.216 2.034 2.156 3.635 2.516 c 2.745 0.617 5.472 -1.02 6.608 -3.595 c 2.922 -6.621 6.702 -13.106 10.829 -19.367 c 4.206 -6.345 8.816 -12.484 13.706 -18.41 c 9.183 -11.104 19.331 -21.496 30.315 -30.939 C 90.168 10.382 90.358 8.558 89.357 7.284 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(114,181,55); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" /></g ></svg ><div class="text"><p class="title">' + type + '</p><p class="message">' + msg + '</p></div><div id="decoration"></div></div>';
+
+        element.innerHTML = decoration;
+        setTimeout(function () {
+            element.parentNode.removeChild(element);
+        }, duration);
+        document.body.appendChild(element);
+    }
     const deleteData = (index) => {
         console.log(index);
         axios.delete(`https://localhost:7174/api/ShowData/${index}`).then(() => {
             axios.get("https://localhost:7174/api/File").then(resp => {
-                setInfo(resp);
-                setStatus(true);
+                setFileData(resp);
+                setStatusForFileData(true);
             })
             axios.get("https://localhost:7174/api/Sorting").then(item => {
-                setData(item);
-                setDelay(true);
+                setCategoryData(item);
+                setCategoryStatus(true);
+                setStatusForExpenses(true);
             });
             axios.get("https://localhost:7174/api/Sorting").then((item) => {
-                setExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
+                setNewExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
             })
         }
         )
         setShowConfirmation(false);
+        CustomAlert("Success", "Record has been removed succesfully", 3000);
     }
+
     return (
         <div>
             <Navbar />
@@ -116,10 +102,12 @@ const EnterData = () => {
             <Modal className="enter-data" onClose={() => setShowUpdateData(false)} show={showUpdateData}>
                 <ModalUpdateData show={showUpdateData} buttonType={"update"} index={currentIndex} date={currentDate} seller={currentSeller} purpose={currentPurpose} amount={currentAmount} />
             </Modal>
-            <Modal show={showConfirmation} onClose={() => setShowConfirmation(false)}>
-                <p>delete?</p>
-                <button onClick={() => deleteData(deleteIndex)}>Yes</button>
-                <button onClick={() => setShowConfirmation(false)}>No</button>
+            <Modal className="delete-comfirmation" show={showConfirmation} onClose={() => setShowConfirmation(false)}>
+                <p>Are you sure you want to delete this record?</p>
+                <div id="buttons">
+                    <button onClick={() => deleteData(deleteIndex)}>Yes</button>
+                    <button onClick={() => setShowConfirmation(false)} className="secondary">No</button>
+                </div>
             </Modal>
 
             <div className="container statistics-table">
@@ -138,9 +126,8 @@ const EnterData = () => {
                     </thead>
                     <tbody>
                         {
-                            status ? (
-
-                                info.data.sort((a, b) => a.date > b.date ? 1 : -1).slice(0, size).map((item, index) => {
+                            statusForFileData ? (
+                                fileData.data.sort((a, b) => a.date > b.date ? 1 : -1).slice(0, size).map((item, index) => {
                                     const { date, seller, purpose, amount, id } = item;
                                     return (
                                         <tr>
@@ -151,7 +138,9 @@ const EnterData = () => {
                                             <td className="edit" onClick={() => updateData(id, date, seller, purpose, amount)}>
                                                 <Icon type="edit-button"></Icon>
                                             </td>
-                                            <td onClick={() => showModal(id)}>Remove item</td>
+                                            <td className="delete" onClick={() => showModal(id)}>
+                                                <Icon type="trash-bin"></Icon>
+                                            </td>
                                         </tr>
                                     );
                                 })
@@ -164,7 +153,7 @@ const EnterData = () => {
                     <tfoot>
                         <tr>
                             <td colSpan="3">Spent in total</td>
-                            <td colSpan="3">{parseFloat(expenses).toFixed(2)}</td>
+                            <td colSpan="3">{parseFloat(newExpenses).toFixed(2)}</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -178,17 +167,16 @@ const EnterData = () => {
             <div className="container">
 
                 <h2 className="title">Statistics</h2>
-
                 {
-                    (delay && delayForInput) ? (
+                    (statusForExpenses && categoryStatus) ? (
                         <div id="statistics">
                             <div id="cards">
-                                <ExpensesCard name="food" categorySum={data.data.foodSum} expenses={expenses} />
-                                <ExpensesCard name="transportation" categorySum={data.data.carSum} expenses={expenses} />
-                                <ExpensesCard name="entertainment" categorySum={data.data.entertaintmentSum} expenses={expenses} />
-                                <ExpensesCard name="house" categorySum={data.data.houseSum} expenses={expenses} />
-                                <ExpensesCard name="clothes" categorySum={data.data.clothesSum} expenses={expenses} />
-                                <ExpensesCard name="other" categorySum={data.data.otherSum} expenses={expenses} />
+                                <ExpensesCard name="food" categorySum={categoryData.data.foodSum} expenses={newExpenses} />
+                                <ExpensesCard name="transportation" categorySum={categoryData.data.carSum} expenses={newExpenses} />
+                                <ExpensesCard name="entertainment" categorySum={categoryData.data.entertaintmentSum} expenses={newExpenses} />
+                                <ExpensesCard name="house" categorySum={categoryData.data.houseSum} expenses={newExpenses} />
+                                <ExpensesCard name="clothes" categorySum={categoryData.data.clothesSum} expenses={newExpenses} />
+                                <ExpensesCard name="other" categorySum={categoryData.data.otherSum} expenses={newExpenses} />
                             </div>
                         </div>
                     ) : (
