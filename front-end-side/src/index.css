@@ -1,6 +1,8 @@
 :root {
     --main-color: #ff2f39;
     --main-color-shade: #ff27b3;
+    --secondary-color: #96a5af;
+    --secondary-color-shade: #bdc3c7;
     --main-text-color: #798395;
     --secondary-text-color: #343b48;
     --active-text-color: #d7259e;
@@ -74,7 +76,7 @@ code {
     font-size: 16px;
 }
 
-.navigation-block hr.nav-seperator, .modal .modal-content #modal-decoration {
+.navigation-block hr.nav-seperator, .modal .modal-content #modal-decoration, #custom-alert #decoration {
     border: 0;
     height: 7px;
     background: var(--main-color);
@@ -83,7 +85,7 @@ code {
     margin: 0;
 }
 
-.modal .modal-content #modal-decoration {
+.modal .modal-content #modal-decoration, #custom-alert #decoration {
     width: 100%;
     position: absolute;
     left: 0;
@@ -144,6 +146,10 @@ button {
     text-transform: uppercase;
     cursor: pointer;
     transition: .3s ease-in-out;
+}
+
+button.secondary {
+    background: linear-gradient(90deg, var(--secondary-color) 0%, var(--secondary-color-shade) 100%) no-repeat;
 }
 
 button:hover {
@@ -211,4 +217,69 @@ body::-webkit-scrollbar-track {
 
 body::-webkit-scrollbar-thumb {
     background: #373f4d;
+}
+
+.modal.categorize .modal-content {
+    max-width: 300px;
+    width: 300px;
+}
+
+#custom-alert {
+    background: #2e3542;
+    position: fixed;
+    max-width: 350px;
+    width: 350px;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 14px 18px 7px;
+    border-radius: 0 0 8px 8px;
+    user-select: none;
+    overflow: hidden;
+    box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.75);
+}
+
+#custom-alert #decoration {
+    animation-name: loadingAnimation;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    background: linear-gradient(90deg, var(--house-color) 0%, var(--house-color-shade) 100%) no-repeat;
+}
+
+#custom-alert #alignment {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    grid-column-gap: 20px;
+}
+
+#custom-alert #alignment svg {
+    height: 70px;
+    user-select: none;
+    width: auto;
+    padding: 15px;
+}
+
+#custom-alert #alignment .text p {
+    margin: 0;
+}
+
+#custom-alert #alignment .text p.title {
+    font-size: 20px;
+}
+
+#custom-alert #alignment .text p.message {
+    font-size: 15px;
+}
+
+@keyframes loadingAnimation {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
 }

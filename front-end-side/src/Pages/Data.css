@@ -44,22 +44,30 @@ table.data_table td:nth-of-type(4) {
     width: 60px;
 }
 
-table.data_table td.edit {
+table.data_table td.edit, table.data_table td.move, table.data_table td.delete {
     cursor: pointer;
     width: 0px;
     height: 0px;
     transition: .3s ease-in-out;
 }
 
-table.data_table td.edit:hover {
+table.data_table td.edit:hover, table.data_table td.move:hover, table.data_table td.delete:hover {
     transition:.3s ease-in-out;
     transform: scale(1.1);
 }
 
-table.data_table td.edit svg {
-    fill: var(--main-text-color);
+table.data_table td.edit svg, table.data_table td.delete svg {
     width: auto;
     height: 20px;
+}
+
+table.data_table td.edit svg { fill: var(--main-text-color); }
+table.data_table td.delete svg { fill: var(--main-color); }
+
+table.data_table td.move svg {
+    fill: var(--main-text-color);
+    width: 26px;
+    height: auto;
 }
 
 #statistics {
@@ -73,4 +81,23 @@ table.data_table td.edit svg {
     grid-column-gap: 15px;
     grid-row-gap: 15px;
     margin-bottom: 20px;
+}
+
+.modal.delete-comfirmation .modal-content { max-width: 500px; }
+
+.modal.delete-comfirmation .modal-content p {
+    margin: 0 0 15px 0;
+    font-size: 20px;
+    text-transform: none;
+    letter-spacing: 5px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.modal.delete-comfirmation .modal-content #buttons {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 15px;
 }
