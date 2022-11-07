@@ -35,12 +35,9 @@ namespace back_end_side.Controllers
 
                 }
             }
-            catch (DbUpdateException /* ex */)
+            catch (DbUpdateException  ex )
             {
-                //Log the error (uncomment ex variable name and write a log.
-                /*ModelState.AddModelError("", "Unable to save changes. " +
-                    "Try again, and if the problem persists " +
-                    "see your system administrator.");*/
+                Console.WriteLine(ex);
             }
 
             return Ok(model);
@@ -70,15 +67,10 @@ namespace back_end_side.Controllers
                     recordToUpdate.Category = sorting.CheckInput(model);
                     _context.SaveChanges();
                 }
-
-                //UploadController.RecordsFromFile.Sort();
             }
-            catch (DbUpdateException /* ex */)
+            catch (DbUpdateException ex )
             {
-                //Log the error (uncomment ex variable name and write a log.)
-                /*ModelState.AddModelError("", "Unable to save changes. " +
-                    "Try again, and if the problem persists, " +
-                    "see your system administrator.");*/
+                Console.WriteLine(ex);
             }
             return Ok(model);
         }

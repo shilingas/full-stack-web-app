@@ -45,9 +45,6 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<ExpensesContext>();
     context.Database.EnsureCreated();
 
-    //UploadController uploadController = new UploadController(context);
-
-    //DbInitializer.Initialize(context);
 }
 
 app.UseHttpsRedirection();

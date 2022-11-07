@@ -44,12 +44,9 @@ namespace back_end_side.Controllers
                     _context.SaveChanges();
                 }
             }
-            catch (DbUpdateException /* ex */)
+            catch (DbUpdateException ex )
             {
-                //Log the error (uncomment ex variable name and write a log.)
-                /*ModelState.AddModelError("", "Unable to save changes. " +
-                    "Try again, and if the problem persists, " +
-                    "see your system administrator.");*/
+                Console.WriteLine(ex);
             }
 
             return Ok(model);

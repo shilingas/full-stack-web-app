@@ -29,10 +29,7 @@ namespace back_end_side.Controllers
             {
                 if (file.FormFile != null && file.FileName != null)
                 {
-                    
                     ReportReader reportReader = new ReportReader(fileData: file.FormFile);
-                    
-                    //RecordsFromFile.Sort();
                     _context.Expenses.AddRange(reportReader.ReadFromCsvFile());
                     _context.RemoveDuplicates();
                     _context.SaveChanges();
