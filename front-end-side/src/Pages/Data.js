@@ -95,6 +95,7 @@ const EnterData = () => {
         )
         setShowConfirmation(false);
     }
+
     return (
         <div>
             <Navbar />
@@ -115,10 +116,12 @@ const EnterData = () => {
             <Modal className="enter-data" onClose={() => setShowUpdateData(false)} show={showUpdateData}>
                 <ModalUpdateData show={showUpdateData} buttonType={"update"} index={currentIndex} date={currentDate} seller={currentSeller} purpose={currentPurpose} amount={currentAmount} />
             </Modal>
-            <Modal show={showConfirmation} onClose={() => setShowConfirmation(false)}>
-                <p>delete?</p>
-                <button onClick={() => deleteData(deleteIndex)}>Yes</button>
-                <button onClick={() => setShowConfirmation(false)}>No</button>
+            <Modal className="delete-comfirmation" show={showConfirmation} onClose={() => setShowConfirmation(false)}>
+                <p>Are you sure you want to delete this record?</p>
+                <div id="buttons">
+                    <button onClick={() => deleteData(deleteIndex)}>Yes</button>
+                    <button onClick={() => setShowConfirmation(false)} className="secondary">No</button>
+                </div>
             </Modal>
 
             <div className="container statistics-table">

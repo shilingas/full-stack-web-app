@@ -82,3 +82,22 @@ table.data_table td.move svg {
     grid-row-gap: 15px;
     margin-bottom: 20px;
 }
+
+.modal.delete-comfirmation .modal-content { max-width: 500px; }
+
+.modal.delete-comfirmation .modal-content p {
+    margin: 0 0 15px 0;
+    font-size: 20px;
+    text-transform: none;
+    letter-spacing: 5px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.modal.delete-comfirmation .modal-content #buttons {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 15px;
+}

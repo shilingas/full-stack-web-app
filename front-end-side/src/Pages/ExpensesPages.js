@@ -75,7 +75,7 @@ const ExpensesPages = ({ categoryType }) => {
                 });
                 setShowCategories(false);
                 setSelectedCategory("");
-                SuccessMsg("Success!", "Record removed successfully!", 3000)
+                SuccessMsg("Success!", "Category of the record has been changed successfully!", 3000)
             }
         }
     }, [selectedCategory]);

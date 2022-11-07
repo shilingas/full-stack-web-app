@@ -1,6 +1,8 @@
 :root {
     --main-color: #ff2f39;
     --main-color-shade: #ff27b3;
+    --secondary-color: #96a5af;
+    --secondary-color-shade: #bdc3c7;
     --main-text-color: #798395;
     --secondary-text-color: #343b48;
     --active-text-color: #d7259e;
@@ -144,6 +146,10 @@ button {
     text-transform: uppercase;
     cursor: pointer;
     transition: .3s ease-in-out;
+}
+
+button.secondary {
+    background: linear-gradient(90deg, var(--secondary-color) 0%, var(--secondary-color-shade) 100%) no-repeat;
 }
 
 button:hover {
