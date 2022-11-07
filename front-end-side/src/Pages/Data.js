@@ -150,7 +150,9 @@ const EnterData = () => {
                                             <td className="edit" onClick={() => updateData(parseInt(index), date, seller, purpose, amount)}>
                                                 <Icon type="edit-button"></Icon>
                                             </td>
-                                            <td onClick={() => showModal(index)}>Remove item</td>
+                                            <td className="delete" onClick={() => showModal(index)}>
+                                                <Icon type="trash-bin"></Icon>
+                                            </td>
                                         </tr>
                                     );
                                 })

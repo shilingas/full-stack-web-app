@@ -44,23 +44,25 @@ table.data_table td:nth-of-type(4) {
     width: 60px;
 }
 
-table.data_table td.edit, table.data_table td.move {
+table.data_table td.edit, table.data_table td.move, table.data_table td.delete {
     cursor: pointer;
     width: 0px;
     height: 0px;
     transition: .3s ease-in-out;
 }
 
-table.data_table td.edit:hover, table.data_table td.move:hover {
+table.data_table td.edit:hover, table.data_table td.move:hover, table.data_table td.delete:hover {
     transition:.3s ease-in-out;
     transform: scale(1.1);
 }
 
-table.data_table td.edit svg {
-    fill: var(--main-text-color);
+table.data_table td.edit svg, table.data_table td.delete svg {
     width: auto;
     height: 20px;
 }
+
+table.data_table td.edit svg { fill: var(--main-text-color); }
+table.data_table td.delete svg { fill: var(--main-color); }
 
 table.data_table td.move svg {
     fill: var(--main-text-color);
