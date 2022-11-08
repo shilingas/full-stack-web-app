@@ -13,7 +13,7 @@ const EnterData = () => {
     const [showUploadData, setShowUploadData] = useState(false);
     const [showEnterData, setShowEnterData] = useState(false);
     const [showUpdateData, setShowUpdateData] = useState(false);
-    const [currentIndex, setCurrentIndex] = useState("");
+    const [currentIndex, setCurrentIndex] = useState(0);
     const [currentDate, setCurrentDate] = useState("");
     const [currentSeller, setCurrentSeller] = useState("");
     const [currentPurpose, setCurrentPurpose] = useState("");
@@ -62,7 +62,6 @@ const EnterData = () => {
         document.body.appendChild(element);
     }
     const deleteData = (index) => {
-        console.log(index);
         axios.delete(`https://localhost:7174/api/ShowData/${index}`).then(() => {
             axios.get("https://localhost:7174/api/File").then(resp => {
                 setFileData(resp);
@@ -81,109 +80,115 @@ const EnterData = () => {
         setShowConfirmation(false);
         CustomAlert("Success", "Record has been removed succesfully", 3000);
     }
-
+    const RenderModal = () => {
+        return (
+            <>
+                <div className="container" style={{ marginTop: "30px" }}>
+                    <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
+                    <a onClick={() => setShowUploadData(true)}>Upload Data</a>
+                </div>
+                <Modal className="enter-data" onClose={() => setShowEnterData(false)} show={showEnterData}>
+                    <DataEnter buttonType={"post"} date={""} seller={""} purpose={""} amount={""} />
+                </Modal>
+                <Modal className="upload-data" onClose={() => setShowUploadData(false)} show={showUploadData}>
+                    <UploadFile />
+                </Modal>
+            </>
+        );
+    }
     return (
         <div>
             <Navbar />
+            {
+                newExpenses !== 0 ?
+                    (
+                        <React.Fragment>
+                            {<RenderModal />}
+                            <Modal className="enter-data" onClose={() => setShowUpdateData(false)} show={showUpdateData}>
+                                <ModalUpdateData show={showUpdateData} buttonType={"update"} index={currentIndex} date={currentDate} seller={currentSeller} purpose={currentPurpose} amount={currentAmount} />
+                            </Modal>
+                            <Modal className="delete-comfirmation" show={showConfirmation} onClose={() => setShowConfirmation(false)}>
+                                <p>Are you sure you want to delete this record?</p>
+                                <div id="buttons">
+                                    <button onClick={() => deleteData(deleteIndex)}>Yes</button>
+                                    <button onClick={() => setShowConfirmation(false)} className="secondary">No</button>
+                                </div>
+                            </Modal>
+                            <h2 className="title">Your expenses</h2>
+                            <div className="container statistics-table">
 
-            <div className="container" style={{ marginTop: "30px" }}>
-                <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
-                <a onClick={() => setShowUploadData(true)}>Upload Data</a>
-            </div>
-
-            <Modal className="enter-data" onClose={() => setShowEnterData(false)} show={showEnterData}>
-                <DataEnter buttonType={"post"} date={""} seller={""} purpose={""} amount={""} />
-            </Modal>
-
-            <Modal className="upload-data" onClose={() => setShowUploadData(false)} show={showUploadData}>
-                <UploadFile />
-            </Modal>
-
-            <Modal className="enter-data" onClose={() => setShowUpdateData(false)} show={showUpdateData}>
-                <ModalUpdateData show={showUpdateData} buttonType={"update"} index={currentIndex} date={currentDate} seller={currentSeller} purpose={currentPurpose} amount={currentAmount} />
-            </Modal>
-            <Modal className="delete-comfirmation" show={showConfirmation} onClose={() => setShowConfirmation(false)}>
-                <p>Are you sure you want to delete this record?</p>
-                <div id="buttons">
-                    <button onClick={() => deleteData(deleteIndex)}>Yes</button>
-                    <button onClick={() => setShowConfirmation(false)} className="secondary">No</button>
-                </div>
-            </Modal>
-
-            <div className="container statistics-table">
-
-                <h2 className="title">Your expenses</h2>
-
-                <table className="data_table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Seller</th>
-                            <th>Details</th>
-                            <th>Price</th>
-                            <th colSpan="2"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            statusForFileData ? (
-                                fileData.data.sort((a, b) => a.date > b.date ? 1 : -1).slice(0, size).map((item, index) => {
-                                    const { date, seller, purpose, amount, id } = item;
-                                    return (
+                                <table className="data_table">
+                                    <thead>
                                         <tr>
-                                            <td>{date.slice(0, 10)}</td>
-                                            <td>{seller}</td>
-                                            <td>{purpose}</td>
-                                            <td>{amount.toFixed(2)}</td>
-                                            <td className="edit" onClick={() => updateData(id, date, seller, purpose, amount)}>
-                                                <Icon type="edit-button"></Icon>
-                                            </td>
-                                            <td className="delete" onClick={() => showModal(id)}>
-                                                <Icon type="trash-bin"></Icon>
-                                            </td>
+                                            <th>Date</th>
+                                            <th>Seller</th>
+                                            <th>Details</th>
+                                            <th>Price</th>
+                                            <th colSpan="2"></th>
                                         </tr>
-                                    );
-                                })
-                            ) : (
-                                null
-                            )
-                        }
-                    </tbody>
+                                    </thead>
+                                    <tbody>
+                                        {statusForFileData ? (
 
-                    <tfoot>
-                        <tr>
-                            <td colSpan="3">Spent in total</td>
-                            <td colSpan="3">{parseFloat(newExpenses).toFixed(2)}</td>
-                        </tr>
-                    </tfoot>
-                </table>
+                                            fileData.data.sort((a, b) => a.date > b.date ? 1 : -1).slice(0, size).map((item) => {
+                                                const { date, seller, purpose, amount, id } = item;
+                                                return (
+                                                    <tr>
+                                                        <td>{date.slice(0, 10)}</td>
+                                                        <td>{seller}</td>
+                                                        <td>{purpose}</td>
+                                                        <td>{amount.toFixed(2)}</td>
+                                                        <td className="edit" onClick={() => updateData(id, date, seller, purpose, amount)}>
+                                                            <Icon type="edit-button"></Icon>
+                                                        </td>
+                                                        <td onClick={() => showModal(id)}>Remove item</td>
+                                                    </tr>
+                                                );
+                                            })
+                                        ) : (
+                                            null
+                                        )}
+                                    </tbody>
 
-                {allShown ?
-                    <button type="button" onClick={showLess}>Show less</button>
-                    : <button type="button" onClick={showAll}>Show more</button>
-                }
-            </div>
+                                    <tfoot>
+                                        <tr>
+                                            <td colSpan="3">Spent in total</td>
+                                            <td colSpan="3">{parseFloat(newExpenses).toFixed(2)}</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
 
-            <div className="container">
-
-                <h2 className="title">Statistics</h2>
-                {
-                    (statusForExpenses && categoryStatus) ? (
-                        <div id="statistics">
-                            <div id="cards">
-                                <ExpensesCard name="food" categorySum={categoryData.data.foodSum} expenses={newExpenses} />
-                                <ExpensesCard name="transportation" categorySum={categoryData.data.carSum} expenses={newExpenses} />
-                                <ExpensesCard name="entertainment" categorySum={categoryData.data.entertaintmentSum} expenses={newExpenses} />
-                                <ExpensesCard name="house" categorySum={categoryData.data.houseSum} expenses={newExpenses} />
-                                <ExpensesCard name="clothes" categorySum={categoryData.data.clothesSum} expenses={newExpenses} />
-                                <ExpensesCard name="other" categorySum={categoryData.data.otherSum} expenses={newExpenses} />
+                                {allShown ?
+                                    <button type="button" onClick={showLess}>Show less</button>
+                                    : <button type="button" onClick={showAll}>Show more</button>
+                                }
                             </div>
-                        </div>
+                            <div className="container">
+
+                                <h2 className="title">Statistics</h2>
+                                {(statusForExpenses && categoryStatus) ? (
+                                    <div id="statistics">
+                                        <div id="cards">
+                                            <ExpensesCard name="food" categorySum={categoryData.data.foodSum} expenses={newExpenses} />
+                                            <ExpensesCard name="transportation" categorySum={categoryData.data.carSum} expenses={newExpenses} />
+                                            <ExpensesCard name="entertainment" categorySum={categoryData.data.entertaintmentSum} expenses={newExpenses} />
+                                            <ExpensesCard name="house" categorySum={categoryData.data.houseSum} expenses={newExpenses} />
+                                            <ExpensesCard name="clothes" categorySum={categoryData.data.clothesSum} expenses={newExpenses} />
+                                            <ExpensesCard name="other" categorySum={categoryData.data.otherSum} expenses={newExpenses} />
+                                        </div>
+                                    </div>
+                                ) : (
+                                    null
+                                )}
+                            </div>
+                        </React.Fragment>
                     ) : (
-                        null
+                        <React.Fragment>
+                            {<RenderModal />}
+                            <p> Nothing to show here. Upload or enter data to get statistics.</p>
+                        </React.Fragment>
                     )
-                }
-            </div>
+            }
         </div>
     );
 }
