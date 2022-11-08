@@ -65,7 +65,7 @@ const ExpensesPages = ({ categoryType }) => {
         }
         else {
             if (selectedCategory != "") {
-                axios.put("https://localhost:7174/api/Sorting/" + currentIndex, { "date": date, "seller": seller, "amount": amount, "purpose": purpose, "category": selectedCategory, "isCategorized": true, "index": currentIndex }).then(() => {
+                axios.put("https://localhost:7174/api/Sorting/" + id, { "date": date, "seller": seller, "amount": amount, "purpose": purpose, "category": selectedCategory, "isCategorized": true, "id": id }).then(() => {
                     axios.get('https://localhost:7174/api/ShowData').then(resp => {
                         setInputData(resp);
                         setDelayForInput(true);
