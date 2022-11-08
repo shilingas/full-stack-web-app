@@ -68,23 +68,30 @@ const EnterData = () => {
         )
         setShowConfirmation(false);
     }
+    const RenderModal = () => {
+        return (
+            <>
+                <div className="container" style={{ marginTop: "30px" }}>
+                    <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
+                    <a onClick={() => setShowUploadData(true)}>Upload Data</a>
+                </div>
+                <Modal className="enter-data" onClose={() => setShowEnterData(false)} show={showEnterData}>
+                    <DataEnter buttonType={"post"} date={""} seller={""} purpose={""} amount={""} />
+                </Modal>
+                <Modal className="upload-data" onClose={() => setShowUploadData(false)} show={showUploadData}>
+                    <UploadFile />
+                </Modal>
+            </>
+        );
+    }
     return (
         <div>
             <Navbar />
             {
                 newExpenses !== 0 ?
                     (
-                        <>
-                            <div className="container" style={{ marginTop: "30px" }}>
-                                <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
-                                <a onClick={() => setShowUploadData(true)}>Upload Data</a>
-                            </div>
-                            <Modal className="enter-data" onClose={() => setShowEnterData(false)} show={showEnterData}>
-                                <DataEnter buttonType={"post"} date={""} seller={""} purpose={""} amount={""} />
-                            </Modal>
-                            <Modal className="upload-data" onClose={() => setShowUploadData(false)} show={showUploadData}>
-                                <UploadFile />
-                            </Modal>
+                        <React.Fragment>
+                            {<RenderModal />}
                             <Modal className="enter-data" onClose={() => setShowUpdateData(false)} show={showUpdateData}>
                                 <ModalUpdateData show={showUpdateData} buttonType={"update"} index={currentIndex} date={currentDate} seller={currentSeller} purpose={currentPurpose} amount={currentAmount} />
                             </Modal>
@@ -160,21 +167,12 @@ const EnterData = () => {
                                     null
                                 )}
                             </div>
-                        </>
+                        </React.Fragment>
                     ) : (
-                        <>
-                            <div className="container" style={{ marginTop: "30px" }}>
-                                <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
-                                <a onClick={() => setShowUploadData(true)}>Upload Data</a>
-                                <p> Upload your files or enter data to get statistics... </p>
-                            </div>
-                            <Modal className="enter-data" onClose={() => setShowEnterData(false)} show={showEnterData}>
-                                <DataEnter buttonType={"post"} date={""} seller={""} purpose={""} amount={""} />
-                            </Modal>
-                            <Modal className="upload-data" onClose={() => setShowUploadData(false)} show={showUploadData}>
-                                <UploadFile />
-                            </Modal>
-                        </>
+                        <React.Fragment>
+                            {<RenderModal />}
+                            <p> Nothing to show here. Upload or enter data to get statistics.</p>
+                        </React.Fragment>
                     )
             }
         </div>
