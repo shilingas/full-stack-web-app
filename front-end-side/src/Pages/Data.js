@@ -130,18 +130,18 @@ const EnterData = () => {
                                     <tbody>
                                         {statusForFileData ? (
 
-                                            fileData.data.slice(0, size).map((item, index) => {
-                                                const { date, seller, purpose, amount } = item;
+                                            fileData.data.sort((a, b) => a.date > b.date ? 1 : -1).slice(0, size).map((item) => {
+                                                const { date, seller, purpose, amount, id } = item;
                                                 return (
                                                     <tr>
                                                         <td>{date.slice(0, 10)}</td>
                                                         <td>{seller}</td>
                                                         <td>{purpose}</td>
                                                         <td>{amount.toFixed(2)}</td>
-                                                        <td className="edit" onClick={() => updateData(parseInt(index), date, seller, purpose, amount)}>
+                                                        <td className="edit" onClick={() => updateData(id, date, seller, purpose, amount)}>
                                                             <Icon type="edit-button"></Icon>
                                                         </td>
-                                                        <td onClick={() => showModal(index)}>Remove item</td>
+                                                        <td onClick={() => showModal(id)}>Remove item</td>
                                                     </tr>
                                                 );
                                             })

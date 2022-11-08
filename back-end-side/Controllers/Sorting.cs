@@ -1,4 +1,6 @@
-﻿using back_end_side.Models;
+﻿using back_end_side.DbFiles;
+using back_end_side.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Reflection;
 
@@ -15,12 +17,19 @@ namespace back_end_side.Controllers
     }
     public class Sorting
     {
-        public static readonly string[] Supermarkets = { "MAXIMA", "NORFA", "LIDL", "IKI", "RIMI", "AIBE", "KFC", "SUBWAY", "MEATBUSTERS", "HESBURGER", "JAMMI", "CAN CAN", "NO FORKS", "ILUNCH", "TAU", "CHAIKA", "Kavinė", "CAFFEINE" };
-        public static readonly string[] ClothesShops = { "ZARA", "STRADIVARIUS", "H&M" };
-        public static readonly string[] CarMaintenanceShops = { "CIRCLE K", "VIADA", "BOLT", "STOVA", "RIDE SHARE", "SUSISIEKIMO PASLAUGOS", "CITYBEE" };
-        public static readonly string[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI", "CONSILIUM OPTIMUM", "TELE2", "telia", "TOPO CENTRAS", "BITĖ", "GO3", "IKEA" };
-        public static readonly string[] EntertainmentShops = { "CYBERX", "SPOTIFY", "BASKETNEWS", "OCULUS DIGITAL", "STEAM", "ŽALGIRIO KREPŠINIO CENTRAS" };
-        public static SortingModel SortToCategories()
+        private readonly ExpensesContext _context;
+
+        public Sorting(ExpensesContext context)
+        {
+            _context = context;
+        }
+
+        public readonly string[] Supermarkets = { "MAXIMA", "NORFA", "LIDL", "IKI", "RIMI", "AIBE", "KFC", "SUBWAY", "MEATBUSTERS", "HESBURGER", "JAMMI", "CAN CAN", "NO FORKS", "ILUNCH", "TAU", "CHAIKA", "Kavinė", "CAFFEINE" };
+        public readonly string[] ClothesShops = { "ZARA", "STRADIVARIUS", "H&M" };
+        public readonly string[] CarMaintenanceShops = { "CIRCLE K", "VIADA", "BOLT", "STOVA", "RIDE SHARE", "SUSISIEKIMO PASLAUGOS", "CITYBEE" };
+        public readonly string[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI", "CONSILIUM OPTIMUM", "TELE2", "telia", "TOPO CENTRAS", "BITĖ", "GO3", "IKEA" };
+        public readonly string[] EntertainmentShops = { "CYBERX", "SPOTIFY", "BASKETNEWS", "OCULUS DIGITAL", "STEAM", "ŽALGIRIO KREPŠINIO CENTRAS" };
+        public SortingModel SortToCategories()
         {
             SortingModel Model = new()
             {
@@ -31,9 +40,8 @@ namespace back_end_side.Controllers
                 ClothesSum = 0,
                 FoodSum = 0
             };
-            if (UploadController.RecordsFromFile != null)
+            if (_context.Expenses != null)
             {
-
                 Model.FoodSum = queryMethod("food", Supermarkets);
                 Model.ClothesSum = queryMethod("clothes", ClothesShops);
                 Model.CarSum = queryMethod("car", CarMaintenanceShops);
@@ -41,7 +49,7 @@ namespace back_end_side.Controllers
                 Model.HouseSum = queryMethod("house", HouseMaintenanceShops);
 
                 double sumOfOther = 0;
-                foreach (var record in UploadController.RecordsFromFile)
+                foreach (var record in _context.Expenses)
                 {
                     if (record.Category.Equals("other"))
                     {
@@ -56,31 +64,34 @@ namespace back_end_side.Controllers
 
         }
 
-        public static double queryMethod(string category, string[] shops)
+        public double queryMethod(string category, string[] shops)
         {
             double Sum = 0;
-            (from record in UploadController.RecordsFromFile
-             where record.Seller != null && shops.Any(record.Seller.ToUpper().Contains) && !record.IsCategorized
-             select record).ToList().ForEach(record => {
-                 record.Category = category;
-             });
 
-            Sum = UploadController.RecordsFromFile
-                .Where(r => r.Category != null && r.Category
-                .Equals(category))
+            foreach (var record in _context.Expenses)
+            {
+                if (record.Seller != null && shops.Any(record.Seller.ToUpper().Contains) && !record.IsCategorized)
+                {
+                    record.Category = category;
+                }
+            }
+            _context.SaveChanges();
+
+            Sum = _context.Expenses
+                .Where(r => r.Category != null && r.Category.Equals(category))
                 .Select(r => r.Amount)
                 .Sum();
 
             return Sum;
         }
 
-        public static List<Record> SortedList()
+        public DbSet<Record> SortedList()
         {
             SortToCategories();
-            return UploadController.RecordsFromFile;
+            return _context.Expenses;
         }
 
-        public static String CheckInput(Record model)
+        public String CheckInput(Record model)
         {
             if (model.Seller != null && Supermarkets.Any(model.Seller.ToUpper().Contains))
                 return "food";

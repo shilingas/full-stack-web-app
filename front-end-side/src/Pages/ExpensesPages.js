@@ -16,6 +16,7 @@ const ExpensesPages = ({ categoryType }) => {
     const [purpose, setPurpose] = useState('');
     const [showCategories, setShowCategories] = useState(false);
     const initialRender = useRef(true);
+    const [id, setId] = useState("");
     useEffect(() => {
         axios.get("https://localhost:7174/api/File").then(resp => {
             setInfo(resp);
@@ -30,13 +31,14 @@ const ExpensesPages = ({ categoryType }) => {
     }, []);
 
 
-    const handleSelect = (index, newDate, newSeller, newPurpose, newAmount) => {
+    const handleSelect = (index, newDate, newSeller, newPurpose, newAmount, newId) => {
         setShowCategories(true);
         setCurrentIndex(index);
         setDate(newDate);
         setSeller(newSeller);
         setPurpose(newPurpose);
         setAmount(newAmount);
+        setId(newId);
     }
 
     function addClass() {
@@ -120,8 +122,8 @@ const ExpensesPages = ({ categoryType }) => {
                     <tbody>
                         {
                             status ? (
-                                info.data.map((item, index) => {
-                                    const { date, seller, purpose, amount, category } = item;
+                                info.data.sort((a, b) => a.date > b.date ? 1 : -1).map((item, index) => {
+                                    const { date, seller, purpose, amount, category, id } = item;
                                     if (category == categoryType) {
                                         return (
                                             <tr>
@@ -129,7 +131,7 @@ const ExpensesPages = ({ categoryType }) => {
                                                 <td>{seller}</td>
                                                 <td>{purpose}</td>
                                                 <td>{parseFloat(amount).toFixed(2)}</td>
-                                                <td className="move" onClick={addClass(), () => handleSelect(index, date, seller, purpose, amount)}>
+                                                <td className="move" onClick={addClass(), () => handleSelect(index, date, seller, purpose, amount, id)}>
                                                     <Icon type="change-category"></Icon>
                                                 </td>
                                                 
