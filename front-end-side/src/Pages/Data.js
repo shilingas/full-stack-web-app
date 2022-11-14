@@ -143,7 +143,9 @@ const EnterData = () => {
                                                         <td className="edit" onClick={() => updateData(id, date, seller, purpose, amount)}>
                                                             <Icon type="edit-button"></Icon>
                                                         </td>
-                                                        <td onClick={() => showModal(id)}>Remove item</td>
+                                                        <td className="delete" onClick={() => showModal(id)}>
+                                                            <Icon type="trash-bin"></Icon>
+                                                        </td>
                                                     </tr>
                                                 );
                                             })
@@ -185,14 +187,16 @@ const EnterData = () => {
                             </div>
                         </React.Fragment>
                     ) : (
-                        <div id="nothing-to-show">
-                            <div className="container">
-                                <h2 className="title">Ooops...</h2>
-                                <h5>Nothing to show here. Upload or enter data to get statistics</h5>
+                        <>
+                            <div id="nothing-to-show">
+                                <div className="container">
+                                    <h2 className="title">Ooops...</h2>
+                                    <h5>Nothing to show here. Upload or enter data to get statistics</h5>
+                                </div>
                             </div>
 
                             {<RenderModal className="buttons" />}
-                        </div>
+                        </>
                     )
             }
         </div>
