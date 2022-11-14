@@ -17,17 +17,5 @@ namespace back_end_side.Controllers
             return list;
         }
 
-        public static void RemoveDuplicates(this List<Record> list, ExpensesContext context)
-        {
-            //removing duplicates in list
-            var uniqueList = list.Where(i => i.ExpenseCode != null).DistinctBy(i => i.ExpenseCode).ToList();
-            var nullList = list.Where(i => i.ExpenseCode == null).ToList();
-            uniqueList.AddRange(nullList);
-            list.Clear();
-            list.AddRange(uniqueList);
-            //removing records that duplicate with database records
-            list.RemoveAll(record => context.Expenses.SingleOrDefault(r => r.ExpenseCode == record.ExpenseCode) != null);
-           
-        }
     }
 }

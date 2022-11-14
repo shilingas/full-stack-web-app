@@ -28,9 +28,8 @@ namespace back_end_side.Controllers
             {
                 if (file.FormFile != null && file.FileName != null)
                 {
-                    ReportReader reportReader = new ReportReader(fileData: file.FormFile);
-                    var dataFromFile = reportReader.ReadFromCsvFile();
-                    dataFromFile.RemoveDuplicates(_context);
+                    ReportReader reportReader = new ReportReader(fileData: file.FormFile, _context);
+                    var dataFromFile = reportReader.ReadFromCsvFile(RemoveDuplicates);
                     _context.Expenses.AddRange(dataFromFile);
                     await _context.SaveChangesAsync();
                 } 
@@ -41,6 +40,19 @@ namespace back_end_side.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        private void RemoveDuplicates(List<Record> list, ExpensesContext context)
+        {
+            //removing duplicates in list
+            var uniqueList = list.Where(i => i.ExpenseCode != null).DistinctBy(i => i.ExpenseCode).ToList();
+            var nullList = list.Where(i => i.ExpenseCode == null).ToList();
+            uniqueList.AddRange(nullList);
+            list.Clear();
+            list.AddRange(uniqueList);
+            //removing records that duplicate with database records
+            list.RemoveAll(record => context.Expenses.SingleOrDefault(r => r.ExpenseCode == record.ExpenseCode) != null);
+
         }
     }
 }
