@@ -48,6 +48,7 @@ namespace back_end_side.Controllers
         public async Task<Record[]> GetAll()
         {
             var data = await _context.Expenses.ToArrayAsync();
+            Array.Sort(data);
             return data;
         }
 
