@@ -21,9 +21,9 @@ namespace back_end_side.Controllers
 
         [HttpGet]
         [EnableCors("corsapp")]
-        public DbSet<Record> GetFile()
+        public async Task<Record[]> GetFile()
         {
-            var FileData = _context.Expenses;
+            var FileData = await _context.Expenses.ToArrayAsync();
             return FileData;
         }
     }

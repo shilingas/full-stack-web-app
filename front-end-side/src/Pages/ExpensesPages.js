@@ -131,7 +131,7 @@ const ExpensesPages = ({ categoryType }) => {
                                                 <td>{seller}</td>
                                                 <td>{purpose}</td>
                                                 <td>{parseFloat(amount).toFixed(2)}</td>
-                                                <td className="move" onClick={addClass(), () => handleSelect(index, date, seller, purpose, amount, id)}>
+                                                <td className="move" onClick={addClass(), () => handleSelect(parseInt(index), date, seller, purpose, amount, id)}>
                                                     <Icon type="change-category"></Icon>
                                                 </td>
                                                 

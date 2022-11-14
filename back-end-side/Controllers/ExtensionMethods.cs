@@ -1,6 +1,7 @@
 ﻿using back_end_side.DbFiles;
 using back_end_side.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace back_end_side.Controllers
 {
@@ -16,12 +17,17 @@ namespace back_end_side.Controllers
             return list;
         }
 
-        public static void RemoveDuplicates(this ExpensesContext context)
+        public static void RemoveDuplicates(this List<Record> list, ExpensesContext context)
         {
-            var duplicates = context.Expenses.AsEnumerable().GroupBy(r => r.ExpenseCode).SelectMany(grp => grp.Skip(1));
-            context.Expenses.RemoveRange(duplicates);
-            context.SaveChanges();
-
+            //removing duplicates in list
+            var uniqueList = list.Where(i => i.ExpenseCode != null).DistinctBy(i => i.ExpenseCode).ToList();
+            var nullList = list.Where(i => i.ExpenseCode == null).ToList();
+            uniqueList.AddRange(nullList);
+            list.Clear();
+            list.AddRange(uniqueList);
+            //removing records that duplicate with database records
+            list.RemoveAll(record => context.Expenses.SingleOrDefault(r => r.ExpenseCode == record.ExpenseCode) != null);
+           
         }
     }
 }

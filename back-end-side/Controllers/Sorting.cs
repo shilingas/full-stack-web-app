@@ -15,7 +15,7 @@ namespace back_end_side.Controllers
         public double EntertaintmentSum { get; set; }
         public double OtherSum { get; set; }
     }
-    public class Sorting
+    public class Sorting : ISorting
     {
         private readonly ExpensesContext _context;
 
@@ -64,7 +64,7 @@ namespace back_end_side.Controllers
 
         }
 
-        public double queryMethod(string category, string[] shops)
+        public double queryMethod(string category, string[] shops) 
         {
             double Sum = 0;
 
