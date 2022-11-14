@@ -80,12 +80,14 @@ const EnterData = () => {
         setShowConfirmation(false);
         CustomAlert("Success", "Record has been removed succesfully", 3000);
     }
-    const RenderModal = () => {
+    const RenderModal = props => {
         return (
-            <>
+            <React.Fragment>
                 <div className="container" style={{ marginTop: "30px" }}>
-                    <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
-                    <a onClick={() => setShowUploadData(true)}>Upload Data</a>
+                    <div className={props.className }>
+                        <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
+                        <a onClick={() => setShowUploadData(true)}>Upload file</a>
+                    </div>
                 </div>
                 <Modal className="enter-data" onClose={() => setShowEnterData(false)} show={showEnterData}>
                     <DataEnter buttonType={"post"} date={""} seller={""} purpose={""} amount={""} />
@@ -93,7 +95,7 @@ const EnterData = () => {
                 <Modal className="upload-data" onClose={() => setShowUploadData(false)} show={showUploadData}>
                     <UploadFile />
                 </Modal>
-            </>
+            </React.Fragment>
         );
     }
     return (
@@ -130,7 +132,7 @@ const EnterData = () => {
                                     <tbody>
                                         {statusForFileData ? (
 
-                                            fileData.data.sort((a, b) => a.date > b.date ? 1 : -1).slice(0, size).map((item) => {
+                                            fileData.data.sort((a, b) => a.date > b.date && a.seller < b.seller ? 1 : -1).slice(0, size).map((item) => {
                                                 const { date, seller, purpose, amount, id } = item;
                                                 return (
                                                     <tr>
@@ -183,10 +185,14 @@ const EnterData = () => {
                             </div>
                         </React.Fragment>
                     ) : (
-                        <React.Fragment>
-                            {<RenderModal />}
-                            <p> Nothing to show here. Upload or enter data to get statistics.</p>
-                        </React.Fragment>
+                        <div id="nothing-to-show">
+                            <div className="container">
+                                <h2 className="title">Ooops...</h2>
+                                <h5>Nothing to show here. Upload or enter data to get statistics</h5>
+                            </div>
+
+                            {<RenderModal className="buttons" />}
+                        </div>
                     )
             }
         </div>
