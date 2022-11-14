@@ -122,7 +122,7 @@ const ExpensesPages = ({ categoryType }) => {
                     <tbody>
                         {
                             status ? (
-                                info.data.sort((a, b) => a.date > b.date ? 1 : -1).map((item, index) => {
+                                info.data.map((item, index) => {
                                     const { date, seller, purpose, amount, category, id } = item;
                                     if (category == categoryType) {
                                         return (

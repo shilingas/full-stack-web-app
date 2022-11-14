@@ -133,7 +133,7 @@ const EnterData = () => {
                                         <tbody>
                                             {statusForFileData ? (
 
-                                                fileData.data.sort((a, b) => a.date > b.date ? 1 : -1).slice(0, size).map((item) => {
+                                                fileData.data.slice(0, size).map((item) => {
                                                     const { date, seller, purpose, amount, id } = item;
                                                     return (
                                                         <tr>
