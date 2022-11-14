@@ -102,6 +102,7 @@ const EnterData = () => {
         <div>
             <Navbar />
             {
+                !categoryStatus ? null :
                 newExpenses !== 0 ?
                     (
                         <React.Fragment>
@@ -132,7 +133,7 @@ const EnterData = () => {
                                     <tbody>
                                         {statusForFileData ? (
 
-                                            fileData.data.sort((a, b) => a.date > b.date && a.seller < b.seller ? 1 : -1).slice(0, size).map((item) => {
+                                            fileData.data.sort((a, b) => a.date > b.date ? 1 : -1).slice(0, size).map((item) => {
                                                 const { date, seller, purpose, amount, id } = item;
                                                 return (
                                                     <tr>
