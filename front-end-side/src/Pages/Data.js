@@ -84,7 +84,7 @@ const EnterData = () => {
         return (
             <React.Fragment>
                 <div className="container" style={{ marginTop: "30px" }}>
-                    <div className={props.className }>
+                    <div className={props.className}>
                         <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
                         <a onClick={() => setShowUploadData(true)}>Upload file</a>
                     </div>
@@ -103,102 +103,102 @@ const EnterData = () => {
             <Navbar />
             {
                 !categoryStatus ? null :
-                newExpenses !== 0 ?
-                    (
-                        <React.Fragment>
-                            {<RenderModal />}
-                            <Modal className="enter-data" onClose={() => setShowUpdateData(false)} show={showUpdateData}>
-                                <ModalUpdateData show={showUpdateData} buttonType={"update"} index={currentIndex} date={currentDate} seller={currentSeller} purpose={currentPurpose} amount={currentAmount} />
-                            </Modal>
-                            <Modal className="delete-comfirmation" show={showConfirmation} onClose={() => setShowConfirmation(false)}>
-                                <p>Are you sure you want to delete this record?</p>
-                                <div id="buttons">
-                                    <button onClick={() => deleteData(deleteIndex)}>Yes</button>
-                                    <button onClick={() => setShowConfirmation(false)} className="secondary">No</button>
-                                </div>
-                            </Modal>
-                            <h2 className="title">Your expenses</h2>
-                            <div className="container statistics-table">
-
-                                <table className="data_table">
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Seller</th>
-                                            <th>Details</th>
-                                            <th>Price</th>
-                                            <th colSpan="2"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {statusForFileData ? (
-
-                                            fileData.data.sort((a, b) => a.date > b.date ? 1 : -1).slice(0, size).map((item) => {
-                                                const { date, seller, purpose, amount, id } = item;
-                                                return (
-                                                    <tr>
-                                                        <td>{date.slice(0, 10)}</td>
-                                                        <td>{seller}</td>
-                                                        <td>{purpose}</td>
-                                                        <td>{amount.toFixed(2)}</td>
-                                                        <td className="edit" onClick={() => updateData(id, date, seller, purpose, amount)}>
-                                                            <Icon type="edit-button"></Icon>
-                                                        </td>
-                                                        <td className="delete" onClick={() => showModal(id)}>
-                                                            <Icon type="trash-bin"></Icon>
-                                                        </td>
-                                                    </tr>
-                                                );
-                                            })
-                                        ) : (
-                                            null
-                                        )}
-                                    </tbody>
-
-                                    <tfoot>
-                                        <tr>
-                                            <td colSpan="3">Spent in total</td>
-                                            <td colSpan="3">{parseFloat(newExpenses).toFixed(2)}</td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-
-                                {allShown ?
-                                    <button type="button" onClick={showLess}>Show less</button>
-                                    : <button type="button" onClick={showAll}>Show more</button>
-                                }
-                            </div>
-                            <div className="container">
-
-                                <h2 className="title">Statistics</h2>
-                                {(statusForExpenses && categoryStatus) ? (
-                                    <div id="statistics">
-                                        <div id="cards">
-                                            <ExpensesCard name="food" categorySum={categoryData.data.foodSum} expenses={newExpenses} />
-                                            <ExpensesCard name="transportation" categorySum={categoryData.data.carSum} expenses={newExpenses} />
-                                            <ExpensesCard name="entertainment" categorySum={categoryData.data.entertaintmentSum} expenses={newExpenses} />
-                                            <ExpensesCard name="house" categorySum={categoryData.data.houseSum} expenses={newExpenses} />
-                                            <ExpensesCard name="clothes" categorySum={categoryData.data.clothesSum} expenses={newExpenses} />
-                                            <ExpensesCard name="other" categorySum={categoryData.data.otherSum} expenses={newExpenses} />
-                                        </div>
+                    newExpenses !== 0 ?
+                        (
+                            <React.Fragment>
+                                {<RenderModal />}
+                                <Modal className="enter-data" onClose={() => setShowUpdateData(false)} show={showUpdateData}>
+                                    <ModalUpdateData show={showUpdateData} buttonType={"update"} index={currentIndex} date={currentDate} seller={currentSeller} purpose={currentPurpose} amount={currentAmount} />
+                                </Modal>
+                                <Modal className="delete-comfirmation" show={showConfirmation} onClose={() => setShowConfirmation(false)}>
+                                    <p>Are you sure you want to delete this record?</p>
+                                    <div id="buttons">
+                                        <button onClick={() => deleteData(deleteIndex)}>Yes</button>
+                                        <button onClick={() => setShowConfirmation(false)} className="secondary">No</button>
                                     </div>
-                                ) : (
-                                    null
-                                )}
-                            </div>
-                        </React.Fragment>
-                    ) : (
-                        <>
-                            <div id="nothing-to-show">
-                                <div className="container">
-                                    <h2 className="title">Ooops...</h2>
-                                    <h5>Nothing to show here. Upload or enter data to get statistics</h5>
-                                </div>
-                            </div>
+                                </Modal>
+                                <h2 className="title">Your expenses</h2>
+                                <div className="container statistics-table">
 
-                            {<RenderModal className="buttons" />}
-                        </>
-                    )
+                                    <table className="data_table">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Seller</th>
+                                                <th>Details</th>
+                                                <th>Price</th>
+                                                <th colSpan="2"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {statusForFileData ? (
+
+                                                fileData.data.sort((a, b) => a.date > b.date ? 1 : -1).slice(0, size).map((item) => {
+                                                    const { date, seller, purpose, amount, id } = item;
+                                                    return (
+                                                        <tr>
+                                                            <td>{date.slice(0, 10)}</td>
+                                                            <td>{seller}</td>
+                                                            <td>{purpose}</td>
+                                                            <td>{amount.toFixed(2)}</td>
+                                                            <td className="edit" onClick={() => updateData(id, date, seller, purpose, amount)}>
+                                                                <Icon type="edit-button"></Icon>
+                                                            </td>
+                                                            <td className="delete" onClick={() => showModal(id)}>
+                                                                <Icon type="trash-bin"></Icon>
+                                                            </td>
+                                                        </tr>
+                                                    );
+                                                })
+                                            ) : (
+                                                null
+                                            )}
+                                        </tbody>
+
+                                        <tfoot>
+                                            <tr>
+                                                <td colSpan="3">Spent in total</td>
+                                                <td colSpan="3">{parseFloat(newExpenses).toFixed(2)}</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+
+                                    {allShown ?
+                                        <button type="button" onClick={showLess}>Show less</button>
+                                        : <button type="button" onClick={showAll}>Show more</button>
+                                    }
+                                </div>
+                                <div className="container">
+
+                                    <h2 className="title">Statistics</h2>
+                                    {(statusForExpenses && categoryStatus) ? (
+                                        <div id="statistics">
+                                            <div id="cards">
+                                                <ExpensesCard name="food" categorySum={categoryData.data.foodSum} expenses={newExpenses} />
+                                                <ExpensesCard name="transportation" categorySum={categoryData.data.carSum} expenses={newExpenses} />
+                                                <ExpensesCard name="entertainment" categorySum={categoryData.data.entertaintmentSum} expenses={newExpenses} />
+                                                <ExpensesCard name="house" categorySum={categoryData.data.houseSum} expenses={newExpenses} />
+                                                <ExpensesCard name="clothes" categorySum={categoryData.data.clothesSum} expenses={newExpenses} />
+                                                <ExpensesCard name="other" categorySum={categoryData.data.otherSum} expenses={newExpenses} />
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        null
+                                    )}
+                                </div>
+                            </React.Fragment>
+                        ) : (
+                            <>
+                                <div id="nothing-to-show">
+                                    <div className="container">
+                                        <h2 className="title">Ooops...</h2>
+                                        <h5>Nothing to show here. Upload or enter data to get statistics</h5>
+                                    </div>
+                                </div>
+
+                                {<RenderModal className="buttons" />}
+                            </>
+                        )
             }
         </div>
     );
