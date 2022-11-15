@@ -107,6 +107,10 @@ const ExpensesPages = ({ categoryType }) => {
                     null
                     : <button style={{ display: "block", marginTop: "10px", width: "100%" }} onClick={() => setSelectedCategory("clothes")}>Clothing</button>
                 }
+                {categoryType == "other" ?
+                    null
+                    : <button style={{ display: "block", marginTop: "10px", width: "100%" }} onClick={() => setSelectedCategory("other")}>Other</button>
+                }
             </Modal>
             <div className="container">
 

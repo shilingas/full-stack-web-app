@@ -157,8 +157,8 @@ const EnterData = () => {
                                         </tr>
                                     </tfoot>
                                 </table>
-
-                                {allShown ?
+                                {fileData.data.length <= 5 ? null : 
+                                allShown ?
                                     <button type="button" onClick={showLess}>Show less</button>
                                     : <button type="button" onClick={showAll}>Show more</button>
                                 }
