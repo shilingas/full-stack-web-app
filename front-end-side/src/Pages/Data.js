@@ -155,20 +155,21 @@ const EnterData = () => {
                                             )}
                                         </tbody>
 
-                                        <tfoot>
-                                            <tr>
-                                                <td colSpan="3">Spent in total</td>
-                                                <td colSpan="3">{parseFloat(newExpenses).toFixed(2)}</td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-
-                                    {allShown ?
-                                        <button type="button" onClick={showLess}>Show less</button>
-                                        : <button type="button" onClick={showAll}>Show more</button>
+                                    <tfoot>
+                                        <tr>
+                                            <td colSpan="3">Spent in total</td>
+                                            <td colSpan="3">{parseFloat(newExpenses).toFixed(2)}</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                    {
+                                        fileData.data.length <= 5 ? null :
+                                            allShown ?
+                                                <button type="button" onClick={showLess}>Show less</button>
+                                                : <button type="button" onClick={showAll}>Show more</button>
                                     }
-                                </div>
-                                <div className="container">
+                            </div>
+                            <div className="container">
 
                                     <h2 className="title">Statistics</h2>
                                     {(statusForExpenses && categoryStatus) ? (
