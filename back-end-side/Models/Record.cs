@@ -20,7 +20,7 @@ namespace back_end_side.Models
         [Ignore]
         public int ID { get; set; }
         [Ignore]
-        public string? Category { get; set; } = "other";
+        public string Category { get; set; } = "other";
 
         [Ignore]
         public bool IsCategorized { get; set; } = false;

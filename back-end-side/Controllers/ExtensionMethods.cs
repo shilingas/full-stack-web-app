@@ -1,6 +1,7 @@
 ﻿using back_end_side.DbFiles;
 using back_end_side.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace back_end_side.Controllers
 {
@@ -16,12 +17,5 @@ namespace back_end_side.Controllers
             return list;
         }
 
-        public static void RemoveDuplicates(this ExpensesContext context)
-        {
-            var duplicates = context.Expenses.AsEnumerable().GroupBy(r => r.ExpenseCode).SelectMany(grp => grp.Skip(1));
-            context.Expenses.RemoveRange(duplicates);
-            context.SaveChanges();
-
-        }
     }
 }

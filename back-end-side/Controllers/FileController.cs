@@ -13,17 +13,21 @@ namespace back_end_side.Controllers
     public class FileController : ControllerBase
     {
         private readonly ExpensesContext _context;
+        private readonly ISorting _sorting;
 
-        public FileController(ExpensesContext context)
+        public FileController(ExpensesContext context, ISorting sorting)
         {
             _context = context;
+            _sorting = sorting;
         }
 
         [HttpGet]
         [EnableCors("corsapp")]
-        public DbSet<Record> GetFile()
+        public async Task<Record[]> GetFile()
         {
-            var FileData = _context.Expenses;
+            _sorting.SortToCategories();
+            var FileData = await _context.Expenses.ToArrayAsync();
+            Array.Sort(FileData);
             return FileData;
         }
     }

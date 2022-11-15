@@ -13,35 +13,34 @@ namespace back_end_side.Controllers
     public class SortingController : ControllerBase
     {
         private readonly ExpensesContext _context;
+        private readonly ISorting _sorting;
 
-        public SortingController(ExpensesContext context)
+        public SortingController(ExpensesContext context, ISorting sorting)
         {
             _context = context;
+            _sorting = sorting;
         }
 
         [HttpGet]
         [EnableCors("corsapp")]
         public SortingModel Get()
         {
-            var sorting = new Sorting(_context);
-            SortingModel data = sorting.SortToCategories();
-
+            SortingModel data = _sorting.SortToCategories();
             return data;
         }
 
         [HttpPut("{index:int}")]
         [EnableCors("corsapp")]
-        public IActionResult Put([FromBody] Record model, int index)
+        public async Task<IActionResult> Put([FromBody] Record model, int index)
         {
-            var sorting = new Sorting(_context);
-            var recordToUpdate = _context.Expenses.FirstOrDefault(r => r.ID == index);
+            var recordToUpdate = await _context.Expenses.FindAsync(index);
             try
             {
                 if (recordToUpdate != null)
                 {
                     recordToUpdate.Category = model.Category;
                     recordToUpdate.IsCategorized = model.IsCategorized;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                 }
             }
             catch (DbUpdateException ex )

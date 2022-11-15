@@ -1,4 +1,5 @@
-﻿using back_end_side.Models;
+﻿using back_end_side.DbFiles;
+using back_end_side.Models;
 using CsvHelper;
 using CsvHelper.Configuration;
 using Microsoft.AspNetCore.Components;
@@ -14,13 +15,16 @@ namespace back_end_side.Controllers
         Seb
     }
 
+    public delegate void DeleteDuplicates(List<Record> list, ExpensesContext context);
     public class ReportReader
     {
         public IFormFile fileData;
         private static List<Record> IncomeList = new List<Record>();
-        public ReportReader(IFormFile fileData)
+        private ExpensesContext _context;
+        public ReportReader(IFormFile fileData, ExpensesContext context)
         {
             this.fileData = fileData;
+            _context = context;
         }
         private int CheckBank(StreamReader streamReader)
         {
@@ -39,7 +43,7 @@ namespace back_end_side.Controllers
 
             else return -1;
         }
-        public List<Record>? ReadFromCsvFile()
+        public List<Record>? ReadFromCsvFile(DeleteDuplicates deleteDuplicates)
         {
             var DelimiterToSemicolon = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
@@ -72,7 +76,7 @@ namespace back_end_side.Controllers
                         records.MoveToOtherList(IncomeList, i);
                     }
                 }
-
+                deleteDuplicates(records, _context);
                 return records;
             }
             else if (bank == (int)Banks.Paysera)
@@ -91,6 +95,7 @@ namespace back_end_side.Controllers
                         records.ElementAt(i).Amount *= -1;
                     }
                 }
+                deleteDuplicates(records, _context);
                 return records;
             }
             else if (bank == (int)Banks.Seb)
@@ -109,6 +114,7 @@ namespace back_end_side.Controllers
                         records.MoveToOtherList(IncomeList, i);
                     }
                 }
+                deleteDuplicates(records, _context);
                 return records;
                   
             } else

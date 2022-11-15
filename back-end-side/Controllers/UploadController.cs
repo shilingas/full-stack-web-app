@@ -18,21 +18,20 @@ namespace back_end_side.Controllers
         public UploadController(ExpensesContext context)
         {
             _context = context;
-            new FileController(context);
         }
 
 
         [HttpPost]
-        public ActionResult Post([FromForm] FileModel file)
+        public async Task<ActionResult> Post([FromForm] FileModel file)
         {
             try
             {
                 if (file.FormFile != null && file.FileName != null)
                 {
-                    ReportReader reportReader = new ReportReader(fileData: file.FormFile);
-                    _context.Expenses.AddRange(reportReader.ReadFromCsvFile());
-                    _context.RemoveDuplicates();
-                    _context.SaveChanges();
+                    ReportReader reportReader = new ReportReader(fileData: file.FormFile, _context);
+                    var dataFromFile = reportReader.ReadFromCsvFile(RemoveDuplicates);
+                    _context.Expenses.AddRange(dataFromFile);
+                    await _context.SaveChangesAsync();
                 } 
 
                 return Ok();
@@ -41,6 +40,19 @@ namespace back_end_side.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        private void RemoveDuplicates(List<Record> list, ExpensesContext context)
+        {
+            //removing duplicates in list
+            var uniqueList = list.Where(i => i.ExpenseCode != null).DistinctBy(i => i.ExpenseCode).ToList();
+            var nullList = list.Where(i => i.ExpenseCode == null).ToList();
+            uniqueList.AddRange(nullList);
+            list.Clear();
+            list.AddRange(uniqueList);
+            //removing records that duplicate with database records
+            list.RemoveAll(record => context.Expenses.SingleOrDefault(r => r.ExpenseCode == record.ExpenseCode) != null);
+
         }
     }
 }

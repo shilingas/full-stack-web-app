@@ -12,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<ExpensesContext>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("ExpensesContext")));
+builder.Services.AddScoped<ISorting, Sorting>();
 builder.Services.AddControllers();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();

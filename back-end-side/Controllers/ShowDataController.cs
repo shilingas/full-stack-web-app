@@ -13,25 +13,26 @@ namespace back_end_side.Controllers
     public class ShowDataController : ControllerBase
     {
         private readonly ExpensesContext _context;
+        private readonly ISorting _sorting;
 
-        public ShowDataController(ExpensesContext context)
+        public ShowDataController(ExpensesContext context, ISorting sorting)
         {
             _context = context;
+            _sorting = sorting;
         }
 
         [HttpPost]
         [Produces("application/json")]
         [EnableCors("corsapp")]
-        public IActionResult Post([FromBody] Record model)
+        public async Task<IActionResult> Post([FromBody] Record model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var sorting = new Sorting(_context);
-                    model.Category = sorting.CheckInput(model);
+                    model.Category = _sorting.CheckInput(model);
                     _context.Add(model);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
                 }
             }
@@ -44,17 +45,18 @@ namespace back_end_side.Controllers
         }
         [HttpGet]
         [EnableCors("corsapp")]
-        public DbSet<Record> GetAll()
+        public async Task<Record[]> GetAll()
         {
-            return _context.Expenses;
+            var data = await _context.Expenses.ToArrayAsync();
+            Array.Sort(data);
+            return data;
         }
 
         [HttpPut("{id:int}")]
         [EnableCors("corsapp")]
-        public IActionResult Put([FromBody] Record model, int id)
+        public async Task<IActionResult> Put([FromBody] Record model, int id)
         {
-            var sorting = new Sorting(_context);
-            var recordToUpdate = _context.Expenses.FirstOrDefault(r => r.ID.Equals(id));
+            var recordToUpdate = await _context.Expenses.FindAsync(id);
            
             try
             {
@@ -64,8 +66,8 @@ namespace back_end_side.Controllers
                     recordToUpdate.Seller = model.Seller;
                     recordToUpdate.Purpose = model.Purpose;
                     recordToUpdate.Amount = model.Amount;
-                    recordToUpdate.Category = sorting.CheckInput(model);
-                    _context.SaveChanges();
+                    recordToUpdate.Category = _sorting.CheckInput(model);
+                    await _context.SaveChangesAsync();
                 }
             }
             catch (DbUpdateException ex )
@@ -76,18 +78,18 @@ namespace back_end_side.Controllers
         }
         [HttpDelete("{id:int}")]
         [EnableCors("corsapp")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var record = _context.Expenses.AsNoTracking().FirstOrDefault(r => r.ID.Equals(id));
+            var record = await _context.Expenses.FindAsync(id);
             if (record == null)
             {
-                return NotFound();
+                Console.WriteLine("Couldn't find record");
+                return Ok();
             }
             else
             {
-                _context.Expenses.Attach(record);
                 _context.Expenses.Remove(record);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             return Ok();
         }
