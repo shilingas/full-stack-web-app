@@ -126,7 +126,7 @@ const ExpensesPages = ({ categoryType }) => {
                     <tbody>
                         {
                             status ? (
-                                info.data.sort((a, b) => a.date > b.date ? 1 : -1).map((item, index) => {
+                                info.data.map((item, index) => {
                                     const { date, seller, purpose, amount, category, id } = item;
                                     if (category == categoryType) {
                                         return (
@@ -135,7 +135,7 @@ const ExpensesPages = ({ categoryType }) => {
                                                 <td>{seller}</td>
                                                 <td>{purpose}</td>
                                                 <td>{parseFloat(amount).toFixed(2)}</td>
-                                                <td className="move" onClick={addClass(), () => handleSelect(index, date, seller, purpose, amount, id)}>
+                                                <td className="move" onClick={addClass(), () => handleSelect(parseInt(index), date, seller, purpose, amount, id)}>
                                                     <Icon type="change-category"></Icon>
                                                 </td>
                                                 
