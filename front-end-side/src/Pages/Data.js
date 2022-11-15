@@ -162,11 +162,12 @@ const EnterData = () => {
                                         </tr>
                                     </tfoot>
                                 </table>
-
-                                {allShown ?
-                                    <button type="button" onClick={showLess}>Show less</button>
-                                    : <button type="button" onClick={showAll}>Show more</button>
-                                }
+                                    {
+                                        fileData.data.length <= 5 ? null :
+                                            allShown ?
+                                                <button type="button" onClick={showLess}>Show less</button>
+                                                : <button type="button" onClick={showAll}>Show more</button>
+                                    }
                             </div>
                             <div className="container">
 
