@@ -10,16 +10,16 @@ const HomePage = () => {
             <Navbar />
             {
                 !user ? (
-                    <>
+                    <div className="container" style={{ marginTop: '20px' }}>
                         <LoginButton />
                         <p>Login or create a profile to use this...</p>
-                    </>
+                    </div>
                 ) :
                     (
-                        <>
+                        <div className="container" style={{marginTop: '20px'} }>
                             <LogoutButton />
                             <p>Welcome back, {user.nickname}!</p>
-                        </>
+                        </div>
                     )
             }
         </div>
