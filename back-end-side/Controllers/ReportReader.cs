@@ -15,23 +15,16 @@ namespace back_end_side.Controllers
         Seb
     }
 
-    public delegate void DeleteDuplicates(List<Record> list, ExpensesContext context);
-    public class ReportReader
+    public delegate void DeleteDuplicates(List<Record> list);
+    public class ReportReader : IReportReader
     {
-        public IFormFile fileData;
         private static List<Record> IncomeList = new List<Record>();
-        private ExpensesContext _context;
-        public ReportReader(IFormFile fileData, ExpensesContext context)
-        {
-            this.fileData = fileData;
-            _context = context;
-        }
         private int CheckBank(StreamReader streamReader)
         {
             string? firstLine = streamReader.ReadLine();
             string sebPattern = @"^(""SĄSKAITOS  \(LT\d{2}70440\d{11}\) IŠRAŠAS \(UŽ LAIKOTARPĮ:)+";
             Regex expr = new Regex(sebPattern);
-           
+
             if (expr.Matches(firstLine).Count > 0)
                 return 2;
 
@@ -43,7 +36,7 @@ namespace back_end_side.Controllers
 
             else return -1;
         }
-        public List<Record>? ReadFromCsvFile(DeleteDuplicates deleteDuplicates)
+        public List<Record>? ReadFromCsvFile(IFormFile fileData, DeleteDuplicates deleteDuplicates)
         {
             var DelimiterToSemicolon = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
@@ -67,16 +60,16 @@ namespace back_end_side.Controllers
                 for (int i = records.Count - 1; i >= 0; --i)
                 {
                     if ((records.ElementAt(i).Seller.Equals("") && records.ElementAt(i).Purpose.Equals("Likutis pradžiai")) ||
-                        (records.ElementAt(i).Seller.Equals("") && records.ElementAt(i).Purpose.Equals("Apyvarta")) )
+                        (records.ElementAt(i).Seller.Equals("") && records.ElementAt(i).Purpose.Equals("Apyvarta")))
                     {
                         records.RemoveAt(i);
-                    } 
+                    }
                     else if (records.ElementAt(i).PaymentType.Equals("K"))
                     {
                         records.MoveToOtherList(IncomeList, i);
                     }
                 }
-                deleteDuplicates(records, _context);
+                deleteDuplicates(records);
                 return records;
             }
             else if (bank == (int)Banks.Paysera)
@@ -95,7 +88,7 @@ namespace back_end_side.Controllers
                         records.ElementAt(i).Amount *= -1;
                     }
                 }
-                deleteDuplicates(records, _context);
+                deleteDuplicates(records);
                 return records;
             }
             else if (bank == (int)Banks.Seb)
@@ -114,14 +107,15 @@ namespace back_end_side.Controllers
                         records.MoveToOtherList(IncomeList, i);
                     }
                 }
-                deleteDuplicates(records, _context);
+                deleteDuplicates(records);
                 return records;
-                  
-            } else
+
+            }
+            else
             {
                 return null;
             }
-        } 
+        }
     }
-            
-   }
+
+}

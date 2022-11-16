@@ -1,5 +1,6 @@
 using back_end_side.Controllers;
 using back_end_side.DbFiles;
+using back_end_side.Services;
 using CsvHelper;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
@@ -13,6 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ExpensesContext>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("ExpensesContext")));
 builder.Services.AddScoped<ISorting, Sorting>();
+builder.Services.AddScoped<IReportReader, ReportReader>();
+builder.Services.AddScoped<IShowDataService, ShowDataService>();
+builder.Services.AddScoped<ISortingService, SortingService>();
+builder.Services.AddScoped<IUploadService, UploadService>();
 builder.Services.AddControllers();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
