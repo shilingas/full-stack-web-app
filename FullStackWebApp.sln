@@ -7,6 +7,8 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "front-end-side", "front-end
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "back-end-side", "back-end-side\back-end-side.csproj", "{A94680C5-261D-490B-9922-A01D3647A21B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "back-end-side.UnitTests", "back-end-side.UnitTests\back-end-side.UnitTests.csproj", "{AB27632F-A54B-4D78-973C-3D0A2CC9BE06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{A94680C5-261D-490B-9922-A01D3647A21B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A94680C5-261D-490B-9922-A01D3647A21B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A94680C5-261D-490B-9922-A01D3647A21B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB27632F-A54B-4D78-973C-3D0A2CC9BE06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB27632F-A54B-4D78-973C-3D0A2CC9BE06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB27632F-A54B-4D78-973C-3D0A2CC9BE06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB27632F-A54B-4D78-973C-3D0A2CC9BE06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

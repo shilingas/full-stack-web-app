@@ -1,5 +1,6 @@
 ﻿using back_end_side.DbFiles;
 using back_end_side.Models;
+using back_end_side.Services;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,42 +13,27 @@ namespace back_end_side.Controllers
     [EnableCors("corsapp")]
     public class SortingController : ControllerBase
     {
-        private readonly ExpensesContext _context;
         private readonly ISorting _sorting;
+        private readonly ISortingService _sortingService;
 
-        public SortingController(ExpensesContext context, ISorting sorting)
+        public SortingController(ISorting sorting, ISortingService sortingService)
         {
-            _context = context;
             _sorting = sorting;
+            _sortingService = sortingService;
         }
 
         [HttpGet]
         [EnableCors("corsapp")]
         public SortingModel Get()
         {
-            SortingModel data = _sorting.SortToCategories();
-            return data;
+            return _sorting.SortToCategories();
         }
 
         [HttpPut("{index:int}")]
         [EnableCors("corsapp")]
         public async Task<IActionResult> Put([FromBody] Record model, int index)
         {
-            var recordToUpdate = await _context.Expenses.FindAsync(index);
-            try
-            {
-                if (recordToUpdate != null)
-                {
-                    recordToUpdate.Category = model.Category;
-                    recordToUpdate.IsCategorized = model.IsCategorized;
-                    await _context.SaveChangesAsync();
-                }
-            }
-            catch (DbUpdateException ex )
-            {
-                Console.WriteLine(ex);
-            }
-
+            await _sortingService.ChangeCategory(model, index);
             return Ok(model);
         }
     }

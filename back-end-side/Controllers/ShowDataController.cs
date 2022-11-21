@@ -1,5 +1,6 @@
 ﻿using back_end_side.DbFiles;
 using back_end_side.Models;
+using back_end_side.Services;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +14,12 @@ namespace back_end_side.Controllers
     public class ShowDataController : ControllerBase
     {
         private readonly ExpensesContext _context;
-        private readonly ISorting _sorting;
+        private readonly IShowDataService _showDataService;
 
-        public ShowDataController(ExpensesContext context, ISorting sorting)
+        public ShowDataController(ExpensesContext context, IShowDataService showDataService)
         {
             _context = context;
-            _sorting = sorting;
+            _showDataService = showDataService;
         }
 
         [HttpPost]
@@ -26,21 +27,7 @@ namespace back_end_side.Controllers
         [EnableCors("corsapp")]
         public async Task<IActionResult> Post([FromBody] Record model)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    model.Category = _sorting.CheckInput(model);
-                    _context.Add(model);
-                    await _context.SaveChangesAsync();
-
-                }
-            }
-            catch (DbUpdateException  ex )
-            {
-                Console.WriteLine(ex);
-            }
-
+            await _showDataService.AddRecord(model);
             return Ok(model);
         }
         [HttpGet]
@@ -56,41 +43,15 @@ namespace back_end_side.Controllers
         [EnableCors("corsapp")]
         public async Task<IActionResult> Put([FromBody] Record model, int id)
         {
-            var recordToUpdate = await _context.Expenses.FindAsync(id);
-           
-            try
-            {
-                if (recordToUpdate != null)
-                {
-                    recordToUpdate.Date = model.Date;
-                    recordToUpdate.Seller = model.Seller;
-                    recordToUpdate.Purpose = model.Purpose;
-                    recordToUpdate.Amount = model.Amount;
-                    recordToUpdate.Category = _sorting.CheckInput(model);
-                    await _context.SaveChangesAsync();
-                }
-            }
-            catch (DbUpdateException ex )
-            {
-                Console.WriteLine(ex);
-            }
+            await _showDataService.EditData(model, id);
             return Ok(model);
         }
+
         [HttpDelete("{id:int}")]
         [EnableCors("corsapp")]
         public async Task<IActionResult> Delete(int id)
         {
-            var record = await _context.Expenses.FindAsync(id);
-            if (record == null)
-            {
-                Console.WriteLine("Couldn't find record");
-                return Ok();
-            }
-            else
-            {
-                _context.Expenses.Remove(record);
-                await _context.SaveChangesAsync();
-            }
+            await _showDataService.DeleteRecord(id);
             return Ok();
         }
     }
