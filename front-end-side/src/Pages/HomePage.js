@@ -1,10 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Navbar from "../Components/Navbar";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../Login";
 import LogoutButton from "../Logout";
+import axios from "axios";
 const HomePage = () => {
     const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+    useEffect(() => {
+        axios.post("https://localhost:7174/api/User", user);
+    }, [user])
     return (
         <div>
             <Navbar />
