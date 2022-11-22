@@ -18,7 +18,7 @@ namespace back_end_side.Controllers
     public delegate void DeleteDuplicates(List<Record> list);
     public class ReportReader : IReportReader
     {
-        private static List<Record> IncomeList = new List<Record>();
+        private static Lazy<List<Record>> IncomeList = new Lazy<List<Record>>();
         private int CheckBank(StreamReader streamReader)
         {
             string? firstLine = streamReader.ReadLine();
@@ -66,7 +66,7 @@ namespace back_end_side.Controllers
                     }
                     else if (records.ElementAt(i).PaymentType.Equals("K"))
                     {
-                        records.MoveToOtherList(IncomeList, i);
+                        records.MoveToOtherList(IncomeList.Value, i);
                     }
                 }
                 deleteDuplicates(records);
@@ -81,7 +81,7 @@ namespace back_end_side.Controllers
                 {
                     if (records.ElementAt(i).PaymentType.Equals("K"))
                     {
-                        records.MoveToOtherList(IncomeList, i);
+                        records.MoveToOtherList(IncomeList.Value, i);
                     }
                     else
                     {
@@ -104,7 +104,7 @@ namespace back_end_side.Controllers
 
                     if (records.ElementAt(i).PaymentType.Equals("C"))
                     {
-                        records.MoveToOtherList(IncomeList, i);
+                        records.MoveToOtherList(IncomeList.Value, i);
                     }
                 }
                 deleteDuplicates(records);

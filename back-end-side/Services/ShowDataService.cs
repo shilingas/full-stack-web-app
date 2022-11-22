@@ -14,54 +14,81 @@ namespace back_end_side.Services
             _context = context;
             _sorting = sorting;
         }
+
+        private readonly SemaphoreSlim someLock = new SemaphoreSlim(1, 1);
+
         public async Task AddRecord(Record record)
         {
+            await someLock.WaitAsync();
             try
             {
-                //if (ModelState.IsValid)
-                record.Category = _sorting.CheckInput(record);
-                _context.Add(record);
-                await _context.SaveChangesAsync();
+                try
+                {
+                    //if (ModelState.IsValid)
+                    record.Category = _sorting.CheckInput(record);
+                    _context.Add(record);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateException ex)
+                {
+                    Console.WriteLine(ex);
+                }
             }
-            catch (DbUpdateException ex)
+            finally
             {
-                Console.WriteLine(ex);
+                someLock.Release();
             }
         }
 
         public async Task EditData(Record model, int id)
         {
-            var recordToUpdate = await _context.Expenses.FindAsync(id);
-
+            await someLock.WaitAsync();
             try
             {
-                if (recordToUpdate != null)
+                var recordToUpdate = await _context.Expenses.FindAsync(id);
+
+                try
                 {
-                    recordToUpdate.Date = model.Date;
-                    recordToUpdate.Seller = model.Seller;
-                    recordToUpdate.Purpose = model.Purpose;
-                    recordToUpdate.Amount = model.Amount;
-                    recordToUpdate.Category = _sorting.CheckInput(model);
-                    await _context.SaveChangesAsync();
+                    if (recordToUpdate != null)
+                    {
+                        recordToUpdate.Date = model.Date;
+                        recordToUpdate.Seller = model.Seller;
+                        recordToUpdate.Purpose = model.Purpose;
+                        recordToUpdate.Amount = model.Amount;
+                        recordToUpdate.Category = _sorting.CheckInput(model);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+                catch (DbUpdateException ex)
+                {
+                    Console.WriteLine(ex);
                 }
             }
-            catch (DbUpdateException ex)
+            finally
             {
-                Console.WriteLine(ex);
+                someLock.Release();
             }
         }
 
         public async Task DeleteRecord(int id)
         {
-            var record = await _context.Expenses.FindAsync(id);
-            if (record == null)
+            await someLock.WaitAsync();
+            try
             {
-                Console.WriteLine("Couldn't find record");
+                var record = await _context.Expenses.FindAsync(id);
+                if (record == null)
+                {
+                    Console.WriteLine("Couldn't find record");
+                }
+                else
+                {
+                    _context.Expenses.Remove(record);
+                    await _context.SaveChangesAsync();
+                }
             }
-            else
+            finally
             {
-                _context.Expenses.Remove(record);
-                await _context.SaveChangesAsync();
+                someLock.Release();
             }
         }
     }

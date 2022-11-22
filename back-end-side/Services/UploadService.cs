@@ -16,21 +16,31 @@ namespace back_end_side.Services
             _reader = reader;
         }
 
+        private readonly SemaphoreSlim someLock = new SemaphoreSlim(1, 1);
+
         public async Task GetFileData(FileModel file)
         {
+            await someLock.WaitAsync();
             try
             {
-                if (file.FormFile != null && file.FileName != null)
+                try
                 {
-                    var dataFromFile = _reader.ReadFromCsvFile(file.FormFile, RemoveDuplicates);
-                    if (dataFromFile != null)
-                        _context.Expenses.AddRange(dataFromFile);
-                    await _context.SaveChangesAsync();
+                    if (file.FormFile != null && file.FileName != null)
+                    {
+                        var dataFromFile = _reader.ReadFromCsvFile(file.FormFile, RemoveDuplicates);
+                        if (dataFromFile != null)
+                            _context.Expenses.AddRange(dataFromFile);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+                catch (Exception)
+                {
+
                 }
             }
-            catch (Exception)
+            finally
             {
-
+                someLock.Release();
             }
         }
 
