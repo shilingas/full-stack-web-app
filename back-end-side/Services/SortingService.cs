@@ -35,7 +35,7 @@ namespace back_end_side.Services
                 }
                 catch (DbUpdateException ex)
                 {
-                    Console.WriteLine(ex);
+                    Logger.WriteLog(ex.ToString());
                 }
             }
             finally

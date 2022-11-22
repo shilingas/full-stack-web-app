@@ -33,9 +33,9 @@ namespace back_end_side.Services
                         await _context.SaveChangesAsync();
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    Logger.WriteLog(e.ToString());
                 }
             }
             finally

@@ -1,0 +1,2 @@
+11/22/2022 12:59:16 PM : Microsoft.EntityFrameworkCore.DbUpdateException: Exception of type 'Microsoft.EntityFrameworkCore.DbUpdateException' was thrown.
+   at back_end_side.Services.SortingService.ChangeCategory(Record model, Int32 index) in C:\Users\Marius\Videos\full-stack-web-app\back-end-side\Services\SortingService.cs:line 34
