@@ -10,32 +10,37 @@ namespace back_end_side.Services
     public class SortingService : ISortingService
     {
         private readonly ExpensesContext _context;
-        private readonly ISorting _sorting;
 
-        public SortingService(ExpensesContext context, ISorting sorting)
+        public SortingService(ExpensesContext context)
         {
             _context = context;
-            _sorting = sorting;
         }
 
-
-
+        private readonly SemaphoreSlim someLock = new SemaphoreSlim(1, 1);
 
         public async Task ChangeCategory(Record model, int index)
         {
-            var recordToUpdate = await _context.Expenses.FindAsync(index);
+            await someLock.WaitAsync();
             try
             {
-                if (recordToUpdate != null)
+                var recordToUpdate = await _context.Expenses.FindAsync(index);
+                try
                 {
-                    recordToUpdate.Category = model.Category;
-                    recordToUpdate.IsCategorized = model.IsCategorized;
-                    await _context.SaveChangesAsync();
+                    if (recordToUpdate != null)
+                    {
+                        recordToUpdate.Category = model.Category;
+                        recordToUpdate.IsCategorized = model.IsCategorized;
+                        await _context.SaveChangesAsync();
+                    }
+                }
+                catch (DbUpdateException ex)
+                {
+                    Console.WriteLine(ex);
                 }
             }
-            catch (DbUpdateException ex)
+            finally
             {
-                Console.WriteLine(ex);
+                someLock.Release();
             }
         }
     }
