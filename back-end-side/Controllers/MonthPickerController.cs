@@ -25,18 +25,20 @@ namespace back_end_side.Controllers
         {
             Console.WriteLine(PickedDate);
 
-            var sortedByMonth = _context.Expenses
-                .Where(x => x.Date.ToString().StartsWith(PickedDate))
-                .Select(x => x)
-                .ToArray();
+            if (!PickedDate.Equals("total")) {
+                var sortedByMonth = _context.Expenses
+                                .Where(x => x.Date.ToString().StartsWith(PickedDate))
+                                .Select(x => x)
+                                .ToArray();
 
-            foreach (var labas in sortedByMonth)
+                return sortedByMonth;
+            } else
             {
-                Console.WriteLine(labas.Seller);
+                var sortedByMonth = _context.Expenses.ToArray();
+                Array.Sort(sortedByMonth);
+                return sortedByMonth;
             }
-            Console.WriteLine("--------------------------------");
 
-            return sortedByMonth;
         }
 
     }

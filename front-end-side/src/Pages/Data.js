@@ -110,7 +110,7 @@ const EnterData = () => {
         date.setMonth(monthNumber - 1);
 
         if (monthNumber === "") {
-            return "Your total ";
+            return "Your total";
         } else {
             return date.toLocaleString('en-US', {
                 month: 'long',
@@ -118,8 +118,16 @@ const EnterData = () => {
         }
     }
 
+    useEffect(() => {
+        if (datePick === "") {
+            sendDate("total");
+        }
+    }, [datePick]);
+
     const sendDate = (e) => {
-        setDatePick(e);
+        if (e !== "total") {
+            setDatePick(e);
+        }
         axios.get("https://localhost:7174/api/MonthPicker/" + e).then(resp => {
             setFileData(resp);
         })
