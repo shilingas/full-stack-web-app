@@ -27,6 +27,7 @@ const EnterData = () => {
     const [categoryData, categoryStatus, setCategoryData, setCategoryStatus] = useGetData("GET_CATEGORY_DATA");
     const [datePick, setDatePick] = useState(new Date().toISOString().split('T')[0].slice(0, 7));
     const [minDate, setMinDate] = useState(new Date().toISOString().split('T')[0].slice(0, 7));
+    const [isEmpty, setIsEmpty] = useState(true);
     const initialRender = useRef(true);
     function addClass() {
         var element = document.getElementsByTagName("BODY")[0];
@@ -97,6 +98,7 @@ const EnterData = () => {
                 setStatusForExpenses(true);
             });
             axios.get("https://localhost:7174/api/Sorting").then((item) => {
+                setIsEmpty(item.data.Empty);
                 setNewExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
             })
         }
@@ -137,6 +139,7 @@ const EnterData = () => {
             setStatusForExpenses(true);
         })
         axios.get("https://localhost:7174/api/SumsByMonth/" + e).then((item) => {
+            setIsEmpty(item.data.Empty);
             setNewExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
         })
     }
@@ -147,7 +150,7 @@ const EnterData = () => {
 
             {
                 !categoryStatus ? null :
-                    newExpenses !== 0 ?
+                    isEmpty !== false ?
                         (
                             <React.Fragment>
                                 <div className="container" style={{ marginTop: "30px" }}>

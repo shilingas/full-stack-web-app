@@ -1,5 +1,6 @@
 ﻿using back_end_side.DbFiles;
 using back_end_side.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Reflection;
@@ -14,6 +15,7 @@ namespace back_end_side.Controllers
         public double HouseSum { get; set; }
         public double EntertaintmentSum { get; set; }
         public double OtherSum { get; set; }
+        public bool Empty { get; set; }
     }
     public class Sorting : ISorting
     {
@@ -38,12 +40,15 @@ namespace back_end_side.Controllers
                 OtherSum = 0,
                 HouseSum = 0,
                 ClothesSum = 0,
-                FoodSum = 0
+                FoodSum = 0,
+                Empty = true
             };
 
 
             if (_context.Expenses != null)
             {
+                Model.Empty = false;
+
                 Model.FoodSum = queryMethod("food", Supermarkets, pickedDate);
                 Model.ClothesSum = queryMethod("clothes", ClothesShops, pickedDate);
                 Model.CarSum = queryMethod("car", CarMaintenanceShops, pickedDate);
