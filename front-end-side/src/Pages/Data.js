@@ -109,9 +109,13 @@ const EnterData = () => {
         const date = new Date();
         date.setMonth(monthNumber - 1);
 
-        return date.toLocaleString('en-US', {
-            month: 'long',
-        });
+        if (monthNumber === "") {
+            return "Your total ";
+        } else {
+            return date.toLocaleString('en-US', {
+                month: 'long',
+            });
+        }
     }
 
     return (
