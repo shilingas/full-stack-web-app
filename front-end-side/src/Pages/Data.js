@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import "../Pages/Data.css";
 import Icon from "../Components/Icons.js";
@@ -25,6 +25,9 @@ const EnterData = () => {
     const [fileData, statusForFileData, setFileData, setStatusForFileData] = useGetData("GET_FILE_DATA");
     const [newExpenses, statusForExpenses, setNewExpenses, setStatusForExpenses] = useGetData("GET_EXPENSES");
     const [categoryData, categoryStatus, setCategoryData, setCategoryStatus] = useGetData("GET_CATEGORY_DATA");
+    const [datePick, setDatePick] = useState(new Date().toISOString().split('T')[0].slice(0, 7));
+    const [minDate, setMinDate] = useState(new Date().toISOString().split('T')[0].slice(0, 7));
+    const initialRender = useRef(true);
     function addClass() {
         var element = document.getElementsByTagName("BODY")[0];
         element.classList.remove("modal-open");
@@ -37,6 +40,27 @@ const EnterData = () => {
         setSize(5);
         setAllShown(false);
     }
+
+    useEffect(() => {
+
+        if (initialRender.current) {
+            initialRender.current = false;
+        }
+        else {
+            var minStart = new Date();
+
+            fileData.data.map((item) => {
+                const { date } = item;
+                let laikina = new Date(date);
+                if (laikina < minStart) {
+                    minStart = date;
+                }
+            })
+
+            setMinDate(minStart);
+        }
+    }, [fileData.data]);
+
     const updateData = (index, date, seller, purpose, amount) => {
         setCurrentIndex(index);
         setCurrentDate(date);
@@ -80,33 +104,43 @@ const EnterData = () => {
         setShowConfirmation(false);
         CustomAlert("Success", "Record has been removed succesfully", 3000);
     }
-    const RenderModal = props => {
-        return (
-            <React.Fragment>
-                <div className="container" style={{ marginTop: "30px" }}>
-                    <div className={props.className}>
-                        <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
-                        <a onClick={() => setShowUploadData(true)}>Upload file</a>
-                    </div>
-                </div>
-                <Modal className="enter-data" onClose={() => setShowEnterData(false)} show={showEnterData}>
-                    <DataEnter buttonType={"post"} date={""} seller={""} purpose={""} amount={""} />
-                </Modal>
-                <Modal className="upload-data" onClose={() => setShowUploadData(false)} show={showUploadData}>
-                    <UploadFile />
-                </Modal>
-            </React.Fragment>
-        );
+
+    function toMonthName(monthNumber) {
+        const date = new Date();
+        date.setMonth(monthNumber - 1);
+
+        return date.toLocaleString('en-US', {
+            month: 'long',
+        });
     }
+
     return (
         <div>
             <Navbar />
+
             {
                 !categoryStatus ? null :
                     newExpenses !== 0 ?
                         (
                             <React.Fragment>
-                                {<RenderModal />}
+                                <div className="container" style={{ marginTop: "30px" }}>
+                                    <div class="second-navigation">
+                                        <div className={"selects"}>
+                                            <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
+                                            <a onClick={() => setShowUploadData(true)}>Upload file</a>
+                                        </div>
+                                        <div>
+                                            <input type="month" onChange={e => setDatePick(e.target.value)} min={minDate.slice(0, 7)} max={new Date().toISOString().split('T')[0].slice(0, 7)} defaultValue={new Date().toISOString().split('T')[0].slice(0, 7)}></input>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <Modal className="enter-data" onClose={() => setShowEnterData(false)} show={showEnterData}>
+                                    <DataEnter buttonType={"post"} date={""} seller={""} purpose={""} amount={""} />
+                                </Modal>
+                                <Modal className="upload-data" onClose={() => setShowUploadData(false)} show={showUploadData}>
+                                    <UploadFile />
+                                </Modal>
                                 <Modal className="enter-data" onClose={() => setShowUpdateData(false)} show={showUpdateData}>
                                     <ModalUpdateData show={showUpdateData} buttonType={"update"} index={currentIndex} date={currentDate} seller={currentSeller} purpose={currentPurpose} amount={currentAmount} />
                                 </Modal>
@@ -117,7 +151,7 @@ const EnterData = () => {
                                         <button onClick={() => setShowConfirmation(false)} className="secondary">No</button>
                                     </div>
                                 </Modal>
-                                <h2 className="title">Your expenses</h2>
+                                <h2 className="title">{datePick.slice(0, 4) + " " + toMonthName(datePick.slice(5, 7))} expenses</h2>
                                 <div className="container statistics-table">
 
                                     <table className="data_table">
@@ -136,6 +170,7 @@ const EnterData = () => {
                                                 fileData.data.slice(0, size).map((item) => {
                                                     const { date, seller, purpose, amount, id } = item;
                                                     return (
+
                                                         <tr>
                                                             <td>{date.slice(0, 10)}</td>
                                                             <td>{seller}</td>
@@ -155,21 +190,21 @@ const EnterData = () => {
                                             )}
                                         </tbody>
 
-                                    <tfoot>
-                                        <tr>
-                                            <td colSpan="3">Spent in total</td>
-                                            <td colSpan="3">{parseFloat(newExpenses).toFixed(2)}</td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                                        <tfoot>
+                                            <tr>
+                                                <td colSpan="3">Spent in total</td>
+                                                <td colSpan="3">{parseFloat(newExpenses).toFixed(2)}</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
                                     {
                                         fileData.data.length <= 5 ? null :
                                             allShown ?
                                                 <button type="button" onClick={showLess}>Show less</button>
                                                 : <button type="button" onClick={showAll}>Show more</button>
                                     }
-                            </div>
-                            <div className="container">
+                                </div>
+                                <div className="container">
 
                                     <h2 className="title">Statistics</h2>
                                     {(statusForExpenses && categoryStatus) ? (
@@ -197,7 +232,24 @@ const EnterData = () => {
                                     </div>
                                 </div>
 
-                                {<RenderModal className="buttons" />}
+                                <div className="container" style={{ marginTop: "30px" }}>
+                                    <div class="second-navigation">
+                                        <div className={"selects buttons"}>
+                                            <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
+                                            <a onClick={() => setShowUploadData(true)}>Upload file</a>
+                                        </div>
+                                        <div>
+                                            <input type="month" onChange={e => setDatePick(e.target.value)} min={minDate.slice(0, 7)} max={new Date().toISOString().split('T')[0].slice(0, 7)} defaultValue={new Date().toISOString().split('T')[0].slice(0, 7)}></input>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <Modal className="enter-data" onClose={() => setShowEnterData(false)} show={showEnterData}>
+                                    <DataEnter buttonType={"post"} date={""} seller={""} purpose={""} amount={""} />
+                                </Modal>
+                                <Modal className="upload-data" onClose={() => setShowUploadData(false)} show={showUploadData}>
+                                    <UploadFile />
+                                </Modal>
                             </>
                         )
             }
