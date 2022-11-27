@@ -6,5 +6,6 @@ namespace back_end_side.Controllers
     public interface IReportReader
     {
         List<Record>? ReadFromCsvFile(IFormFile fileData, DeleteDuplicates deleteDuplicates);
+        List<Record> GetIncomeList();
     }
 }

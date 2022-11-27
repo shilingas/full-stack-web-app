@@ -25,6 +25,7 @@ namespace back_end_side.Controllers
         public async Task<ActionResult> Post([FromForm] FileModel file)
         {
             await _uploadService.GetFileData(file);
+            await _uploadService.GetIncomeData();
             return Ok();
         }
 
