@@ -10,118 +10,127 @@ table.data_table {
     margin: 0px -10px 0;
 }
 
-table.data_table td, table.data_table th {
-    padding: 10px;
-    border-radius: 7px;
-    color: var(--main-text-color);
-}
+    table.data_table td, table.data_table th {
+        padding: 10px;
+        border-radius: 7px;
+        color: var(--main-text-color);
+    }
 
-table.data_table th {
-    background: #2e3542;
-}
+    table.data_table th {
+        background: #2e3542;
+    }
 
-table.data_table td {
-    background: #373f4d;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
+    table.data_table td {
+        background: #373f4d;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
 
-table.data_table td:nth-of-type(1) {
-    width: 110px;
-}
+        table.data_table td:nth-of-type(1) {
+            width: 110px;
+        }
 
-table.data_table td:nth-of-type(2) {
-    max-width: 20vw;
-}
+        table.data_table td:nth-of-type(2) {
+            max-width: 20vw;
+        }
 
-table.data_table td:nth-of-type(3) {
-    max-width: 42vw;
-}
+        table.data_table td:nth-of-type(3) {
+            max-width: 42vw;
+        }
 
 
-table.data_table td:nth-of-type(4) {
-    width: 60px;
-}
+        table.data_table td:nth-of-type(4) {
+            width: 60px;
+        }
 
-table.data_table td.edit, table.data_table td.move, table.data_table td.delete {
-    cursor: pointer;
-    width: 0px;
-    height: 0px;
-    transition: .3s ease-in-out;
-}
+        table.data_table td.edit, table.data_table td.move, table.data_table td.delete {
+            cursor: pointer;
+            width: 0px;
+            height: 0px;
+            transition: .3s ease-in-out;
+        }
 
-table.data_table td.edit:hover, table.data_table td.move:hover, table.data_table td.delete:hover {
-    transition:.3s ease-in-out;
-    transform: scale(1.1);
-}
+            table.data_table td.edit:hover, table.data_table td.move:hover, table.data_table td.delete:hover {
+                transition: .3s ease-in-out;
+                transform: scale(1.1);
+            }
 
-table.data_table td.edit svg, table.data_table td.delete svg {
-    width: auto;
-    height: 20px;
-}
+            table.data_table td.edit svg, table.data_table td.delete svg {
+                width: auto;
+                height: 20px;
+            }
 
-table.data_table td.edit svg { fill: var(--main-text-color); }
-table.data_table td.delete svg { fill: var(--main-color); }
+            table.data_table td.edit svg {
+                fill: var(--main-text-color);
+            }
 
-table.data_table td.move svg {
-    fill: var(--main-text-color);
-    width: 26px;
-    height: auto;
-}
+            table.data_table td.delete svg {
+                fill: var(--main-color);
+            }
+
+            table.data_table td.move svg {
+                fill: var(--main-text-color);
+                width: 26px;
+                height: auto;
+            }
 
 #statistics {
     width: calc(100% - 20px);
     margin: 50px 0;
 }
 
-#statistics #cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: 15px;
-    grid-row-gap: 15px;
-    margin-bottom: 20px;
+    #statistics #cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-column-gap: 15px;
+        grid-row-gap: 15px;
+        margin-bottom: 20px;
+    }
+
+.modal.delete-comfirmation .modal-content {
+    max-width: 500px;
 }
 
-.modal.delete-comfirmation .modal-content { max-width: 500px; }
+    .modal.delete-comfirmation .modal-content p {
+        margin: 0 0 15px 0;
+        font-size: 20px;
+        text-transform: none;
+        letter-spacing: 5px;
+        margin-bottom: 30px;
+        font-weight: bold;
+        text-align: center;
+    }
 
-.modal.delete-comfirmation .modal-content p {
-    margin: 0 0 15px 0;
-    font-size: 20px;
-    text-transform: none;
-    letter-spacing: 5px;
-    margin-bottom: 30px;
-    font-weight: bold;
+    .modal.delete-comfirmation .modal-content #buttons {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 15px;
+    }
+
+.buttons {
     text-align: center;
 }
 
-.modal.delete-comfirmation .modal-content #buttons {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 15px;
-}
+    .buttons a {
+        background: linear-gradient(90deg, var(--main-color) 0%, var(--main-color-shade) 100%) no-repeat;
+        border: 0;
+        outline: none;
+        font-size: 14px;
+        padding: 12px 30px;
+        border-radius: 10px;
+        color: var(--white);
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: .3s ease-in-out;
+        display: inline-block;
+    }
 
-.buttons { text-align: center; }
-
-.buttons a {
-    background: linear-gradient(90deg, var(--main-color) 0%, var(--main-color-shade) 100%) no-repeat;
-    border: 0;
-    outline: none;
-    font-size: 14px;
-    padding: 12px 30px;
-    border-radius: 10px;
-    color: var(--white);
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: .3s ease-in-out;
-    display: inline-block;
-}
-
-.buttons a:hover {
-    transition: .3s ease-in-out;
-    transform: scale(1.05);
-}
+        .buttons a:hover {
+            transition: .3s ease-in-out;
+            transform: scale(1.05);
+        }
 
 #nothing-to-show h2.title {
     margin-bottom: 0;
@@ -133,3 +142,12 @@ table.data_table td.move svg {
     margin: 5px 0 0 0;
     font-weight: 500;
 }
+
+.second-navigation {
+    display: flex;
+    align-items: center;
+}
+
+    .second-navigation .selects {
+        flex-grow: 1;
+    }
