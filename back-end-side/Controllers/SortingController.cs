@@ -26,7 +26,9 @@ namespace back_end_side.Controllers
         [EnableCors("corsapp")]
         public SortingModel Get()
         {
-            return _sorting.SortToCategories();
+            var CurrentDate = DateTime.Now.ToString("yyyy-MM-dd").Substring(0, 7);
+
+            return _sorting.SortToCategories(CurrentDate);
         }
 
         [HttpPut("{index:int}")]

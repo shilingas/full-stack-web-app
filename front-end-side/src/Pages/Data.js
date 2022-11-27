@@ -131,6 +131,14 @@ const EnterData = () => {
         axios.get("https://localhost:7174/api/MonthPicker/" + e).then(resp => {
             setFileData(resp);
         })
+        axios.get("https://localhost:7174/api/SumsByMonth/" + e).then(item => {
+            setCategoryData(item);
+            setCategoryStatus(true);
+            setStatusForExpenses(true);
+        })
+        axios.get("https://localhost:7174/api/SumsByMonth/" + e).then((item) => {
+            setNewExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
+        })
     }
 
     return (

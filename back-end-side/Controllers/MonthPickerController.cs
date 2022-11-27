@@ -23,8 +23,6 @@ namespace back_end_side.Controllers
         [EnableCors("corsapp")]
         public Record[] Get(string PickedDate)
         {
-            Console.WriteLine(PickedDate);
-
             if (!PickedDate.Equals("total")) {
                 var sortedByMonth = _context.Expenses
                                 .Where(x => x.Date.ToString().StartsWith(PickedDate))
