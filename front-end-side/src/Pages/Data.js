@@ -26,7 +26,6 @@ const EnterData = () => {
     const [newExpenses, statusForExpenses, setNewExpenses, setStatusForExpenses] = useGetData("GET_EXPENSES");
     const [categoryData, categoryStatus, setCategoryData, setCategoryStatus] = useGetData("GET_CATEGORY_DATA");
     const [datePick, setDatePick] = useState(new Date().toISOString().split('T')[0].slice(0, 7));
-    const [minDate, setMinDate] = useState(new Date().toISOString().split('T')[0].slice(0, 7));
     const [isEmpty, setIsEmpty] = useState(true);
     const initialRender = useRef(true);
     function addClass() {
@@ -41,26 +40,6 @@ const EnterData = () => {
         setSize(5);
         setAllShown(false);
     }
-
-    useEffect(() => {
-
-        if (initialRender.current) {
-            initialRender.current = false;
-        }
-        else {
-            var minStart = new Date();
-
-            fileData.data.map((item) => {
-                const { date } = item;
-                let laikina = new Date(date);
-                if (laikina < minStart) {
-                    minStart = date;
-                }
-            })
-
-            setMinDate(minStart);
-        }
-    }, [fileData.data]);
 
     const updateData = (index, date, seller, purpose, amount) => {
         setCurrentIndex(index);
