@@ -74,6 +74,7 @@ code {
 .navigation-block .navbar #logotype a {
     color: var(--white);
     font-size: 16px;
+    padding: 0;
 }
 
 .navigation-block hr.nav-seperator, .modal .modal-content #modal-decoration, #custom-alert #decoration {
@@ -117,12 +118,22 @@ code {
     padding: 0 20px;
 }
 
+.double-title h2.title { margin-top: 0; }
+
 h2.title {
     color: var(--main-text-color);
     font-size: 29px;
     text-transform: lowercase;
     text-align: center;
     letter-spacing: 7px;
+}
+
+h6.date {
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 25px 0 -8px;
 }
 
 input {

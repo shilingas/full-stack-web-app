@@ -118,6 +118,13 @@ const EnterData = () => {
         }
     }
 
+    const sendDate = (e) => {
+        setDatePick(e);
+        axios.get("https://localhost:7174/api/MonthPicker/" + e).then(resp => {
+            setFileData(resp);
+        })
+    }
+
     return (
         <div>
             <Navbar />
@@ -134,7 +141,7 @@ const EnterData = () => {
                                             <a onClick={() => setShowUploadData(true)}>Upload file</a>
                                         </div>
                                         <div>
-                                            <input type="month" onChange={e => setDatePick(e.target.value)} min={minDate.slice(0, 7)} max={new Date().toISOString().split('T')[0].slice(0, 7)} defaultValue={new Date().toISOString().split('T')[0].slice(0, 7)}></input>
+                                            <input type="month" onChange={e => sendDate(e.target.value)} max={new Date().toISOString().split('T')[0].slice(0, 7)} defaultValue={new Date().toISOString().split('T')[0].slice(0, 7)}></input>
                                         </div>
                                     </div>
 
@@ -155,7 +162,12 @@ const EnterData = () => {
                                         <button onClick={() => setShowConfirmation(false)} className="secondary">No</button>
                                     </div>
                                 </Modal>
-                                <h2 className="title">{datePick.slice(0, 4) + " " + toMonthName(datePick.slice(5, 7))} expenses</h2>
+
+                                <div class="double-title">
+                                    <h6 className="date">{datePick.slice(0, 4) + " " + toMonthName(datePick.slice(5, 7))}</h6>
+                                    <h2 className="title">expenses</h2>
+                                </div>
+
                                 <div className="container statistics-table">
 
                                     <table className="data_table">
@@ -210,7 +222,10 @@ const EnterData = () => {
                                 </div>
                                 <div className="container">
 
-                                    <h2 className="title">Statistics</h2>
+                                    <div class="double-title">
+                                        <h6 className="date">{datePick.slice(0, 4) + " " + toMonthName(datePick.slice(5, 7))}</h6>
+                                        <h2 className="title">statistics</h2>
+                                    </div>
                                     {(statusForExpenses && categoryStatus) ? (
                                         <div id="statistics">
                                             <div id="cards">
@@ -241,9 +256,6 @@ const EnterData = () => {
                                         <div className={"selects buttons"}>
                                             <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
                                             <a onClick={() => setShowUploadData(true)}>Upload file</a>
-                                        </div>
-                                        <div>
-                                            <input type="month" onChange={e => setDatePick(e.target.value)} min={minDate.slice(0, 7)} max={new Date().toISOString().split('T')[0].slice(0, 7)} defaultValue={new Date().toISOString().split('T')[0].slice(0, 7)}></input>
                                         </div>
                                     </div>
 

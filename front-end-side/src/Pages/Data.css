@@ -151,3 +151,7 @@ table.data_table {
     .second-navigation .selects {
         flex-grow: 1;
     }
+
+        .second-navigation div input {
+            gap: 5px;
+        }
