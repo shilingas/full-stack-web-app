@@ -1,5 +1,6 @@
 ﻿using back_end_side.DbFiles;
 using back_end_side.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Reflection;
@@ -14,6 +15,7 @@ namespace back_end_side.Controllers
         public double HouseSum { get; set; }
         public double EntertaintmentSum { get; set; }
         public double OtherSum { get; set; }
+        public bool Empty { get; set; }
     }
     public class Sorting : ISorting
     {
@@ -29,7 +31,7 @@ namespace back_end_side.Controllers
         public readonly string[] CarMaintenanceShops = { "CIRCLE K", "VIADA", "BOLT", "STOVA", "RIDE SHARE", "SUSISIEKIMO PASLAUGOS", "CITYBEE" };
         public readonly string[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI", "CONSILIUM OPTIMUM", "TELE2", "telia", "TOPO CENTRAS", "BITĖ", "GO3", "IKEA" };
         public readonly string[] EntertainmentShops = { "CYBERX", "SPOTIFY", "BASKETNEWS", "OCULUS DIGITAL", "STEAM", "ŽALGIRIO KREPŠINIO CENTRAS" };
-        public SortingModel SortToCategories()
+        public SortingModel SortToCategories(string pickedDate = "")
         {
             SortingModel Model = new()
             {
@@ -38,22 +40,43 @@ namespace back_end_side.Controllers
                 OtherSum = 0,
                 HouseSum = 0,
                 ClothesSum = 0,
-                FoodSum = 0
+                FoodSum = 0,
+                Empty = true
             };
+
+
             if (_context.Expenses != null)
             {
-                Model.FoodSum = queryMethod("food", Supermarkets);
-                Model.ClothesSum = queryMethod("clothes", ClothesShops);
-                Model.CarSum = queryMethod("car", CarMaintenanceShops);
-                Model.EntertaintmentSum = queryMethod("entertainment", EntertainmentShops);
-                Model.HouseSum = queryMethod("house", HouseMaintenanceShops);
+                if (_context.Expenses.Any())
+                {
+                    Model.Empty = false;
+                }
+
+                Model.FoodSum = queryMethod("food", Supermarkets, pickedDate);
+                Model.ClothesSum = queryMethod("clothes", ClothesShops, pickedDate);
+                Model.CarSum = queryMethod("car", CarMaintenanceShops, pickedDate);
+                Model.EntertaintmentSum = queryMethod("entertainment", EntertainmentShops, pickedDate);
+                Model.HouseSum = queryMethod("house", HouseMaintenanceShops, pickedDate);
 
                 double sumOfOther = 0;
-                foreach (var record in _context.Expenses)
+
+                if (!string.IsNullOrEmpty(pickedDate))
                 {
-                    if (record.Category.Equals("other"))
+                    foreach (var record in _context.Expenses)
                     {
-                        sumOfOther += record.Amount;
+                        if (record.Category.Equals("other") && record.Date.ToString().StartsWith(pickedDate))
+                        {
+                            sumOfOther += record.Amount;
+                        }
+                    }
+                } else
+                {
+                    foreach (var record in _context.Expenses)
+                    {
+                        if (record.Category.Equals("other"))
+                        {
+                            sumOfOther += record.Amount;
+                        }
                     }
                 }
 
@@ -64,7 +87,7 @@ namespace back_end_side.Controllers
 
         }
 
-        public double queryMethod(string category, string[] shops) 
+        public double queryMethod(string category, string[] shops, string pickedDate)
         {
             double Sum = 0;
 
@@ -77,10 +100,19 @@ namespace back_end_side.Controllers
             }
             _context.SaveChanges();
 
-            Sum = _context.Expenses
+            if (string.IsNullOrEmpty(pickedDate))
+            {
+                Sum = _context.Expenses
                 .Where(r => r.Category != null && r.Category.Equals(category))
                 .Select(r => r.Amount)
                 .Sum();
+            } else
+            {
+                Sum = _context.Expenses
+                .Where(r => r.Category != null && r.Category.Equals(category) && r.Date.ToString().StartsWith(pickedDate))
+                .Select(r => r.Amount)
+                .Sum();
+            }
 
             return Sum;
         }

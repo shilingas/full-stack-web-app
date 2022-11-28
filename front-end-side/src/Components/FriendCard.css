@@ -1,0 +1,60 @@
+.friend-card {
+    background: #373f4d;
+    border-radius: 10px;
+    width: 100%;
+    color: var(--main-text-color);
+    margin-top: 45px;
+}
+
+.friend-card .padding {
+    padding: 20px;
+    grid-column-gap: 15px;
+}
+
+.friend-card .padding .profile-picture {
+    height: 70px;
+    width: 70%;
+    overflow: hidden;
+    height: 150px;
+    margin: -45px auto 0;
+    border-radius: 10px;
+    background: #000;
+}
+
+.friend-card .padding .profile-picture img {
+    height: 100%;
+    width: 100%;
+}
+
+.friend-card .padding .texts {
+    text-align: center;
+    margin: 5px 0 20px;
+}
+
+.friend-card .padding .texts p.title {
+    font-weight: bold;
+    font-size: 25px;
+    margin: 0;
+}
+
+.friend-card .padding .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.friend-card .padding .buttons .button .cursor-field a {
+    color: var(--white);
+    text-decoration: none;
+    background: linear-gradient(90deg, var(--main-color) 0%, var(--main-color-shade) 100%) no-repeat;
+    padding: 5px 25px 7px;
+    border-radius: 50px;
+    text-transform: lowercase;
+    font-size: 13px;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.friend-card .padding .buttons .button.secondary .cursor-field a {
+    background: linear-gradient(90deg, var(--other-color) 0%, var(--other-color-shade) 100%) no-repeat;
+}

@@ -26,7 +26,7 @@ const EnterData = () => {
     const [newExpenses, statusForExpenses, setNewExpenses, setStatusForExpenses] = useGetData("GET_EXPENSES");
     const [categoryData, categoryStatus, setCategoryData, setCategoryStatus] = useGetData("GET_CATEGORY_DATA");
     const [datePick, setDatePick] = useState(new Date().toISOString().split('T')[0].slice(0, 7));
-    const [minDate, setMinDate] = useState(new Date().toISOString().split('T')[0].slice(0, 7));
+    const [isEmpty, setIsEmpty] = useState(true);
     const initialRender = useRef(true);
     function addClass() {
         var element = document.getElementsByTagName("BODY")[0];
@@ -40,26 +40,6 @@ const EnterData = () => {
         setSize(5);
         setAllShown(false);
     }
-
-    useEffect(() => {
-
-        if (initialRender.current) {
-            initialRender.current = false;
-        }
-        else {
-            var minStart = new Date();
-
-            fileData.data.map((item) => {
-                const { date } = item;
-                let laikina = new Date(date);
-                if (laikina < minStart) {
-                    minStart = date;
-                }
-            })
-
-            setMinDate(minStart);
-        }
-    }, [fileData.data]);
 
     const updateData = (index, date, seller, purpose, amount) => {
         setCurrentIndex(index);
@@ -97,6 +77,7 @@ const EnterData = () => {
                 setStatusForExpenses(true);
             });
             axios.get("https://localhost:7174/api/Sorting").then((item) => {
+                setIsEmpty(item.data.Empty);
                 setNewExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
             })
         }
@@ -109,9 +90,37 @@ const EnterData = () => {
         const date = new Date();
         date.setMonth(monthNumber - 1);
 
-        return date.toLocaleString('en-US', {
-            month: 'long',
-        });
+        if (monthNumber === "") {
+            return "Your total";
+        } else {
+            return date.toLocaleString('en-US', {
+                month: 'long',
+            });
+        }
+    }
+
+    useEffect(() => {
+        if (datePick === "") {
+            sendDate("total");
+        }
+    }, [datePick]);
+
+    const sendDate = (e) => {
+        if (e !== "total") {
+            setDatePick(e);
+        }
+        axios.get("https://localhost:7174/api/MonthPicker/" + e).then(resp => {
+            setFileData(resp);
+        })
+        axios.get("https://localhost:7174/api/SumsByMonth/" + e).then(item => {
+            setCategoryData(item);
+            setCategoryStatus(true);
+            setStatusForExpenses(true);
+        })
+        axios.get("https://localhost:7174/api/SumsByMonth/" + e).then((item) => {
+            setIsEmpty(item.data.Empty);
+            setNewExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
+        })
     }
 
     return (
@@ -120,7 +129,7 @@ const EnterData = () => {
 
             {
                 !categoryStatus ? null :
-                    newExpenses !== 0 ?
+                    isEmpty !== false ?
                         (
                             <React.Fragment>
                                 <div className="container" style={{ marginTop: "30px" }}>
@@ -130,7 +139,7 @@ const EnterData = () => {
                                             <a onClick={() => setShowUploadData(true)}>Upload file</a>
                                         </div>
                                         <div>
-                                            <input type="month" onChange={e => setDatePick(e.target.value)} min={minDate.slice(0, 7)} max={new Date().toISOString().split('T')[0].slice(0, 7)} defaultValue={new Date().toISOString().split('T')[0].slice(0, 7)}></input>
+                                            <input type="month" onChange={e => sendDate(e.target.value)} max={new Date().toISOString().split('T')[0].slice(0, 7)} defaultValue={new Date().toISOString().split('T')[0].slice(0, 7)}></input>
                                         </div>
                                     </div>
 
@@ -151,7 +160,12 @@ const EnterData = () => {
                                         <button onClick={() => setShowConfirmation(false)} className="secondary">No</button>
                                     </div>
                                 </Modal>
-                                <h2 className="title">{datePick.slice(0, 4) + " " + toMonthName(datePick.slice(5, 7))} expenses</h2>
+
+                                <div class="double-title">
+                                    <h6 className="date">{datePick.slice(0, 4) + " " + toMonthName(datePick.slice(5, 7))}</h6>
+                                    <h2 className="title">expenses</h2>
+                                </div>
+
                                 <div className="container statistics-table">
 
                                     <table className="data_table">
@@ -206,7 +220,10 @@ const EnterData = () => {
                                 </div>
                                 <div className="container">
 
-                                    <h2 className="title">Statistics</h2>
+                                    <div class="double-title">
+                                        <h6 className="date">{datePick.slice(0, 4) + " " + toMonthName(datePick.slice(5, 7))}</h6>
+                                        <h2 className="title">statistics</h2>
+                                    </div>
                                     {(statusForExpenses && categoryStatus) ? (
                                         <div id="statistics">
                                             <div id="cards">
@@ -237,9 +254,6 @@ const EnterData = () => {
                                         <div className={"selects buttons"}>
                                             <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
                                             <a onClick={() => setShowUploadData(true)}>Upload file</a>
-                                        </div>
-                                        <div>
-                                            <input type="month" onChange={e => setDatePick(e.target.value)} min={minDate.slice(0, 7)} max={new Date().toISOString().split('T')[0].slice(0, 7)} defaultValue={new Date().toISOString().split('T')[0].slice(0, 7)}></input>
                                         </div>
                                     </div>
 

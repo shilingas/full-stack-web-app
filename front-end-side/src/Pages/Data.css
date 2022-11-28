@@ -76,7 +76,7 @@ table.data_table {
             }
 
 #statistics {
-    width: calc(100% - 20px);
+    width: 100%;
     margin: 50px 0;
 }
 
@@ -151,3 +151,25 @@ table.data_table {
     .second-navigation .selects {
         flex-grow: 1;
     }
+
+        .second-navigation div input {
+            gap: 5px;
+        }
+
+@media only screen and (max-width: 1200px) {
+    #statistics #cards {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    #statistics #cards {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    #statistics #cards {
+        grid-template-columns: 1fr;
+    }
+}

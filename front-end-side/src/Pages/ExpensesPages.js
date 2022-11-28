@@ -17,6 +17,7 @@ const ExpensesPages = ({ categoryType }) => {
     const [showCategories, setShowCategories] = useState(false);
     const initialRender = useRef(true);
     const [id, setId] = useState("");
+    const [datePick, setDatePick] = useState(new Date().toISOString().split('T')[0].slice(0, 7));
     useEffect(() => {
         axios.get("https://localhost:7174/api/File").then(resp => {
             setInfo(resp);
@@ -82,9 +83,19 @@ const ExpensesPages = ({ categoryType }) => {
         }
     }, [selectedCategory]);
 
+    const sendDate = (e) => {
+        if (e !== "total") {
+            setDatePick(e);
+        }
+    }
+
     return (
         <div>
             <Navbar />
+            <div>
+                <input type="month" onChange={e => sendDate(e.target.value)} max={new Date().toISOString().split('T')[0].slice(0, 7)} defaultValue={new Date().toISOString().split('T')[0].slice(0, 7)}></input>
+            </div>
+
             <h2 className="title">{categoryType} Expenses</h2>
             <Modal className="categorize" onClose={() => setShowCategories(false)} show={showCategories}>
                 {categoryType == "food" ?

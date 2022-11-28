@@ -4,7 +4,7 @@ namespace back_end_side.Controllers
 {
     public interface ISorting
     {
-        SortingModel SortToCategories();
+        SortingModel SortToCategories(string pickedDate = "");
         String CheckInput(Record model);
     }
 }
