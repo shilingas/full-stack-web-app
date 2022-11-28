@@ -47,7 +47,13 @@ namespace back_end_side.Controllers
 
             if (_context.Expenses != null)
             {
-                Model.Empty = false;
+                if (_context.Expenses.Any())
+                {
+                    Console.WriteLine("-------------------------------------");
+                    Console.WriteLine(_context.Expenses.Count());
+                    Console.WriteLine("-------------------------------------");
+                    Model.Empty = false;
+                }
 
                 Model.FoodSum = queryMethod("food", Supermarkets, pickedDate);
                 Model.ClothesSum = queryMethod("clothes", ClothesShops, pickedDate);

@@ -1,15 +1,14 @@
 :root {
-    --main-color: #ff2f39;
-    --main-color-shade: #ff27b3;
+    --main-color: #0067ad;
+    --main-color-shade: #3498db;
     --secondary-color: #96a5af;
     --secondary-color-shade: #bdc3c7;
     --main-text-color: #798395;
     --secondary-text-color: #343b48;
-    --active-text-color: #d7259e;
+    --active-text-color: #3498db;
     --bg-color: #1b2028;
     --bg-color-shade: #263246;
     --white: #fff;
-    --gradient: linear-gradient(90deg, var(--main-color) 0%, var(--main-color-shade) 100%) no-repeat;
     /*Statistics bars colors*/
     --food-color: #ff2f39;
     --food-color-shade: #ff27b3;
