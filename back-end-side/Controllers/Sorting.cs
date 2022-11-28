@@ -31,7 +31,7 @@ namespace back_end_side.Controllers
         public readonly string[] CarMaintenanceShops = { "CIRCLE K", "VIADA", "BOLT", "STOVA", "RIDE SHARE", "SUSISIEKIMO PASLAUGOS", "CITYBEE" };
         public readonly string[] HouseMaintenanceShops = { "JYSK", "MOKI VEZI", "SENUKAI", "CONSILIUM OPTIMUM", "TELE2", "telia", "TOPO CENTRAS", "BITĖ", "GO3", "IKEA" };
         public readonly string[] EntertainmentShops = { "CYBERX", "SPOTIFY", "BASKETNEWS", "OCULUS DIGITAL", "STEAM", "ŽALGIRIO KREPŠINIO CENTRAS" };
-        public SortingModel SortToCategories(string pickedDate = "aa")
+        public SortingModel SortToCategories(string pickedDate = "")
         {
             SortingModel Model = new()
             {
@@ -49,9 +49,6 @@ namespace back_end_side.Controllers
             {
                 if (_context.Expenses.Any())
                 {
-                    Console.WriteLine("-------------------------------------");
-                    Console.WriteLine(_context.Expenses.Count());
-                    Console.WriteLine("-------------------------------------");
                     Model.Empty = false;
                 }
 

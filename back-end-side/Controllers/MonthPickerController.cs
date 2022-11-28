@@ -29,12 +29,13 @@ namespace back_end_side.Controllers
                                 .Select(x => x)
                                 .ToArray();
 
+                Array.Sort(sortedByMonth);
                 return sortedByMonth;
             } else
             {
-                var sortedByMonth = _context.Expenses.ToArray();
-                Array.Sort(sortedByMonth);
-                return sortedByMonth;
+                var fullList = _context.Expenses.ToArray();
+                Array.Sort(fullList);
+                return fullList;
             }
 
         }
