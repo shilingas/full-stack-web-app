@@ -10,6 +10,7 @@ namespace back_end_side.Models
         public double Amount { get; set; }
         public string? ExpenseCode { get; set; }
         public int ID { get; set; }
+        public bool IsSelected { get; set; } = false;
        
     }
 }
