@@ -9,11 +9,18 @@ const Profile = () => {
     const [status, setStatus] = useState(false);
     const [deletedWork, setDeletedWork] = useState("");
     const [unique, setUnique] = useState([]);
+    const [sum, setSum] = useState(0);
 
     useEffect(() => {
         axios.get("https://localhost:7174/api/Income").then(resp => {
             setIncomeData(resp);
             setStatus(true);
+        })
+    }, [])
+
+    useEffect(() => {
+        axios.get("https://localhost:7174/api/InSum").then(resp => {
+            setSum(resp.data);
         })
     }, [])
 
@@ -26,7 +33,7 @@ const Profile = () => {
             }))];
             setUnique(uniqueArray);
         }
-    })
+    }, [incomeData])
 
     const submitWorkplace = () => {
         axios.put("https://localhost:7174/api/Income/" + workplace);
@@ -38,7 +45,10 @@ const Profile = () => {
                 setIncomeData(resp);
                 setStatus(true);
             })
-            }
+            axios.get("https://localhost:7174/api/InSum").then(resp => {
+                setSum(resp.data);
+            })
+        }
         );
     }
 
@@ -48,7 +58,10 @@ const Profile = () => {
                 setIncomeData(resp);
                 setStatus(true);
             })
-            }
+            axios.get("https://localhost:7174/api/InSum").then(resp => {
+                setSum(resp.data);
+            })
+        }
         );;
     }
 
@@ -59,7 +72,7 @@ const Profile = () => {
                 <h1>Profile</h1>
                 <h1>Enter your source of income: </h1>
                 <form onSubmit={submitWorkplace}>
-                    <input onChange={(e) => setWorkplace(e.target.value)} type="text" placeholder="WorkPlace" />
+                    <input onChange={(e) => setWorkplace(e.target.value)} type="text" placeholder="Workplace" />
                     <button>add</button>
                 </form>
                 {
@@ -105,6 +118,12 @@ const Profile = () => {
                             )
                         }
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colSpan="3">Total Income</td>
+                            <td colSpan="3">{parseFloat(sum).toFixed(2)}</td>
+                        </tr>
+                    </tfoot>
                 </table>
                 <table className="data_table" style={{ marginBottom: "30px" }}>
                     <thead>
