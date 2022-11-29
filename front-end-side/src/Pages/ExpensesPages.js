@@ -155,7 +155,7 @@ const ExpensesPages = ({ categoryType }) => {
                     <tbody>
                         {
                             status ? (
-                                info.data.map((item, index) => {
+                                fileData.data.map((item, index) => {
                                     const { date, seller, purpose, amount, category, id } = item;
                                     if (category == categoryType) {
                                         return (
