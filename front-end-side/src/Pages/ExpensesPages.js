@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Navbar from "../../src/Components/Navbar";
+import { useLocation } from "react-router-dom";
 import Modal from "../Components/Modal";
 import Icon from "../Components/Icons.js";
 const ExpensesPages = ({ categoryType }) => {
@@ -18,6 +19,18 @@ const ExpensesPages = ({ categoryType }) => {
     const initialRender = useRef(true);
     const [id, setId] = useState("");
     const [datePick, setDatePick] = useState(new Date().toISOString().split('T')[0].slice(0, 7));
+    const [statusForFileData, setStatusForFileData] = useState(false);
+    const [isEmpty, setIsEmpty] = useState(true);
+    const [fileData, setFileData] = useState([]);
+    const location = useLocation();
+    const currData = location.state;
+    useEffect(() => {
+        setDatePick(currData);
+        axios.get("https://localhost:7174/api/MonthPicker/" + `${currData}`).then(resp => {
+            setFileData(resp);
+            setStatusForFileData(true);
+        })
+    }, []);
     useEffect(() => {
         axios.get("https://localhost:7174/api/File").then(resp => {
             setInfo(resp);
@@ -68,7 +81,7 @@ const ExpensesPages = ({ categoryType }) => {
             if (selectedCategory != "") {
                 axios.put("https://localhost:7174/api/Sorting/" + id, { "date": date, "seller": seller, "amount": amount, "purpose": purpose, "category": selectedCategory, "isCategorized": true, "id": id }).then(() => {
                     axios.get('https://localhost:7174/api/ShowData').then(resp => {
-                        setInputData(resp);
+                        setFileData(resp);
                         setDelayForInput(true);
                     });
                     axios.get("https://localhost:7174/api/File").then(resp => {
@@ -87,13 +100,18 @@ const ExpensesPages = ({ categoryType }) => {
         if (e !== "total") {
             setDatePick(e);
         }
+        axios.get("https://localhost:7174/api/MonthPicker/" + e).then(resp => {
+            setFileData(resp);
+            setStatusForFileData(true);
+        })      
+
     }
 
     return (
         <div>
             <Navbar />
             <div>
-                <input type="month" onChange={e => sendDate(e.target.value)} max={new Date().toISOString().split('T')[0].slice(0, 7)} defaultValue={new Date().toISOString().split('T')[0].slice(0, 7)}></input>
+                <input type="month" onChange={e => sendDate(e.target.value)} max={new Date().toISOString().split('T')[0].slice(0, 7)} defaultValue={currData}></input>
             </div>
 
             <h2 className="title">{categoryType} Expenses</h2>
