@@ -44,6 +44,26 @@ namespace back_end_side.Services
             }
         }
 
+        public async Task GetIncomeData()
+        {
+            var data = _reader.GetIncomeList();
+            var incomeList = new List<IncomeModel>();
+            foreach (var item in data)
+            {
+                var income = new IncomeModel
+                {
+                    Date = item.Date,
+                    Seller = item.Seller,
+                    Purpose = item.Purpose,
+                    Amount = item.Amount,
+                    ExpenseCode = item.ExpenseCode,
+                };
+                incomeList.Add(income);
+            }
+            await _context.Income.AddRangeAsync(incomeList);
+            await _context.SaveChangesAsync();
+        }
+
         private void RemoveDuplicates(List<Record> list)
         {
             //removing duplicates in list
