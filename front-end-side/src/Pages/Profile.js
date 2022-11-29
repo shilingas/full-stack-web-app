@@ -3,11 +3,12 @@ import axios from "axios";
 import Navbar from "../../src/Components/Navbar";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const Friends = () => {
+const Profile = () => {
     const [workplace, setWorkplace] = useState("");
     const [incomeData, setIncomeData] = useState([]);
     const [status, setStatus] = useState(false);
     const [deletedWork, setDeletedWork] = useState("");
+    const [unique, setUnique] = useState([]);
 
     useEffect(() => {
         axios.get("https://localhost:7174/api/Income").then(resp => {
@@ -16,18 +17,39 @@ const Friends = () => {
         })
     }, [])
 
+    useEffect(() => {
+        if (status) {
+            const uniqueArray = [...new Set(incomeData.data.map(item => {
+                if (item.isSelected == true) {
+                    return (item.seller);
+                }
+            }))];
+            setUnique(uniqueArray);
+        }
+    })
+
     const submitWorkplace = () => {
         axios.put("https://localhost:7174/api/Income/" + workplace);
     }
 
     const deleteWorkplace = (work) => {
-            axios.delete("https://localhost:7174/api/Income/" + work).then(resp => {
-                axios.get("https://localhost:7174/api/Income").then(resp => {
-                    setIncomeData(resp);
-                    setStatus(true);
-                })
+        axios.delete("https://localhost:7174/api/Income/" + work).then(resp => {
+            axios.get("https://localhost:7174/api/Income").then(resp => {
+                setIncomeData(resp);
+                setStatus(true);
+            })
             }
-            );
+        );
+    }
+
+    const moveToWorkplace = (work) => {
+        axios.put("https://localhost:7174/api/Income/" + work).then(resp => {
+            axios.get("https://localhost:7174/api/Income").then(resp => {
+                setIncomeData(resp);
+                setStatus(true);
+            })
+            }
+        );;
     }
 
     return (
@@ -42,11 +64,10 @@ const Friends = () => {
                 </form>
                 {
                     status ? (
-                        incomeData.data.map((item, index) => {
-                            const { date, seller, purpose, amount, id, isSelected } = item;
-                            if (isSelected == true) {
+                        unique.map((item) => {
+                            if (item != null) {
                                 return (
-                                    <div>{seller}<a onClick={() => deleteWorkplace(seller)} style={{marginLeft: "25px"} }>Delete</a></div>
+                                    <div>{item}<a onClick={() => deleteWorkplace(item)} style={{ marginLeft: "25px" }}>Delete</a></div>
                                 );
                             }
                         })
@@ -66,7 +87,7 @@ const Friends = () => {
                     <tbody>
                         {
                             status ? (
-                                incomeData.data.map((item, index) => {
+                                incomeData.data.map((item) => {
                                     const { date, seller, purpose, amount, id, isSelected } = item;
                                     if (isSelected == true) {
                                         return (
@@ -97,7 +118,7 @@ const Friends = () => {
                     <tbody>
                         {
                             status ? (
-                                incomeData.data.map((item, index) => {
+                                incomeData.data.map((item) => {
                                     const { date, seller, purpose, amount, id, isSelected } = item;
                                     if (isSelected == false) {
                                         return (
@@ -106,6 +127,7 @@ const Friends = () => {
                                                 <td>{seller}</td>
                                                 <td>{purpose}</td>
                                                 <td>{parseFloat(amount).toFixed(2)}</td>
+                                                <td><a onClick={() => moveToWorkplace(seller)}>add</a></td>
                                             </tr>
                                         );
                                     }
@@ -120,4 +142,4 @@ const Friends = () => {
         </div>
     );
 }
-export default Friends;
+export default Profile;

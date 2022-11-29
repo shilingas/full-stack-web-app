@@ -12,12 +12,12 @@ namespace back_end_side.Controllers
     public class IncomeController : Controller
     {
         private readonly ExpensesContext _context;
-        private readonly IReportReader _reader;
+        //private readonly IReportReader _reader;
 
         public IncomeController(ExpensesContext context, IReportReader reader)
         {
             _context = context;
-            _reader = reader;
+            //_reader = reader;
         }
 
         [HttpGet]
@@ -25,10 +25,10 @@ namespace back_end_side.Controllers
         public IncomeModel[] Get()
         {
             var incomeArray = _context.Income.ToArray();
+            Array.Sort(incomeArray);
             return incomeArray;
         }
 
-        [HttpPut]
         [HttpPut("{workplace}")]
         [EnableCors("corsapp")]
         public IActionResult Put(string workplace)
@@ -57,5 +57,14 @@ namespace back_end_side.Controllers
             }
             return Ok();
         }
+
+        /*[HttpPut("{index}")]
+        [EnableCors("corsapp")]
+        public IActionResult Put([FromBody] IncomeModel model, int index)
+        {
+            Console.WriteLine(index);
+
+            return Ok();
+        }*/
     }
 }
