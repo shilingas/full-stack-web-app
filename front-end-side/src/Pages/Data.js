@@ -9,6 +9,7 @@ import DataEnter from "../Pages/EnterData";
 import UploadFile from "../Pages/FileUpload";
 import ModalUpdateData from "../Pages/EnterData";
 import useGetData from "../useGetData";
+export const GlobalDateContext = React.createContext("GLOBAL DATE");
 const EnterData = () => {
     const [showUploadData, setShowUploadData] = useState(false);
     const [showEnterData, setShowEnterData] = useState(false);
@@ -124,6 +125,7 @@ const EnterData = () => {
     }
 
     return (
+        <GlobalDateContext.Provider value={datePick}>
         <div>
             <Navbar />
 
@@ -267,7 +269,8 @@ const EnterData = () => {
                             </>
                         )
             }
-        </div>
+            </div>
+        </GlobalDateContext.Provider>
     );
 }
 export default EnterData;
