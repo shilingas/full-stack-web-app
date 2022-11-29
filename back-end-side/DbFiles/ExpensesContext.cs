@@ -11,10 +11,12 @@ namespace back_end_side.DbFiles
         }
 
         public DbSet<Record> Expenses { get; set; }
+        public DbSet<IncomeModel> Income { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Record>().ToTable("Expenses");
+            modelBuilder.Entity<IncomeModel>().ToTable("Income");
         }
     }
 }

@@ -10,6 +10,7 @@ import {
 import ExpensesPages from "./Pages/ExpensesPages";
 import Friends from "./Pages/Friends";
 import HomePage from "./Pages/HomePage";
+import Profile from "./Pages/Profile";
 const App = () => {
     const { user } = useAuth0();
     return (
@@ -24,6 +25,7 @@ const App = () => {
                 <Route path="/data/house-expenses" element={user ? <ExpensesPages date={val} categoryType="house" /> : <HomePage />} />
                 <Route path="/data/entertainment-expenses" element={user ? <ExpensesPages date={val} categoryType="entertainment" /> : <HomePage />} />
                 <Route path="/data/other-expenses" element={user ? <ExpensesPages date={val} categoryType="other" /> : <HomePage />} />
+                <Route path="/profile" element={user ? <Profile /> : <HomePage />} />
             </Routes>
         </Router>
         )

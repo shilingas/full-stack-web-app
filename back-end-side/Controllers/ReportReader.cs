@@ -18,7 +18,7 @@ namespace back_end_side.Controllers
     public delegate void DeleteDuplicates(List<Record> list);
     public class ReportReader : IReportReader
     {
-        private static Lazy<List<Record>> IncomeList = new Lazy<List<Record>>();
+        private Lazy<List<Record>> IncomeList = new Lazy<List<Record>>();
         private int CheckBank(StreamReader streamReader)
         {
             string? firstLine = streamReader.ReadLine();
@@ -56,6 +56,8 @@ namespace back_end_side.Controllers
                 using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
 
                 var records = csvReader.GetRecords<Record>().ToList();
+
+                records.RemoveAt(records.Count - 1);
 
                 for (int i = records.Count - 1; i >= 0; --i)
                 {
@@ -115,6 +117,11 @@ namespace back_end_side.Controllers
             {
                 return null;
             }
+        }
+
+        public List<Record> GetIncomeList()
+        {
+            return IncomeList.Value;
         }
     }
 
