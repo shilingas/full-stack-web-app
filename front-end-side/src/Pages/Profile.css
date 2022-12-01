@@ -1,0 +1,61 @@
+#all-sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 0 0 20px;
+}
+
+#all-sources .income-source {
+    background: var(--input-bg);
+    border-radius: 10px;
+    padding: 5px 15px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#all-sources .income-source a { display: flex; }
+
+#all-sources .income-source svg {
+    height: 20px;
+    fill: var(--error-color);
+    width: auto;
+}
+
+form#workplace-input-form {
+    display: flex;
+    margin-bottom: 30px;
+
+}
+
+form#workplace-input-form input {
+    padding: 12px 25px;
+    border-radius: 10px 0 0 10px;
+}
+
+form#workplace-input-form button {
+    border-radius: 0 10px 10px 0;
+}
+
+table td.add {
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+table td.add:hover {
+    transition: .3s ease-in-out;
+    transform: scale(1.1);
+}
+
+table td.add svg {
+    fill: var(--house-color);
+    height: 17px;
+    transform: rotate(45deg);
+    margin-bottom: -2px;
+}
+
+table td.delete.x-icon svg {
+    fill: var(--error-color);
+    margin-bottom: -4px;
+}
