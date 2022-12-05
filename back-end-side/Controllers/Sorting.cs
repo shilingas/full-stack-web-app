@@ -156,6 +156,7 @@ namespace back_end_side.Controllers
 
                 Model.OtherSum = sumOfOther;
                 Model.PreviousOtherSum = sumOfPreviousOther;
+                Model.PreviousYearOtherSum = sumOfPreviousYearOther;
             }
 
             return Model;
