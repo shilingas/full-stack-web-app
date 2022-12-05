@@ -15,9 +15,9 @@ const Accordion = props => {
 
     return (
         <div className={isVisible ? 'accordion opened ' + props.className : 'accordion closed ' + props.className}>
-            <div className="title">
+            <div className="title" onClick={newFunction}>
                 <h3>{props.title}</h3>
-                <button onClick={newFunction} className={isVisible? "opened" : "closed"}>
+                <button className={isVisible? "opened" : "closed"}>
                     <Icon type="expand-arrow"></Icon>
                 </button>
             </div>
