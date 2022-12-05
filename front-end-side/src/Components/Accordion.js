@@ -5,7 +5,7 @@ import "../Components/Accordion.css";
 const Accordion = props => {
     const [isVisible, setIsVisible] = useState(false);
 
-    const newFunction = (e) => {
+    const OpenAccordionContent = (e) => {
         if (isVisible) {
             setIsVisible(false);
         } else {
@@ -15,7 +15,7 @@ const Accordion = props => {
 
     return (
         <div className={isVisible ? 'accordion opened ' + props.className : 'accordion closed ' + props.className}>
-            <div className="title" onClick={newFunction}>
+            <div className="title" onClick={OpenAccordionContent}>
                 <h3>{props.title}</h3>
                 <button className={isVisible? "opened" : "closed"}>
                     <Icon type="expand-arrow"></Icon>
