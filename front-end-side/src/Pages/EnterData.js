@@ -84,7 +84,12 @@ const ShowData = props => {
 
         // props.index - id, kuri keisti
         // purpose, amount, seller, date - jau update inpute ivesti duomenys
-        axios.put("https://localhost:7174/api/ShowData/" + props.index, { "date": date, "seller": seller, "amount": amount, "purpose": purpose, "id": props.index });
+        if (props.income == true) {
+            axios.put("https://localhost:7174/api/Income/Edit/" + props.id, { "date": date, "seller": seller, "amount": amount, "purpose": purpose, "id": props.id, "isSelected": props.isSelected, "isAdded": props.isAdded });
+        } else {
+            axios.put("https://localhost:7174/api/ShowData/" + props.index, { "date": date, "seller": seller, "amount": amount, "purpose": purpose, "id": props.index });
+        }
+        
     }
     return (
         <form id='form' onSubmit={props.buttonType == "post" ? postData : updateData}>

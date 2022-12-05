@@ -26,14 +26,13 @@ namespace back_end_side.Controllers
         public async Task<Record[]> GetFile()
         {
             _sorting.SortToCategories();
-            var FileData = await _context.Expenses.ToArrayAsync();
-            Array.Sort(FileData);
 
             var CurrentDate = DateTime.Now.ToString("yyyy-MM-dd").Substring(0, 7);
 
             var CurrentMonthData = _context.Expenses
                 .Where(x => x.Date.ToString().StartsWith(CurrentDate))
                 .Select(x => x)
+                .OrderBy(x => x.Date)
                 .ToArray();
             return CurrentMonthData;
         }

@@ -18,12 +18,23 @@ namespace back_end_side.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("{date}")]
         [EnableCors("corsapp")]
-        public double Get()
+        public double Get(string date)
         {
-            var sum = _context.Income.Where(x => x.IsSelected == true).Select(x => x.Amount).Sum();
-            Console.WriteLine(sum);
+            double sum;
+            if (date.Equals("total"))
+            {
+                sum = _context.Income.Where(x => x.IsSelected == true || x.IsAdded == true).Select(x => x.Amount).Sum();
+            }
+            else
+            {
+                var selectedDate = Convert.ToDateTime(date);
+                sum = _context.Income
+                    .Where(x => x.Date.Year == selectedDate.Year && x.Date.Month == selectedDate.Month && (x.IsSelected == true || x.IsAdded == true))
+                    .Select(x => x.Amount)
+                    .Sum();
+            }
             return sum;
         }
 

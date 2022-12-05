@@ -11,6 +11,7 @@ namespace back_end_side.Models
         public string? ExpenseCode { get; set; }
         public int ID { get; set; }
         public bool IsSelected { get; set; } = false;
+        public bool IsAdded { get; set; } = false;
 
         public int CompareTo(object? obj)
         {
