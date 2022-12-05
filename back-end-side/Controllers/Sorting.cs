@@ -3,6 +3,7 @@ using back_end_side.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Globalization;
 using System.Reflection;
 
 namespace back_end_side.Controllers
@@ -15,6 +16,18 @@ namespace back_end_side.Controllers
         public double HouseSum { get; set; }
         public double EntertaintmentSum { get; set; }
         public double OtherSum { get; set; }
+        public double PreviousFoodSum { get; set; }
+        public double PreviousClothesSum { get; set; }
+        public double PreviousCarSum { get; set; }
+        public double PreviousHouseSum { get; set; }
+        public double PreviousEntertaintmentSum { get; set; }
+        public double PreviousOtherSum { get; set; }
+        public double PreviousYearFoodSum { get; set; }
+        public double PreviousYearClothesSum { get; set; }
+        public double PreviousYearCarSum { get; set; }
+        public double PreviousYearHouseSum { get; set; }
+        public double PreviousYearEntertaintmentSum { get; set; }
+        public double PreviousYearOtherSum { get; set; }
         public bool Empty { get; set; }
     }
     public class Sorting : ISorting
@@ -41,6 +54,18 @@ namespace back_end_side.Controllers
                 HouseSum = 0,
                 ClothesSum = 0,
                 FoodSum = 0,
+                PreviousCarSum = 0,
+                PreviousEntertaintmentSum = 0,
+                PreviousOtherSum = 0,
+                PreviousHouseSum = 0,
+                PreviousClothesSum = 0,
+                PreviousFoodSum = 0,
+                PreviousYearCarSum = 0,
+                PreviousYearEntertaintmentSum = 0,
+                PreviousYearOtherSum = 0,
+                PreviousYearHouseSum = 0,
+                PreviousYearClothesSum = 0,
+                PreviousYearFoodSum = 0,
                 Empty = true
             };
 
@@ -52,13 +77,51 @@ namespace back_end_side.Controllers
                     Model.Empty = false;
                 }
 
-                Model.FoodSum = queryMethod("food", Supermarkets, pickedDate);
-                Model.ClothesSum = queryMethod("clothes", ClothesShops, pickedDate);
-                Model.CarSum = queryMethod("car", CarMaintenanceShops, pickedDate);
-                Model.EntertaintmentSum = queryMethod("entertainment", EntertainmentShops, pickedDate);
-                Model.HouseSum = queryMethod("house", HouseMaintenanceShops, pickedDate);
+                var currentDate = DateTime.Now;
+                var dateFromFront = DateTime.Now;
+                var previousMonth = DateTime.Now;
+                var previousYear = DateTime.Now;
+
+                if (string.IsNullOrEmpty(pickedDate))
+                {
+                    dateFromFront = DateTime.MinValue;
+                    previousMonth = DateTime.MinValue;
+                    previousYear = DateTime.MinValue;
+                }
+                else if (currentDate.ToString("yyyy-MM").StartsWith(pickedDate))
+                {
+                    dateFromFront = new DateTime(currentDate.Year, currentDate.Month, 1);
+                    previousYear = dateFromFront.AddYears(-1);
+                    previousMonth = dateFromFront.AddMonths(-1);
+                }
+                else
+                {
+                    dateFromFront = DateTime.ParseExact(pickedDate, "yyyy-MM", null);
+                    previousYear = dateFromFront.AddYears(-1);
+                    previousMonth = dateFromFront.AddMonths(-1);
+                }
+
+                Model.FoodSum = queryMethod("food", Supermarkets, dateFromFront);
+                Model.ClothesSum = queryMethod("clothes", ClothesShops, dateFromFront);
+                Model.CarSum = queryMethod("car", CarMaintenanceShops, dateFromFront);
+                Model.EntertaintmentSum = queryMethod("entertainment", EntertainmentShops, dateFromFront);
+                Model.HouseSum = queryMethod("house", HouseMaintenanceShops, dateFromFront);
+
+                Model.PreviousFoodSum = queryMethod("food", Supermarkets, previousMonth);
+                Model.PreviousClothesSum = queryMethod("clothes", ClothesShops, previousMonth);
+                Model.PreviousCarSum = queryMethod("car", CarMaintenanceShops, previousMonth);
+                Model.PreviousHouseSum = queryMethod("house", HouseMaintenanceShops, previousMonth);
+                Model.PreviousEntertaintmentSum = queryMethod("entertainment", EntertainmentShops, previousMonth);
+
+                Model.PreviousYearFoodSum = queryMethod("food", Supermarkets, previousYear);
+                Model.PreviousYearClothesSum = queryMethod("clothes", ClothesShops, previousYear);
+                Model.PreviousYearCarSum = queryMethod("car", CarMaintenanceShops, previousYear);
+                Model.PreviousYearEntertaintmentSum = queryMethod("entertainment", EntertainmentShops, previousYear);
+                Model.PreviousYearHouseSum = queryMethod("house", HouseMaintenanceShops, previousYear);
 
                 double sumOfOther = 0;
+                double sumOfPreviousOther = 0;
+                double sumOfPreviousYearOther = 0;
 
                 if (!string.IsNullOrEmpty(pickedDate))
                 {
@@ -68,8 +131,19 @@ namespace back_end_side.Controllers
                         {
                             sumOfOther += record.Amount;
                         }
+
+                        if (record.Category.Equals("other") && record.Date >= previousMonth && record.Date < previousMonth.AddMonths(1))
+                        {
+                            sumOfPreviousOther += record.Amount;
+                        }
+
+                        if (record.Category.Equals("other") && record.Date >= previousYear && record.Date < previousYear.AddMonths(1))
+                        {
+                            sumOfPreviousYearOther += record.Amount;
+                        }
                     }
-                } else
+                }
+                else
                 {
                     foreach (var record in _context.Expenses)
                     {
@@ -81,13 +155,14 @@ namespace back_end_side.Controllers
                 }
 
                 Model.OtherSum = sumOfOther;
+                Model.PreviousOtherSum = sumOfPreviousOther;
             }
 
             return Model;
 
         }
 
-        public double queryMethod(string category, string[] shops, string pickedDate)
+        public double queryMethod(string category, string[] shops, DateTime pickedDate)
         {
             double Sum = 0;
 
@@ -100,16 +175,17 @@ namespace back_end_side.Controllers
             }
             _context.SaveChanges();
 
-            if (string.IsNullOrEmpty(pickedDate))
+            if (pickedDate == DateTime.MinValue)
             {
                 Sum = _context.Expenses
                 .Where(r => r.Category != null && r.Category.Equals(category))
                 .Select(r => r.Amount)
                 .Sum();
-            } else
+            }
+            else
             {
                 Sum = _context.Expenses
-                .Where(r => r.Category != null && r.Category.Equals(category) && r.Date.ToString().StartsWith(pickedDate))
+                .Where(r => r.Category != null && r.Category.Equals(category) && r.Date >= pickedDate && r.Date < pickedDate.AddMonths(1))
                 .Select(r => r.Amount)
                 .Sum();
             }

@@ -9,6 +9,7 @@ import DataEnter from "../Pages/EnterData";
 import UploadFile from "../Pages/FileUpload";
 import ModalUpdateData from "../Pages/EnterData";
 import useGetData from "../useGetData";
+import Graph from "../Components/Graph";
 export const GlobalDateContext = React.createContext("GLOBAL DATE");
 const EnterData = () => {
     const [showUploadData, setShowUploadData] = useState(false);
@@ -29,6 +30,10 @@ const EnterData = () => {
     const [datePick, setDatePick] = useState(new Date().toISOString().split('T')[0].slice(0, 7));
     const [isEmpty, setIsEmpty] = useState(true);
     const initialRender = useRef(true);
+    const [rerender, setRerender] = useState(false);
+    const [data, setData] = useState([]);
+    const [previousMonthExpenses, setPreviousMonthExpenses] = useState(0);
+    const [previousYearExpenses, setPreviousYearExpenses] = useState(0);
     function addClass() {
         var element = document.getElementsByTagName("BODY")[0];
         element.classList.remove("modal-open");
@@ -121,154 +126,239 @@ const EnterData = () => {
         axios.get("https://localhost:7174/api/SumsByMonth/" + e).then((item) => {
             setIsEmpty(item.data.Empty);
             setNewExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
+            setPreviousMonthExpenses(item.data.previousCarSum + item.data.previousClothesSum + item.data.previousEntertaintmentSum + item.data.previousFoodSum + item.data.previousOtherSum + item.data.previousHouseSum);
+            setPreviousYearExpenses(item.data.previousYearCarSum + item.data.previousYearClothesSum + item.data.previousYearEntertaintmentSum + item.data.previousYearFoodSum + item.data.previousYearOtherSum + item.data.previousYearHouseSum);
         })
+
     }
+
+    function checkIfNotNaN(number) {
+        if (isNaN(number)) {
+            return 0;
+        } else {
+            return number;
+        }
+    }
+
+    useEffect(() => {
+        if (categoryStatus) {
+            data.push({
+                name: 'Food',
+                Month1: checkIfNotNaN(Math.round(categoryData.data.previousFoodSum / previousMonthExpenses * 10 * 100) / 10),
+                Month2: checkIfNotNaN(Math.round(categoryData.data.foodSum / newExpenses * 10 * 100) / 10),
+                PreviousYear: checkIfNotNaN(Math.round(categoryData.data.previousYearFoodSum / previousYearExpenses * 10 * 100) / 10),
+            });
+
+            data.push({
+                name: 'Car',
+                Month1: checkIfNotNaN(Math.round(categoryData.data.previousCarSum / previousMonthExpenses * 10 * 100) / 10),
+                Month2: checkIfNotNaN(Math.round(categoryData.data.carSum / newExpenses * 10 * 100) / 10),
+                PreviousYear: checkIfNotNaN(Math.round(categoryData.data.previousYearCarSum / previousYearExpenses * 10 * 100) / 10),
+            });
+
+            data.push({
+                name: 'Entertainment',
+                Month1: checkIfNotNaN(Math.round(categoryData.data.previousEntertaintmentSum / previousMonthExpenses * 10 * 100) / 10),
+                Month2: checkIfNotNaN(Math.round(categoryData.data.entertaintmentSum / newExpenses * 10 * 100) / 10),
+                PreviousYear: checkIfNotNaN(Math.round(categoryData.data.previousYearEntertaintmentSum / previousYearExpenses * 10 * 100) / 10),
+            });
+
+            data.push({
+                name: 'House',
+                Month1: checkIfNotNaN(Math.round(categoryData.data.previousHouseSum / previousMonthExpenses * 10 * 100) / 10),
+                Month2: checkIfNotNaN(Math.round(categoryData.data.houseSum / newExpenses * 10 * 100) / 10),
+                PreviousYear: checkIfNotNaN(Math.round(categoryData.data.previousYearHouseSum / previousYearExpenses * 10 * 100) / 10),
+            });
+
+            data.push({
+                name: 'Clothes',
+                Month1: checkIfNotNaN(Math.round(categoryData.data.previousClothesSum / previousMonthExpenses * 10 * 100) / 10),
+                Month2: checkIfNotNaN(Math.round(categoryData.data.clothesSum / newExpenses * 10 * 100) / 10),
+                PreviousYear: checkIfNotNaN(Math.round(categoryData.data.previousYearClothesSum / previousYearExpenses * 10 * 100) / 10),
+            });
+
+            data.push({
+                name: 'Other',
+                Month1: checkIfNotNaN(Math.round((previousMonthExpenses - categoryData.data.previousClothesSum - categoryData.data.previousHouseSum - categoryData.data.previousFoodSum - categoryData.data.previousEntertaintmentSum - categoryData.data.previousCarSum) / previousMonthExpenses * 10 * 100) / 10),
+                Month2: checkIfNotNaN(Math.round((newExpenses - categoryData.data.clothesSum - categoryData.data.houseSum - categoryData.data.foodSum - categoryData.data.entertaintmentSum - categoryData.data.carSum) / newExpenses * 10 * 100) / 10),
+                PreviousYear: checkIfNotNaN(Math.round((previousYearExpenses - categoryData.data.previousYearClothesSum - categoryData.data.previousYearHouseSum - categoryData.data.previousYearFoodSum - categoryData.data.previousYearEntertaintmentSum - categoryData.data.previousYearCarSum) / previousYearExpenses * 10 * 100) / 10),
+            });
+
+            setRerender(true);
+        }
+    }, [categoryStatus, rerender, previousMonthExpenses])
+
+    useEffect(() => {
+        setData([]);
+        setRerender(false);
+    }, [newExpenses, previousMonthExpenses])
 
     return (
         <GlobalDateContext.Provider value={datePick}>
-        <div>
-            <Navbar />
+            <div>
+                <Navbar />
 
-            {
-                !categoryStatus ? null :
-                    isEmpty !== false ?
-                        (
-                            <React.Fragment>
-                                <div className="container" style={{ marginTop: "30px" }}>
-                                    <div class="second-navigation">
-                                        <div className={"selects"}>
-                                            <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
-                                            <a onClick={() => setShowUploadData(true)}>Upload file</a>
+                {
+                    !categoryStatus ? null :
+                        isEmpty !== false ?
+                            (
+                                <React.Fragment>
+                                    <div className="container" style={{ marginTop: "30px" }}>
+                                        <div class="second-navigation">
+                                            <div className={"selects"}>
+                                                <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
+                                                <a onClick={() => setShowUploadData(true)}>Upload file</a>
+                                            </div>
+                                            <div>
+                                                <input type="month" onChange={e => sendDate(e.target.value)} max={new Date().toISOString().split('T')[0].slice(0, 7)} defaultValue={new Date().toISOString().split('T')[0].slice(0, 7)}></input>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <input type="month" onChange={e => sendDate(e.target.value)} max={new Date().toISOString().split('T')[0].slice(0, 7)} defaultValue={new Date().toISOString().split('T')[0].slice(0, 7)}></input>
+
+                                    </div>
+                                    <Modal className="enter-data" onClose={() => setShowEnterData(false)} show={showEnterData}>
+                                        <DataEnter buttonType={"post"} date={""} seller={""} purpose={""} amount={""} />
+                                    </Modal>
+                                    <Modal className="upload-data" onClose={() => setShowUploadData(false)} show={showUploadData}>
+                                        <UploadFile />
+                                    </Modal>
+                                    <Modal className="enter-data" onClose={() => setShowUpdateData(false)} show={showUpdateData}>
+                                        <ModalUpdateData show={showUpdateData} buttonType={"update"} index={currentIndex} date={currentDate} seller={currentSeller} purpose={currentPurpose} amount={currentAmount} />
+                                    </Modal>
+                                    <Modal className="delete-comfirmation" show={showConfirmation} onClose={() => setShowConfirmation(false)}>
+                                        <p>Are you sure you want to delete this record?</p>
+                                        <div id="buttons">
+                                            <button onClick={() => deleteData(deleteIndex)}>Yes</button>
+                                            <button onClick={() => setShowConfirmation(false)} className="secondary">No</button>
                                         </div>
-                                    </div>
-
-                                </div>
-                                <Modal className="enter-data" onClose={() => setShowEnterData(false)} show={showEnterData}>
-                                    <DataEnter buttonType={"post"} date={""} seller={""} purpose={""} amount={""} />
-                                </Modal>
-                                <Modal className="upload-data" onClose={() => setShowUploadData(false)} show={showUploadData}>
-                                    <UploadFile />
-                                </Modal>
-                                <Modal className="enter-data" onClose={() => setShowUpdateData(false)} show={showUpdateData}>
-                                    <ModalUpdateData show={showUpdateData} buttonType={"update"} index={currentIndex} date={currentDate} seller={currentSeller} purpose={currentPurpose} amount={currentAmount} />
-                                </Modal>
-                                <Modal className="delete-comfirmation" show={showConfirmation} onClose={() => setShowConfirmation(false)}>
-                                    <p>Are you sure you want to delete this record?</p>
-                                    <div id="buttons">
-                                        <button onClick={() => deleteData(deleteIndex)}>Yes</button>
-                                        <button onClick={() => setShowConfirmation(false)} className="secondary">No</button>
-                                    </div>
-                                </Modal>
-
-                                <div class="double-title">
-                                    <h6 className="date">{datePick.slice(0, 4) + " " + toMonthName(datePick.slice(5, 7))}</h6>
-                                    <h2 className="title">expenses</h2>
-                                </div>
-
-                                <div className="container statistics-table">
-
-                                    <table className="data_table">
-                                        <thead>
-                                            <tr>
-                                                <th>Date</th>
-                                                <th>Seller</th>
-                                                <th>Details</th>
-                                                <th>Price</th>
-                                                <th colSpan="2"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {statusForFileData ? (
-
-                                                fileData.data.slice(0, size).map((item) => {
-                                                    const { date, seller, purpose, amount, id } = item;
-                                                    return (
-
-                                                        <tr>
-                                                            <td>{date.slice(0, 10)}</td>
-                                                            <td>{seller}</td>
-                                                            <td>{purpose}</td>
-                                                            <td>{amount.toFixed(2)}</td>
-                                                            <td className="edit" onClick={() => updateData(id, date, seller, purpose, amount)}>
-                                                                <Icon type="edit-button"></Icon>
-                                                            </td>
-                                                            <td className="delete" onClick={() => showModal(id)}>
-                                                                <Icon type="trash-bin"></Icon>
-                                                            </td>
-                                                        </tr>
-                                                    );
-                                                })
-                                            ) : (
-                                                null
-                                            )}
-                                        </tbody>
-
-                                        <tfoot>
-                                            <tr>
-                                                <td colSpan="3">Spent in total</td>
-                                                <td colSpan="3">{parseFloat(newExpenses).toFixed(2)}</td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                    {
-                                        fileData.data.length <= 5 ? null :
-                                            allShown ?
-                                                <button type="button" onClick={showLess}>Show less</button>
-                                                : <button type="button" onClick={showAll}>Show more</button>
-                                    }
-                                </div>
-                                <div className="container">
+                                    </Modal>
 
                                     <div class="double-title">
                                         <h6 className="date">{datePick.slice(0, 4) + " " + toMonthName(datePick.slice(5, 7))}</h6>
-                                        <h2 className="title">statistics</h2>
+                                        <h2 className="title">expenses</h2>
                                     </div>
-                                    {(statusForExpenses && categoryStatus) ? (
-                                        <div id="statistics">
-                                            <div id="cards">
-                                                <ExpensesCard name="food" categorySum={categoryData.data.foodSum} expenses={newExpenses} />
-                                                <ExpensesCard name="transportation" categorySum={categoryData.data.carSum} expenses={newExpenses} />
-                                                <ExpensesCard name="entertainment" categorySum={categoryData.data.entertaintmentSum} expenses={newExpenses} />
-                                                <ExpensesCard name="house" categorySum={categoryData.data.houseSum} expenses={newExpenses} />
-                                                <ExpensesCard name="clothes" categorySum={categoryData.data.clothesSum} expenses={newExpenses} />
-                                                <ExpensesCard name="other" categorySum={categoryData.data.otherSum} expenses={newExpenses} />
+
+                                    <div className="container statistics-table">
+
+                                        <table className="data_table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Seller</th>
+                                                    <th>Details</th>
+                                                    <th>Price</th>
+                                                    <th colSpan="2"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {statusForFileData ? (
+
+                                                    fileData.data.slice(0, size).map((item) => {
+                                                        const { date, seller, purpose, amount, id } = item;
+                                                        return (
+
+                                                            <tr>
+                                                                <td>{date.slice(0, 10)}</td>
+                                                                <td>{seller}</td>
+                                                                <td>{purpose}</td>
+                                                                <td>{amount.toFixed(2)}</td>
+                                                                <td className="edit" onClick={() => updateData(id, date, seller, purpose, amount)}>
+                                                                    <Icon type="edit-button"></Icon>
+                                                                </td>
+                                                                <td className="delete" onClick={() => showModal(id)}>
+                                                                    <Icon type="trash-bin"></Icon>
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    })
+                                                ) : (
+                                                    null
+                                                )}
+                                            </tbody>
+
+                                            <tfoot>
+                                                <tr>
+                                                    <td colSpan="3">Spent in total</td>
+                                                    <td colSpan="3">{parseFloat(newExpenses).toFixed(2)}</td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                        {
+                                            fileData.data.length <= 5 ? null :
+                                                allShown ?
+                                                    <button type="button" onClick={showLess}>Show less</button>
+                                                    : <button type="button" onClick={showAll}>Show more</button>
+                                        }
+                                    </div>
+                                    <div className="container">
+
+                                        <div class="double-title">
+                                            <h6 className="date">{datePick.slice(0, 4) + " " + toMonthName(datePick.slice(5, 7))}</h6>
+                                            <h2 className="title">statistics</h2>
+                                        </div>
+                                        {(statusForExpenses && categoryStatus) ? (
+                                            <div id="statistics">
+                                                <div id="cards">
+                                                    <ExpensesCard name="food" categorySum={categoryData.data.foodSum} expenses={newExpenses} />
+                                                    <ExpensesCard name="transportation" categorySum={categoryData.data.carSum} expenses={newExpenses} />
+                                                    <ExpensesCard name="entertainment" categorySum={categoryData.data.entertaintmentSum} expenses={newExpenses} />
+                                                    <ExpensesCard name="house" categorySum={categoryData.data.houseSum} expenses={newExpenses} />
+                                                    <ExpensesCard name="clothes" categorySum={categoryData.data.clothesSum} expenses={newExpenses} />
+                                                    <ExpensesCard name="other" categorySum={categoryData.data.otherSum} expenses={newExpenses} />
+                                                </div>
+
+                                                <div id="statistics-graph">
+                                                    <div class="graph-block">
+                                                        <div className="title">{toMonthName(datePick.slice(5, 7))} compared with {toMonthName(datePick.slice(5, 7) - 1)}</div>
+                                                        <div className="graph" style={{ background: "#373f4d" }} >
+                                                            {
+                                                                rerender ? <Graph graphData={data} date={datePick} type="1"></Graph>
+                                                                    : null
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    <div class="graph-block">
+                                                        <div className="title">{datePick.slice(0, 4) + " " + toMonthName(datePick.slice(5, 7))} compared with {datePick.slice(0, 4) - 1 + " " + toMonthName(datePick.slice(5, 7))}</div>
+                                                        <div className="graph">
+                                                            {
+                                                                rerender ? <Graph graphData={data} date={datePick} type="2"></Graph>
+                                                                    : null
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            null
+                                        )}
+                                    </div>
+                                </React.Fragment>
+                            ) : (
+                                <>
+                                    <div id="nothing-to-show">
+                                        <div className="container">
+                                            <h2 className="title">Ooops...</h2>
+                                            <h5>Nothing to show here. Upload or enter data to get statistics</h5>
+                                        </div>
+                                    </div>
+
+                                    <div className="container" style={{ marginTop: "30px" }}>
+                                        <div class="second-navigation">
+                                            <div className={"selects buttons"}>
+                                                <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
+                                                <a onClick={() => setShowUploadData(true)}>Upload file</a>
                                             </div>
                                         </div>
-                                    ) : (
-                                        null
-                                    )}
-                                </div>
-                            </React.Fragment>
-                        ) : (
-                            <>
-                                <div id="nothing-to-show">
-                                    <div className="container">
-                                        <h2 className="title">Ooops...</h2>
-                                        <h5>Nothing to show here. Upload or enter data to get statistics</h5>
-                                    </div>
-                                </div>
 
-                                <div className="container" style={{ marginTop: "30px" }}>
-                                    <div class="second-navigation">
-                                        <div className={"selects buttons"}>
-                                            <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
-                                            <a onClick={() => setShowUploadData(true)}>Upload file</a>
-                                        </div>
                                     </div>
-
-                                </div>
-                                <Modal className="enter-data" onClose={() => setShowEnterData(false)} show={showEnterData}>
-                                    <DataEnter buttonType={"post"} date={""} seller={""} purpose={""} amount={""} />
-                                </Modal>
-                                <Modal className="upload-data" onClose={() => setShowUploadData(false)} show={showUploadData}>
-                                    <UploadFile />
-                                </Modal>
-                            </>
-                        )
-            }
+                                    <Modal className="enter-data" onClose={() => setShowEnterData(false)} show={showEnterData}>
+                                        <DataEnter buttonType={"post"} date={""} seller={""} purpose={""} amount={""} />
+                                    </Modal>
+                                    <Modal className="upload-data" onClose={() => setShowUploadData(false)} show={showUploadData}>
+                                        <UploadFile />
+                                    </Modal>
+                                </>
+                            )
+                }
             </div>
         </GlobalDateContext.Provider>
     );
