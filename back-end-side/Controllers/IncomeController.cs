@@ -6,26 +6,48 @@ using Microsoft.EntityFrameworkCore;
 
 namespace back_end_side.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
     [EnableCors("corsapp")]
+    [Route("api/[controller]/[action]")]
     public class IncomeController : Controller
     {
         private readonly ExpensesContext _context;
 
-        public IncomeController(ExpensesContext context, IReportReader reader)
+        public IncomeController(ExpensesContext context)
         {
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("{date}")]
         [EnableCors("corsapp")]
-        public IncomeModel[] Get()
+        public IncomeModel[] Get(string date)
         {
-            var incomeArray = _context.Income.ToArray();
-            Array.Sort(incomeArray);
+            IncomeModel[] incomeArray = new IncomeModel[5];
+            if (date.Equals("total"))
+            {
+                incomeArray = _context.Income.OrderBy(x => x.Date).ToArray();
+            }
+            else
+            {
+                var selectedDate = Convert.ToDateTime(date);
+                incomeArray = _context.Income
+                    .Where(x => x.Date.Year == selectedDate.Year && x.Date.Month == selectedDate.Month)
+                    .Select(x => x)
+                    .OrderBy(x => x.Date).ToArray();
+            }
+            
             return incomeArray;
         }
+
+        [HttpGet]
+        [EnableCors("corsapp")]
+        public IncomeModel[] GetAll()
+        {
+            var incomeArray = _context.Income.OrderBy(x => x.Date).ToArray();
+            return incomeArray;
+        }
+
 
         [HttpPut("{workplace}")]
         [EnableCors("corsapp")]
@@ -42,6 +64,45 @@ namespace back_end_side.Controllers
             return Ok();
         }
 
+        [HttpPut("{id:int}")]
+        [EnableCors("corsapp")]
+        public IActionResult Edit([FromBody] IncomeModel model, int id)
+        {
+            var recordToUpdate = _context.Income.Find(id);
+
+            try
+            {
+                if (recordToUpdate != null)
+                {
+                    recordToUpdate.Date = model.Date;
+                    recordToUpdate.Seller = model.Seller;
+                    recordToUpdate.Purpose = model.Purpose;
+                    recordToUpdate.Amount = model.Amount;
+                    recordToUpdate.IsSelected = model.IsSelected;
+                    recordToUpdate.IsAdded = model.IsAdded;
+                    _context.SaveChanges();
+                }
+            }
+            catch (DbUpdateException ex)
+            {
+                Logger.WriteLog(ex.ToString());
+            }
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        [EnableCors("corsapp")]
+        public IActionResult AddRecord(int id)
+        {
+            var record = _context.Income.Find(id);
+            if (record != null)
+            {
+                record.IsAdded= true;
+                _context.SaveChanges();
+            }
+            return Ok();
+        }
+
         [HttpDelete("{workplace}")]
         [EnableCors("corsapp")]
         public IActionResult Delete(string workplace)
@@ -53,6 +114,17 @@ namespace back_end_side.Controllers
                 rec.IsSelected = false;
                 _context.SaveChanges();
             }
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        [EnableCors("corsapp")]
+        public IActionResult Remove(int id)
+        {
+            var record = _context.Income.Find(id);
+            record.IsSelected = false;
+            record.IsAdded = false;
+            _context.SaveChanges();
             return Ok();
         }
 
