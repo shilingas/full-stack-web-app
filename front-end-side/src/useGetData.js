@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
 import axios from 'axios';
 function useGetData(type) {
     const [data, setData] = useState([]);
@@ -8,6 +9,7 @@ function useGetData(type) {
     const [status, setStatus] = useState(false);
     const [delayForInput, setDelayForInput] = useState(false);
     const [statusForSorting, setStatusForSorting] = useState(false);
+    const { getAccessTokenSilently } = useAuth0();
     // kategoriju sumos
     useEffect(() => {
         axios.get("https://localhost:7174/api/Sorting").then(item => {
@@ -24,11 +26,21 @@ function useGetData(type) {
     }, []);
     // info is file
     useEffect(() => {
-        axios.get("https://localhost:7174/api/File").then(resp => {
-            setInfo(resp);
-            setStatus(true);
-            console.log(resp);
-        })
+        (async () => {
+            const token = await getAccessTokenSilently();
+            console.log(token);
+            try {
+                const resp = await axios.get("https://localhost:7174/api/File", {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                setStatus(true);
+                setInfo(resp);               
+            } catch (e) {
+
+            }
+        })();
     }, []);
     useEffect(() => {
         axios.get('https://localhost:7174/api/ShowData').then(resp => {

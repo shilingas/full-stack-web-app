@@ -4,6 +4,7 @@ import Navbar from "../../src/Components/Navbar";
 import { useLocation } from "react-router-dom";
 import Modal from "../Components/Modal";
 import Icon from "../Components/Icons.js";
+import { useAuth0 } from "@auth0/auth0-react";
 const ExpensesPages = ({ categoryType }) => {
     const [info, setInfo] = useState([]);
     const [status, setStatus] = useState(false);
@@ -24,6 +25,7 @@ const ExpensesPages = ({ categoryType }) => {
     const [fileData, setFileData] = useState([]);
     const location = useLocation();
     const currData = location.state;
+    const { getAccessTokenSilently } = useAuth0();
     useEffect(() => {
         setDatePick(currData);
         axios.get("https://localhost:7174/api/MonthPicker/" + `${currData}`).then(resp => {
@@ -32,10 +34,22 @@ const ExpensesPages = ({ categoryType }) => {
         })
     }, []);
     useEffect(() => {
-        axios.get("https://localhost:7174/api/File").then(resp => {
-            setInfo(resp);
-            setStatus(true);
-        })
+        (async () => {
+            const token = await getAccessTokenSilently();
+            
+            try {
+                const resp = await axios.get("https://localhost:7174/api/File", {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                
+                setInfo(resp);
+                setStatus(true);
+            } catch (e) {
+
+            }
+        })();
     }, []);
     useEffect(() => {
         axios.get('https://localhost:7174/api/ShowData').then(resp => {
@@ -84,10 +98,22 @@ const ExpensesPages = ({ categoryType }) => {
                         setFileData(resp);
                         setDelayForInput(true);
                     });
-                    axios.get("https://localhost:7174/api/File").then(resp => {
-                        setInfo(resp);
-                        setStatus(true);
-                    });
+                    (async () => {
+                        const token = await getAccessTokenSilently();
+                        
+                        try {
+                            const resp = await axios.get("https://localhost:7174/api/File", {
+                                headers: {
+                                    Authorization: `Bearer ${token}`,
+                                },
+                            })
+                            
+                            setInfo(resp);
+                            setStatus(true);
+                        } catch (e) {
+
+                        }
+                    })();
                 });
                 setShowCategories(false);
                 setSelectedCategory("");

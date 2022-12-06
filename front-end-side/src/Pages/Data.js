@@ -283,10 +283,12 @@ const EnterData = () => {
                                             </tfoot>
                                         </table>
                                         {
+                                            statusForFileData ? (
                                             fileData.data.length <= 5 ? null :
                                                 allShown ?
                                                     <button type="button" onClick={showLess}>Show less</button>
-                                                    : <button type="button" onClick={showAll}>Show more</button>
+                                                        : <button type="button" onClick={showAll}>Show more</button>
+                                                ): (null)
                                         }
                                     </div>
                                     <div className="container">
