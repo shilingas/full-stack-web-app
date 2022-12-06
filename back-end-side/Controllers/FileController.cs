@@ -1,5 +1,6 @@
 ﻿using back_end_side.DbFiles;
 using back_end_side.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,7 @@ namespace back_end_side.Controllers
 
         [HttpGet]
         [EnableCors("corsapp")]
+        [Authorize]
         public async Task<Record[]> GetFile()
         {
             _sorting.SortToCategories();
