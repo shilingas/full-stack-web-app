@@ -1,4 +1,4 @@
-import { XAxis, CartesianGrid, Tooltip, AreaChart, Area } from 'recharts';
+import { XAxis, CartesianGrid, Tooltip, BarChart, Bar } from 'recharts';
 const Graph = props => {
 
     const toolTipSyle = {
@@ -21,7 +21,7 @@ const Graph = props => {
 
 
     return (
-        <AreaChart
+        <BarChart
             width={535}
             height={300}
             data={props.graphData}
@@ -39,18 +39,19 @@ const Graph = props => {
             </defs>
             <CartesianGrid strokeDasharray="5 10" stroke="#798395" />
             <XAxis dataKey="name" stroke="#798395" />
-            <Tooltip contentStyle={toolTipSyle} labelFormatter={x => x + " expenses"} formatter={(value, name, props) => [value + "%", name]} />
+            <Tooltip cursor={{ fill: 'rgba(255, 255, 255, 0.1)', strokeWidth: 2 }} contentStyle={toolTipSyle} labelFormatter={x => x + " expenses"} formatter={(value, name, props) => [value + "%", name]} />
+
             {props.type === "1" ?
                 <>
-                    <Area type="monotone" dataKey="Month1" name={toMonthName(props.date.slice(5, 7) - 1)} stroke="#96a5af" fillOpacity={1} fill="url(#colorGrey)" />
-                    <Area type="monotone" dataKey="Month2" name={toMonthName(props.date.slice(5, 7))} stroke="#0067ad" activeDot={{ r: 8 }} fillOpacity={1} fill="url(#colorBlue)" />
+                    <Bar type="monotone" dataKey="Month1" name={toMonthName(props.date.slice(5, 7) - 1)} stroke="#96a5af" fillOpacity={1} fill="url(#colorGrey)" />
+                    <Bar type="monotone" dataKey="Month2" name={toMonthName(props.date.slice(5, 7))} stroke="#0067ad" fillOpacity={1} fill="#0067ad" />
                 </>
                 :
                 <>
-                    <Area type="monotone" dataKey="PreviousYear" name={props.date.slice(0, 4) - 1 + " " + toMonthName(props.date.slice(5, 7))} stroke="#96a5af" fillOpacity={1} fill="url(#colorGrey)" />
-                    <Area type="monotone" dataKey="Month2" name={props.date.slice(0, 4) + " " + toMonthName(props.date.slice(5, 7))} stroke="#0067ad" activeDot={{ r: 8 }} fillOpacity={1} fill="url(#colorBlue)" />
+                    <Bar type="monotone" dataKey="PreviousYear" name={props.date.slice(0, 4) - 1 + " " + toMonthName(props.date.slice(5, 7))} stroke="#96a5af" fillOpacity={1} fill="url(#colorGrey)" />
+                    <Bar type="monotone" dataKey="Month2" name={props.date.slice(0, 4) + " " + toMonthName(props.date.slice(5, 7))} stroke="#0067ad" fillOpacity={1} fill="#0067ad" />
                 </>}
-        </AreaChart>
+        </BarChart>
     );
 }
 
