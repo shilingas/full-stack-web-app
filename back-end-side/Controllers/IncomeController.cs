@@ -110,8 +110,7 @@ namespace back_end_side.Controllers
             var record = _context.Income.Where(x => x.Seller.Contains(workplace)).Select(x => x).ToList();
             foreach (var r in record)
             {
-                var rec = _context.Income.Find(r.ID);
-                rec.IsSelected = false;
+                r.IsSelected = false;
                 _context.SaveChanges();
             }
             return Ok();
