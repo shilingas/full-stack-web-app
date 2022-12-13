@@ -1,5 +1,6 @@
 using back_end_side.Controllers;
 using back_end_side.DbFiles;
+using back_end_side.Middleware;
 using back_end_side.Services;
 using CsvHelper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -41,6 +42,8 @@ builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 {
     builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 }));
+builder.Services.AddLogging();
+builder.Services.AddTransient<ErrorMiddleware>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -68,7 +71,7 @@ app.UseHttpsRedirection();
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseMiddleware<ErrorMiddleware>();
 app.MapControllers();
 
 app.Run();
