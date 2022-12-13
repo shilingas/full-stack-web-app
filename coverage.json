@@ -1,0 +1,2458 @@
+{
+  "back-end-side.dll": {
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Program.cs": {
+      "Program": {
+        "System.Void Program::<Main>$(System.String[])": {
+          "Lines": {
+            "12": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "24": 0,
+            "26": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0,
+            "43": 0,
+            "44": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "53": 0,
+            "54": 0,
+            "55": 0,
+            "56": 0,
+            "58": 0,
+            "59": 0,
+            "60": 0,
+            "62": 0,
+            "63": 0,
+            "65": 0,
+            "67": 0,
+            "68": 0,
+            "69": 0,
+            "70": 0,
+            "72": 0,
+            "74": 0
+          },
+          "Branches": [
+            {
+              "Line": 47,
+              "Offset": 358,
+              "EndOffset": 360,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 47,
+              "Offset": 358,
+              "EndOffset": 380,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Services\\MailService.cs": {
+      "back_end_side.Services.MailService": {
+        "System.Void back_end_side.Services.MailService::OnSentEmail(System.Object,back_end_side.Controllers.SentEmailArgs)": {
+          "Lines": {
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Services\\ShowDataService.cs": {
+      "back_end_side.Services.ShowDataService": {
+        "System.Void back_end_side.Services.ShowDataService::.ctor(back_end_side.DbFiles.ExpensesContext,back_end_side.Controllers.ISorting)": {
+          "Lines": {
+            "13": 3,
+            "14": 3,
+            "15": 3,
+            "16": 3,
+            "17": 3,
+            "19": 3
+          },
+          "Branches": []
+        }
+      },
+      "back_end_side.Services.ShowDataService/<AddRecord>d__4": {
+        "System.Void back_end_side.Services.ShowDataService/<AddRecord>d__4::MoveNext()": {
+          "Lines": {
+            "22": 1,
+            "23": 1,
+            "25": 1,
+            "27": 1,
+            "29": 1,
+            "30": 1,
+            "31": 1,
+            "32": 1,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 1,
+            "39": 1,
+            "40": 1,
+            "41": 1,
+            "42": 1
+          },
+          "Branches": []
+        }
+      },
+      "back_end_side.Services.ShowDataService/<DeleteRecord>d__6": {
+        "System.Void back_end_side.Services.ShowDataService/<DeleteRecord>d__6::MoveNext()": {
+          "Lines": {
+            "75": 1,
+            "76": 1,
+            "78": 1,
+            "79": 1,
+            "80": 1,
+            "81": 0,
+            "82": 0,
+            "83": 0,
+            "85": 1,
+            "86": 1,
+            "87": 1,
+            "88": 1,
+            "89": 1,
+            "91": 1,
+            "92": 1,
+            "93": 1,
+            "95": 1
+          },
+          "Branches": [
+            {
+              "Line": 75,
+              "Offset": 16,
+              "EndOffset": 24,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 75,
+              "Offset": 16,
+              "EndOffset": 131,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            },
+            {
+              "Line": 80,
+              "Offset": 324,
+              "EndOffset": 326,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 80,
+              "Offset": 324,
+              "EndOffset": 344,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            }
+          ]
+        }
+      },
+      "back_end_side.Services.ShowDataService/<EditData>d__5": {
+        "System.Void back_end_side.Services.ShowDataService/<EditData>d__5::MoveNext()": {
+          "Lines": {
+            "45": 1,
+            "46": 1,
+            "48": 1,
+            "49": 1,
+            "52": 1,
+            "53": 1,
+            "54": 1,
+            "55": 1,
+            "56": 1,
+            "57": 1,
+            "58": 1,
+            "59": 1,
+            "60": 1,
+            "61": 1,
+            "62": 1,
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0,
+            "67": 1,
+            "69": 1,
+            "70": 1,
+            "71": 1,
+            "72": 1
+          },
+          "Branches": [
+            {
+              "Line": 45,
+              "Offset": 16,
+              "EndOffset": 24,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 45,
+              "Offset": 16,
+              "EndOffset": 131,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            },
+            {
+              "Line": 53,
+              "Offset": 337,
+              "EndOffset": 342,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 53,
+              "Offset": 337,
+              "EndOffset": 589,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            }
+          ]
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Services\\SortingService.cs": {
+      "back_end_side.Services.SortingService": {
+        "System.Void back_end_side.Services.SortingService::.ctor(back_end_side.DbFiles.ExpensesContext)": {
+          "Lines": {
+            "14": 1,
+            "15": 1,
+            "16": 1,
+            "17": 1,
+            "19": 1
+          },
+          "Branches": []
+        }
+      },
+      "back_end_side.Services.SortingService/<ChangeCategory>d__3": {
+        "System.Void back_end_side.Services.SortingService/<ChangeCategory>d__3::MoveNext()": {
+          "Lines": {
+            "22": 1,
+            "23": 1,
+            "25": 1,
+            "26": 1,
+            "28": 1,
+            "29": 1,
+            "30": 1,
+            "31": 1,
+            "32": 1,
+            "33": 1,
+            "34": 1,
+            "35": 1,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 1,
+            "42": 1,
+            "43": 1,
+            "44": 1,
+            "45": 1
+          },
+          "Branches": [
+            {
+              "Line": 22,
+              "Offset": 16,
+              "EndOffset": 24,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 22,
+              "Offset": 16,
+              "EndOffset": 131,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            },
+            {
+              "Line": 29,
+              "Offset": 337,
+              "EndOffset": 342,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 29,
+              "Offset": 337,
+              "EndOffset": 509,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            }
+          ]
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Services\\UploadService.cs": {
+      "back_end_side.Services.UploadService": {
+        "System.Void back_end_side.Services.UploadService::RemoveDuplicates(System.Collections.Generic.List`1<back_end_side.Models.Record>)": {
+          "Lines": {
+            "68": 3,
+            "70": 13,
+            "71": 8,
+            "72": 3,
+            "73": 3,
+            "74": 3,
+            "76": 8,
+            "77": 3
+          },
+          "Branches": []
+        },
+        "System.Void back_end_side.Services.UploadService::.ctor(back_end_side.DbFiles.ExpensesContext,back_end_side.Controllers.IReportReader)": {
+          "Lines": {
+            "13": 1,
+            "14": 1,
+            "15": 1,
+            "16": 1,
+            "17": 1,
+            "19": 1
+          },
+          "Branches": []
+        }
+      },
+      "back_end_side.Services.UploadService/<GetFileData>d__4": {
+        "System.Void back_end_side.Services.UploadService/<GetFileData>d__4::MoveNext()": {
+          "Lines": {
+            "22": 3,
+            "23": 3,
+            "25": 3,
+            "27": 3,
+            "28": 3,
+            "29": 3,
+            "30": 3,
+            "31": 3,
+            "32": 3,
+            "33": 3,
+            "34": 3,
+            "35": 3,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 3,
+            "42": 3,
+            "43": 3,
+            "44": 3,
+            "45": 3
+          },
+          "Branches": [
+            {
+              "Line": 28,
+              "Offset": 163,
+              "EndOffset": 165,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 3
+            },
+            {
+              "Line": 28,
+              "Offset": 163,
+              "EndOffset": 181,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 28,
+              "Offset": 184,
+              "EndOffset": 189,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 3
+            },
+            {
+              "Line": 31,
+              "Offset": 253,
+              "EndOffset": 255,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 3
+            },
+            {
+              "Line": 31,
+              "Offset": 253,
+              "EndOffset": 283,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 3
+            },
+            {
+              "Line": 28,
+              "Offset": 184,
+              "EndOffset": 410,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 3
+            }
+          ]
+        }
+      },
+      "back_end_side.Services.UploadService/<GetIncomeData>d__5": {
+        "System.Void back_end_side.Services.UploadService/<GetIncomeData>d__5::MoveNext()": {
+          "Lines": {
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0,
+            "55": 0,
+            "56": 0,
+            "57": 0,
+            "58": 0,
+            "59": 0,
+            "60": 0,
+            "61": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0,
+            "65": 0
+          },
+          "Branches": [
+            {
+              "Line": 51,
+              "Offset": 248,
+              "EndOffset": 85,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 51,
+              "Offset": 248,
+              "EndOffset": 253,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Models\\CheckModel.cs": {
+      "back_end_side.Models.CheckModel": {
+        "System.Int32 back_end_side.Models.CheckModel::get_id()": {
+          "Lines": {
+            "5": 0
+          },
+          "Branches": []
+        },
+        "System.String back_end_side.Models.CheckModel::get_marketName()": {
+          "Lines": {
+            "6": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Models\\FileModel.cs": {
+      "back_end_side.Models.FileModel": {
+        "System.String back_end_side.Models.FileModel::get_FileName()": {
+          "Lines": {
+            "5": 6
+          },
+          "Branches": []
+        },
+        "Microsoft.AspNetCore.Http.IFormFile back_end_side.Models.FileModel::get_FormFile()": {
+          "Lines": {
+            "6": 10
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Models\\IncomeModel.cs": {
+      "back_end_side.Models.IncomeModel": {
+        "System.DateTime back_end_side.Models.IncomeModel::get_Date()": {
+          "Lines": {
+            "7": 0
+          },
+          "Branches": []
+        },
+        "System.String back_end_side.Models.IncomeModel::get_Seller()": {
+          "Lines": {
+            "8": 0
+          },
+          "Branches": []
+        },
+        "System.String back_end_side.Models.IncomeModel::get_Purpose()": {
+          "Lines": {
+            "9": 0
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Models.IncomeModel::get_Amount()": {
+          "Lines": {
+            "10": 0
+          },
+          "Branches": []
+        },
+        "System.String back_end_side.Models.IncomeModel::get_ExpenseCode()": {
+          "Lines": {
+            "11": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 back_end_side.Models.IncomeModel::get_ID()": {
+          "Lines": {
+            "12": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean back_end_side.Models.IncomeModel::get_IsSelected()": {
+          "Lines": {
+            "13": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean back_end_side.Models.IncomeModel::get_IsAdded()": {
+          "Lines": {
+            "14": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 back_end_side.Models.IncomeModel::CompareTo(System.Object)": {
+          "Lines": {
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Models\\Record.cs": {
+      "back_end_side.Models.Record": {
+        "System.DateTime back_end_side.Models.Record::get_Date()": {
+          "Lines": {
+            "9": 48
+          },
+          "Branches": []
+        },
+        "System.String back_end_side.Models.Record::get_Seller()": {
+          "Lines": {
+            "11": 334
+          },
+          "Branches": []
+        },
+        "System.String back_end_side.Models.Record::get_Purpose()": {
+          "Lines": {
+            "13": 26
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Models.Record::get_Amount()": {
+          "Lines": {
+            "15": 45
+          },
+          "Branches": []
+        },
+        "System.String back_end_side.Models.Record::get_PaymentType()": {
+          "Lines": {
+            "17": 23
+          },
+          "Branches": []
+        },
+        "System.String back_end_side.Models.Record::get_ExpenseCode()": {
+          "Lines": {
+            "19": 37
+          },
+          "Branches": []
+        },
+        "System.Int32 back_end_side.Models.Record::get_ID()": {
+          "Lines": {
+            "21": 20
+          },
+          "Branches": []
+        },
+        "System.String back_end_side.Models.Record::get_Category()": {
+          "Lines": {
+            "23": 70
+          },
+          "Branches": []
+        },
+        "System.Boolean back_end_side.Models.Record::get_IsCategorized()": {
+          "Lines": {
+            "26": 45
+          },
+          "Branches": []
+        },
+        "System.Int32 back_end_side.Models.Record::CompareTo(System.Object)": {
+          "Lines": {
+            "29": 2,
+            "30": 2,
+            "31": 2,
+            "32": 2
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Models\\User.cs": {
+      "back_end_side.Models.User": {
+        "System.String back_end_side.Models.User::get_Id()": {
+          "Lines": {
+            "5": 0
+          },
+          "Branches": []
+        },
+        "System.String back_end_side.Models.User::get_Email()": {
+          "Lines": {
+            "6": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\DbFiles\\ExpensesContext.cs": {
+      "back_end_side.DbFiles.ExpensesContext": {
+        "Microsoft.EntityFrameworkCore.DbSet`1<back_end_side.Models.Record> back_end_side.DbFiles.ExpensesContext::get_Expenses()": {
+          "Lines": {
+            "13": 90
+          },
+          "Branches": []
+        },
+        "Microsoft.EntityFrameworkCore.DbSet`1<back_end_side.Models.IncomeModel> back_end_side.DbFiles.ExpensesContext::get_Income()": {
+          "Lines": {
+            "14": 6
+          },
+          "Branches": []
+        },
+        "System.Void back_end_side.DbFiles.ExpensesContext::OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)": {
+          "Lines": {
+            "17": 2,
+            "18": 2,
+            "19": 2,
+            "20": 2
+          },
+          "Branches": []
+        },
+        "System.Void back_end_side.DbFiles.ExpensesContext::.ctor(Microsoft.EntityFrameworkCore.DbContextOptions`1<back_end_side.DbFiles.ExpensesContext>)": {
+          "Lines": {
+            "8": 6,
+            "9": 6,
+            "11": 6
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\ExtensionMethods.cs": {
+      "back_end_side.Controllers.ExtensionMethods": {
+        "System.Collections.Generic.List`1<T> back_end_side.Controllers.ExtensionMethods::MoveToOtherList(System.Collections.Generic.List`1<T>,System.Collections.Generic.List`1<T>,System.Int32,System.Boolean)": {
+          "Lines": {
+            "11": 3,
+            "12": 3,
+            "13": 3,
+            "14": 2,
+            "15": 2,
+            "16": 2,
+            "17": 3,
+            "18": 3
+          },
+          "Branches": [
+            {
+              "Line": 13,
+              "Offset": 18,
+              "EndOffset": 20,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 13,
+              "Offset": 18,
+              "EndOffset": 30,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 3
+            }
+          ]
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\FileController.cs": {
+      "back_end_side.Controllers.FileController": {
+        "System.Void back_end_side.Controllers.FileController::.ctor(back_end_side.DbFiles.ExpensesContext,back_end_side.Controllers.ISorting)": {
+          "Lines": {
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0
+          },
+          "Branches": []
+        }
+      },
+      "back_end_side.Controllers.FileController/<GetFile>d__3": {
+        "System.Void back_end_side.Controllers.FileController/<GetFile>d__3::MoveNext()": {
+          "Lines": {
+            "29": 0,
+            "30": 0,
+            "32": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\IncomeController.cs": {
+      "back_end_side.Controllers.IncomeController": {
+        "back_end_side.Models.IncomeModel[] back_end_side.Controllers.IncomeController::Get(System.String)": {
+          "Lines": {
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "40": 0,
+            "41": 0
+          },
+          "Branches": [
+            {
+              "Line": 27,
+              "Offset": 21,
+              "EndOffset": 23,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 27,
+              "Offset": 21,
+              "EndOffset": 109,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "back_end_side.Models.IncomeModel[] back_end_side.Controllers.IncomeController::GetAll()": {
+          "Lines": {
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0
+          },
+          "Branches": []
+        },
+        "Microsoft.AspNetCore.Mvc.IActionResult back_end_side.Controllers.IncomeController::Put(System.String)": {
+          "Lines": {
+            "55": 0,
+            "56": 0,
+            "57": 0,
+            "58": 0,
+            "59": 0,
+            "60": 0,
+            "61": 0,
+            "62": 0,
+            "64": 0,
+            "65": 0
+          },
+          "Branches": [
+            {
+              "Line": 57,
+              "Offset": 283,
+              "EndOffset": 205,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 57,
+              "Offset": 283,
+              "EndOffset": 285,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            }
+          ]
+        },
+        "Microsoft.AspNetCore.Mvc.IActionResult back_end_side.Controllers.IncomeController::Edit(back_end_side.Models.IncomeModel,System.Int32)": {
+          "Lines": {
+            "70": 0,
+            "71": 0,
+            "74": 0,
+            "75": 0,
+            "76": 0,
+            "77": 0,
+            "78": 0,
+            "79": 0,
+            "80": 0,
+            "81": 0,
+            "82": 0,
+            "83": 0,
+            "84": 0,
+            "85": 0,
+            "86": 0,
+            "87": 0,
+            "88": 0,
+            "89": 0,
+            "90": 0,
+            "91": 0
+          },
+          "Branches": [
+            {
+              "Line": 75,
+              "Offset": 40,
+              "EndOffset": 42,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 75,
+              "Offset": 40,
+              "EndOffset": 134,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "Microsoft.AspNetCore.Mvc.IActionResult back_end_side.Controllers.IncomeController::AddRecord(System.Int32)": {
+          "Lines": {
+            "96": 0,
+            "97": 0,
+            "98": 0,
+            "99": 0,
+            "100": 0,
+            "101": 0,
+            "102": 0,
+            "103": 0,
+            "104": 0
+          },
+          "Branches": [
+            {
+              "Line": 98,
+              "Offset": 39,
+              "EndOffset": 41,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 98,
+              "Offset": 39,
+              "EndOffset": 63,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "Microsoft.AspNetCore.Mvc.IActionResult back_end_side.Controllers.IncomeController::Delete(System.String)": {
+          "Lines": {
+            "109": 0,
+            "110": 0,
+            "111": 0,
+            "112": 0,
+            "114": 0,
+            "115": 0,
+            "116": 0,
+            "117": 0,
+            "118": 0
+          },
+          "Branches": [
+            {
+              "Line": 111,
+              "Offset": 244,
+              "EndOffset": 205,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 111,
+              "Offset": 244,
+              "EndOffset": 246,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            }
+          ]
+        },
+        "Microsoft.AspNetCore.Mvc.IActionResult back_end_side.Controllers.IncomeController::Remove(System.Int32)": {
+          "Lines": {
+            "123": 0,
+            "124": 0,
+            "125": 0,
+            "126": 0,
+            "127": 0,
+            "128": 0,
+            "129": 0
+          },
+          "Branches": []
+        },
+        "System.Void back_end_side.Controllers.IncomeController::.ctor(back_end_side.DbFiles.ExpensesContext)": {
+          "Lines": {
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\InSumController.cs": {
+      "back_end_side.Controllers.InSumController": {
+        "System.Double back_end_side.Controllers.InSumController::Get(System.String)": {
+          "Lines": {
+            "24": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0
+          },
+          "Branches": [
+            {
+              "Line": 26,
+              "Offset": 14,
+              "EndOffset": 19,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 26,
+              "Offset": 14,
+              "EndOffset": 245,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void back_end_side.Controllers.InSumController::.ctor(back_end_side.DbFiles.ExpensesContext,back_end_side.Controllers.IReportReader)": {
+          "Lines": {
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\Logger.cs": {
+      "back_end_side.Controllers.Logger": {
+        "System.Void back_end_side.Controllers.Logger::WriteLog(System.String)": {
+          "Lines": {
+            "8": 0,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\MonthPickerController.cs": {
+      "back_end_side.Controllers.MonthPickerController": {
+        "back_end_side.Models.Record[] back_end_side.Controllers.MonthPickerController::Get(System.String)": {
+          "Lines": {
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "32": 0,
+            "33": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "41": 0
+          },
+          "Branches": [
+            {
+              "Line": 26,
+              "Offset": 35,
+              "EndOffset": 40,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 26,
+              "Offset": 35,
+              "EndOffset": 259,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void back_end_side.Controllers.MonthPickerController::.ctor(back_end_side.DbFiles.ExpensesContext)": {
+          "Lines": {
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\ReportReader.cs": {
+      "back_end_side.Controllers.ReportReader": {
+        "System.Int32 back_end_side.Controllers.ReportReader::CheckBank(System.IO.StreamReader)": {
+          "Lines": {
+            "23": 3,
+            "24": 3,
+            "25": 3,
+            "26": 3,
+            "28": 3,
+            "29": 1,
+            "31": 2,
+            "32": 1,
+            "34": 1,
+            "35": 1,
+            "37": 0,
+            "38": 3
+          },
+          "Branches": [
+            {
+              "Line": 28,
+              "Offset": 38,
+              "EndOffset": 40,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 28,
+              "Offset": 38,
+              "EndOffset": 45,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 31,
+              "Offset": 60,
+              "EndOffset": 62,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 31,
+              "Offset": 60,
+              "EndOffset": 67,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            },
+            {
+              "Line": 34,
+              "Offset": 82,
+              "EndOffset": 84,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 1
+            },
+            {
+              "Line": 34,
+              "Offset": 82,
+              "EndOffset": 89,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Collections.Generic.List`1<back_end_side.Models.Record> back_end_side.Controllers.ReportReader::ReadFromCsvFile(Microsoft.AspNetCore.Http.IFormFile,back_end_side.Controllers.DeleteDuplicates)": {
+          "Lines": {
+            "40": 3,
+            "41": 3,
+            "42": 3,
+            "43": 3,
+            "44": 3,
+            "46": 3,
+            "47": 3,
+            "49": 3,
+            "51": 3,
+            "52": 3,
+            "54": 3,
+            "55": 1,
+            "56": 1,
+            "58": 1,
+            "60": 1,
+            "62": 6,
+            "63": 2,
+            "64": 2,
+            "65": 2,
+            "66": 1,
+            "67": 1,
+            "68": 1,
+            "69": 1,
+            "70": 0,
+            "71": 0,
+            "72": 0,
+            "73": 2,
+            "74": 1,
+            "75": 1,
+            "77": 2,
+            "78": 1,
+            "79": 1,
+            "80": 1,
+            "82": 8,
+            "83": 3,
+            "84": 3,
+            "85": 1,
+            "86": 1,
+            "87": 1,
+            "89": 2,
+            "90": 2,
+            "91": 2,
+            "92": 3,
+            "93": 1,
+            "94": 1,
+            "96": 1,
+            "97": 1,
+            "98": 1,
+            "99": 1,
+            "101": 1,
+            "103": 6,
+            "104": 2,
+            "105": 2,
+            "107": 2,
+            "108": 0,
+            "109": 0,
+            "110": 0,
+            "111": 2,
+            "112": 1,
+            "113": 1,
+            "117": 0,
+            "118": 0,
+            "120": 3
+          },
+          "Branches": [
+            {
+              "Line": 54,
+              "Offset": 70,
+              "EndOffset": 75,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 62,
+              "Offset": 339,
+              "EndOffset": 137,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 2
+            },
+            {
+              "Line": 64,
+              "Offset": 162,
+              "EndOffset": 164,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 64,
+              "Offset": 162,
+              "EndOffset": 190,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            },
+            {
+              "Line": 64,
+              "Offset": 188,
+              "EndOffset": 190,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 1
+            },
+            {
+              "Line": 64,
+              "Offset": 214,
+              "EndOffset": 216,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 64,
+              "Offset": 214,
+              "EndOffset": 242,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 1
+            },
+            {
+              "Line": 64,
+              "Offset": 188,
+              "EndOffset": 245,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 1
+            },
+            {
+              "Line": 64,
+              "Offset": 250,
+              "EndOffset": 252,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 1
+            },
+            {
+              "Line": 64,
+              "Offset": 250,
+              "EndOffset": 266,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 1
+            },
+            {
+              "Line": 69,
+              "Offset": 294,
+              "EndOffset": 296,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 69,
+              "Offset": 294,
+              "EndOffset": 320,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 2
+            },
+            {
+              "Line": 62,
+              "Offset": 339,
+              "EndOffset": 344,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 1
+            },
+            {
+              "Line": 54,
+              "Offset": 70,
+              "EndOffset": 375,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 77,
+              "Offset": 383,
+              "EndOffset": 388,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 1
+            },
+            {
+              "Line": 82,
+              "Offset": 539,
+              "EndOffset": 430,
+              "Path": 1,
+              "Ordinal": 19,
+              "Hits": 3
+            },
+            {
+              "Line": 84,
+              "Offset": 459,
+              "EndOffset": 461,
+              "Path": 0,
+              "Ordinal": 16,
+              "Hits": 1
+            },
+            {
+              "Line": 84,
+              "Offset": 459,
+              "EndOffset": 487,
+              "Path": 1,
+              "Ordinal": 17,
+              "Hits": 2
+            },
+            {
+              "Line": 82,
+              "Offset": 539,
+              "EndOffset": 541,
+              "Path": 0,
+              "Ordinal": 18,
+              "Hits": 1
+            },
+            {
+              "Line": 77,
+              "Offset": 383,
+              "EndOffset": 572,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 1
+            },
+            {
+              "Line": 96,
+              "Offset": 580,
+              "EndOffset": 585,
+              "Path": 0,
+              "Ordinal": 20,
+              "Hits": 1
+            },
+            {
+              "Line": 103,
+              "Offset": 734,
+              "EndOffset": 629,
+              "Path": 1,
+              "Ordinal": 25,
+              "Hits": 2
+            },
+            {
+              "Line": 107,
+              "Offset": 689,
+              "EndOffset": 691,
+              "Path": 0,
+              "Ordinal": 22,
+              "Hits": 0
+            },
+            {
+              "Line": 107,
+              "Offset": 689,
+              "EndOffset": 715,
+              "Path": 1,
+              "Ordinal": 23,
+              "Hits": 2
+            },
+            {
+              "Line": 103,
+              "Offset": 734,
+              "EndOffset": 736,
+              "Path": 0,
+              "Ordinal": 24,
+              "Hits": 1
+            },
+            {
+              "Line": 96,
+              "Offset": 580,
+              "EndOffset": 764,
+              "Path": 1,
+              "Ordinal": 21,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Collections.Generic.List`1<back_end_side.Models.Record> back_end_side.Controllers.ReportReader::GetIncomeList()": {
+          "Lines": {
+            "123": 0,
+            "124": 0,
+            "125": 0
+          },
+          "Branches": []
+        },
+        "System.Void back_end_side.Controllers.ReportReader::.ctor()": {
+          "Lines": {
+            "21": 1
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\ShowDataController.cs": {
+      "back_end_side.Controllers.ShowDataController": {
+        "System.Void back_end_side.Controllers.ShowDataController::.ctor(back_end_side.DbFiles.ExpensesContext,back_end_side.Services.IShowDataService)": {
+          "Lines": {
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0
+          },
+          "Branches": []
+        }
+      },
+      "back_end_side.Controllers.ShowDataController/<Delete>d__6": {
+        "System.Void back_end_side.Controllers.ShowDataController/<Delete>d__6::MoveNext()": {
+          "Lines": {
+            "53": 0,
+            "54": 0,
+            "55": 0,
+            "56": 0
+          },
+          "Branches": []
+        }
+      },
+      "back_end_side.Controllers.ShowDataController/<GetAll>d__4": {
+        "System.Void back_end_side.Controllers.ShowDataController/<GetAll>d__4::MoveNext()": {
+          "Lines": {
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0
+          },
+          "Branches": []
+        }
+      },
+      "back_end_side.Controllers.ShowDataController/<Post>d__3": {
+        "System.Void back_end_side.Controllers.ShowDataController/<Post>d__3::MoveNext()": {
+          "Lines": {
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0
+          },
+          "Branches": []
+        }
+      },
+      "back_end_side.Controllers.ShowDataController/<Put>d__5": {
+        "System.Void back_end_side.Controllers.ShowDataController/<Put>d__5::MoveNext()": {
+          "Lines": {
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\Sorting.cs": {
+      "back_end_side.Controllers.SortingModel": {
+        "System.Double back_end_side.Controllers.SortingModel::get_FoodSum()": {
+          "Lines": {
+            "13": 5
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Controllers.SortingModel::get_ClothesSum()": {
+          "Lines": {
+            "14": 4
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Controllers.SortingModel::get_CarSum()": {
+          "Lines": {
+            "15": 4
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Controllers.SortingModel::get_HouseSum()": {
+          "Lines": {
+            "16": 4
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Controllers.SortingModel::get_EntertaintmentSum()": {
+          "Lines": {
+            "17": 4
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Controllers.SortingModel::get_OtherSum()": {
+          "Lines": {
+            "18": 6
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Controllers.SortingModel::get_PreviousFoodSum()": {
+          "Lines": {
+            "19": 4
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Controllers.SortingModel::get_PreviousClothesSum()": {
+          "Lines": {
+            "20": 4
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Controllers.SortingModel::get_PreviousCarSum()": {
+          "Lines": {
+            "21": 4
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Controllers.SortingModel::get_PreviousHouseSum()": {
+          "Lines": {
+            "22": 4
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Controllers.SortingModel::get_PreviousEntertaintmentSum()": {
+          "Lines": {
+            "23": 4
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Controllers.SortingModel::get_PreviousOtherSum()": {
+          "Lines": {
+            "24": 4
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Controllers.SortingModel::get_PreviousYearFoodSum()": {
+          "Lines": {
+            "25": 4
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Controllers.SortingModel::get_PreviousYearClothesSum()": {
+          "Lines": {
+            "26": 4
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Controllers.SortingModel::get_PreviousYearCarSum()": {
+          "Lines": {
+            "27": 4
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Controllers.SortingModel::get_PreviousYearHouseSum()": {
+          "Lines": {
+            "28": 4
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Controllers.SortingModel::get_PreviousYearEntertaintmentSum()": {
+          "Lines": {
+            "29": 4
+          },
+          "Branches": []
+        },
+        "System.Double back_end_side.Controllers.SortingModel::get_PreviousYearOtherSum()": {
+          "Lines": {
+            "30": 4
+          },
+          "Branches": []
+        },
+        "System.Boolean back_end_side.Controllers.SortingModel::get_Empty()": {
+          "Lines": {
+            "31": 4
+          },
+          "Branches": []
+        }
+      },
+      "back_end_side.Controllers.Sorting": {
+        "back_end_side.Controllers.SortingModel back_end_side.Controllers.Sorting::SortToCategories(System.String)": {
+          "Lines": {
+            "48": 2,
+            "49": 2,
+            "50": 2,
+            "51": 2,
+            "52": 2,
+            "53": 2,
+            "54": 2,
+            "55": 2,
+            "56": 2,
+            "57": 2,
+            "58": 2,
+            "59": 2,
+            "60": 2,
+            "61": 2,
+            "62": 2,
+            "63": 2,
+            "64": 2,
+            "65": 2,
+            "66": 2,
+            "67": 2,
+            "68": 2,
+            "69": 2,
+            "70": 2,
+            "73": 2,
+            "74": 2,
+            "75": 2,
+            "76": 2,
+            "77": 2,
+            "78": 2,
+            "80": 2,
+            "81": 2,
+            "82": 2,
+            "83": 2,
+            "85": 2,
+            "86": 1,
+            "87": 1,
+            "88": 1,
+            "89": 1,
+            "90": 1,
+            "91": 1,
+            "92": 1,
+            "93": 1,
+            "94": 1,
+            "95": 1,
+            "96": 1,
+            "98": 0,
+            "99": 0,
+            "100": 0,
+            "101": 0,
+            "102": 0,
+            "104": 2,
+            "105": 2,
+            "106": 2,
+            "107": 2,
+            "108": 2,
+            "110": 2,
+            "111": 2,
+            "112": 2,
+            "113": 2,
+            "114": 2,
+            "116": 2,
+            "117": 2,
+            "118": 2,
+            "119": 2,
+            "120": 2,
+            "122": 2,
+            "123": 2,
+            "124": 2,
+            "126": 2,
+            "127": 1,
+            "128": 13,
+            "129": 5,
+            "130": 5,
+            "131": 2,
+            "132": 2,
+            "133": 2,
+            "135": 5,
+            "136": 1,
+            "137": 1,
+            "138": 1,
+            "140": 5,
+            "141": 0,
+            "142": 0,
+            "143": 0,
+            "144": 5,
+            "145": 1,
+            "147": 1,
+            "148": 13,
+            "149": 5,
+            "150": 5,
+            "151": 3,
+            "152": 3,
+            "153": 3,
+            "154": 5,
+            "155": 1,
+            "157": 2,
+            "158": 2,
+            "159": 2,
+            "160": 2,
+            "162": 2,
+            "164": 2
+          },
+          "Branches": [
+            {
+              "Line": 73,
+              "Offset": 342,
+              "EndOffset": 347,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 75,
+              "Offset": 368,
+              "EndOffset": 370,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 75,
+              "Offset": 368,
+              "EndOffset": 381,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 2
+            },
+            {
+              "Line": 85,
+              "Offset": 418,
+              "EndOffset": 420,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 1
+            },
+            {
+              "Line": 85,
+              "Offset": 418,
+              "EndOffset": 445,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 1
+            },
+            {
+              "Line": 91,
+              "Offset": 467,
+              "EndOffset": 469,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 1
+            },
+            {
+              "Line": 91,
+              "Offset": 467,
+              "EndOffset": 515,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 126,
+              "Offset": 1002,
+              "EndOffset": 1007,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 1
+            },
+            {
+              "Line": 128,
+              "Offset": 1270,
+              "EndOffset": 1032,
+              "Path": 1,
+              "Ordinal": 27,
+              "Hits": 5
+            },
+            {
+              "Line": 130,
+              "Offset": 1059,
+              "EndOffset": 1061,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 3
+            },
+            {
+              "Line": 130,
+              "Offset": 1059,
+              "EndOffset": 1085,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 2
+            },
+            {
+              "Line": 130,
+              "Offset": 1090,
+              "EndOffset": 1092,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 2
+            },
+            {
+              "Line": 130,
+              "Offset": 1090,
+              "EndOffset": 1106,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 5
+            },
+            {
+              "Line": 135,
+              "Offset": 1123,
+              "EndOffset": 1125,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 3
+            },
+            {
+              "Line": 135,
+              "Offset": 1139,
+              "EndOffset": 1141,
+              "Path": 0,
+              "Ordinal": 16,
+              "Hits": 3
+            },
+            {
+              "Line": 135,
+              "Offset": 1123,
+              "EndOffset": 1163,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 2
+            },
+            {
+              "Line": 135,
+              "Offset": 1139,
+              "EndOffset": 1163,
+              "Path": 1,
+              "Ordinal": 17,
+              "Hits": 2
+            },
+            {
+              "Line": 135,
+              "Offset": 1168,
+              "EndOffset": 1170,
+              "Path": 0,
+              "Ordinal": 18,
+              "Hits": 1
+            },
+            {
+              "Line": 135,
+              "Offset": 1168,
+              "EndOffset": 1184,
+              "Path": 1,
+              "Ordinal": 19,
+              "Hits": 5
+            },
+            {
+              "Line": 140,
+              "Offset": 1201,
+              "EndOffset": 1203,
+              "Path": 0,
+              "Ordinal": 20,
+              "Hits": 3
+            },
+            {
+              "Line": 140,
+              "Offset": 1217,
+              "EndOffset": 1219,
+              "Path": 0,
+              "Ordinal": 22,
+              "Hits": 3
+            },
+            {
+              "Line": 140,
+              "Offset": 1201,
+              "EndOffset": 1241,
+              "Path": 1,
+              "Ordinal": 21,
+              "Hits": 2
+            },
+            {
+              "Line": 140,
+              "Offset": 1217,
+              "EndOffset": 1241,
+              "Path": 1,
+              "Ordinal": 23,
+              "Hits": 2
+            },
+            {
+              "Line": 140,
+              "Offset": 1246,
+              "EndOffset": 1248,
+              "Path": 0,
+              "Ordinal": 24,
+              "Hits": 0
+            },
+            {
+              "Line": 140,
+              "Offset": 1246,
+              "EndOffset": 1262,
+              "Path": 1,
+              "Ordinal": 25,
+              "Hits": 5
+            },
+            {
+              "Line": 128,
+              "Offset": 1270,
+              "EndOffset": 1275,
+              "Path": 0,
+              "Ordinal": 26,
+              "Hits": 1
+            },
+            {
+              "Line": 126,
+              "Offset": 1002,
+              "EndOffset": 1293,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 1
+            },
+            {
+              "Line": 148,
+              "Offset": 1370,
+              "EndOffset": 1315,
+              "Path": 1,
+              "Ordinal": 31,
+              "Hits": 5
+            },
+            {
+              "Line": 150,
+              "Offset": 1346,
+              "EndOffset": 1348,
+              "Path": 0,
+              "Ordinal": 28,
+              "Hits": 3
+            },
+            {
+              "Line": 150,
+              "Offset": 1346,
+              "EndOffset": 1362,
+              "Path": 1,
+              "Ordinal": 29,
+              "Hits": 5
+            },
+            {
+              "Line": 148,
+              "Offset": 1370,
+              "EndOffset": 1372,
+              "Path": 0,
+              "Ordinal": 30,
+              "Hits": 1
+            },
+            {
+              "Line": 73,
+              "Offset": 342,
+              "EndOffset": 1419,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Double back_end_side.Controllers.Sorting::queryMethod(System.String,System.String[],System.DateTime)": {
+          "Lines": {
+            "167": 30,
+            "168": 30,
+            "170": 390,
+            "171": 150,
+            "172": 150,
+            "173": 12,
+            "174": 12,
+            "175": 12,
+            "176": 150,
+            "177": 30,
+            "179": 30,
+            "180": 15,
+            "181": 15,
+            "182": 15,
+            "183": 15,
+            "184": 15,
+            "185": 15,
+            "187": 15,
+            "188": 15,
+            "189": 15,
+            "190": 15,
+            "191": 15,
+            "192": 15,
+            "194": 30,
+            "195": 30
+          },
+          "Branches": [
+            {
+              "Line": 170,
+              "Offset": 137,
+              "EndOffset": 51,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 150
+            },
+            {
+              "Line": 172,
+              "Offset": 65,
+              "EndOffset": 67,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 150
+            },
+            {
+              "Line": 172,
+              "Offset": 95,
+              "EndOffset": 97,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 12
+            },
+            {
+              "Line": 172,
+              "Offset": 65,
+              "EndOffset": 108,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 138
+            },
+            {
+              "Line": 172,
+              "Offset": 95,
+              "EndOffset": 108,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 138
+            },
+            {
+              "Line": 172,
+              "Offset": 113,
+              "EndOffset": 115,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 12
+            },
+            {
+              "Line": 172,
+              "Offset": 113,
+              "EndOffset": 130,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 150
+            },
+            {
+              "Line": 170,
+              "Offset": 137,
+              "EndOffset": 139,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 30
+            },
+            {
+              "Line": 179,
+              "Offset": 184,
+              "EndOffset": 189,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 15
+            },
+            {
+              "Line": 179,
+              "Offset": 184,
+              "EndOffset": 451,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 15
+            }
+          ]
+        },
+        "Microsoft.EntityFrameworkCore.DbSet`1<back_end_side.Models.Record> back_end_side.Controllers.Sorting::SortedList()": {
+          "Lines": {
+            "198": 0,
+            "199": 0,
+            "200": 0,
+            "201": 0
+          },
+          "Branches": []
+        },
+        "System.String back_end_side.Controllers.Sorting::CheckInput(back_end_side.Models.Record)": {
+          "Lines": {
+            "204": 0,
+            "205": 0,
+            "206": 0,
+            "207": 0,
+            "208": 0,
+            "209": 0,
+            "210": 0,
+            "211": 0,
+            "212": 0,
+            "213": 0,
+            "214": 0,
+            "215": 0,
+            "216": 0
+          },
+          "Branches": [
+            {
+              "Line": 205,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 205,
+              "Offset": 7,
+              "EndOffset": 44,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 205,
+              "Offset": 47,
+              "EndOffset": 49,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 205,
+              "Offset": 47,
+              "EndOffset": 60,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 207,
+              "Offset": 66,
+              "EndOffset": 68,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 207,
+              "Offset": 66,
+              "EndOffset": 103,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 207,
+              "Offset": 106,
+              "EndOffset": 108,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 207,
+              "Offset": 106,
+              "EndOffset": 119,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 209,
+              "Offset": 125,
+              "EndOffset": 127,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 209,
+              "Offset": 125,
+              "EndOffset": 162,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 209,
+              "Offset": 165,
+              "EndOffset": 167,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 209,
+              "Offset": 165,
+              "EndOffset": 175,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 211,
+              "Offset": 181,
+              "EndOffset": 183,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 211,
+              "Offset": 181,
+              "EndOffset": 218,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 211,
+              "Offset": 223,
+              "EndOffset": 225,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 211,
+              "Offset": 223,
+              "EndOffset": 233,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            },
+            {
+              "Line": 213,
+              "Offset": 239,
+              "EndOffset": 241,
+              "Path": 0,
+              "Ordinal": 16,
+              "Hits": 0
+            },
+            {
+              "Line": 213,
+              "Offset": 239,
+              "EndOffset": 276,
+              "Path": 1,
+              "Ordinal": 17,
+              "Hits": 0
+            },
+            {
+              "Line": 213,
+              "Offset": 281,
+              "EndOffset": 283,
+              "Path": 0,
+              "Ordinal": 18,
+              "Hits": 0
+            },
+            {
+              "Line": 213,
+              "Offset": 281,
+              "EndOffset": 291,
+              "Path": 1,
+              "Ordinal": 19,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void back_end_side.Controllers.Sorting::.ctor(back_end_side.DbFiles.ExpensesContext)": {
+          "Lines": {
+            "37": 1,
+            "38": 1,
+            "39": 1,
+            "40": 1,
+            "42": 1,
+            "43": 1,
+            "44": 1,
+            "45": 1,
+            "46": 1
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\SortingController.cs": {
+      "back_end_side.Controllers.SortingController": {
+        "back_end_side.Controllers.SortingModel back_end_side.Controllers.SortingController::Get()": {
+          "Lines": {
+            "28": 0,
+            "29": 0,
+            "31": 0,
+            "32": 0
+          },
+          "Branches": []
+        },
+        "System.Void back_end_side.Controllers.SortingController::.ctor(back_end_side.Controllers.ISorting,back_end_side.Services.ISortingService)": {
+          "Lines": {
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0
+          },
+          "Branches": []
+        }
+      },
+      "back_end_side.Controllers.SortingController/<Put>d__4": {
+        "System.Void back_end_side.Controllers.SortingController/<Put>d__4::MoveNext()": {
+          "Lines": {
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\SumsByMonthController.cs": {
+      "back_end_side.Controllers.SumsByMonthController": {
+        "back_end_side.Controllers.SortingModel back_end_side.Controllers.SumsByMonthController::Get(System.String)": {
+          "Lines": {
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "33": 0,
+            "34": 0,
+            "36": 0
+          },
+          "Branches": [
+            {
+              "Line": 28,
+              "Offset": 17,
+              "EndOffset": 19,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 28,
+              "Offset": 17,
+              "EndOffset": 35,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void back_end_side.Controllers.SumsByMonthController::.ctor(back_end_side.Controllers.ISorting)": {
+          "Lines": {
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\UploadController.cs": {
+      "back_end_side.Controllers.UploadController": {
+        "System.Void back_end_side.Controllers.UploadController::.ctor(back_end_side.Services.IUploadService)": {
+          "Lines": {
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0
+          },
+          "Branches": []
+        }
+      },
+      "back_end_side.Controllers.UploadController/<Post>d__2": {
+        "System.Void back_end_side.Controllers.UploadController/<Post>d__2::MoveNext()": {
+          "Lines": {
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\UserController.cs": {
+      "back_end_side.Controllers.SentEmailArgs": {
+        "back_end_side.Models.User back_end_side.Controllers.SentEmailArgs::get_userEmail()": {
+          "Lines": {
+            "11": 0
+          },
+          "Branches": []
+        }
+      },
+      "back_end_side.Controllers.UserController": {
+        "Microsoft.AspNetCore.Mvc.IActionResult back_end_side.Controllers.UserController::Post(back_end_side.Models.User)": {
+          "Lines": {
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0
+          },
+          "Branches": []
+        },
+        "System.Void back_end_side.Controllers.UserController::OnSentEmail()": {
+          "Lines": {
+            "35": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0
+          },
+          "Branches": [
+            {
+              "Line": 37,
+              "Offset": 12,
+              "EndOffset": 14,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 37,
+              "Offset": 12,
+              "EndOffset": 47,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void back_end_side.Controllers.UserController::.ctor()": {
+          "Lines": {
+            "19": 0
+          },
+          "Branches": []
+        }
+      }
+    }
+  }
+}
