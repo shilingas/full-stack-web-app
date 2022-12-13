@@ -1,3 +1,4 @@
+using back_end_side;
 using back_end_side.Controllers;
 using back_end_side.DbFiles;
 using back_end_side.Middleware;
@@ -13,8 +14,10 @@ using System.Linq;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<ExpensesContext>(options =>
-  options.UseSqlServer(builder.Configuration.GetConnectionString("ExpensesContext")));
+builder.Services.AddDbContext<ExpensesContext>(options => {
+    UpdateEntitiesInterceptor updateEntitiesInterceptor = new UpdateEntitiesInterceptor();
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ExpensesContext")).AddInterceptors(updateEntitiesInterceptor);
+}); 
 builder.Services.AddScoped<ISorting, Sorting>();
 builder.Services.AddScoped<IReportReader, ReportReader>();
 builder.Services.AddScoped<IShowDataService, ShowDataService>();
