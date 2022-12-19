@@ -30,6 +30,7 @@ namespace back_end_side.Models
             Record nextRecord = (Record)obj;
             return this.Date.CompareTo(nextRecord.Date);
         }
+        [Ignore]
         public DateTime CreatedOnUtc { get; set; }
     }
 }
