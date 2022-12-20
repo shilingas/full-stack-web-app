@@ -22,27 +22,27 @@ table.data_table {
 
     table.data_table td {
         background: #373f4d;
-        /*white-space: nowrap;
+        white-space: nowrap;
         text-overflow: ellipsis;
-        overflow: hidden;*/
+        overflow: hidden;
     }
 
         table.data_table td:nth-of-type(1) {
             width: 110px;
         }
 
-        /*table.data_table td:nth-of-type(2) {
+        table.data_table td:nth-of-type(2) {
             max-width: 20vw;
-        }*/
+        }
 
         table.data_table td:nth-of-type(4) {
             width: 90px;
         }
 
 
-        /*table.data_table td:nth-of-type(4) {
-            width: 60px;
-        }*/
+        table.data_table td:nth-of-type(4) {
+           width: 60px;
+        }
 
         table.data_table td.edit, table.data_table td.move, table.data_table td.delete {
             cursor: pointer;
@@ -173,14 +173,24 @@ table.data_table {
         background: #373f4d;
         border-radius: 0 0 10px 10px;
         margin-top: 5px;
-        height: 300px;
-        padding: 20px;
+        padding: 20px 5.208vw 10px;
     }
+
+.recharts-wrapper, .recharts-wrapper svg.recharts-surface {
+    width: 100% !important;
+    height: auto !important;
+}
 
 
 @media only screen and (max-width: 1200px) {
     #statistics #cards {
         grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    table.data_table td:nth-of-type(3) {
+        max-width: 30vw !important;
     }
 }
 
@@ -191,7 +201,22 @@ table.data_table {
 }
 
 @media only screen and (max-width: 700px) {
-    #statistics #cards {
+    #statistics #cards, #statistics-graph {
         grid-template-columns: 1fr;
     }
+
+    #statistics-graph {
+        grid-row-gap: 20px;
+    }
+
+    table.data_table td:nth-of-type(3) {
+        max-width: 20vw!important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    table.data_table td.edit, table.data_table td.move, table.data_table td.delete, table.data_table th.last {
+        display: none;
+    }
+
 }

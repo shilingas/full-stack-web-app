@@ -158,7 +158,7 @@ const ExpensesPages = ({ categoryType }) => {
     return (
         <div>
             <Navbar />
-            <div>
+            <div class="container" style={{ marginTop: "20px", display: "flex", justifyContent: "flex-end" }}>
                 <input type="month" onChange={e => sendDate(e.target.value)} max={new Date().toISOString().split('T')[0].slice(0, 7)} defaultValue={currData}></input>
             </div>
 

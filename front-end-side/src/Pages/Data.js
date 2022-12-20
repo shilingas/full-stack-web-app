@@ -127,8 +127,6 @@ const EnterData = () => {
         axios.get("https://localhost:7174/api/SumsByMonth/" + e).then((item) => {
             setIsEmpty(item.data.Empty);
             setNewExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
-            setPreviousMonthExpenses(item.data.previousCarSum + item.data.previousClothesSum + item.data.previousEntertaintmentSum + item.data.previousFoodSum + item.data.previousOtherSum + item.data.previousHouseSum);
-            setPreviousYearExpenses(item.data.previousYearCarSum + item.data.previousYearClothesSum + item.data.previousYearEntertaintmentSum + item.data.previousYearFoodSum + item.data.previousYearOtherSum + item.data.previousYearHouseSum);
         })
 
     }
@@ -143,6 +141,10 @@ const EnterData = () => {
 
     useEffect(() => {
         if (categoryStatus) {
+
+            setPreviousMonthExpenses(categoryData.data.previousCarSum + categoryData.data.previousClothesSum + categoryData.data.previousEntertaintmentSum + categoryData.data.previousFoodSum + categoryData.data.previousOtherSum + categoryData.data.previousHouseSum);
+            setPreviousYearExpenses(categoryData.data.previousYearCarSum + categoryData.data.previousYearClothesSum + categoryData.data.previousYearEntertaintmentSum + categoryData.data.previousYearFoodSum + categoryData.data.previousYearOtherSum + categoryData.data.previousYearHouseSum);
+
             data.push({
                 name: 'Food',
                 Month1: checkIfNotNaN(Math.round(categoryData.data.previousFoodSum / previousMonthExpenses * 10 * 100) / 10),
@@ -187,7 +189,7 @@ const EnterData = () => {
 
             setRerender(true);
         }
-    }, [categoryStatus, rerender, previousMonthExpenses])
+    }, [categoryStatus, rerender, previousMonthExpenses, previousYearExpenses])
 
     useEffect(() => {
         setData([]);
@@ -273,7 +275,7 @@ const EnterData = () => {
                                                     <th>Seller</th>
                                                     <th>Details</th>
                                                     <th>Price</th>
-                                                    <th colSpan="2"></th>
+                                                    <th colSpan="2" className="last"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
