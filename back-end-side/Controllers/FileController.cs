@@ -1,5 +1,6 @@
 ﻿using back_end_side.DbFiles;
 using back_end_side.Models;
+using back_end_side.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -25,18 +26,10 @@ namespace back_end_side.Controllers
         [HttpGet]
         [EnableCors("corsapp")]
         [Authorize]
-        public async Task<Record[]> GetFile()
+        public Record[] GetFile()
         {
-            _sorting.SortToCategories();
-
-            var CurrentDate = DateTime.Now.ToString("yyyy-MM-dd").Substring(0, 7);
-
-            var CurrentMonthData = _context.Expenses
-                .Where(x => x.Date.ToString().StartsWith(CurrentDate))
-                .Select(x => x)
-                .OrderBy(x => x.Date)
-                .ToArray();
-            return CurrentMonthData;
+            var fileService = new FileService(_context, _sorting);
+            return fileService.GetFileData();
         }
     }
 }

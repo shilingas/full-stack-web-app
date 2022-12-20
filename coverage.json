@@ -1,6 +1,6 @@
 {
   "back-end-side.dll": {
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Program.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Program.cs": {
       "Program": {
         "System.Void Program::<Main>$(System.String[])": {
           "Lines": {
@@ -80,7 +80,7 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\UpdateEntitiesInterceptor.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\UpdateEntitiesInterceptor.cs": {
       "back_end_side.UpdateEntitiesInterceptor": {
         "System.Threading.Tasks.ValueTask`1<Microsoft.EntityFrameworkCore.Diagnostics.InterceptionResult`1<System.Int32>> back_end_side.UpdateEntitiesInterceptor::SavingChangesAsync(Microsoft.EntityFrameworkCore.Diagnostics.DbContextEventData,Microsoft.EntityFrameworkCore.Diagnostics.InterceptionResult`1<System.Int32>,System.Threading.CancellationToken)": {
           "Lines": {
@@ -153,7 +153,36 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Services\\MailService.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Services\\FileService.cs": {
+      "back_end_side.Services.FileService": {
+        "back_end_side.Models.Record[] back_end_side.Services.FileService::GetFileData()": {
+          "Lines": {
+            "18": 1,
+            "19": 1,
+            "21": 1,
+            "23": 1,
+            "24": 1,
+            "25": 1,
+            "26": 1,
+            "27": 1,
+            "28": 1,
+            "29": 1
+          },
+          "Branches": []
+        },
+        "System.Void back_end_side.Services.FileService::.ctor(back_end_side.DbFiles.ExpensesContext,back_end_side.Controllers.ISorting)": {
+          "Lines": {
+            "12": 1,
+            "13": 1,
+            "14": 1,
+            "15": 1,
+            "16": 1
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Services\\MailService.cs": {
       "back_end_side.Services.MailService": {
         "System.Void back_end_side.Services.MailService::OnSentEmail(System.Object,back_end_side.Controllers.SentEmailArgs)": {
           "Lines": {
@@ -181,7 +210,7 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Services\\ShowDataService.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Services\\ShowDataService.cs": {
       "back_end_side.Services.ShowDataService": {
         "System.Void back_end_side.Services.ShowDataService::.ctor(back_end_side.DbFiles.ExpensesContext,back_end_side.Controllers.ISorting)": {
           "Lines": {
@@ -341,7 +370,7 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Services\\SortingService.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Services\\SortingService.cs": {
       "back_end_side.Services.SortingService": {
         "System.Void back_end_side.Services.SortingService::.ctor(back_end_side.DbFiles.ExpensesContext)": {
           "Lines": {
@@ -416,7 +445,7 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Services\\UploadService.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Services\\UploadService.cs": {
       "back_end_side.Services.UploadService": {
         "System.Void back_end_side.Services.UploadService::RemoveDuplicates(System.Collections.Generic.List`1<back_end_side.Models.Record>)": {
           "Lines": {
@@ -433,12 +462,12 @@
         },
         "System.Void back_end_side.Services.UploadService::.ctor(back_end_side.DbFiles.ExpensesContext,back_end_side.Controllers.IReportReader)": {
           "Lines": {
-            "13": 1,
-            "14": 1,
-            "15": 1,
-            "16": 1,
-            "17": 1,
-            "19": 1
+            "13": 2,
+            "14": 2,
+            "15": 2,
+            "16": 2,
+            "17": 2,
+            "19": 2
           },
           "Branches": []
         }
@@ -523,24 +552,24 @@
       "back_end_side.Services.UploadService/<GetIncomeData>d__5": {
         "System.Void back_end_side.Services.UploadService/<GetIncomeData>d__5::MoveNext()": {
           "Lines": {
-            "48": 0,
-            "49": 0,
-            "50": 0,
-            "51": 0,
-            "52": 0,
-            "53": 0,
-            "54": 0,
-            "55": 0,
-            "56": 0,
-            "57": 0,
-            "58": 0,
-            "59": 0,
-            "60": 0,
-            "61": 0,
-            "62": 0,
-            "63": 0,
-            "64": 0,
-            "65": 0
+            "48": 1,
+            "49": 1,
+            "50": 1,
+            "51": 5,
+            "52": 1,
+            "53": 1,
+            "54": 1,
+            "55": 1,
+            "56": 1,
+            "57": 1,
+            "58": 1,
+            "59": 1,
+            "60": 1,
+            "61": 1,
+            "62": 1,
+            "63": 1,
+            "64": 1,
+            "65": 1
           },
           "Branches": [
             {
@@ -549,7 +578,7 @@
               "EndOffset": 85,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 0
+              "Hits": 1
             },
             {
               "Line": 51,
@@ -557,13 +586,13 @@
               "EndOffset": 253,
               "Path": 0,
               "Ordinal": 0,
-              "Hits": 0
+              "Hits": 1
             }
           ]
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Models\\CheckModel.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Models\\CheckModel.cs": {
       "back_end_side.Models.CheckModel": {
         "System.Int32 back_end_side.Models.CheckModel::get_id()": {
           "Lines": {
@@ -579,7 +608,7 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Models\\ErrorModel.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Models\\ErrorModel.cs": {
       "back_end_side.Models.ErrorModel": {
         "System.Int32 back_end_side.Models.ErrorModel::get_StatusCode()": {
           "Lines": {
@@ -595,7 +624,7 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Models\\FileModel.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Models\\FileModel.cs": {
       "back_end_side.Models.FileModel": {
         "System.String back_end_side.Models.FileModel::get_FileName()": {
           "Lines": {
@@ -611,53 +640,53 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Models\\IncomeModel.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Models\\IncomeModel.cs": {
       "back_end_side.Models.IncomeModel": {
         "System.DateTime back_end_side.Models.IncomeModel::get_Date()": {
           "Lines": {
-            "7": 0
+            "7": 4
           },
           "Branches": []
         },
         "System.String back_end_side.Models.IncomeModel::get_Seller()": {
           "Lines": {
-            "8": 0
+            "8": 4
           },
           "Branches": []
         },
         "System.String back_end_side.Models.IncomeModel::get_Purpose()": {
           "Lines": {
-            "9": 0
+            "9": 4
           },
           "Branches": []
         },
         "System.Double back_end_side.Models.IncomeModel::get_Amount()": {
           "Lines": {
-            "10": 0
+            "10": 4
           },
           "Branches": []
         },
         "System.String back_end_side.Models.IncomeModel::get_ExpenseCode()": {
           "Lines": {
-            "11": 0
+            "11": 3
           },
           "Branches": []
         },
         "System.Int32 back_end_side.Models.IncomeModel::get_ID()": {
           "Lines": {
-            "12": 0
+            "12": 3
           },
           "Branches": []
         },
         "System.Boolean back_end_side.Models.IncomeModel::get_IsSelected()": {
           "Lines": {
-            "13": 0
+            "13": 4
           },
           "Branches": []
         },
         "System.Boolean back_end_side.Models.IncomeModel::get_IsAdded()": {
           "Lines": {
-            "14": 0
+            "14": 4
           },
           "Branches": []
         },
@@ -672,59 +701,59 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Models\\Record.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Models\\Record.cs": {
       "back_end_side.Models.Record": {
         "System.DateTime back_end_side.Models.Record::get_Date()": {
           "Lines": {
-            "9": 48
+            "9": 54
           },
           "Branches": []
         },
         "System.String back_end_side.Models.Record::get_Seller()": {
           "Lines": {
-            "11": 334
+            "11": 340
           },
           "Branches": []
         },
         "System.String back_end_side.Models.Record::get_Purpose()": {
           "Lines": {
-            "13": 26
+            "13": 32
           },
           "Branches": []
         },
         "System.Double back_end_side.Models.Record::get_Amount()": {
           "Lines": {
-            "15": 45
+            "15": 51
           },
           "Branches": []
         },
         "System.String back_end_side.Models.Record::get_PaymentType()": {
           "Lines": {
-            "17": 23
+            "17": 25
           },
           "Branches": []
         },
         "System.String back_end_side.Models.Record::get_ExpenseCode()": {
           "Lines": {
-            "19": 37
+            "19": 40
           },
           "Branches": []
         },
         "System.Int32 back_end_side.Models.Record::get_ID()": {
           "Lines": {
-            "21": 20
+            "21": 25
           },
           "Branches": []
         },
         "System.String back_end_side.Models.Record::get_Category()": {
           "Lines": {
-            "23": 70
+            "23": 77
           },
           "Branches": []
         },
         "System.Boolean back_end_side.Models.Record::get_IsCategorized()": {
           "Lines": {
-            "26": 45
+            "26": 52
           },
           "Branches": []
         },
@@ -739,13 +768,13 @@
         },
         "System.DateTime back_end_side.Models.Record::get_CreatedOnUtc()": {
           "Lines": {
-            "34": 6
+            "34": 8
           },
           "Branches": []
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Models\\User.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Models\\User.cs": {
       "back_end_side.Models.User": {
         "System.String back_end_side.Models.User::get_Id()": {
           "Lines": {
@@ -761,7 +790,7 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\ErrorMiddleware.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\ErrorMiddleware.cs": {
       "back_end_side.Middleware.ErrorMiddleware": {
         "System.Void back_end_side.Middleware.ErrorMiddleware::.ctor(Microsoft.Extensions.Logging.ILogger`1<back_end_side.Middleware.ErrorMiddleware>)": {
           "Lines": {
@@ -815,17 +844,17 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\DbFiles\\ExpensesContext.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\DbFiles\\ExpensesContext.cs": {
       "back_end_side.DbFiles.ExpensesContext": {
         "Microsoft.EntityFrameworkCore.DbSet`1<back_end_side.Models.Record> back_end_side.DbFiles.ExpensesContext::get_Expenses()": {
           "Lines": {
-            "13": 90
+            "13": 93
           },
           "Branches": []
         },
         "Microsoft.EntityFrameworkCore.DbSet`1<back_end_side.Models.IncomeModel> back_end_side.DbFiles.ExpensesContext::get_Income()": {
           "Lines": {
-            "14": 6
+            "14": 10
           },
           "Branches": []
         },
@@ -840,15 +869,15 @@
         },
         "System.Void back_end_side.DbFiles.ExpensesContext::.ctor(Microsoft.EntityFrameworkCore.DbContextOptions`1<back_end_side.DbFiles.ExpensesContext>)": {
           "Lines": {
-            "8": 6,
-            "9": 6,
-            "11": 6
+            "8": 8,
+            "9": 8,
+            "11": 8
           },
           "Branches": []
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\ExtensionMethods.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Controllers\\ExtensionMethods.cs": {
       "back_end_side.Controllers.ExtensionMethods": {
         "System.Collections.Generic.List`1<T> back_end_side.Controllers.ExtensionMethods::MoveToOtherList(System.Collections.Generic.List`1<T>,System.Collections.Generic.List`1<T>,System.Int32,System.Boolean)": {
           "Lines": {
@@ -882,38 +911,30 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\FileController.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Controllers\\FileController.cs": {
       "back_end_side.Controllers.FileController": {
+        "back_end_side.Models.Record[] back_end_side.Controllers.FileController::GetFile()": {
+          "Lines": {
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0
+          },
+          "Branches": []
+        },
         "System.Void back_end_side.Controllers.FileController::.ctor(back_end_side.DbFiles.ExpensesContext,back_end_side.Controllers.ISorting)": {
           "Lines": {
-            "19": 0,
             "20": 0,
             "21": 0,
             "22": 0,
-            "23": 0
-          },
-          "Branches": []
-        }
-      },
-      "back_end_side.Controllers.FileController/<GetFile>d__3": {
-        "System.Void back_end_side.Controllers.FileController/<GetFile>d__3::MoveNext()": {
-          "Lines": {
-            "29": 0,
-            "30": 0,
-            "32": 0,
-            "34": 0,
-            "35": 0,
-            "36": 0,
-            "37": 0,
-            "38": 0,
-            "39": 0,
-            "40": 0
+            "23": 0,
+            "24": 0
           },
           "Branches": []
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\IncomeController.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Controllers\\IncomeController.cs": {
       "back_end_side.Controllers.IncomeController": {
         "back_end_side.Models.IncomeModel[] back_end_side.Controllers.IncomeController::Get(System.String)": {
           "Lines": {
@@ -1120,7 +1141,7 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\InSumController.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Controllers\\InSumController.cs": {
       "back_end_side.Controllers.InSumController": {
         "System.Double back_end_side.Controllers.InSumController::Get(System.String)": {
           "Lines": {
@@ -1169,7 +1190,7 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\Logger.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Controllers\\Logger.cs": {
       "back_end_side.Controllers.Logger": {
         "System.Void back_end_side.Controllers.Logger::WriteLog(System.String)": {
           "Lines": {
@@ -1185,7 +1206,7 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\MonthPickerController.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Controllers\\MonthPickerController.cs": {
       "back_end_side.Controllers.MonthPickerController": {
         "back_end_side.Models.Record[] back_end_side.Controllers.MonthPickerController::Get(System.String)": {
           "Lines": {
@@ -1233,7 +1254,7 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\ReportReader.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Controllers\\ReportReader.cs": {
       "back_end_side.Controllers.ReportReader": {
         "System.Int32 back_end_side.Controllers.ReportReader::CheckBank(System.IO.StreamReader)": {
           "Lines": {
@@ -1594,15 +1615,15 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\ShowDataController.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Controllers\\ShowDataController.cs": {
       "back_end_side.Controllers.ShowDataController": {
         "System.Void back_end_side.Controllers.ShowDataController::.ctor(back_end_side.DbFiles.ExpensesContext,back_end_side.Services.IShowDataService)": {
           "Lines": {
+            "18": 0,
             "19": 0,
             "20": 0,
             "21": 0,
-            "22": 0,
-            "23": 0
+            "22": 0
           },
           "Branches": []
         }
@@ -1610,10 +1631,22 @@
       "back_end_side.Controllers.ShowDataController/<Delete>d__6": {
         "System.Void back_end_side.Controllers.ShowDataController/<Delete>d__6::MoveNext()": {
           "Lines": {
+            "52": 0,
             "53": 0,
             "54": 0,
-            "55": 0,
-            "56": 0
+            "55": 0
+          },
+          "Branches": []
+        }
+      },
+      "back_end_side.Controllers.ShowDataController/<DeleteAll>d__7": {
+        "System.Void back_end_side.Controllers.ShowDataController/<DeleteAll>d__7::MoveNext()": {
+          "Lines": {
+            "60": 0,
+            "61": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0
           },
           "Branches": []
         }
@@ -1621,11 +1654,11 @@
       "back_end_side.Controllers.ShowDataController/<GetAll>d__4": {
         "System.Void back_end_side.Controllers.ShowDataController/<GetAll>d__4::MoveNext()": {
           "Lines": {
+            "35": 0,
             "36": 0,
             "37": 0,
             "38": 0,
-            "39": 0,
-            "40": 0
+            "39": 0
           },
           "Branches": []
         }
@@ -1633,10 +1666,10 @@
       "back_end_side.Controllers.ShowDataController/<Post>d__3": {
         "System.Void back_end_side.Controllers.ShowDataController/<Post>d__3::MoveNext()": {
           "Lines": {
+            "28": 0,
             "29": 0,
             "30": 0,
-            "31": 0,
-            "32": 0
+            "31": 0
           },
           "Branches": []
         }
@@ -1644,16 +1677,16 @@
       "back_end_side.Controllers.ShowDataController/<Put>d__5": {
         "System.Void back_end_side.Controllers.ShowDataController/<Put>d__5::MoveNext()": {
           "Lines": {
+            "44": 0,
             "45": 0,
             "46": 0,
-            "47": 0,
-            "48": 0
+            "47": 0
           },
           "Branches": []
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\Sorting.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Controllers\\Sorting.cs": {
       "back_end_side.Controllers.SortingModel": {
         "System.Double back_end_side.Controllers.SortingModel::get_FoodSum()": {
           "Lines": {
@@ -2449,7 +2482,7 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\SortingController.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Controllers\\SortingController.cs": {
       "back_end_side.Controllers.SortingController": {
         "back_end_side.Controllers.SortingModel back_end_side.Controllers.SortingController::Get()": {
           "Lines": {
@@ -2483,7 +2516,7 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\SumsByMonthController.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Controllers\\SumsByMonthController.cs": {
       "back_end_side.Controllers.SumsByMonthController": {
         "back_end_side.Controllers.SortingModel back_end_side.Controllers.SumsByMonthController::Get(System.String)": {
           "Lines": {
@@ -2525,7 +2558,7 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\UploadController.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Controllers\\UploadController.cs": {
       "back_end_side.Controllers.UploadController": {
         "System.Void back_end_side.Controllers.UploadController::.ctor(back_end_side.Services.IUploadService)": {
           "Lines": {
@@ -2550,7 +2583,7 @@
         }
       }
     },
-    "C:\\Users\\Vaiva\\Desktop\\full-stack-web-app\\back-end-side\\Controllers\\UserController.cs": {
+    "C:\\Users\\ASUS\\Desktop\\PSI naujausiais\\full-stack-web-app\\back-end-side\\Controllers\\UserController.cs": {
       "back_end_side.Controllers.SentEmailArgs": {
         "back_end_side.Models.User back_end_side.Controllers.SentEmailArgs::get_userEmail()": {
           "Lines": {
