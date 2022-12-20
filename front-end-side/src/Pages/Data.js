@@ -142,6 +142,10 @@ const EnterData = () => {
 
     useEffect(() => {
         if (categoryStatus) {
+
+            setPreviousMonthExpenses(categoryData.data.previousCarSum + categoryData.data.previousClothesSum + categoryData.data.previousEntertaintmentSum + categoryData.data.previousFoodSum + categoryData.data.previousOtherSum + categoryData.data.previousHouseSum);
+            setPreviousYearExpenses(categoryData.data.previousYearCarSum + categoryData.data.previousYearClothesSum + categoryData.data.previousYearEntertaintmentSum + categoryData.data.previousYearFoodSum + categoryData.data.previousYearOtherSum + categoryData.data.previousYearHouseSum);
+
             data.push({
                 name: 'Food',
                 Month1: checkIfNotNaN(Math.round(categoryData.data.previousFoodSum / previousMonthExpenses * 10 * 100) / 10),
@@ -185,8 +189,10 @@ const EnterData = () => {
             });
 
             setRerender(true);
+
+            console.log(previousYearExpenses);
         }
-    }, [categoryStatus, rerender, previousMonthExpenses])
+    }, [categoryStatus, rerender, previousMonthExpenses, previousYearExpenses])
 
     useEffect(() => {
         setData([]);
