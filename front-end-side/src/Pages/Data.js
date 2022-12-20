@@ -126,8 +126,6 @@ const EnterData = () => {
         axios.get("https://localhost:7174/api/SumsByMonth/" + e).then((item) => {
             setIsEmpty(item.data.Empty);
             setNewExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
-            setPreviousMonthExpenses(item.data.previousCarSum + item.data.previousClothesSum + item.data.previousEntertaintmentSum + item.data.previousFoodSum + item.data.previousOtherSum + item.data.previousHouseSum);
-            setPreviousYearExpenses(item.data.previousYearCarSum + item.data.previousYearClothesSum + item.data.previousYearEntertaintmentSum + item.data.previousYearFoodSum + item.data.previousYearOtherSum + item.data.previousYearHouseSum);
         })
 
     }
@@ -189,8 +187,6 @@ const EnterData = () => {
             });
 
             setRerender(true);
-
-            console.log(previousYearExpenses);
         }
     }, [categoryStatus, rerender, previousMonthExpenses, previousYearExpenses])
 

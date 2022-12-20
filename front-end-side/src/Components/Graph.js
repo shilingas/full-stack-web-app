@@ -18,8 +18,6 @@ const Graph = props => {
         }
     }
 
-
-
     return (
         <BarChart
             width={535}
