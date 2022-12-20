@@ -54,5 +54,14 @@ namespace back_end_side.Controllers
             await _showDataService.DeleteRecord(id);
             return Ok();
         }
+
+        [HttpDelete]
+        [EnableCors("corsapp")]
+        public async Task<IActionResult> DeleteAll()
+        {
+            _context.Expenses.RemoveRange(_context.Expenses);
+            _context.SaveChanges();
+            return Ok();
+        }
     }
 }
