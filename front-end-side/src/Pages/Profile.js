@@ -200,10 +200,10 @@ const Profile = () => {
                                                     <td>{seller}</td>
                                                     <td>{purpose}</td>
                                                     <td>{parseFloat(amount).toFixed(2)}</td>
-                                                    <td className="edit" onClick={() => updateData(id, date, seller, purpose, amount, isSelected, isAdded)}>
+                                                    <td className="edit" onClick={addClass(), () => updateData(id, date, seller, purpose, amount, isSelected, isAdded)}>
                                                         <Icon type="edit-button"></Icon>
                                                     </td>
-                                                    <td className="delete" onClick={() => remove(id)}>
+                                                    <td className="delete" onClick={addClass(), () => remove(id)}>
                                                         <Icon type="close-button"></Icon>
                                                     </td>
                                                 </tr>

@@ -18,7 +18,7 @@ const Modal = props => {
     }, [])
 
     function removeClass() {
-        document.getElementsByTagName("BODY")[0].setAttribute("class", ""); //FIX ME
+        document.getElementsByTagName("BODY")[0].setAttribute("class", "modal-open"); //FIX ME
     }
 
     if (!props.show) {
