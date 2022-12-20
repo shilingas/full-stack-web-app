@@ -73,16 +73,16 @@ const EnterData = () => {
     }
     const deleteData = (index) => {
         axios.delete(`https://localhost:7174/api/ShowData/${index}`).then(() => {
-            axios.get("https://localhost:7174/api/File").then(resp => {
+            axios.get("https://localhost:7174/api/MonthPicker/" + datePick).then(resp => {
                 setFileData(resp);
                 setStatusForFileData(true);
             })
-            axios.get("https://localhost:7174/api/Sorting").then(item => {
+            axios.get("https://localhost:7174/api/SumsByMonth/" + datePick).then(item => {
                 setCategoryData(item);
                 setCategoryStatus(true);
                 setStatusForExpenses(true);
             });
-            axios.get("https://localhost:7174/api/Sorting").then((item) => {
+            axios.get("https://localhost:7174/api/SumsByMonth/" + datePick).then((item) => {
                 setIsEmpty(item.data.Empty);
                 setNewExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
             })

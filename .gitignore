@@ -243,3 +243,9 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# Logs
+Logs.txt
+
+# Test coverage
+coverage.json

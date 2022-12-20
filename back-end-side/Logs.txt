@@ -54,3 +54,28 @@ Error Number:515,State:2,Class:16
    at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
    at back_end_side.Services.ShowDataService.AddRecord(Record record) in C:\Users\Marius\Downloads\full-stack-web-app\back-end-side\Services\ShowDataService.cs:line 31
+2022-12-13 15:59:18 : CsvHelper.HeaderValidationException: Header with name 'CreatedOnUtc'[0] was not found.
+If you are expecting some headers to be missing and want to ignore this validation, set the configuration HeaderValidated to null. You can also change the functionality to do something else, like logging the issue.
+
+IReader state:
+   ColumnCount: 0
+   CurrentIndex: -1
+   HeaderRecord:
+["Tipas","Išrašo nr.","Pervedimo nr.","Data ir laikas","Gavėjas / Mokėtojas","Kodas","Suma ir valiuta","Valiutos","Paskirtis","Įmokos kodas","Kreditas / Debetas","Likutis"]
+IParser state:
+   ByteCount: 0
+   CharCount: 162
+   Row: 1
+   RawRow: 1
+   Count: 12
+   RawRecord:
+Tipas,"Išrašo nr.","Pervedimo nr.","Data ir laikas","Gavėjas / Mokėtojas",Kodas,"Suma ir valiuta",Valiutos,Paskirtis,"Įmokos kodas","Kreditas / Debetas",Likutis
+
+
+   at CsvHelper.Configuration.ConfigurationFunctions.HeaderValidated(HeaderValidatedArgs args)
+   at CsvHelper.CsvReader.ValidateHeader(Type type)
+   at CsvHelper.CsvReader.GetRecords[T]()+MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at back_end_side.Controllers.ReportReader.ReadFromCsvFile(IFormFile fileData, DeleteDuplicates deleteDuplicates) in C:\Users\Vaiva\Desktop\full-stack-web-app\back-end-side\Controllers\ReportReader.cs:line 80
+   at back_end_side.Services.UploadService.GetFileData(FileModel file) in C:\Users\Vaiva\Desktop\full-stack-web-app\back-end-side\Services\UploadService.cs:line 30

@@ -28,10 +28,18 @@ const ExpensesPages = ({ categoryType }) => {
     const { getAccessTokenSilently } = useAuth0();
     useEffect(() => {
         setDatePick(currData);
-        axios.get("https://localhost:7174/api/MonthPicker/" + `${currData}`).then(resp => {
-            setFileData(resp);
-            setStatusForFileData(true);
-        })
+        if (currData == "") {
+            axios.get("https://localhost:7174/api/MonthPicker/" + "total").then(resp => {
+                setFileData(resp);
+                setStatusForFileData(true);
+            })
+        }
+        else {
+            axios.get("https://localhost:7174/api/MonthPicker/" + `${currData}`).then(resp => {
+                setFileData(resp);
+                setStatusForFileData(true);
+            })
+        }
     }, []);
     useEffect(() => {
         (async () => {
@@ -94,10 +102,18 @@ const ExpensesPages = ({ categoryType }) => {
         else {
             if (selectedCategory != "") {
                 axios.put("https://localhost:7174/api/Sorting/" + id, { "date": date, "seller": seller, "amount": amount, "purpose": purpose, "category": selectedCategory, "isCategorized": true, "id": id }).then(() => {
-                    axios.get('https://localhost:7174/api/ShowData').then(resp => {
-                        setFileData(resp);
-                        setDelayForInput(true);
-                    });
+                    if (currData == "") {
+                        axios.get("https://localhost:7174/api/MonthPicker/" + "total").then(resp => {
+                            setFileData(resp);
+                            setStatusForFileData(true);
+                        })
+                    }
+                    else {
+                        axios.get("https://localhost:7174/api/MonthPicker/" + datePick).then(resp => {
+                            setFileData(resp);
+                            setStatusForFileData(true);
+                        })
+                    }
                     (async () => {
                         const token = await getAccessTokenSilently();
                         
@@ -121,6 +137,12 @@ const ExpensesPages = ({ categoryType }) => {
             }
         }
     }, [selectedCategory]);
+
+    useEffect(() => {
+        if (datePick === "") {
+            sendDate("total");
+        }
+    }, [datePick]);
 
     const sendDate = (e) => {
         if (e !== "total") {
