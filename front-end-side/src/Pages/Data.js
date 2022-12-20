@@ -34,6 +34,7 @@ const EnterData = () => {
     const [data, setData] = useState([]);
     const [previousMonthExpenses, setPreviousMonthExpenses] = useState(0);
     const [previousYearExpenses, setPreviousYearExpenses] = useState(0);
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     function addClass() {
         var element = document.getElementsByTagName("BODY")[0];
         element.classList.remove("modal-open");
@@ -192,6 +193,25 @@ const EnterData = () => {
         setData([]);
         setRerender(false);
     }, [newExpenses, previousMonthExpenses])
+    const deleteAllData = () => {
+        axios.delete('https://localhost:7174/api/ShowData').then(() => {
+            axios.get("https://localhost:7174/api/MonthPicker/" + datePick).then(resp => {
+                setFileData(resp);
+                setStatusForFileData(true);
+            })
+            axios.get("https://localhost:7174/api/SumsByMonth/" + datePick).then(item => {
+                setCategoryData(item);
+                setCategoryStatus(true);
+                setStatusForExpenses(true);
+            });
+            axios.get("https://localhost:7174/api/SumsByMonth/" + datePick).then((item) => {
+                setIsEmpty(item.data.Empty);
+                setNewExpenses(item.data.carSum + item.data.clothesSum + item.data.entertaintmentSum + item.data.foodSum + item.data.otherSum + item.data.houseSum);
+            })
+        }
+        );
+        setShowDeleteConfirmation(false);
+    }
 
     return (
         <GlobalDateContext.Provider value={datePick}>
@@ -207,7 +227,8 @@ const EnterData = () => {
                                         <div class="second-navigation">
                                             <div className={"selects"}>
                                                 <a onClick={addClass(), () => setShowEnterData(true)} style={{ marginRight: "10px" }}>Add data</a>
-                                                <a onClick={() => setShowUploadData(true)}>Upload file</a>
+                                                <a onClick={() => setShowUploadData(true)} style={{ marginRight: "10px" }}>Upload file</a>
+                                                <a onClick={() => setShowDeleteConfirmation(true)}>Delete all</a>
                                             </div>
                                             <div>
                                                 <input type="month" onChange={e => sendDate(e.target.value)} max={new Date().toISOString().split('T')[0].slice(0, 7)} defaultValue={new Date().toISOString().split('T')[0].slice(0, 7)}></input>
@@ -231,7 +252,13 @@ const EnterData = () => {
                                             <button onClick={() => setShowConfirmation(false)} className="secondary">No</button>
                                         </div>
                                     </Modal>
-
+                                    <Modal className="delete-comfirmation" show={showDeleteConfirmation} onClose={() => setShowDeleteConfirmation(false)}>
+                                        <p>Are you sure you want to delete all records?</p>
+                                        <div id="buttons">
+                                            <button onClick={() => deleteAllData()}>Yes</button>
+                                            <button onClick={() => setShowDeleteConfirmation(false)} className="secondary">No</button>
+                                        </div>
+                                    </Modal>
                                     <div class="double-title">
                                         <h6 className="date">{datePick.slice(0, 4) + " " + toMonthName(datePick.slice(5, 7))}</h6>
                                         <h2 className="title">expenses</h2>

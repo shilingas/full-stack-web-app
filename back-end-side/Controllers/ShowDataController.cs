@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
 namespace back_end_side.Controllers
 {
     [Route("api/[controller]")]
@@ -52,6 +51,15 @@ namespace back_end_side.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _showDataService.DeleteRecord(id);
+            return Ok();
+        }
+
+        [HttpDelete]
+        [EnableCors("corsapp")]
+        public async Task<IActionResult> DeleteAll()
+        {
+            _context.Database.ExecuteSqlRaw("TRUNCATE TABLE Expenses");
+            _context.SaveChanges();
             return Ok();
         }
     }
