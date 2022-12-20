@@ -185,7 +185,7 @@ const Profile = () => {
                                 <th>Source</th>
                                 <th>Details</th>
                                 <th>Amount</th>
-                                <th colSpan="2"></th>
+                                <th colSpan="2" className="last"></th>
                             </tr>
                         </thead>
                         <tbody>

@@ -252,7 +252,7 @@ const EnterData = () => {
                                                     <th>Seller</th>
                                                     <th>Details</th>
                                                     <th>Price</th>
-                                                    <th colSpan="2"></th>
+                                                    <th colSpan="2" className="last"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
